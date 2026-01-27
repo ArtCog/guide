@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clawdbot Guide | Твой личный ИИ-сотрудник</title>
+    <meta name="description" content="Полный гайд по установке Clawdbot - автономного ИИ-агента с памятью. Команды, настройка VPS, System Prompt.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <span class="terminal-btn red"></span>
+                <span class="terminal-btn yellow"></span>
+                <span class="terminal-btn green"></span>
+                <span class="terminal-title">clawdbot ~ guide</span>
+            </div>
+            <div class="terminal-body">
+                <div class="typing-container">
+                    <span class="prompt">$</span>
+                    <span class="typing-text" id="typing"></span>
+                    <span class="cursor">|</span>
+                </div>
+            </div>
+        </div>
+        <h1>Clawdbot</h1>
+        <p class="tagline">Твой личный ИИ-сотрудник, который работает 24/7</p>
+        <p class="subtitle">Автономный агент с бесконечной памятью. Живёт в Telegram. Управляет твоим компьютером.</p>
+        <a href="#install" class="cta-button">Начать установку</a>
+    </header>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="feature">
+            <span class="feature-icon">&#129302;</span>
+            <h3>Бесконечная память</h3>
+            <p>Помнит всё, что ты ему говорил. Навсегда.</p>
+        </div>
+        <div class="feature">
+            <span class="feature-icon">&#128187;</span>
+            <h3>Локальный</h3>
+            <p>Работает на твоём сервере. Твои данные — твои.</p>
+        </div>
+        <div class="feature">
+            <span class="feature-icon">&#9889;</span>
+            <h3>Автономный</h3>
+            <p>Сам пишет тебе, когда нужно. Без напоминаний.</p>
+        </div>
+    </section>
+
+    <!-- Installation -->
+    <section id="install" class="section">
+        <h2><span class="accent">#</span> Установка</h2>
+        <p class="section-desc">Одна команда — и твой сотрудник нанят</p>
+
+        <div class="install-tabs">
+            <button class="tab-btn active" data-tab="mac">macOS / Linux</button>
+            <button class="tab-btn" data-tab="windows">Windows</button>
+        </div>
+
+        <div class="tab-content active" id="mac">
+            <div class="code-block">
+                <div class="code-header">
+                    <span>Terminal</span>
+                    <button class="copy-btn" data-copy="curl -fsSL https://clawd.bot/install.sh | bash">Копировать</button>
+                </div>
+                <pre><code>curl -fsSL https://clawd.bot/install.sh | bash</code></pre>
+            </div>
+        </div>
+
+        <div class="tab-content" id="windows">
+            <div class="code-block">
+                <div class="code-header">
+                    <span>PowerShell (от администратора)</span>
+                    <button class="copy-btn" data-copy="iwr -useb https://clawd.bot/install.ps1 | iex">Копировать</button>
+                </div>
+                <pre><code>iwr -useb https://clawd.bot/install.ps1 | iex</code></pre>
+            </div>
+        </div>
+
+        <div class="requirements">
+            <h4>Требования:</h4>
+            <ul>
+                <li>Node.js 22+ (установщик скачает автоматически)</li>
+                <li>API ключ Claude (Anthropic) или OpenAI</li>
+                <li>Telegram токен от @BotFather</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- System Prompt -->
+    <section id="prompt" class="section">
+        <h2><span class="accent">#</span> System Prompt</h2>
+        <p class="section-desc">Загрузи в бота свою личность — он станет персональным</p>
+
+        <div class="code-block large">
+            <div class="code-header">
+                <span>Отправь это боту первым сообщением</span>
+                <button class="copy-btn" data-copy="Привет! Давай знакомиться.
+
+Меня зовут [ИМЯ], я занимаюсь [ПРОФЕССИЯ/СФЕРА].
+
+Мои текущие проекты:
+- [Проект 1]
+- [Проект 2]
+
+Мои цели на этот год:
+- [Цель 1]
+- [Цель 2]
+
+Как я хочу, чтобы ты работал:
+- Отвечай кратко и по делу
+- Если не уверен — уточни
+- Предлагай идеи проактивно
+- Напоминай о важных задачах
+
+Запомни это и используй в нашей работе.">Копировать</button>
+            </div>
+            <pre><code>Привет! Давай знакомиться.
+
+Меня зовут [ИМЯ], я занимаюсь [ПРОФЕССИЯ/СФЕРА].
+
+Мои текущие проекты:
+- [Проект 1]
+- [Проект 2]
+
+Мои цели на этот год:
+- [Цель 1]
+- [Цель 2]
+
+Как я хочу, чтобы ты работал:
+- Отвечай кратко и по делу
+- Если не уверен — уточни
+- Предлагай идеи проактивно
+- Напоминай о важных задачах
+
+Запомни это и используй в нашей работе.</code></pre>
+        </div>
+
+        <p class="tip">Совет: Чем больше расскажешь о себе, тем умнее станет твой ассистент</p>
+    </section>
+
+    <!-- VPS Setup -->
+    <section id="vps" class="section">
+        <h2><span class="accent">#</span> VPS: Запуск 24/7</h2>
+        <p class="section-desc">Чтобы бот работал круглосуточно — поставь его на сервер</p>
+
+        <div class="vps-recommendation">
+            <h4>Рекомендуемый хостинг: Hetzner</h4>
+            <ul>
+                <li>Тариф: <strong>CX22</strong> (~€4.5/мес)</li>
+                <li>2 vCPU, 4 GB RAM, 40 GB SSD</li>
+                <li>Локация: Германия (Falkenstein)</li>
+            </ul>
+        </div>
+
+        <h4>Команды настройки:</h4>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span>1. Обновление системы</span>
+                <button class="copy-btn" data-copy="sudo apt update && sudo apt upgrade -y">Копировать</button>
+            </div>
+            <pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span>2. Установка Node.js 22</span>
+                <button class="copy-btn" data-copy="curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt install -y nodejs">Копировать</button>
+            </div>
+            <pre><code>curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt install -y nodejs</code></pre>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span>3. Установка Clawdbot</span>
+                <button class="copy-btn" data-copy="curl -fsSL https://clawd.bot/install.sh | bash">Копировать</button>
+            </div>
+            <pre><code>curl -fsSL https://clawd.bot/install.sh | bash</code></pre>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header">
+                <span>4. Запуск в фоне (после настройки)</span>
+                <button class="copy-btn" data-copy="clawdbot onboard --install-daemon">Копировать</button>
+            </div>
+            <pre><code>clawdbot onboard --install-daemon</code></pre>
+        </div>
+    </section>
+
+    <!-- API Guide -->
+    <section id="api" class="section">
+        <h2><span class="accent">#</span> API ключи</h2>
+        <p class="section-desc">Clawdbot — это «тело», а API — «мозги»</p>
+
+        <div class="api-options">
+            <div class="api-card">
+                <h4>Claude (Anthropic)</h4>
+                <p>Рекомендуется для лучшего качества</p>
+                <ul>
+                    <li>Claude Pro: $20/мес</li>
+                    <li>API: от $0.003 за 1K токенов</li>
+                </ul>
+                <a href="https://console.anthropic.com/" target="_blank" class="link-btn">Получить ключ</a>
+            </div>
+            <div class="api-card">
+                <h4>OpenAI</h4>
+                <p>Альтернатива, если Claude недоступен</p>
+                <ul>
+                    <li>ChatGPT Plus: $20/мес</li>
+                    <li>API: от $0.0015 за 1K токенов</li>
+                </ul>
+                <a href="https://platform.openai.com/" target="_blank" class="link-btn">Получить ключ</a>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <h4>Оплата из России</h4>
+            <p>Для оплаты API из РФ используй:</p>
+            <ul>
+                <li>Виртуальные карты (например, через крипто-сервисы)</li>
+                <li>OpenRouter — агрегатор с альтернативной оплатой</li>
+                <li>Карты друзей/родственников за рубежом</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Остались вопросы?</h2>
+            <p>Присоединяйся к каналу — там разбираем установку, делимся промптами и помогаем друг другу</p>
+            <a href="https://t.me/+i8bnWOjCGlEyYzYy" target="_blank" class="telegram-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161l-1.97 9.287c-.146.658-.537.818-1.084.508l-3-2.211-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.332-.373-.119l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.538-.194 1.006.128.833.934z"/>
+                </svg>
+                AI и NEO здесь
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Гайд создан для канала <a href="https://youtube.com/@Magavui" target="_blank">Maga vu</a></p>
+        <p class="small">Clawdbot — Open Source проект. <a href="https://github.com/clawdbot/clawdbot" target="_blank">GitHub</a> | <a href="https://clawd.bot" target="_blank">Официальный сайт</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
