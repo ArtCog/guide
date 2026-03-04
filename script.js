@@ -1,3 +1,45 @@
+// === LOAD COMPONENTS ===
+async function loadComponent(elementId, componentPath) {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+
+    try {
+        const response = await fetch(componentPath);
+        if (response.ok) {
+            const html = await response.text();
+            element.innerHTML = html;
+
+            // Re-initialize mobile menu after header loads
+            if (elementId === 'header-placeholder') {
+                initMobileMenu();
+            }
+        }
+    } catch (e) {
+        console.error('Failed to load component:', componentPath, e);
+    }
+}
+
+// === MOBILE MENU ===
+function initMobileMenu() {
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (!menuBtn || !navLinks) return;
+
+    menuBtn.addEventListener('click', () => {
+        menuBtn.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+
+    // Close menu on link click
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            menuBtn.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
+}
+
 // === TYPING EFFECT ===
 const typingPhrases = [
     'clawdbot --help',
@@ -42,7 +84,10 @@ function typeEffect() {
 
 // Start typing effect
 document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(typeEffect, 1000);
+    // Start typing effect if element exists
+    if (document.getElementById('typing')) {
+        setTimeout(typeEffect, 1000);
+    }
 });
 
 // === TAB SWITCHING ===
