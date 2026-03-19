@@ -10,10 +10,11 @@
     --bg-secondary: #111111;
     --bg-terminal: #1a1a1a;
     --text-primary: #ffffff;
-    --text-secondary: #888888;
+    --text-secondary: #a0a0a0;
+    --text-muted: #666666;
     --accent: #ff6b35;
-    --accent-green: #00ff88;
-    --accent-blue: #00a8ff;
+    --accent-green: #34d399;
+    --accent-blue: #38bdf8;
     --border: #333333;
     --code-bg: #0d1117;
 }
@@ -136,7 +137,7 @@ code, pre,
 
 .terminal-title {
     margin-left: auto;
-    color: var(--text-secondary);
+    color: var(--text-muted);
     font-size: 0.85rem;
 }
 
@@ -299,7 +300,7 @@ code, pre,
 
 .copy-btn {
     background: transparent;
-    border: 1px solid var(--border);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     color: var(--text-secondary);
     padding: 0.4rem 0.8rem;
     border-radius: 6px;
@@ -326,7 +327,7 @@ code, pre,
 }
 
 .code-block code {
-    color: var(--accent-green);
+    color: #c9d1d9;
     font-size: 0.9rem;
     line-height: 1.8;
 }
@@ -1004,7 +1005,7 @@ footer a:hover {
     gap: 1rem;
     margin-top: 1rem;
     font-size: 0.8rem;
-    color: var(--text-secondary);
+    color: var(--text-muted);
 }
 
 .card-meta span {
