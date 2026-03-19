@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>n8n — визуальная автоматизация с AI | guide.arturx.art</title>
+    <meta name="description" content="Руководство по n8n — self-hosted платформа автоматизации. Связывай API, сервисы и AI-агентов без кода.">
+
+    <meta property="og:title" content="n8n — визуальная автоматизация с AI">
+    <meta property="og:description" content="Self-hosted Zapier альтернатива. Визуальные workflow с AI-интеграциями.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://guide.arturx.art/guides/tools/n8n.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../guide.css">
+</head>
+<body>
+    <div class="reading-progress" id="reading-progress"></div>
+    <div id="header-placeholder"></div>
+
+    <div class="guide-container">
+        <aside class="guide-sidebar" id="guide-sidebar">
+            <nav class="toc">
+                <h4>Содержание</h4>
+                <ul id="toc-list"></ul>
+            </nav>
+        </aside>
+
+        <main class="guide-content">
+            <nav class="breadcrumbs">
+                <a href="/">Главная</a>
+                <span>/</span>
+                <a href="/#tools">Инструменты</a>
+                <span>/</span>
+                <span>n8n</span>
+            </nav>
+
+            <header class="guide-header">
+                <div class="guide-meta">
+                    <span class="guide-category">Инструменты</span>
+                    <span class="guide-reading-time">~15 мин</span>
+                    <span class="guide-updated">Март 2026</span>
+                </div>
+                <h1>n8n — визуальная автоматизация</h1>
+                <p class="guide-description">Self-hosted альтернатива Zapier. Визуальный редактор workflow: связывай API, базы данных и AI-агентов без написания кода.</p>
+            </header>
+
+            <article class="guide-body">
+
+                <section id="intro">
+                    <h2>Что такое n8n?</h2>
+
+                    <p><strong>n8n</strong> (произносится «n-eight-n») — open-source платформа автоматизации с визуальным редактором. Ты перетаскиваешь блоки (ноды), соединяешь их — и получаешь рабочий pipeline.</p>
+
+                    <h3>Зачем n8n, если есть Zapier / Make?</h3>
+
+                    <table class="comparison-table">
+                        <thead><tr><th></th><th>Zapier</th><th>Make</th><th>n8n</th></tr></thead>
+                        <tbody>
+                            <tr><td>Self-hosted</td><td>Нет</td><td>Нет</td><td><strong>Да</strong></td></tr>
+                            <tr><td>Бесплатный тир</td><td>100 задач/мес</td><td>1000 операций/мес</td><td><strong>Безлимит (self-hosted)</strong></td></tr>
+                            <tr><td>Кастомный код</td><td>Ограничен</td><td>Ограничен</td><td><strong>JS и Python ноды</strong></td></tr>
+                            <tr><td>AI-интеграции</td><td>Базовые</td><td>Базовые</td><td><strong>AI Agent, Vector Store, LLM Chain</strong></td></tr>
+                            <tr><td>Приватность</td><td>Облако</td><td>Облако</td><td><strong>Твой сервер</strong></td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="callout callout-info">
+                        <span class="callout-icon">&#128161;</span>
+                        <div class="callout-content">
+                            <strong>Официальные ресурсы</strong>
+                            <p>Документация: <a href="https://docs.n8n.io" target="_blank">docs.n8n.io</a> | GitHub: <a href="https://github.com/n8n-io/n8n" target="_blank">n8n-io/n8n</a></p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="install">
+                    <h2>Быстрая установка</h2>
+
+                    <h3>Docker (рекомендуется)</h3>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Terminal</span>
+                            <button class="copy-btn" data-copy="docker run -d --name n8n \
+  -p 5678:5678 \
+  -v n8n_data:/home/node/.n8n \
+  n8nio/n8n">Копировать</button>
+                        </div>
+                        <pre><code>docker run -d --name n8n \
+  -p 5678:5678 \
+  -v n8n_data:/home/node/.n8n \
+  n8nio/n8n</code></pre>
+                    </div>
+
+                    <p>Откройте <code>http://localhost:5678</code> — визуальный редактор готов.</p>
+
+                    <h3>npm</h3>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Terminal</span>
+                            <button class="copy-btn" data-copy="npm install -g n8n
+n8n start">Копировать</button>
+                        </div>
+                        <pre><code>npm install -g n8n
+n8n start</code></pre>
+                    </div>
+                </section>
+
+                <section id="use-cases">
+                    <h2>Что можно автоматизировать</h2>
+
+                    <ul>
+                        <li><strong>Контент-машина</strong> — RSS → AI-обработка → Telegram/Twitter публикация</li>
+                        <li><strong>Мониторинг</strong> — webhook → проверка → уведомление в Slack</li>
+                        <li><strong>AI-агенты</strong> — LLM Chain + Vector Store + Tools = автономный агент</li>
+                        <li><strong>Обработка данных</strong> — Google Sheets → трансформация → PostgreSQL</li>
+                        <li><strong>Email-автоматизация</strong> — входящее письмо → классификация AI → ответ</li>
+                    </ul>
+                </section>
+
+                <div class="callout callout-success">
+                    <span class="callout-icon">&#128640;</span>
+                    <div class="callout-content">
+                        <strong>Подробный гайд готовится</strong>
+                        <p>Продвинутые workflow, AI-ноды, интеграция с OpenClaw и развёртывание на VPS — скоро на этой странице.</p>
+                    </div>
+                </div>
+
+                <section class="related-guides">
+                    <h3>Связанные руководства</h3>
+                    <div class="related-cards">
+                        <a href="openclaw.html" class="related-card">
+                            <h4>OpenClaw</h4>
+                            <p>AI-агент в Telegram — полный гайд</p>
+                        </a>
+                        <a href="claude-code.html" class="related-card">
+                            <h4>Claude Code</h4>
+                            <p>AI в терминале для разработчиков</p>
+                        </a>
+                    </div>
+                </section>
+
+            </article>
+
+            <footer class="guide-footer">
+                <div class="guide-feedback">
+                    <p>Есть вопросы?</p>
+                    <a href="https://t.me/+i8bnWOjCGlEyYzYy" target="_blank" class="feedback-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161l-1.97 9.287c-.146.658-.537.818-1.084.508l-3-2.211-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.332-.373-.119l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.538-.194 1.006.128.833.934z"/>
+                        </svg>
+                        Telegram
+                    </a>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <script src="../../script.js"></script>
+    <script src="../guide.js"></script>
+</body>
+</html>

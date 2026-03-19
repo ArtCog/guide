@@ -42,8 +42,8 @@ function initMobileMenu() {
 
 // === TYPING EFFECT ===
 const typingPhrases = [
-    'clawdbot --help',
-    'curl -fsSL https://clawd.bot/install.sh | bash',
+    'openclaw --help',
+    'curl -fsSL https://openclaw.ai/install.sh | bash',
     'Привет! Напиши мне план на день.',
     'Создай сайт-визитку за 30 секунд',
     'Проанализируй этот PDF файл',

@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>guide.arturx.art | Руководства по AI-инструментам</title>
-    <meta name="description" content="Пошаговые руководства по настройке API, OAuth, AI-инструментам. OpenClaw, Claude, OpenAI и многое другое.">
-    <meta name="keywords" content="AI, API, OAuth, OpenClaw, ClawdBot, Claude, OpenAI, руководства, гайды, безопасность">
+    <title>guide.arturx.art | AI-агенты: настройка и запуск</title>
+    <meta name="description" content="Запусти своего AI-агента за 10 минут. OpenClaw, Claude Code, n8n — пошаговые гайды: установка, безопасность, модели, оптимизация.">
+    <meta name="keywords" content="AI агент, Telegram бот, OpenClaw, Claude Code, n8n, настройка, безопасность, модели, автоматизация">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="guide.arturx.art | Руководства по AI-инструментам">
-    <meta property="og:description" content="Пошаговые руководства по настройке API, OAuth, AI-инструментам">
+    <meta property="og:title" content="Руководства по настройке AI-агентов">
+    <meta property="og:description" content="Пошаговые инструкции: установка, безопасность, модели, оптимизация. OpenClaw, Claude Code, n8n.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://guide.arturx.art">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -38,139 +38,119 @@
                 </div>
             </div>
         </div>
-        <p class="tagline">Руководства по AI-инструментам</p>
-        <p class="subtitle">Пошаговые инструкции от настройки API до запуска ботов</p>
+        <p class="tagline">Руководства по настройке AI-агентов</p>
+        <p class="subtitle">Пошаговые инструкции: установка, безопасность, модели, оптимизация — только практика</p>
     </header>
 
     <!-- Categories Section -->
     <main class="categories-section">
 
-        <!-- Category: Tools -->
+        <!-- Category: AI Agents -->
         <section id="tools" class="category">
             <div class="category-header">
-                <span class="category-icon">&#128736;</span>
-                <h2>Инструменты</h2>
-                <p class="category-desc">AI-агенты и средства разработки</p>
+                <span class="category-icon">&#129302;</span>
+                <h2>AI-агенты</h2>
+                <p class="category-desc">Установка, настройка и продвинутое использование</p>
             </div>
 
             <div class="guides-grid">
                 <article class="guide-card featured">
                     <span class="card-badge">Обновлено</span>
                     <h3><a href="guides/tools/openclaw.html">OpenClaw</a></h3>
-                    <p>Автономный AI-агент с бесконечной памятью. Живёт в Telegram, управляет твоим компьютером. Включает подробное руководство по безопасности.</p>
+                    <p>Автономный AI-агент в Telegram. Установка, безопасность, стек из 6 моделей, экономия токенов, QMD-память, субагенты.</p>
                     <div class="card-meta">
-                        <span>~25 мин</span>
-                        <span>Начальный</span>
+                        <span>~35 мин</span>
+                        <span>Полный гайд</span>
                     </div>
                 </article>
 
-                <article class="guide-card coming-soon">
-                    <span class="card-badge muted">Скоро</span>
-                    <h3>Claude Code</h3>
-                    <p>CLI для работы с Claude в терминале. Кодинг с AI прямо из консоли.</p>
+                <article class="guide-card featured">
+                    <h3><a href="guides/tools/claude-code.html">Claude Code</a></h3>
+                    <p>Самый умный AI прямо в терминале. Пишет, рефакторит и дебажит код — без IDE и браузера.</p>
                     <div class="card-meta">
                         <span>~10 мин</span>
-                    </div>
-                </article>
-
-                <article class="guide-card coming-soon">
-                    <span class="card-badge muted">Скоро</span>
-                    <h3>n8n</h3>
-                    <p>Автоматизация без кода. Интеграция сервисов и AI-агентов.</p>
-                    <div class="card-meta">
-                        <span>~20 мин</span>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- Category: API Keys -->
-        <section id="api-keys" class="category">
-            <div class="category-header">
-                <span class="category-icon">&#128273;</span>
-                <h2>API-ключи</h2>
-                <p class="category-desc">Как получить доступ к AI-сервисам</p>
-            </div>
-
-            <div class="guides-grid">
-                <article class="guide-card featured">
-                    <span class="card-badge">Новое</span>
-                    <h3><a href="guides/api-keys/anthropic.html">Claude (Anthropic)</a></h3>
-                    <p>Получение API-ключа для Claude. Настройка биллинга и лимитов.</p>
-                    <div class="card-meta">
-                        <span>~5 мин</span>
-                        <span>Начальный</span>
+                        <span>Быстрый старт</span>
                     </div>
                 </article>
 
                 <article class="guide-card featured">
-                    <span class="card-badge">Новое</span>
-                    <h3><a href="guides/api-keys/openai.html">OpenAI</a></h3>
-                    <p>API-ключ для GPT-4, GPT-4o и других моделей. Настройка организации.</p>
-                    <div class="card-meta">
-                        <span>~5 мин</span>
-                        <span>Начальный</span>
-                    </div>
-                </article>
-
-                <article class="guide-card featured">
-                    <span class="card-badge">Новое</span>
-                    <h3><a href="guides/api-keys/twitter.html">X (Twitter)</a></h3>
-                    <p>API-ключи для публикации твитов. Developer Account и OAuth настройка.</p>
-                    <div class="card-meta">
-                        <span>~10 мин</span>
-                        <span>Средний</span>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- Category: OAuth -->
-        <section id="oauth" class="category">
-            <div class="category-header">
-                <span class="category-icon">&#128274;</span>
-                <h2>OAuth настройка</h2>
-                <p class="category-desc">Авторизация через сторонние сервисы</p>
-            </div>
-
-            <div class="guides-grid">
-                <article class="guide-card featured">
-                    <span class="card-badge">Новое</span>
-                    <h3><a href="guides/oauth/google.html">Google OAuth</a></h3>
-                    <p>Client ID и Client Secret для авторизации через Google. Настройка consent screen.</p>
-                    <div class="card-meta">
-                        <span>~10 мин</span>
-                        <span>Средний</span>
-                    </div>
-                </article>
-
-                <article class="guide-card coming-soon">
-                    <span class="card-badge muted">Скоро</span>
-                    <h3>GitHub OAuth</h3>
-                    <p>Авторизация через GitHub для приложений и ботов.</p>
-                    <div class="card-meta">
-                        <span>~7 мин</span>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- Category: VPS/Servers -->
-        <section id="servers" class="category">
-            <div class="category-header">
-                <span class="category-icon">&#128421;</span>
-                <h2>VPS и серверы</h2>
-                <p class="category-desc">Развёртывание ботов на серверах</p>
-            </div>
-
-            <div class="guides-grid">
-                <article class="guide-card coming-soon">
-                    <span class="card-badge muted">Скоро</span>
-                    <h3>Hetzner VPS</h3>
-                    <p>Настройка сервера для работы OpenClaw 24/7. Выбор тарифа и безопасная настройка.</p>
+                    <h3><a href="guides/tools/n8n.html">n8n</a></h3>
+                    <p>Визуальная автоматизация: перетаскивай блоки, соединяй API и AI — без строчки кода. Бесплатная альтернатива Zapier.</p>
                     <div class="card-meta">
                         <span>~15 мин</span>
-                        <span>Средний</span>
+                        <span>Быстрый старт</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Category: Access to AI Services (compact) -->
+        <section id="ai-access" class="category category-compact">
+            <div class="category-header">
+                <span class="category-icon">&#128273;</span>
+                <h2>Подключение к моделям</h2>
+                <p class="category-desc">API-ключи и авторизация — чтобы агенты заработали</p>
+            </div>
+
+            <div class="guides-grid">
+                <article class="guide-card featured">
+                    <h3><a href="guides/api-keys/anthropic.html">Claude (Anthropic)</a></h3>
+                    <p>API-ключ и подписка Max для Claude Opus.</p>
+                    <div class="card-meta">
+                        <span>~5 мин</span>
+                    </div>
+                </article>
+
+                <article class="guide-card featured">
+                    <h3><a href="guides/api-keys/openai.html">OpenAI</a></h3>
+                    <p>API-ключ для GPT-5 и Codex.</p>
+                    <div class="card-meta">
+                        <span>~5 мин</span>
+                    </div>
+                </article>
+
+                <article class="guide-card featured">
+                    <h3><a href="guides/oauth/google.html">Google OAuth</a></h3>
+                    <p>Авторизация для Gemini и Google API.</p>
+                    <div class="card-meta">
+                        <span>~10 мин</span>
+                    </div>
+                </article>
+
+                <article class="guide-card featured">
+                    <h3><a href="guides/api-keys/twitter.html">X (Twitter)</a></h3>
+                    <p>API для автопубликации.</p>
+                    <div class="card-meta">
+                        <span>~10 мин</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Category: Infrastructure (compact) -->
+        <section id="infra" class="category category-compact">
+            <div class="category-header">
+                <span class="category-icon">&#128421;</span>
+                <h2>Инфраструктура</h2>
+                <p class="category-desc">Где и как запустить агента 24/7</p>
+            </div>
+
+            <div class="guides-grid">
+                <article class="guide-card coming-soon">
+                    <span class="card-badge muted">Скоро</span>
+                    <h3>Выбор VPS</h3>
+                    <p>Hetzner, Aeza, Timeweb, Contabo — сравнение для россиян и не только.</p>
+                    <div class="card-meta">
+                        <span>~10 мин</span>
+                    </div>
+                </article>
+
+                <article class="guide-card coming-soon">
+                    <span class="card-badge muted">Скоро</span>
+                    <h3>Docker для AI</h3>
+                    <p>Sandbox, ресурсы, безопасность контейнеров.</p>
+                    <div class="card-meta">
+                        <span>~15 мин</span>
                     </div>
                 </article>
             </div>

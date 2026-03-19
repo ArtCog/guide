@@ -23,11 +23,31 @@ html {
 }
 
 body {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background-color: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
     font-size: 16px;
+}
+
+/* Monospace for code, terminal, headings, nav */
+h1, h2, h3, h4, h5, h6,
+.terminal-window,
+code, pre,
+.code-block,
+.nav-links a,
+.logo-text,
+.card-badge,
+.card-meta,
+.guide-category,
+.guide-reading-time,
+.guide-updated,
+.toc,
+.breadcrumbs,
+.copy-btn,
+.tab-btn,
+.expand-collapse-btn {
+    font-family: 'JetBrains Mono', monospace;
 }
 
 /* === HERO === */
@@ -825,6 +845,41 @@ footer a:hover {
 
 .category {
     margin-bottom: 4rem;
+}
+
+/* Compact category — smaller cards, less spacing */
+.category-compact {
+    margin-bottom: 2.5rem;
+}
+
+.category-compact .category-header {
+    margin-bottom: 1rem;
+}
+
+.category-compact .category-icon {
+    font-size: 1.5rem;
+}
+
+.category-compact h2 {
+    font-size: 1.2rem;
+}
+
+.category-compact .guides-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.category-compact .guide-card {
+    padding: 1rem 1.25rem;
+}
+
+.category-compact .guide-card h3 {
+    font-size: 0.95rem;
+}
+
+.category-compact .guide-card > p {
+    font-size: 0.82rem;
+    line-height: 1.4;
 }
 
 .category-header {

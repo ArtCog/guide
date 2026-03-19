@@ -26,6 +26,7 @@ function generateTOC() {
     const tocList = document.getElementById('toc-list');
     if (!tocList) return;
 
+    // Find h2/h3 including those inside <summary> of guide-section
     const headings = document.querySelectorAll('.guide-body h2, .guide-body h3');
     let html = '';
 
@@ -86,17 +87,51 @@ function initTOCLinks() {
             const targetId = e.target.getAttribute('href').substring(1);
             const target = document.getElementById(targetId);
             if (target) {
-                const headerOffset = 100;
-                const elementPosition = target.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.scrollY - headerOffset;
+                // Auto-open parent <details> if heading is inside one
+                const parentDetails = target.closest('details.guide-section');
+                if (parentDetails && !parentDetails.open) {
+                    parentDetails.open = true;
+                }
+                // Also check if heading is inside summary (h2 in guide-section)
+                const parentSummary = target.closest('summary');
+                if (parentSummary) {
+                    const details = parentSummary.closest('details.guide-section');
+                    if (details && !details.open) {
+                        details.open = true;
+                    }
+                }
 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
+                // Small delay to let details expand before scrolling
+                setTimeout(() => {
+                    const headerOffset = 100;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }, 50);
             }
         }
     });
+}
+
+// === EXPAND / COLLAPSE ALL SECTIONS ===
+function initExpandCollapse() {
+    const expandBtn = document.getElementById('expand-all');
+    const collapseBtn = document.getElementById('collapse-all');
+
+    if (expandBtn) {
+        expandBtn.addEventListener('click', () => {
+            document.querySelectorAll('details.guide-section').forEach(d => d.open = true);
+        });
+    }
+    if (collapseBtn) {
+        collapseBtn.addEventListener('click', () => {
+            document.querySelectorAll('details.guide-section').forEach(d => d.open = false);
+        });
+    }
 }
 
 // === MOBILE MENU ===
@@ -205,6 +240,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Init copy buttons
     initCopyButtons();
+
+    // Init expand/collapse
+    initExpandCollapse();
 
     // Scroll listeners with throttle
     const throttledScroll = throttle(() => {
