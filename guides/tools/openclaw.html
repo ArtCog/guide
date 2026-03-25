@@ -848,6 +848,231 @@ iptables -I INPUT -i br-$(docker network inspect openclaw-egress \
                     </div>
                 </details>
 
+                <!-- ==================== 4.5. CONTROL UI ==================== -->
+                <details class="guide-section" id="control-ui-section">
+                    <summary><h2 id="control-ui">Control UI — веб-панель управления</h2></summary>
+                    <div class="section-content">
+
+                        <p>OpenClaw включает встроенный веб-интерфейс — <strong>Control UI</strong> (в сообществе его часто называют «Mission Control»). Это полноценная панель управления ботом через браузер: чат, агенты, память, журнал действий, аппрувы, cron-задачи, скиллы — всё в одном месте.</p>
+
+                        <div class="callout callout-info">
+                            <span class="callout-icon">&#128161;</span>
+                            <div class="callout-content">
+                                <strong>Telegram vs Control UI</strong>
+                                <p>Telegram — основной канал для общения с ботом. Control UI — для мониторинга и управления: просмотр памяти, журналов, агентов, настроек. Они дополняют друг друга, а не заменяют.</p>
+                            </div>
+                        </div>
+
+                        <h3>Способ 1: Tailscale Serve (рекомендуется)</h3>
+
+                        <p>Официально рекомендуемый способ удалённого доступа. Tailscale обеспечивает VPN + автоматический HTTPS + аутентификацию — всё без открытия портов.</p>
+
+                        <p><strong>Предварительные условия:</strong></p>
+                        <ul>
+                            <li>Tailscale установлен на сервере и на вашем устройстве</li>
+                            <li>Оба устройства в одном tailnet</li>
+                            <li>Tailscale Serve <a href="https://login.tailscale.com/admin/machines" target="_blank">включён в настройках tailnet</a></li>
+                        </ul>
+
+                        <p><strong>Шаг 1:</strong> Настройте gateway в <code>openclaw.json</code>:</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>openclaw.json — gateway (Tailscale Serve)</span>
+                                <button class="copy-btn" data-copy='"gateway": {
+  "port": 18789,
+  "mode": "local",
+  "bind": "loopback",
+  "auth": {
+    "mode": "token",
+    "token": "СГЕНЕРИРУЙ_СВОЙ_ТОКЕН",
+    "allowTailscale": true
+  },
+  "controlUi": {
+    "allowedOrigins": ["https://ВАШЕ_ИМЯ.ВАШ_TAILNET.ts.net"],
+    "dangerouslyDisableDeviceAuth": true
+  },
+  "trustedProxies": ["127.0.0.1", "::1"],
+  "tailscale": {
+    "mode": "serve",
+    "resetOnExit": false
+  }
+}'>Копировать</button>
+                            </div>
+                            <pre><code>"gateway": {
+  "port": 18789,
+  "mode": "local",
+  "bind": "loopback",            // gateway слушает только на localhost
+  "auth": {
+    "mode": "token",
+    "token": "СГЕНЕРИРУЙ_СВОЙ_ТОКЕН",
+    "allowTailscale": true        // разрешить аутентификацию через Tailscale identity
+  },
+  "controlUi": {
+    "allowedOrigins": ["https://ВАШЕ_ИМЯ.ВАШ_TAILNET.ts.net"],
+    "dangerouslyDisableDeviceAuth": true  // см. примечание ниже
+  },
+  "trustedProxies": ["127.0.0.1", "::1"],
+  "tailscale": {
+    "mode": "serve",              // Tailscale проксирует трафик с HTTPS
+    "resetOnExit": false
+  }
+}</code></pre>
+                        </div>
+
+                        <div class="callout callout-warning">
+                            <span class="callout-icon">&#9888;&#65039;</span>
+                            <div class="callout-content">
+                                <strong>Зачем <code>dangerouslyDisableDeviceAuth</code>?</strong>
+                                <p>Control UI требует «device pairing» — одобрение каждого нового устройства через CLI (<code>openclaw devices approve</code>). На небольших VPS CLI может не успевать пройти crypto-handshake (таймаут 3 сек). Этот флаг отключает device pairing. Безопасность компенсируется тремя другими слоями: Tailscale VPN (только ваши устройства), HTTPS (шифрование), и токен (аутентификация).</p>
+                            </div>
+                        </div>
+
+                        <p><strong>Шаг 2:</strong> Включите Tailscale Serve:</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Terminal</span>
+                                <button class="copy-btn" data-copy="tailscale serve --bg http://127.0.0.1:18789">Копировать</button>
+                            </div>
+                            <pre><code># Если появится ссылка на включение Serve — откройте её в браузере
+tailscale serve --bg http://127.0.0.1:18789
+
+# Проверить статус:
+tailscale serve status</code></pre>
+                        </div>
+
+                        <p><strong>Шаг 3:</strong> Перезапустите gateway:</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Terminal</span>
+                                <button class="copy-btn" data-copy="systemctl --user restart openclaw-gateway">Копировать</button>
+                            </div>
+                            <pre><code>systemctl --user restart openclaw-gateway</code></pre>
+                        </div>
+
+                        <p><strong>Шаг 4:</strong> Откройте в браузере:</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>URL</span>
+                            </div>
+                            <pre><code>https://ВАШЕ_ИМЯ.ВАШ_TAILNET.ts.net/</code></pre>
+                        </div>
+
+                        <p>При первом подключении введите gateway token. Браузер запомнит сессию.</p>
+
+                        <div class="callout callout-info">
+                            <span class="callout-icon">&#128161;</span>
+                            <div class="callout-content">
+                                <strong>Как узнать ваш Tailscale домен</strong>
+                                <p><code>tailscale status</code> покажет имя машины. Полный домен: <code>ИМЯ_МАШИНЫ.ВАШ_TAILNET.ts.net</code>. Например: <code>openclaw.tail7ba1c3.ts.net</code>.</p>
+                            </div>
+                        </div>
+
+                        <h3>Способ 2: Прямой доступ по IP (без Tailscale)</h3>
+
+                        <p>Если Tailscale не используется, можно открыть gateway по IP. Менее безопасно — нет VPN и нет автоматического HTTPS.</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>openclaw.json — gateway (прямой IP)</span>
+                                <button class="copy-btn" data-copy='"gateway": {
+  "port": 18789,
+  "mode": "local",
+  "bind": "lan",
+  "auth": {
+    "mode": "token",
+    "token": "СГЕНЕРИРУЙ_СВОЙ_ТОКЕН"
+  },
+  "controlUi": {
+    "allowedOrigins": ["http://ВАШ_IP:18789"],
+    "allowInsecureAuth": true,
+    "dangerouslyDisableDeviceAuth": true
+  },
+  "tailscale": {
+    "mode": "off"
+  }
+}'>Копировать</button>
+                            </div>
+                            <pre><code>"gateway": {
+  "port": 18789,
+  "mode": "local",
+  "bind": "lan",
+  "auth": {
+    "mode": "token",
+    "token": "СГЕНЕРИРУЙ_СВОЙ_ТОКЕН"
+  },
+  "controlUi": {
+    "allowedOrigins": ["http://ВАШ_IP:18789"],
+    "allowInsecureAuth": true,          // обязательно для HTTP
+    "dangerouslyDisableDeviceAuth": true
+  },
+  "tailscale": {
+    "mode": "off"
+  }
+}</code></pre>
+                        </div>
+
+                        <p>Дополнительно: <code>ufw allow 18789/tcp</code> для открытия порта.</p>
+
+                        <div class="callout callout-danger">
+                            <span class="callout-icon">&#9940;</span>
+                            <div class="callout-content">
+                                <strong>bind: "lan" + tailscale.mode: "serve" = ошибка конфига</strong>
+                                <p>Tailscale serve требует <code>bind: "loopback"</code>. Если хотите Tailscale — используйте Способ 1. Если прямой IP — отключите Tailscale (<code>"mode": "off"</code>).</p>
+                            </div>
+                        </div>
+
+                        <h3>Способ 3: SSH-туннель (максимальная безопасность)</h3>
+
+                        <p>Никаких изменений в конфиге не нужно — gateway остаётся на loopback. Туннель создаёт локальный порт на вашем компьютере:</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Terminal (ваш компьютер)</span>
+                                <button class="copy-btn" data-copy="ssh -L 18789:127.0.0.1:18789 -i ~/.ssh/id_ed25519 ЮЗЕР@ВАШ_IP">Копировать</button>
+                            </div>
+                            <pre><code># Запустите на СВОЁМ компьютере (не на сервере):
+ssh -L 18789:127.0.0.1:18789 -i ~/.ssh/id_ed25519 ЮЗЕР@ВАШ_IP
+
+# Затем откройте в браузере:
+# http://localhost:18789/#token=ВАШТОКЕН</code></pre>
+                        </div>
+
+                        <p>Localhost — secure context для браузера, device identity работает автоматически. Минус — команду нужно запускать каждый раз.</p>
+
+                        <h3>Безопасность: сравнение способов</h3>
+
+                        <table class="comparison-table">
+                            <thead><tr><th>Способ</th><th>HTTPS</th><th>VPN</th><th>Порты</th><th>Удобство</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Tailscale Serve</strong></td><td>Автоматический</td><td>Tailscale</td><td>Закрыты</td><td>Закладка в браузере</td></tr>
+                                <tr><td>SSH-туннель</td><td>Не нужен (localhost)</td><td>SSH</td><td>Закрыты</td><td>Команда каждый раз</td></tr>
+                                <tr><td>Прямой IP</td><td>Нет</td><td>Нет</td><td>Открыт 18789</td><td>Закладка в браузере</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Что видно в Control UI</h3>
+
+                        <table class="comparison-table">
+                            <thead><tr><th>Раздел</th><th>Что показывает</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Chat</strong></td><td>Чат с ботом прямо из браузера, стриминг, tool calls</td></tr>
+                                <tr><td><strong>Agents</strong></td><td>Список агентов, их модели и состояние</td></tr>
+                                <tr><td><strong>Skills</strong></td><td>Установленные скиллы и их статус</td></tr>
+                                <tr><td><strong>Memory</strong></td><td>Long-term memory бота, журналы</td></tr>
+                                <tr><td><strong>Sessions</strong></td><td>Активные и завершённые сессии</td></tr>
+                                <tr><td><strong>Cron Jobs</strong></td><td>Запланированные задачи</td></tr>
+                                <tr><td><strong>Channels</strong></td><td>Подключённые каналы (Telegram, WhatsApp и др.)</td></tr>
+                                <tr><td><strong>Config</strong></td><td>Редактор конфигурации с валидацией</td></tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </details>
+
                 <!-- ==================== 5. MODELS ==================== -->
                 <details class="guide-section" id="models-section">
                     <summary><h2 id="models">Стек моделей (Model Layering)</h2></summary>
@@ -1418,17 +1643,22 @@ free -h</code></pre>
                                 <tr>
                                     <td><strong>Honeypot-файлы</strong></td>
                                     <td>Ловушки на несанкционированный доступ</td>
-                                    <td>Файлы <code>backup_keys.txt</code>, <code>secrets.env</code> с поддельными ключами. Чтение = мгновенный алерт</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Детектор аномалий</strong></td>
-                                    <td>Анализ логов на подозрительную активность</td>
-                                    <td>Cron каждый час: >50 exec-команд или >10 sudo за час = алерт</td>
+                                    <td>Файлы <code>backup_keys.txt</code>, <code>secrets.env</code>, <code>.credentials</code> с поддельными ключами. Чтение = мгновенный алерт</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Canary-файлы</strong></td>
                                     <td>Контроль целостности конфигов</td>
-                                    <td>SHA256-хеши <code>openclaw.json</code>, <code>exec-approvals.json</code>, <code>filter.txt</code>. Несовпадение = алерт</td>
+                                    <td>SHA256-хеши <code>openclaw.json</code>, <code>exec-approvals.json</code>, <code>tinyproxy.conf</code>, <code>filter.txt</code>. Несовпадение = алерт</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Детектор аномалий</strong></td>
+                                    <td>Анализ логов на подозрительную активность</td>
+                                    <td>>50 elevated-команд или >10 sudo за час, любой rm → алерт</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>System Health</strong></td>
+                                    <td>Мониторинг здоровья сервера</td>
+                                    <td>Диск > 90% или прокси/API недоступен → алерт</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Immutable бэкапы</strong></td>
@@ -1451,12 +1681,38 @@ free -h</code></pre>
   ├── exec-denylist-check.sh ──── программный блок + алерт (уровень ОС)
   ├── Honeypot-файлы ──────────── ловушки на чтение (уровень ОС)
   ├── Anomaly detector ────────── анализ логов (cron)
-  ├── Canary-check ────────────── хеши конфигов (heartbeat)
+  ├── Canary-check ────────────── хеши конфигов (cron)
+  ├── System Health ────────────── диск + прокси + API (cron)
   ├── Immutable бэкапы ────────── chattr +i (уровень FS)
   ├── Tinyproxy whitelist ─────── фильтр трафика (уровень сети)
   ├── Git auto-commit ─────────── снапшоты (cron)
   └── Docker sandbox ──────────── изоляция субагентов (контейнер)
        └── sudoers ────────────── ограниченный список команд (уровень ОС)</code></pre>
+
+                        <h5>Автономный страж — мониторинг 24/7</h5>
+
+                        <p>Canary, Honeypot, Anomaly Detector и System Health объединены в <strong>автономную систему мониторинга</strong> — три независимых bash-скрипта, которые запускаются по cron без участия человека.</p>
+
+                        <table class="comparison-table">
+                            <thead><tr><th>Параметр</th><th>Значение</th></tr></thead>
+                            <tbody>
+                                <tr><td>Cron (безопасность)</td><td><code>0 8,20 * * *</code> Europe/Berlin — 2 раза в день</td></tr>
+                                <tr><td>Cron (здоровье)</td><td><code>0 8,14,20 * * *</code> Europe/Berlin — 3 раза в день</td></tr>
+                                <tr><td>Запуск</td><td><code>systemEvent</code> в main-сессию OpenClaw</td></tr>
+                                <tr><td>Если всё OK</td><td>Тишина (<code>NO_REPLY</code>) — ничего не приходит</td></tr>
+                                <tr><td>Если проблема</td><td>Мгновенное сообщение в Telegram</td></tr>
+                            </tbody>
+                        </table>
+
+                        <p><strong>Ключевой принцип:</strong> после обновления эталонных хешей (<code>--update</code>) canary "принимает" легитимные изменения. Всё остальное — повод для немедленного алерта.</p>
+
+                        <div class="callout callout-info">
+                            <span class="callout-icon">&#128161;</span>
+                            <div class="callout-content">
+                                <strong>Реальный пример</strong>
+                                <p>Canary обнаружил изменение <code>openclaw.json</code> — алерт пришёл автоматически в Telegram, пока владелец занимался другими делами. Система зафиксировала изменение без какого-либо участия человека.</p>
+                            </div>
+                        </div>
 
                         <div class="callout callout-info">
                             <span class="callout-icon">&#128161;</span>
@@ -1470,7 +1726,7 @@ free -h</code></pre>
                             <span class="callout-icon">&#9940;</span>
                             <div class="callout-content">
                                 <strong>Не копируйте конфигурацию полной автономии вслепую</strong>
-                                <p><code>security: "full"</code> + <code>ask: "off"</code> = бот выполняет <em>любую</em> команду без вопросов. Это безопасно только при наличии ВСЕХ компенсирующих слоёв: Telegram allowlist, egress proxy, sandbox, "Умный Бастион". Если у вас этого нет — используйте дефолтную конфигурацию из начала секции «Безопасность».</p>
+                                <p><code>security: "full"</code> + <code>ask: "off"</code> = бот выполняет <em>любую</em> команду без вопросов. Это безопасно только при наличии ВСЕХ компенсирующих слоёв: Telegram allowlist, egress proxy, sandbox, «Умный Бастион». Если у вас этого нет — используйте дефолтную конфигурацию из начала секции «Безопасность».</p>
                             </div>
                         </div>
 
