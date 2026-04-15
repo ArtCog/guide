@@ -3,15 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>guide.arturx.art | AI-агенты: настройка и запуск</title>
-    <meta name="description" content="Запусти своего AI-агента за 10 минут. OpenClaw, Claude Code, n8n — пошаговые гайды: установка, безопасность, модели, оптимизация.">
-    <meta name="keywords" content="AI агент, Telegram бот, OpenClaw, Claude Code, n8n, настройка, безопасность, модели, автоматизация">
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Руководства по настройке AI-агентов">
-    <meta property="og:description" content="Пошаговые инструкции: установка, безопасность, модели, оптимизация. OpenClaw, Claude Code, n8n.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://guide.arturx.art">
+    <title>guide.arturx.art | Доступ через Telegram</title>
+    <meta name="robots" content="noindex, nofollow">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,145 +12,79 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .gate-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+        .gate-terminal {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 2.5rem 3rem;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: 0 0 40px rgba(88, 166, 255, 0.08);
+        }
+        .gate-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .gate-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            color: #58a6ff;
+            margin-bottom: 0.5rem;
+        }
+        .gate-subtitle {
+            color: #8b949e;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .gate-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: #2563eb;
+            color: #fff;
+            text-decoration: none;
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        .gate-btn:hover {
+            background: #1d4ed8;
+        }
+        .gate-hint {
+            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            color: #484f58;
+            font-family: 'JetBrains Mono', monospace;
+        }
+    </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <header class="hero hero-compact">
-        <div class="terminal-window">
-            <div class="terminal-header">
-                <span class="terminal-btn red"></span>
-                <span class="terminal-btn yellow"></span>
-                <span class="terminal-btn green"></span>
-                <span class="terminal-title">guide ~ catalog</span>
-            </div>
-            <div class="terminal-body">
-                <div class="typing-container">
-                    <span class="prompt">$</span>
-                    <span class="typing-text" id="typing"></span>
-                    <span class="cursor">|</span>
-                </div>
-            </div>
+    <div class="gate-wrapper">
+        <div class="gate-terminal">
+            <div class="gate-icon">🔒</div>
+            <div class="gate-title">access denied</div>
+            <p class="gate-subtitle">
+                Материалы доступны только через Telegram-бот.<br>
+                Нажми кнопку — получишь ссылку сразу.
+            </p>
+            <a class="gate-btn" href="https://t.me/imersivnybot">
+                <span>✈️</span> Получить доступ
+            </a>
+            <div class="gate-hint">→ @imersivnybot</div>
         </div>
-        <p class="tagline">Руководства по настройке AI-агентов</p>
-        <p class="subtitle">Пошаговые инструкции: установка, безопасность, модели, оптимизация — только практика</p>
-    </header>
-
-    <!-- Categories Section -->
-    <main class="categories-section">
-
-        <!-- Category: AI Agents -->
-        <section id="tools" class="category">
-            <div class="category-header">
-                <span class="category-icon">&#129302;</span>
-                <h2>AI-агенты</h2>
-                <p class="category-desc">Установка, настройка и продвинутое использование</p>
-            </div>
-
-            <div class="guides-grid">
-                <article class="guide-card featured">
-                    <span class="card-badge">Обновлено</span>
-                    <h3><a href="guides/tools/openclaw.html">OpenClaw</a></h3>
-                    <p>Автономный AI-агент в Telegram. Установка, безопасность, стек из 6 моделей, экономия токенов, QMD-память, субагенты.</p>
-                    <div class="card-meta">
-                        <span>~35 мин</span>
-                        <span>Полный гайд</span>
-                    </div>
-                </article>
-
-                <article class="guide-card featured">
-                    <h3><a href="guides/tools/claude-code.html">Claude Code</a></h3>
-                    <p>Самый умный AI прямо в терминале. Пишет, рефакторит и дебажит код — без IDE и браузера.</p>
-                    <div class="card-meta">
-                        <span>~10 мин</span>
-                        <span>Быстрый старт</span>
-                    </div>
-                </article>
-
-                <article class="guide-card featured">
-                    <h3><a href="guides/tools/n8n.html">n8n</a></h3>
-                    <p>Визуальная автоматизация: перетаскивай блоки, соединяй API и AI — без строчки кода. Бесплатная альтернатива Zapier.</p>
-                    <div class="card-meta">
-                        <span>~15 мин</span>
-                        <span>Быстрый старт</span>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- Category: Access to AI Services (compact) -->
-        <section id="ai-access" class="category category-compact">
-            <div class="category-header">
-                <span class="category-icon">&#128273;</span>
-                <h2>Подключение к моделям</h2>
-                <p class="category-desc">API-ключи и авторизация — чтобы агенты заработали</p>
-            </div>
-
-            <div class="guides-grid">
-                <article class="guide-card featured">
-                    <h3><a href="guides/api-keys/anthropic.html">Claude (Anthropic)</a></h3>
-                    <p>API-ключ и подписка Max для Claude Opus.</p>
-                    <div class="card-meta">
-                        <span>~5 мин</span>
-                    </div>
-                </article>
-
-                <article class="guide-card featured">
-                    <h3><a href="guides/api-keys/openai.html">OpenAI</a></h3>
-                    <p>API-ключ для GPT-5 и Codex.</p>
-                    <div class="card-meta">
-                        <span>~5 мин</span>
-                    </div>
-                </article>
-
-                <article class="guide-card featured">
-                    <h3><a href="guides/oauth/google.html">Google OAuth</a></h3>
-                    <p>Авторизация для Gemini и Google API.</p>
-                    <div class="card-meta">
-                        <span>~10 мин</span>
-                    </div>
-                </article>
-
-                <article class="guide-card featured">
-                    <h3><a href="guides/api-keys/twitter.html">X (Twitter)</a></h3>
-                    <p>API для автопубликации.</p>
-                    <div class="card-meta">
-                        <span>~10 мин</span>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- Category: Infrastructure (compact) -->
-        <section id="infra" class="category category-compact">
-            <div class="category-header">
-                <span class="category-icon">&#128421;</span>
-                <h2>Инфраструктура</h2>
-                <p class="category-desc">Где и как запустить агента 24/7</p>
-            </div>
-
-            <div class="guides-grid">
-                <article class="guide-card coming-soon">
-                    <span class="card-badge muted">Скоро</span>
-                    <h3>Выбор VPS</h3>
-                    <p>Hetzner, Aeza, Timeweb, Contabo — сравнение для россиян и не только.</p>
-                    <div class="card-meta">
-                        <span>~10 мин</span>
-                    </div>
-                </article>
-
-                <article class="guide-card coming-soon">
-                    <span class="card-badge muted">Скоро</span>
-                    <h3>Docker для AI</h3>
-                    <p>Sandbox, ресурсы, безопасность контейнеров.</p>
-                    <div class="card-meta">
-                        <span>~15 мин</span>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-    </main>
-
-    <script src="script.js"></script>
+    </div>
 </body>
 </html>
