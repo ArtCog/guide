@@ -6,12 +6,13 @@ if (window.location.pathname.startsWith(SECRET_PATH)) {
     localStorage.setItem('guide_access', SECRET_PATH);
 }
 
-// Rewrite header links to use secret path instead of root
-function rewriteHeaderLinks() {
+// Rewrite all root-pointing links to use secret path
+function rewriteRootLinks() {
     const accessPath = localStorage.getItem('guide_access');
     if (!accessPath) return;
 
-    document.querySelectorAll('a.logo, .nav-links a').forEach(link => {
+    // Header logo, nav links, breadcrumbs — anything pointing to /
+    document.querySelectorAll('a.logo, .nav-links a, .breadcrumbs a').forEach(link => {
         const href = link.getAttribute('href');
         if (href === '/' || href === '/index.html') {
             link.setAttribute('href', accessPath);
@@ -35,7 +36,7 @@ async function loadComponent(elementId, componentPath) {
             element.innerHTML = html; // Safe: same-origin static HTML components
             if (elementId === 'header-placeholder') {
                 initMobileMenu();
-                rewriteHeaderLinks();
+                rewriteRootLinks();
             }
         }
     } catch (e) {
@@ -106,12 +107,13 @@ function typeEffect() {
     setTimeout(typeEffect, typingSpeed);
 }
 
-// Start typing effect
+// Start typing effect + rewrite links on page load
 document.addEventListener('DOMContentLoaded', () => {
-    // Start typing effect if element exists
     if (document.getElementById('typing')) {
         setTimeout(typeEffect, 1000);
     }
+    // Rewrite breadcrumbs and any other root-pointing links already in HTML
+    rewriteRootLinks();
 });
 
 // === TAB SWITCHING ===
