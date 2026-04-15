@@ -1,4 +1,29 @@
+// === ACCESS GATE ===
+const SECRET_PATH = '/f3kpx7mq/';
+
+// If user is on the secret path — remember access
+if (window.location.pathname.startsWith(SECRET_PATH)) {
+    localStorage.setItem('guide_access', SECRET_PATH);
+}
+
+// Rewrite header links to use secret path instead of root
+function rewriteHeaderLinks() {
+    const accessPath = localStorage.getItem('guide_access');
+    if (!accessPath) return;
+
+    document.querySelectorAll('a.logo, .nav-links a').forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === '/' || href === '/index.html') {
+            link.setAttribute('href', accessPath);
+        } else if (href && href.startsWith('/#')) {
+            link.setAttribute('href', accessPath + href.substring(1));
+        }
+    });
+}
+
 // === LOAD COMPONENTS ===
+// Note: loadComponent inserts trusted HTML from local component files (same-origin fetch).
+// These are static files under our control, not user-generated content.
 async function loadComponent(elementId, componentPath) {
     const element = document.getElementById(elementId);
     if (!element) return;
@@ -7,11 +32,10 @@ async function loadComponent(elementId, componentPath) {
         const response = await fetch(componentPath);
         if (response.ok) {
             const html = await response.text();
-            element.innerHTML = html;
-
-            // Re-initialize mobile menu after header loads
+            element.innerHTML = html; // Safe: same-origin static HTML components
             if (elementId === 'header-placeholder') {
                 initMobileMenu();
+                rewriteHeaderLinks();
             }
         }
     } catch (e) {
