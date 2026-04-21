@@ -1000,6 +1000,21 @@ footer a:hover {
     line-height: 1.5;
 }
 
+/* Inline numbered chip (also used on materials page) */
+.h-num {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    background: rgba(255, 107, 53, 0.15);
+    font-weight: 800;
+    font-size: 0.75em;
+    padding: 0.15em 0.5em;
+    border-radius: 6px;
+    margin-right: 0.4rem;
+    vertical-align: 0.1em;
+    letter-spacing: 0.03em;
+}
+
 .module-list {
     list-style: none;
     counter-reset: module;

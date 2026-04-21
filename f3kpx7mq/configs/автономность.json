@@ -1,0 +1,101 @@
+{
+  "_comment": "Автономность ИИмерсивного — бот реально делает, не спрашивая на каждое движение. Применяй ПОВЕРХ агенты-и-модели.json + безопасность.json через deep-merge. Без этого файла бот работает ручкой — каждый sudo требует подтверждение.",
+  "auth": {
+    "cooldowns": {
+      "billingBackoffHoursByProvider": {
+        "anthropic": 0.01
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "heartbeat": {
+        "every": "120m",
+        "model": "google/gemini-2.5-flash",
+        "target": "telegram",
+        "to": "telegram:REPLACE_ME_TELEGRAM_ID",
+        "prompt": "Read HEARTBEAT.md if it exists. If nothing needs attention, reply HEARTBEAT_OK."
+      },
+      "sandbox": {
+        "workspaceAccess": "rw",
+        "scope": "session",
+        "docker": {
+          "dangerouslyAllowExternalBindSources": true
+        }
+      }
+    }
+  },
+  "tools": {
+    "sessions": {
+      "visibility": "all"
+    },
+    "agentToAgent": {
+      "enabled": true,
+      "allow": [
+        "main",
+        "coder",
+        "strategist",
+        "researcher"
+      ]
+    },
+    "elevated": {
+      "enabled": false
+    }
+  },
+  "messages": {
+    "ackReactionScope": "group-mentions"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "approvals": {
+    "exec": {
+      "enabled": true,
+      "mode": "targets",
+      "agentFilter": [
+        "main"
+      ],
+      "targets": [
+        {
+          "channel": "telegram",
+          "to": "REPLACE_ME_TELEGRAM_ID"
+        }
+      ]
+    }
+  },
+  "session": {
+    "agentToAgent": {
+      "maxPingPongTurns": 2
+    }
+  },
+  "hooks": {
+    "internal": {
+      "enabled": true,
+      "entries": {
+        "session-memory": {
+          "enabled": true
+        },
+        "self-improvement": {
+          "enabled": true
+        },
+        "german-vocab-capture": {
+          "enabled": true
+        },
+        "bootstrap-extra-files": {
+          "enabled": true,
+          "paths": [
+            "bootstrap/german-trigger.md"
+          ]
+        }
+      }
+    }
+  },
+  "gateway": {
+    "controlUi": {
+      "dangerouslyDisableDeviceAuth": true
+    }
+  }
+}

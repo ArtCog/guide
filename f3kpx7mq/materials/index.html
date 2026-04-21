@@ -112,26 +112,82 @@
 
         <div class="materials-header">
             <h1>📦 Материалы</h1>
-            <p>Скиллы, шаблоны и инструменты для скачивания. Новые материалы появляются по мере выхода видео.</p>
+            <p>Три конфига + скилл монтажа. Скачай все три JSON, скопируй промт внизу — твой OpenClaw соберёт систему сам, попросит твои ключи, расскажет что получил.</p>
         </div>
 
-        <!-- Config: OpenClaw (full config, sanitized) -->
+        <!-- Config Layer 1: Baseline -->
         <div class="material-card">
-            <h3>⚙️ Мой конфиг OpenClaw</h3>
+            <h3><span class="h-num">01</span> Агенты и модели — база</h3>
             <p>
-                Буквально тот конфиг, что работает у меня. Команда из 4 агентов
-                (Эгида, Кодер, Стратег, Исследователь), стек из 14 моделей, промпт-кэши,
-                QMD-память, sandbox, heartbeat, билинг-прокси, approvals через Telegram.
-                Подставь свои API-ключи и Telegram ID в поля <code>REPLACE_ME_*</code> —
-                получи ту же систему, что я собирал несколько месяцев.
+                Команда из 4 агентов (Эгида, Кодер, Стратег, Исследователь), стек из 14 моделей,
+                QMD-память, плагины, MCP, sub-agents. Это <strong>каркас</strong> — без
+                этого файла ничего не взлетит. Но и сам по себе — это просто «голый» OpenClaw:
+                любой может писать боту, каждая команда требует подтверждения.
             </p>
             <div class="material-meta">
                 <span class="material-tag">.json</span>
                 <span class="material-tag">4 агента</span>
                 <span class="material-tag">14 моделей</span>
-                <span class="material-tag">SECRETREF-safe</span>
-                <span class="material-size">~11 KB · 462 строки</span>
-                <a href="f3kpx7mq/configs/openclaw.json" class="download-btn" download>⬇ Скачать</a>
+                <span class="material-tag">QMD</span>
+                <span class="material-size">~9 KB · 308 строк</span>
+                <a href="f3kpx7mq/configs/агенты-и-модели.json" class="download-btn" download>⬇ Скачать</a>
+            </div>
+        </div>
+
+        <!-- Config Layer 2: Security -->
+        <div class="material-card">
+            <h3><span class="h-num">02</span> Безопасность — 5 уровней защиты</h3>
+            <p>
+                Применяешь поверх базы — получаешь защищённого бота. Telegram allowlist
+                (только ты пишешь), Docker sandbox с <code>capDrop: ALL</code>,
+                egress через tinyproxy, circuit breaker от зацикливаний,
+                gateway на loopback с токенной аутентификацией. <strong>5 уровней</strong>
+                из моего гайда, каждый — одна строка в конфиге.
+            </p>
+            <div class="material-meta">
+                <span class="material-tag">.json</span>
+                <span class="material-tag">allowlist</span>
+                <span class="material-tag">sandbox</span>
+                <span class="material-tag">egress whitelist</span>
+                <span class="material-size">~2 KB · 87 строк</span>
+                <a href="f3kpx7mq/configs/безопасность.json" class="download-btn" download>⬇ Скачать</a>
+            </div>
+        </div>
+
+        <!-- Config Layer 3: Autonomy -->
+        <div class="material-card">
+            <h3><span class="h-num">03</span> Автономность — бот реально делает</h3>
+            <p>
+                Финальный слой: <code>tools.elevated: false</code> (sudo без запроса),
+                agent-to-agent разрешён, maxPingPongTurns, heartbeat каждые 2 часа,
+                4 встроенных крона (memory, self-improvement, bootstrap), billing backoff
+                срезан с 5 часов до 36 секунд. Бот <strong>работает пока ты спишь</strong>.
+                Подтверждения идут только от main-агента тебе в Telegram.
+            </p>
+            <div class="material-meta">
+                <span class="material-tag">.json</span>
+                <span class="material-tag">no elevated</span>
+                <span class="material-tag">heartbeat</span>
+                <span class="material-tag">4 крона</span>
+                <span class="material-size">~2 KB · 101 строка</span>
+                <a href="f3kpx7mq/configs/автономность.json" class="download-btn" download>⬇ Скачать</a>
+            </div>
+        </div>
+
+        <!-- Install prompt -->
+        <div class="material-card">
+            <h3>📜 Промт для установки</h3>
+            <p>
+                Скачай три JSON выше, положи в папку на сервере, скопируй этот промт в
+                чат со своим OpenClaw. Бот сам спросит у тебя твои API-ключи и Telegram ID,
+                расскажет что ты получил, покажет итоговый конфиг на подтверждение перед записью.
+                <strong>Ни одного ручного правления JSON — всё делает агент.</strong>
+            </p>
+            <div class="material-meta">
+                <span class="material-tag">.md</span>
+                <span class="material-tag">copy-paste</span>
+                <span class="material-tag">agent-driven</span>
+                <a href="f3kpx7mq/configs/ПРОМТ-УСТАНОВКИ.md" class="download-btn" download>⬇ Скачать</a>
             </div>
         </div>
 

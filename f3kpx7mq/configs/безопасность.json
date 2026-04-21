@@ -1,0 +1,87 @@
+{
+  "_comment": "Безопасность ИИмерсивного — 5 уровней защиты из гайда. Применяй ПОВЕРХ агенты-и-модели.json через deep-merge. Без этого файла бота может найти и написать любой человек в Telegram.",
+  "agents": {
+    "defaults": {
+      "sandbox": {
+        "mode": "non-main",
+        "docker": {
+          "network": "openclaw-egress",
+          "capDrop": [
+            "ALL"
+          ],
+          "env": {
+            "HTTP_PROXY": "http://172.28.0.1:8888",
+            "HTTPS_PROXY": "http://172.28.0.1:8888",
+            "TAVILY_API_KEY": "REPLACE_ME_TAVILY_API_KEY",
+            "NO_PROXY": "localhost,127.0.0.1,api.supadata.ai",
+            "SUPADATA_API_KEY": "REPLACE_ME_SUPADATA_API_KEY"
+          },
+          "pidsLimit": 256,
+          "memory": "1536m",
+          "memorySwap": "2g",
+          "binds": [
+            "/tmp/openclaw:/hostlogs:ro",
+            "/home/neroot/qmd:/opt/qmd:ro",
+            "/usr/bin/node:/usr/bin/node:ro",
+            "/usr/local/bin/qmd-wrapper:/usr/local/bin/qmd:ro",
+            "/home/neroot/.openclaw/openclaw.json:/home/neroot/.openclaw/openclaw.json:ro"
+          ]
+        }
+      }
+    }
+  },
+  "tools": {
+    "deny": [
+      "Read"
+    ],
+    "loopDetection": {
+      "enabled": true,
+      "warningThreshold": 5,
+      "criticalThreshold": 8,
+      "globalCircuitBreakerThreshold": 12
+    }
+  },
+  "channels": {
+    "telegram": {
+      "dmPolicy": "allowlist",
+      "groupPolicy": "allowlist",
+      "allowFrom": [
+        "REPLACE_ME_TELEGRAM_ID"
+      ],
+      "execApprovals": {
+        "enabled": true,
+        "approvers": [
+          "REPLACE_ME_TELEGRAM_ID"
+        ],
+        "target": "dm"
+      }
+    }
+  },
+  "gateway": {
+    "bind": "loopback",
+    "trustedProxies": [
+      "127.0.0.1",
+      "::1"
+    ],
+    "auth": {
+      "mode": "token",
+      "token": {
+        "source": "file",
+        "provider": "default",
+        "id": "/gateway-auth-token"
+      },
+      "allowTailscale": true
+    },
+    "controlUi": {
+      "allowedOrigins": [
+        "https://REPLACE_ME_TAILSCALE_HOST.ts.net",
+        "http://localhost:5180",
+        "http://localhost:3000",
+        "https://REPLACE_ME_TAILSCALE_HOST.ts.net:3000",
+        "http://localhost:3001",
+        "http://127.0.0.1:3001",
+        "http://127.0.0.1:18789"
+      ]
+    }
+  }
+}

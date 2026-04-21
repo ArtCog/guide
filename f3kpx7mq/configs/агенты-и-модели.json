@@ -1,8 +1,8 @@
 {
+  "_comment": "Базовый конфиг ИИмерсивного — команда из 4 агентов, стек моделей, память QMD, плагины. БЕЗ безопасности и автономности. Применяй вместе с безопасность.json и автономность.json через deep-merge.",
   "meta": {
     "lastTouchedVersion": "2026.4.15",
-    "lastTouchedAt": "2026-04-18T11:51:18.670Z",
-    "_comment": "Конфиг Артура ИИмерсивного. Замени поля REPLACE_ME_* на свои значения — инструкция: guide.arturx.art"
+    "lastTouchedAt": "2026-04-18T11:51:18.670Z"
   },
   "env": {
     "TAVILY_API_KEY": "REPLACE_ME_TAVILY_API_KEY"
@@ -39,11 +39,6 @@
       "openai-codex:REPLACE_ME_SECOND_CODEX_EMAIL@gmail.com": {
         "provider": "openai-codex",
         "mode": "oauth"
-      }
-    },
-    "cooldowns": {
-      "billingBackoffHoursByProvider": {
-        "anthropic": 0.01
       }
     }
   },
@@ -140,46 +135,10 @@
         "mode": "off"
       },
       "imageMaxDimensionPx": 800,
-      "heartbeat": {
-        "every": "120m",
-        "model": "google/gemini-2.5-flash",
-        "target": "telegram",
-        "to": "telegram:REPLACE_ME_TELEGRAM_ID",
-        "prompt": "Read HEARTBEAT.md if it exists. If nothing needs attention, reply HEARTBEAT_OK."
-      },
       "maxConcurrent": 4,
       "subagents": {
         "maxConcurrent": 8,
         "model": "google-gemini-cli/gemini-2.5-flash"
-      },
-      "sandbox": {
-        "mode": "non-main",
-        "workspaceAccess": "rw",
-        "scope": "session",
-        "docker": {
-          "network": "openclaw-egress",
-          "capDrop": [
-            "ALL"
-          ],
-          "env": {
-            "HTTP_PROXY": "http://172.28.0.1:8888",
-            "HTTPS_PROXY": "http://172.28.0.1:8888",
-            "TAVILY_API_KEY": "REPLACE_ME_TAVILY_API_KEY",
-            "NO_PROXY": "localhost,127.0.0.1,api.supadata.ai",
-            "SUPADATA_API_KEY": "REPLACE_ME_SUPADATA_API_KEY"
-          },
-          "pidsLimit": 256,
-          "memory": "1536m",
-          "memorySwap": "2g",
-          "binds": [
-            "/tmp/openclaw:/hostlogs:ro",
-            "/home/neroot/qmd:/opt/qmd:ro",
-            "/usr/bin/node:/usr/bin/node:ro",
-            "/usr/local/bin/qmd-wrapper:/usr/local/bin/qmd:ro",
-            "/home/neroot/.openclaw/openclaw.json:/home/neroot/.openclaw/openclaw.json:ro"
-          ],
-          "dangerouslyAllowExternalBindSources": true
-        }
       },
       "imageGenerationModel": {
         "primary": "google/gemini-3-pro-image-preview"
@@ -265,103 +224,14 @@
       }
     ]
   },
-  "tools": {
-    "deny": [
-      "Read"
-    ],
-    "sessions": {
-      "visibility": "all"
-    },
-    "loopDetection": {
-      "enabled": true,
-      "warningThreshold": 5,
-      "criticalThreshold": 8,
-      "globalCircuitBreakerThreshold": 12
-    },
-    "agentToAgent": {
-      "enabled": true,
-      "allow": [
-        "main",
-        "coder",
-        "strategist",
-        "researcher"
-      ]
-    },
-    "elevated": {
-      "enabled": false
-    }
-  },
-  "messages": {
-    "ackReactionScope": "group-mentions"
-  },
-  "commands": {
-    "native": "auto",
-    "nativeSkills": "auto",
-    "restart": true,
-    "ownerDisplay": "raw"
-  },
-  "approvals": {
-    "exec": {
-      "enabled": true,
-      "mode": "targets",
-      "agentFilter": [
-        "main"
-      ],
-      "targets": [
-        {
-          "channel": "telegram",
-          "to": "REPLACE_ME_TELEGRAM_ID"
-        }
-      ]
-    }
-  },
-  "session": {
-    "agentToAgent": {
-      "maxPingPongTurns": 2
-    }
-  },
-  "hooks": {
-    "internal": {
-      "enabled": true,
-      "entries": {
-        "session-memory": {
-          "enabled": true
-        },
-        "self-improvement": {
-          "enabled": true
-        },
-        "german-vocab-capture": {
-          "enabled": true
-        },
-        "bootstrap-extra-files": {
-          "enabled": true,
-          "paths": [
-            "bootstrap/german-trigger.md"
-          ]
-        }
-      }
-    }
-  },
   "channels": {
     "telegram": {
-      "execApprovals": {
-        "enabled": true,
-        "approvers": [
-          "REPLACE_ME_TELEGRAM_ID"
-        ],
-        "target": "dm"
-      },
       "enabled": true,
-      "dmPolicy": "allowlist",
       "botToken": {
         "source": "file",
         "provider": "default",
         "id": "/telegram-bot-token"
       },
-      "allowFrom": [
-        "REPLACE_ME_TELEGRAM_ID"
-      ],
-      "groupPolicy": "allowlist",
       "streaming": {
         "mode": "partial"
       }
@@ -370,32 +240,6 @@
   "gateway": {
     "port": 18789,
     "mode": "local",
-    "bind": "loopback",
-    "controlUi": {
-      "allowedOrigins": [
-        "https://REPLACE_ME_TAILSCALE_HOST.ts.net",
-        "http://localhost:5180",
-        "http://localhost:3000",
-        "https://REPLACE_ME_TAILSCALE_HOST.ts.net:3000",
-        "http://localhost:3001",
-        "http://127.0.0.1:3001",
-        "http://127.0.0.1:18789"
-      ],
-      "dangerouslyDisableDeviceAuth": true
-    },
-    "auth": {
-      "mode": "token",
-      "token": {
-        "source": "file",
-        "provider": "default",
-        "id": "/gateway-auth-token"
-      },
-      "allowTailscale": true
-    },
-    "trustedProxies": [
-      "127.0.0.1",
-      "::1"
-    ],
     "tailscale": {
       "mode": "serve",
       "resetOnExit": false
