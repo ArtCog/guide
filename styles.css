@@ -1000,6 +1000,52 @@ footer a:hover {
     line-height: 1.5;
 }
 
+.module-list {
+    list-style: none;
+    counter-reset: module;
+    padding: 0;
+    margin: 0.8rem 0 0 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.35rem 1rem;
+}
+
+.module-list li {
+    counter-increment: module;
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    padding-left: 1.6rem;
+    position: relative;
+    line-height: 1.4;
+}
+
+.module-list li::before {
+    content: counter(module, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent-blue);
+    font-weight: 700;
+}
+
+.module-list a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+.module-list a:hover {
+    color: var(--accent-blue);
+}
+
+@media (max-width: 640px) {
+    .module-list {
+        grid-template-columns: 1fr;
+    }
+}
+
 .card-meta {
     display: flex;
     gap: 1rem;
