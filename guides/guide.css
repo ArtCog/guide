@@ -161,27 +161,91 @@
 
 .guide-body h2 {
     color: var(--text-primary);
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin-bottom: 1.25rem;
     padding-top: 1rem;
+    line-height: 1.2;
 }
 
 .guide-body h3 {
     color: var(--text-primary);
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin: 2.5em 0 0.75em;
-    padding: 0.5rem 0 0.5rem 1rem;
-    border-left: 3px solid var(--accent);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 3rem 0 1.25rem;
+    padding: 0.9rem 1.25rem;
+    background: linear-gradient(90deg,
+        rgba(255, 107, 53, 0.14) 0%,
+        rgba(255, 107, 53, 0.04) 50%,
+        rgba(255, 107, 53, 0) 100%);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    line-height: 1.25;
+}
+
+/* Уровень N: / Шаг N: / Способ N: — big number chip */
+.guide-body h3 .h-num,
+.guide-body h4 .h-num {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    background: rgba(255, 107, 53, 0.15);
+    font-weight: 800;
+    font-size: 0.75em;
+    padding: 0.15em 0.5em;
+    border-radius: 6px;
+    margin-right: 0.6rem;
+    vertical-align: 0.1em;
+    letter-spacing: 0.03em;
+}
+
+/* Badges next to level-like headings */
+.h-badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.25em 0.6em;
+    border-radius: 4px;
+    margin-left: 0.5rem;
+    vertical-align: 0.2em;
+    line-height: 1;
+    border: 1px solid;
+}
+.h-badge-required {
+    color: #ff7d7d;
+    background: rgba(255, 87, 87, 0.1);
+    border-color: rgba(255, 87, 87, 0.35);
+}
+.h-badge-recommended {
+    color: var(--accent-green);
+    background: rgba(52, 211, 153, 0.1);
+    border-color: rgba(52, 211, 153, 0.35);
+}
+.h-badge-optional {
+    color: var(--accent-blue);
+    background: rgba(56, 189, 248, 0.1);
+    border-color: rgba(56, 189, 248, 0.3);
+}
+.h-badge-advanced {
+    color: #c084fc;
+    background: rgba(192, 132, 252, 0.1);
+    border-color: rgba(192, 132, 252, 0.35);
 }
 
 .guide-body h4 {
     color: var(--accent-blue);
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin: 2em 0 0.6em;
+    letter-spacing: 0.08em;
+    margin: 2.25rem 0 0.75rem;
+    padding-left: 0.85rem;
+    border-left: 3px solid var(--accent-blue);
 }
 
 .guide-body p {
@@ -604,17 +668,62 @@
 .guide-section > summary h2 {
     margin: 0;
     padding: 0;
-    font-size: 1.5rem;
+    font-size: 1.65rem;
     font-weight: 700;
     color: var(--text-primary);
     letter-spacing: -0.02em;
 }
 
-/* Make h3 groups visually distinct */
+/* h3 group separator — softer since h3 already has background */
 .guide-body h3 ~ h3 {
-    margin-top: 3rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    margin-top: 3.5rem;
+}
+
+/* Bigger, stronger callout icons */
+.callout {
+    padding: 1.5rem 1.75rem;
+    font-size: 1rem;
+}
+
+.callout-icon {
+    font-size: 1.75rem;
+    line-height: 1;
+    padding-top: 0.15rem;
+}
+
+.callout-content strong {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+}
+
+.callout-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Comparison table: stronger header, zebra with tint */
+.comparison-table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.comparison-table th {
+    background: linear-gradient(180deg, rgba(255, 107, 53, 0.18), rgba(255, 107, 53, 0.06));
+    color: var(--text-primary);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.82rem;
+    padding: 0.85rem 1rem;
+}
+
+.comparison-table tbody tr:nth-child(even) td {
+    background: rgba(255, 255, 255, 0.025);
+}
+
+/* Code-block captions — a bit stronger */
+.code-block .code-header {
+    background: rgba(255, 107, 53, 0.08);
 }
 
 .guide-section > summary::after {
