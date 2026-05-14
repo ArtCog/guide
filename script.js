@@ -67,12 +67,12 @@ function initMobileMenu() {
 
 // === TYPING EFFECT ===
 const typingPhrases = [
-    'openclaw --help',
-    'curl -fsSL https://openclaw.ai/install.sh | bash',
-    'Привет! Напиши мне план на день.',
+    'openclaw --status',
+    'plan day --auto',
+    'render video --silence-cut',
+    'Привет! Напиши план на день.',
     'Создай сайт-визитку за 30 секунд',
-    'Проанализируй этот PDF файл',
-    'Напомни мне завтра в 9:00'
+    'Проанализируй этот PDF файл'
 ];
 
 let phraseIndex = 0;
@@ -107,11 +107,25 @@ function typeEffect() {
     setTimeout(typeEffect, typingSpeed);
 }
 
-// Start typing effect + rewrite links on page load
+// Start typing effect + load components + rewrite links on page load
 document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('typing')) {
         setTimeout(typeEffect, 1000);
     }
+
+    // Auto-load header/footer components on catalog & materials pages.
+    // Guide pages have their own loader in guide.js with a dynamic basePath,
+    // so we skip there to avoid double-loading with the wrong relative path.
+    const isGuidePage = !!document.querySelector('.guide-container');
+    if (!isGuidePage) {
+        if (document.getElementById('header-placeholder')) {
+            loadComponent('header-placeholder', 'components/header.html');
+        }
+        if (document.getElementById('footer-placeholder')) {
+            loadComponent('footer-placeholder', 'components/footer.html');
+        }
+    }
+
     // Rewrite breadcrumbs and any other root-pointing links already in HTML
     rewriteRootLinks();
 });

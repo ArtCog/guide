@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>guide.arturx.art | AI-агенты: настройка и запуск</title>
-    <meta name="description" content="Запусти своего AI-агента за 10 минут. OpenClaw, Claude Code, n8n — пошаговые гайды: установка, безопасность, модели, оптимизация.">
+    <title>Материалы ИИмерсивного | guide.arturx.art</title>
+    <meta name="description" content="Гайды, конфиги и скиллы для AI-агентов от Артура ИИмерсивного. Собрано из живой работы — не из туториалов.">
     <meta name="robots" content="noindex, nofollow">
 
     <!-- Base href resolves all relative paths to parent directory -->
@@ -13,53 +13,53 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Hero Section -->
-    <header class="hero hero-compact">
-        <div class="terminal-window">
-            <div class="terminal-header">
-                <span class="terminal-btn red"></span>
-                <span class="terminal-btn yellow"></span>
-                <span class="terminal-btn green"></span>
-                <span class="terminal-title">guide ~ catalog</span>
-            </div>
-            <div class="terminal-body">
-                <div class="typing-container">
-                    <span class="prompt">$</span>
-                    <span class="typing-text" id="typing"></span>
-                    <span class="cursor">|</span>
-                </div>
+    <!-- Site header (was previously missing on this page) -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hero — minimal, centered -->
+    <header class="editorial-hero">
+        <div class="hero-inner">
+            <h1 class="display-headline">
+                Материалы от<br>
+                <span class="hl-accent">ИИмерсивного.</span>
+            </h1>
+
+            <p class="hero-lead">Гайды, конфиги и скиллы для AI-агентов. Собрано из живой работы — не из туториалов.</p>
+
+            <!-- Terminal — typing animation as the hero anchor -->
+            <div class="hero-mini-terminal" aria-hidden="true">
+                <span class="prompt">$</span>
+                <span class="typing-text" id="typing"></span>
+                <span class="cursor">|</span>
             </div>
         </div>
-        <p class="tagline">Руководства по настройке AI-агентов</p>
-        <p class="subtitle">Пошаговые инструкции: установка, безопасность, модели, оптимизация — только практика</p>
     </header>
 
     <!-- Materials Banner -->
-    <div style="max-width:900px;margin:0 auto;padding:0.8rem 1.5rem;">
-        <a href="f3kpx7mq/materials/" style="display:flex;align-items:center;justify-content:space-between;background:#0d1117;border:1px solid #30363d;border-radius:10px;padding:0.9rem 1.4rem;text-decoration:none;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#58a6ff'" onmouseout="this.style.borderColor='#30363d'">
-            <span style="display:flex;align-items:center;gap:0.6rem;">
-                <span style="font-size:1.3rem;">📦</span>
-                <span style="color:#e6edf3;font-weight:600;font-size:0.95rem;">Материалы</span>
-                <span style="color:#8b949e;font-size:0.85rem;">— скиллы, шаблоны, инструменты</span>
-            </span>
-            <span style="color:#58a6ff;font-family:'JetBrains Mono',monospace;font-size:0.8rem;white-space:nowrap;">Скачать →</span>
-        </a>
-    </div>
+    <a href="f3kpx7mq/materials/" class="materials-banner">
+        <span class="materials-banner-left">
+            <span class="materials-banner-icon" aria-hidden="true">📦</span>
+            <span class="materials-banner-title">Материалы</span>
+            <span class="materials-banner-sub">— скиллы, шаблоны, инструменты</span>
+        </span>
+        <span class="materials-banner-cta">Скачать →</span>
+    </a>
 
     <!-- Categories Section -->
     <main class="categories-section">
 
         <!-- Category: AI Agents -->
         <section id="tools" class="category">
-            <div class="category-header">
-                <span class="category-icon">&#129302;</span>
-                <h2>AI-агенты</h2>
-                <p class="category-desc">Установка, настройка и продвинутое использование</p>
+            <div class="category-ruler">
+                <span class="ruler-num">01</span>
+                <h2 class="ruler-h2">AI-агенты</h2>
+                <span class="ruler-line" aria-hidden="true"></span>
+                <p class="ruler-desc">установка · настройка · продвинутое</p>
             </div>
 
             <div class="guides-grid">
@@ -86,18 +86,20 @@
                 </article>
 
                 <article class="guide-card coming-soon">
-                    <span class="card-badge muted">Скоро</span>
+                    <span class="card-badge scheduled">Jun 2026</span>
                     <h3>Claude Code</h3>
                     <p>Самый умный AI прямо в терминале. Пишет, рефакторит и дебажит код — без IDE и браузера.</p>
+                    <div class="card-preview-stub">claude --skill video-montage</div>
                     <div class="card-meta">
                         <span>~10 мин</span>
                     </div>
                 </article>
 
                 <article class="guide-card coming-soon">
-                    <span class="card-badge muted">Скоро</span>
+                    <span class="card-badge scheduled">Jul 2026</span>
                     <h3>n8n</h3>
                     <p>Визуальная автоматизация: перетаскивай блоки, соединяй API и AI — без строчки кода. Бесплатная альтернатива Zapier.</p>
+                    <div class="card-preview-stub">npx n8n start --tunnel</div>
                     <div class="card-meta">
                         <span>~15 мин</span>
                     </div>
@@ -107,15 +109,16 @@
 
         <!-- Category: OpenClaw Tuning -->
         <section id="tuning" class="category category-compact">
-            <div class="category-header">
-                <span class="category-icon">&#9881;</span>
-                <h2>Тюнинг агентов</h2>
-                <p class="category-desc">Продвинутая настройка, интеграции и оптимизация</p>
+            <div class="category-ruler">
+                <span class="ruler-num">02</span>
+                <h2 class="ruler-h2">Тюнинг агентов</h2>
+                <span class="ruler-line" aria-hidden="true"></span>
+                <p class="ruler-desc">интеграции · оптимизация</p>
             </div>
 
             <div class="guides-grid">
                 <article class="guide-card coming-soon">
-                    <span class="card-badge muted">Скоро</span>
+                    <span class="card-badge scheduled">Aug 2026</span>
                     <h3>Тонкая настройка</h3>
                     <p>Промпт-кэширование, токенные бюджеты, биллинг-прокси, мульти-агентная архитектура, скиллы и кроны.</p>
                     <div class="card-meta">
@@ -124,7 +127,7 @@
                 </article>
 
                 <article class="guide-card coming-soon">
-                    <span class="card-badge muted">Скоро</span>
+                    <span class="card-badge scheduled">Sep 2026</span>
                     <h3>OpenClaw + Hermes</h3>
                     <p>Связка двух агентов через MCP. Hermes как внешний исполнитель: рендер, деплой, мониторинг — пока OpenClaw думает.</p>
                     <div class="card-meta">
@@ -136,15 +139,16 @@
 
         <!-- Category: Infrastructure (compact) -->
         <section id="infra" class="category category-compact">
-            <div class="category-header">
-                <span class="category-icon">&#128421;</span>
-                <h2>Инфраструктура</h2>
-                <p class="category-desc">Где и как запустить агента 24/7</p>
+            <div class="category-ruler">
+                <span class="ruler-num">03</span>
+                <h2 class="ruler-h2">Инфраструктура</h2>
+                <span class="ruler-line" aria-hidden="true"></span>
+                <p class="ruler-desc">где и как запустить агента 24/7</p>
             </div>
 
             <div class="guides-grid">
                 <article class="guide-card coming-soon">
-                    <span class="card-badge muted">Скоро</span>
+                    <span class="card-badge scheduled">Jun 2026</span>
                     <h3>Выбор VPS</h3>
                     <p>Hetzner, Aeza, Timeweb, Contabo — сравнение для россиян и не только.</p>
                     <div class="card-meta">
@@ -153,7 +157,7 @@
                 </article>
 
                 <article class="guide-card coming-soon">
-                    <span class="card-badge muted">Скоро</span>
+                    <span class="card-badge scheduled">Jul 2026</span>
                     <h3>Docker для AI</h3>
                     <p>Sandbox, ресурсы, безопасность контейнеров.</p>
                     <div class="card-meta">
@@ -163,12 +167,13 @@
             </div>
         </section>
 
-        <!-- Category: Access to AI Services (compact) -->
-        <section id="ai-access" class="category category-compact">
-            <div class="category-header">
-                <span class="category-icon">&#128273;</span>
-                <h2>Подключение к моделям</h2>
-                <p class="category-desc">API-ключи и авторизация — чтобы агенты заработали</p>
+        <!-- Category: Access to AI Services -->
+        <section id="ai-access" class="category">
+            <div class="category-ruler">
+                <span class="ruler-num">04</span>
+                <h2 class="ruler-h2">Подключение к моделям</h2>
+                <span class="ruler-line" aria-hidden="true"></span>
+                <p class="ruler-desc">api-ключи · oauth</p>
             </div>
 
             <div class="guides-grid">
@@ -207,6 +212,9 @@
         </section>
 
     </main>
+
+    <!-- Site footer -->
+    <div id="footer-placeholder"></div>
 
     <script src="script.js"></script>
 </body>
