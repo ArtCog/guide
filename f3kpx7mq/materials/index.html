@@ -10,7 +10,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700;1,9..144,900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -26,10 +26,10 @@
             <p class="materials-total">5 файлов · ~68 KB · zip-комплект готовится</p>
         </div>
 
-        <!-- Group: OpenClaw — install -->
+        <!-- Group: OpenClaw -->
         <details class="materials-group" open>
             <summary class="materials-group-summary">
-                <span class="group-icon" aria-hidden="true">🤖</span>
+                <span class="group-icon" aria-hidden="true">▣</span>
                 <h2 class="group-title">OpenClaw</h2>
                 <span class="group-count">4 файла</span>
                 <span class="group-toggle" aria-hidden="true">+</span>
@@ -42,12 +42,11 @@
 
                 <!-- Config Layer 1: Baseline -->
                 <div class="material-card">
-                    <h3><span class="h-num">01</span> Агенты и модели — база</h3>
+                    <h3><span class="h-num">01</span> Агенты и модели — <em>база</em></h3>
                     <p>
                         Команда из 4 агентов (Эгида, Кодер, Стратег, Исследователь), стек из 14 моделей,
                         QMD-память, плагины, MCP, sub-agents. Это <strong>каркас</strong> — без
-                        этого файла ничего не взлетит. Но и сам по себе — это просто «голый» OpenClaw:
-                        любой может писать боту, каждая команда требует подтверждения.
+                        этого файла ничего не взлетит. Но и сам по себе — это просто «голый» OpenClaw: любой может писать боту, каждая команда требует подтверждения.
                     </p>
                     <div class="material-meta">
                         <span class="material-tag">.json</span>
@@ -55,13 +54,13 @@
                         <span class="material-tag">14 моделей</span>
                         <span class="material-tag">QMD</span>
                         <span class="material-size">~9 KB · 308 строк</span>
-                        <a href="f3kpx7mq/configs/агенты-и-модели.json" class="download-btn" download>⬇ Скачать</a>
+                        <a href="f3kpx7mq/configs/агенты-и-модели.json" class="download-btn" download>↓ Скачать</a>
                     </div>
                 </div>
 
                 <!-- Config Layer 2: Security -->
                 <div class="material-card">
-                    <h3><span class="h-num">02</span> Безопасность — 5 уровней защиты</h3>
+                    <h3><span class="h-num">02</span> Безопасность — <em>5 уровней</em></h3>
                     <p>
                         Применяешь поверх базы — получаешь защищённого бота. Telegram allowlist
                         (только ты пишешь), Docker sandbox с <code>capDrop: ALL</code>,
@@ -75,13 +74,13 @@
                         <span class="material-tag">sandbox</span>
                         <span class="material-tag">egress whitelist</span>
                         <span class="material-size">~2 KB · 87 строк</span>
-                        <a href="f3kpx7mq/configs/безопасность.json" class="download-btn" download>⬇ Скачать</a>
+                        <a href="f3kpx7mq/configs/безопасность.json" class="download-btn" download>↓ Скачать</a>
                     </div>
                 </div>
 
                 <!-- Config Layer 3: Autonomy -->
                 <div class="material-card">
-                    <h3><span class="h-num">03</span> Автономность — бот реально делает</h3>
+                    <h3><span class="h-num">03</span> Автономность — <em>бот реально делает</em></h3>
                     <p>
                         Финальный слой: <code>tools.elevated: false</code> (sudo без запроса),
                         agent-to-agent разрешён, maxPingPongTurns, heartbeat каждые 2 часа,
@@ -95,13 +94,13 @@
                         <span class="material-tag">heartbeat</span>
                         <span class="material-tag">4 крона</span>
                         <span class="material-size">~2 KB · 101 строка</span>
-                        <a href="f3kpx7mq/configs/автономность.json" class="download-btn" download>⬇ Скачать</a>
+                        <a href="f3kpx7mq/configs/автономность.json" class="download-btn" download>↓ Скачать</a>
                     </div>
                 </div>
 
                 <!-- Install prompt -->
                 <div class="material-card">
-                    <h3>📜 Промт для установки</h3>
+                    <h3><span class="h-num">04</span> Промт для <em>установки</em></h3>
                     <p>
                         В чате со своим OpenClaw-ботом: сначала отправь текст промта первым
                         сообщением, потом три JSON (01, 02, 03) как документы. Бот сам спросит
@@ -113,7 +112,7 @@
                         <span class="material-tag">.md</span>
                         <span class="material-tag">copy-paste</span>
                         <span class="material-tag">Telegram-native</span>
-                        <a href="f3kpx7mq/configs/ПРОМТ-УСТАНОВКИ.md" class="download-btn" download>⬇ Скачать</a>
+                        <a href="f3kpx7mq/configs/ПРОМТ-УСТАНОВКИ.md" class="download-btn" download>↓ Скачать</a>
                     </div>
                 </div>
             </div>
@@ -122,7 +121,7 @@
         <!-- Group: Universal skills -->
         <details class="materials-group">
             <summary class="materials-group-summary">
-                <span class="group-icon" aria-hidden="true">🛠️</span>
+                <span class="group-icon" aria-hidden="true">◆</span>
                 <h2 class="group-title">Универсальные скиллы</h2>
                 <span class="group-count">1 файл</span>
                 <span class="group-toggle" aria-hidden="true">+</span>
@@ -134,7 +133,7 @@
 
                 <!-- Skill: Video Montage -->
                 <div class="material-card">
-                    <h3>🎬 Скилл видеомонтажа</h3>
+                    <h3><span class="h-num">01</span> Скилл <em>видеомонтажа</em></h3>
                     <p>
                         Профессиональный скилл для AI-агентов: удаление пауз, склейка, субтитры,
                         оверлеи, финальный рендер для YouTube — всё через ffmpeg + NVENC.
@@ -144,7 +143,7 @@
                         <span class="material-tag">ffmpeg</span>
                         <span class="material-tag">NVENC</span>
                         <span class="material-size">~55 KB</span>
-                        <a href="f3kpx7mq/skills/video-montage.md" class="download-btn" download>⬇ Скачать</a>
+                        <a href="f3kpx7mq/skills/video-montage.md" class="download-btn" download>↓ Скачать</a>
                     </div>
                 </div>
             </div>
