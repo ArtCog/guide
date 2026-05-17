@@ -1,5 +1,5 @@
 /* ============================================================
-   guide.arturx.art · Matrix Dark Green
+   guide.arturx.art · Осциллограф (Артур ИИмерсивный)
    Brand redesign — May 2026
    ============================================================ */
 
@@ -11,42 +11,48 @@
 }
 
 :root {
-    /* ---------- Fonts ---------- */
-    --font-display: 'PT Serif', Georgia, serif;
-    --font-body:    'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-mono:    'JetBrains Mono', monospace;
+    /* ---------- Fonts (Geist — geometric sans, NO serif) ---------- */
+    --font-display: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body:    'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono:    'Geist Mono', monospace;
 
-    /* ---------- Backgrounds (Matrix Dark Green) ---------- */
-    --bg-primary:    #0a0e0a;       /* page — green-tinted near-black */
-    --bg-secondary:  #121712;       /* cards, panels */
-    --bg-terminal:   #060906;       /* terminals, code blocks */
-    --bg-elev:       #1a211a;       /* hover surfaces */
+    /* ---------- Backgrounds (Осциллограф) ---------- */
+    --bg-primary:    #0B0F0E;       /* page — near-black, green undertone */
+    --bg-secondary:  #111614;       /* cards, panels (brand --surface) */
+    --bg-terminal:   #070A09;       /* terminals, code blocks (--surface-2) */
+    --bg-elev:       #19211E;       /* hover surfaces (derived) */
 
     /* ---------- Foregrounds ---------- */
-    --ink:           #d5e8d5;       /* primary — pale green-white */
-    --cream:         #d5e8d5;       /* alias */
+    --ink:           #E8EDEB;       /* primary text */
+    --cream:         #E8EDEB;       /* alias */
     --text-primary:  var(--ink);
-    --text-secondary:#9db59d;       /* body secondary — muted green-grey */
-    --text-muted:    #6a7d6a;       /* meta */
+    --text-secondary:#B8C2BE;       /* readable secondary — guide body copy */
+    --text-muted:    #7E8C88;       /* meta, captions (brand --muted) */
 
-    /* ---------- Accent (Matrix green) ---------- */
-    --accent:        #2ecc71;       /* primary — readable matrix green */
-    --accent-bright: #43e88a;       /* hover — glows brighter */
-    --accent-deep:   #1f9e57;       /* press */
-    --accent-glow:   rgba(46, 204, 113, 0.30);
-    --accent-tint:   rgba(46, 204, 113, 0.08);
+    /* ---------- Accent (brand green — do NOT lighten/desaturate) ---------- */
+    --accent:        #3CE5B0;       /* brand accent */
+    --accent-bright: #5CEFC0;       /* hover (brand --accent-hover) */
+    --accent-deep:   #1C5F4C;       /* dim fills (brand --accent-dim) */
+    --accent-glow:   rgba(60, 229, 176, 0.30);
+    --accent-tint:   rgba(60, 229, 176, 0.08);
+    --accent-text-glow: 0 0 16px rgba(60, 229, 176, 0.5);
 
-    /* ---------- Reserved utility accents ---------- */
-    --accent-mint:   #5eecd4;       /* $ prompt only — cool teal */
-    --accent-rose:   #ff7e8a;       /* scheduled / coming-soon only */
-    --accent-blue:   #58a6ff;       /* info accents */
-    --accent-green:  #34d399;       /* success / recommended */
+    /* ---------- Legacy accent aliases — folded into brand green ---------- */
+    --accent-mint:   #3CE5B0;       /* terminal $ / green dot */
+    --accent-blue:   #3CE5B0;       /* info accents — brand has no blue */
+    --accent-green:  #3CE5B0;       /* success / recommended */
+    --accent-rose:   #E5594A;       /* semantic red — warnings, terminal dot */
 
     /* ---------- Borders ---------- */
-    --border:        #243024;
-    --border-strong: #33442f;
+    --border:        rgba(255, 255, 255, 0.06);   /* hairline */
+    --border-strong: rgba(60, 229, 176, 0.32);    /* accent-line */
     --code-bg:       var(--bg-terminal);
-    --halo-warm:     rgba(46, 204, 113, 0.10);  /* guide footer glow */
+    --halo-warm:     rgba(60, 229, 176, 0.10);     /* guide footer glow */
+
+    /* ---------- Geometry ---------- */
+    --radius-node: 8px;
+    --radius-card: 10px;
+    --radius-pill: 999px;
 
     /* ---------- Type scale ---------- */
     --t-display: clamp(3rem, 9vw, 7rem);
@@ -270,9 +276,8 @@ a:hover { color: var(--accent-bright); }
 
 .accent {
     color: var(--accent);
-    font-style: italic;
     font-weight: 700;
-    text-shadow: 0 0 24px var(--accent-glow);
+    text-shadow: var(--accent-text-glow);
 }
 
 .section-desc {
@@ -511,8 +516,8 @@ a:hover { color: var(--accent-bright); }
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
-    background: var(--accent-blue);
-    color: #fff;
+    background: var(--accent);
+    color: var(--bg);
     padding: 0.9rem 1.7rem;
     border-radius: 999px;
     text-decoration: none;
@@ -523,9 +528,9 @@ a:hover { color: var(--accent-bright); }
     transition: all 0.2s ease;
 }
 .telegram-btn:hover {
-    background: #006699;
+    background: var(--accent-bright);
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0, 136, 204, 0.3);
+    box-shadow: 0 10px 30px var(--accent-glow);
 }
 
 /* === FOOTER (legacy) === */
@@ -589,8 +594,8 @@ footer a:hover { text-decoration: underline; }
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: var(--accent-blue);
-    color: white;
+    background: var(--accent);
+    color: var(--bg);
     padding: 0.55rem 1rem;
     border-radius: 999px;
     text-decoration: none;
@@ -601,7 +606,7 @@ footer a:hover { text-decoration: underline; }
     transition: all 0.24s ease;
 }
 .nav-telegram:hover {
-    background: #006699;
+    background: var(--accent-bright);
     transform: translateY(-1px);
 }
 .nav-telegram span { display: none; }
@@ -848,8 +853,9 @@ footer a:hover { text-decoration: underline; }
     line-height: 1.6;
 }
 
-.guide-card em {
-    font-style: italic;
+.guide-card em,
+.material-card em {
+    font-style: normal;
     color: var(--accent-bright);
     font-weight: 700;
 }
@@ -1047,7 +1053,6 @@ footer a:hover { text-decoration: underline; }
 }
 .display-headline .headline-accent,
 .display-headline .hl-accent {
-    font-style: italic;
     color: var(--accent);
     font-weight: 700;
     text-shadow: 0 0 30px var(--accent-glow), 0 6px 50px rgba(0,0,0,0.55);
