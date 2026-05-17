@@ -11,35 +11,42 @@
 }
 
 :root {
-    /* ---------- Backgrounds ---------- */
-    --bg-primary:    #0a0608;       /* page ink */
-    --bg-secondary:  #14101a;       /* cards, panels */
-    --bg-terminal:   #060305;       /* terminals, code blocks */
-    --bg-elev:       #1c1626;       /* hover surfaces */
+    /* ---------- Fonts ---------- */
+    --font-display: 'PT Serif', Georgia, serif;
+    --font-body:    'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono:    'JetBrains Mono', monospace;
+
+    /* ---------- Backgrounds (Soft Dark) ---------- */
+    --bg-primary:    #131318;       /* page */
+    --bg-secondary:  #1a191f;       /* cards, panels */
+    --bg-terminal:   #0e0e12;       /* terminals, code blocks */
+    --bg-elev:       #25242e;       /* hover surfaces */
 
     /* ---------- Foregrounds ---------- */
-    --ink:           #fff5dc;       /* primary cream */
-    --cream:         #fff5dc;       /* alias */
+    --ink:           #e8e8f0;       /* primary soft white */
+    --cream:         #e8e8f0;       /* alias */
     --text-primary:  var(--ink);
-    --text-secondary:#c4b9a4;       /* body */
-    --text-muted:    #7a7068;       /* meta */
+    --text-secondary:#a6a0b0;       /* body */
+    --text-muted:    #7a7685;       /* meta */
 
-    /* ---------- Accent (royal indigo) ---------- */
-    --accent:        #5e6bff;       /* primary brand indigo */
-    --accent-bright: #7e8aff;       /* hover */
-    --accent-deep:   #3d49c2;       /* press */
-    --accent-glow:   rgba(94, 107, 255, 0.30);
-    --accent-tint:   rgba(94, 107, 255, 0.08);
+    /* ---------- Accent (indigo) ---------- */
+    --accent:        #6366f1;       /* primary brand indigo */
+    --accent-bright: #818cf8;       /* hover */
+    --accent-deep:   #4f46e5;       /* press */
+    --accent-glow:   rgba(99, 102, 241, 0.30);
+    --accent-tint:   rgba(99, 102, 241, 0.08);
 
     /* ---------- Reserved utility accents ---------- */
     --accent-mint:   #5eecd4;       /* $ prompt only — cool teal */
     --accent-rose:   #ff7e8a;       /* scheduled / coming-soon only */
-    --accent-blue:   #0088cc;       /* Telegram only */
+    --accent-blue:   #58a6ff;       /* info accents */
+    --accent-green:  #34d399;       /* success / recommended */
 
     /* ---------- Borders ---------- */
-    --border:        #2e283a;
-    --border-strong: #423a52;
+    --border:        #3a383f;
+    --border-strong: #4a4854;
     --code-bg:       var(--bg-terminal);
+    --halo-warm:     rgba(99, 102, 241, 0.10);  /* guide footer glow */
 
     /* ---------- Type scale ---------- */
     --t-display: clamp(3rem, 9vw, 7rem);
@@ -50,13 +57,11 @@
 html { scroll-behavior: smooth; }
 
 body {
-    font-family: 'Fraunces', Georgia, serif;
-    font-optical-sizing: auto;
-    font-variation-settings: "opsz" 18, "SOFT" 0, "WONK" 0;
+    font-family: var(--font-body);
     background-color: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
-    font-size: 16px;
+    font-size: 18px;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
 }
@@ -88,7 +93,7 @@ code, pre,
 .footer-container,
 .card-preview-stub,
 .hero-status {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
 }
 
 a {
@@ -116,9 +121,9 @@ a:hover { color: var(--accent-bright); }
 }
 
 .hero h1 {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: var(--font-display);
     font-size: clamp(3rem, 10vw, 6rem);
-    font-weight: 900;
+    font-weight: 700;
     margin-top: 2rem;
     letter-spacing: -0.035em;
     line-height: 0.95;
@@ -126,7 +131,7 @@ a:hover { color: var(--accent-bright); }
 }
 
 .tagline {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: clamp(0.95rem, 2vw, 1.1rem);
     color: var(--text-primary);
     margin-top: 1.25rem;
@@ -134,7 +139,7 @@ a:hover { color: var(--accent-bright); }
 }
 
 .subtitle {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.85rem;
     color: var(--text-secondary);
     margin-top: 0.5rem;
@@ -150,7 +155,7 @@ a:hover { color: var(--accent-bright); }
     background: var(--cream);
     color: var(--bg-primary);
     text-decoration: none;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-weight: 700;
     font-size: 0.85rem;
     letter-spacing: 0.04em;
@@ -241,7 +246,7 @@ a:hover { color: var(--accent-bright); }
 
 .feature-icon { font-size: 2.4rem; display: block; margin-bottom: 1rem; }
 .feature h3 {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: var(--font-display);
     font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 0.5rem;
@@ -256,8 +261,8 @@ a:hover { color: var(--accent-bright); }
 }
 
 .section h2 {
-    font-family: 'Fraunces', Georgia, serif;
-    font-weight: 900;
+    font-family: var(--font-display);
+    font-weight: 700;
     font-size: 2rem;
     letter-spacing: -0.03em;
     margin-bottom: 0.5rem;
@@ -266,7 +271,7 @@ a:hover { color: var(--accent-bright); }
 .accent {
     color: var(--accent);
     font-style: italic;
-    font-weight: 900;
+    font-weight: 700;
     text-shadow: 0 0 24px var(--accent-glow);
 }
 
@@ -284,7 +289,7 @@ a:hover { color: var(--accent-bright); }
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
     cursor: pointer;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.85rem;
     transition: all 0.24s ease;
 }
@@ -319,7 +324,7 @@ a:hover { color: var(--accent-bright); }
 .code-header span {
     color: var(--text-secondary);
     font-size: 0.82rem;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     letter-spacing: 0.04em;
 }
 
@@ -330,7 +335,7 @@ a:hover { color: var(--accent-bright); }
     padding: 0.4rem 0.8rem;
     border-radius: 6px;
     cursor: pointer;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.78rem;
     transition: all 0.2s ease;
 }
@@ -357,7 +362,7 @@ a:hover { color: var(--accent-bright); }
     border: 1px solid var(--border);
 }
 .requirements h4 {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -377,7 +382,7 @@ a:hover { color: var(--accent-bright); }
     position: absolute;
     left: 0;
     color: var(--accent-mint);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
 }
 
 /* === TIP === */
@@ -389,7 +394,7 @@ a:hover { color: var(--accent-bright); }
     background: var(--accent-tint);
     border-radius: 8px;
     border-left: 3px solid var(--accent);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     line-height: 1.6;
 }
 
@@ -402,7 +407,7 @@ a:hover { color: var(--accent-bright); }
     border: 1px solid var(--accent);
 }
 .vps-recommendation h4 {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -431,7 +436,7 @@ a:hover { color: var(--accent-bright); }
 }
 .api-card:hover { border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
 .api-card h4 {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: var(--font-display);
     font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 0.5rem;
@@ -444,7 +449,7 @@ a:hover { color: var(--accent-bright); }
     display: inline-block;
     color: var(--accent);
     text-decoration: none;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.85rem;
     transition: color 0.2s ease;
 }
@@ -458,7 +463,7 @@ a:hover { color: var(--accent-bright); }
     border: 1px solid var(--accent-rose);
 }
 .warning-box h4 {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -495,8 +500,8 @@ a:hover { color: var(--accent-bright); }
     text-align: center;
 }
 .cta-content h2 {
-    font-family: 'Fraunces', Georgia, serif;
-    font-weight: 900;
+    font-family: var(--font-display);
+    font-weight: 700;
     letter-spacing: -0.03em;
     margin-bottom: 1rem;
 }
@@ -511,7 +516,7 @@ a:hover { color: var(--accent-bright); }
     padding: 0.9rem 1.7rem;
     border-radius: 999px;
     text-decoration: none;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-weight: 600;
     font-size: 0.88rem;
     letter-spacing: 0.02em;
@@ -560,7 +565,7 @@ footer a:hover { text-decoration: underline; }
 
 .logo { text-decoration: none; display: flex; align-items: center; gap: 0.6rem; }
 .logo-text {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.95rem;
     font-weight: 700;
     color: var(--text-primary);
@@ -589,7 +594,7 @@ footer a:hover { text-decoration: underline; }
     padding: 0.55rem 1rem;
     border-radius: 999px;
     text-decoration: none;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.02em;
@@ -732,8 +737,8 @@ footer a:hover { text-decoration: underline; }
 }
 .category-ruler .ruler-h2 {
     margin: 0;
-    font-family: 'Fraunces', Georgia, serif;
-    font-weight: 900;
+    font-family: var(--font-display);
+    font-weight: 700;
     font-size: var(--t-section);
     letter-spacing: -0.03em;
     color: var(--ink);
@@ -811,12 +816,12 @@ footer a:hover { text-decoration: underline; }
     background: rgba(255, 126, 138, 0.08);
     color: var(--accent-rose);
     border: 1px solid rgba(255, 126, 138, 0.40);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     letter-spacing: 0.06em;
 }
 
 .guide-card h3 {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: var(--font-display);
     font-weight: 700;
     margin: 0 0 0.5rem;
     font-size: 1.15rem;
@@ -885,7 +890,7 @@ footer a:hover { text-decoration: underline; }
     position: absolute;
     left: 0;
     top: 0.1em;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.74rem;
     color: var(--accent);
     font-weight: 700;
@@ -1006,7 +1011,7 @@ footer a:hover { text-decoration: underline; }
     gap: 10px;
     padding: 6px 14px;
     margin-bottom: 2rem;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.16em;
@@ -1030,8 +1035,8 @@ footer a:hover { text-decoration: underline; }
 }
 
 .display-headline {
-    font-family: 'Fraunces', Georgia, serif;
-    font-weight: 900;
+    font-family: var(--font-display);
+    font-weight: 700;
     font-size: clamp(3rem, 9vw, 7rem);
     line-height: 0.92;
     letter-spacing: -0.035em;
@@ -1044,7 +1049,7 @@ footer a:hover { text-decoration: underline; }
 .display-headline .hl-accent {
     font-style: italic;
     color: var(--accent);
-    font-weight: 900;
+    font-weight: 700;
     text-shadow: 0 0 30px var(--accent-glow), 0 6px 50px rgba(0,0,0,0.55);
 }
 
@@ -1054,7 +1059,7 @@ footer a:hover { text-decoration: underline; }
     color: rgba(255, 245, 220, 0.72);
     font-size: 0.95rem;
     line-height: 1.7;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     letter-spacing: 0.01em;
 }
 .hero-lead strong {
@@ -1074,7 +1079,7 @@ footer a:hover { text-decoration: underline; }
     background: rgba(6, 3, 5, 0.55);
     border: 1px solid rgba(94, 107, 255, 0.25);
     border-radius: 10px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.95rem;
     color: var(--ink);
     backdrop-filter: blur(20px);
@@ -1137,7 +1142,7 @@ footer a:hover { text-decoration: underline; }
     padding: 0.9rem 1.5rem;
     border-radius: 999px;
     text-decoration: none;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-weight: 700;
     font-size: 0.85rem;
     letter-spacing: 0.04em;
@@ -1156,7 +1161,7 @@ footer a:hover { text-decoration: underline; }
 .cta-secondary {
     color: var(--text-primary);
     text-decoration: none;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.85rem;
     letter-spacing: 0.02em;
     padding-bottom: 2px;
@@ -1236,7 +1241,7 @@ footer a:hover { text-decoration: underline; }
 }
 
 .materials-banner-title {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: var(--font-display);
     color: var(--text-primary);
     font-weight: 700;
     font-size: 1rem;
@@ -1245,7 +1250,7 @@ footer a:hover { text-decoration: underline; }
 
 .materials-banner-sub {
     color: var(--text-secondary);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -1294,7 +1299,7 @@ footer a:hover { text-decoration: underline; }
     color: var(--text-muted);
     text-decoration: none;
     font-size: 0.78rem;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     letter-spacing: 0.04em;
     margin-bottom: 2.5rem;
     transition: color 0.2s ease;
@@ -1316,8 +1321,8 @@ footer a:hover { text-decoration: underline; }
 }
 
 .materials-header h1 {
-    font-family: 'Fraunces', Georgia, serif;
-    font-weight: 900;
+    font-family: var(--font-display);
+    font-weight: 700;
     font-size: clamp(2.4rem, 6vw, 4rem);
     letter-spacing: -0.04em;
     color: var(--ink);
@@ -1330,7 +1335,7 @@ footer a:hover { text-decoration: underline; }
     font-size: 1.05rem;
     line-height: 1.7;
     max-width: 62ch;
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: var(--font-display);
 }
 
 .materials-total {
@@ -1356,7 +1361,7 @@ footer a:hover { text-decoration: underline; }
 }
 
 .material-card h3 {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: var(--font-display);
     font-weight: 700;
     font-size: 1.2rem;
     letter-spacing: -0.015em;
@@ -1373,7 +1378,7 @@ footer a:hover { text-decoration: underline; }
     font-size: 0.96rem;
     margin-bottom: 1.1rem;
     line-height: 1.65;
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: var(--font-display);
 }
 
 .material-card p strong {
@@ -1388,7 +1393,7 @@ footer a:hover { text-decoration: underline; }
     border: 1px solid var(--border);
     border-radius: 4px;
     font-size: 0.84em;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
 }
 
 .material-meta {
@@ -1426,7 +1431,7 @@ footer a:hover { text-decoration: underline; }
     text-decoration: none;
     padding: 0.55rem 1.2rem;
     border-radius: 999px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-weight: 700;
     font-size: 0.74rem;
     letter-spacing: 0.06em;
@@ -1477,7 +1482,7 @@ footer a:hover { text-decoration: underline; }
 
 .materials-group-summary .group-title {
     margin: 0;
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: var(--font-display);
     font-weight: 700;
     font-size: 1.2rem;
     letter-spacing: -0.015em;
@@ -1498,7 +1503,7 @@ footer a:hover { text-decoration: underline; }
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 1.4rem;
     font-weight: 300;
     color: var(--accent);
@@ -1520,7 +1525,7 @@ footer a:hover { text-decoration: underline; }
     line-height: 1.7;
     padding-left: 0.85rem;
     border-left: 2px solid var(--accent);
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: var(--font-display);
 }
 
 .materials-group-content .material-card:last-child { margin-bottom: 0; }

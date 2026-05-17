@@ -134,7 +134,7 @@
 }
 
 .guide-header h1 {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-display);
     font-weight: 700;
     font-size: clamp(2.2rem, 5.5vw, 3.4rem);
     margin-bottom: 1rem;
@@ -152,11 +152,12 @@
 /* Guide Content */
 .guide-content {
     min-width: 0; /* Fix for grid overflow */
+    max-width: 72ch; /* readable measure — caps line length ~70-75 chars */
 }
 
 /* Article Body */
 .guide-body {
-    line-height: 1.8;
+    line-height: 1.7;
 }
 
 .guide-body section {
@@ -164,6 +165,7 @@
 }
 
 .guide-body h2 {
+    font-family: var(--font-display);
     color: var(--text-primary);
     font-size: 1.9rem;
     font-weight: 700;
@@ -174,6 +176,7 @@
 }
 
 .guide-body h3 {
+    font-family: var(--font-display);
     color: var(--text-primary);
     font-size: 1.5rem;
     font-weight: 700;
@@ -181,9 +184,9 @@
     margin: 3rem 0 1.25rem;
     padding: 0.9rem 1.25rem;
     background: linear-gradient(90deg,
-        rgba(255, 107, 53, 0.14) 0%,
-        rgba(255, 107, 53, 0.04) 50%,
-        rgba(255, 107, 53, 0) 100%);
+        rgba(99, 102, 241, 0.14) 0%,
+        rgba(99, 102, 241, 0.04) 50%,
+        rgba(99, 102, 241, 0) 100%);
     border-left: 4px solid var(--accent);
     border-radius: 0 8px 8px 0;
     line-height: 1.25;
@@ -193,9 +196,9 @@
 .guide-body h3 .h-num,
 .guide-body h4 .h-num {
     display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     color: var(--accent);
-    background: rgba(255, 107, 53, 0.15);
+    background: rgba(99, 102, 241, 0.15);
     font-weight: 800;
     font-size: 0.75em;
     padding: 0.15em 0.5em;
@@ -208,7 +211,7 @@
 /* Badges next to level-like headings */
 .h-badge {
     display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.62em;
     font-weight: 700;
     text-transform: uppercase;
@@ -355,17 +358,17 @@
 }
 
 .callout-info {
-    background: rgba(0, 168, 255, 0.1);
+    background: rgba(88, 166, 255, 0.1);
     border-color: var(--accent-blue);
 }
 
 .callout-warning {
-    background: rgba(255, 107, 53, 0.1);
+    background: rgba(99, 102, 241, 0.1);
     border-color: var(--accent);
 }
 
 .callout-success {
-    background: rgba(0, 255, 136, 0.1);
+    background: rgba(52, 211, 153, 0.1);
     border-color: var(--accent-green);
 }
 
@@ -521,7 +524,7 @@
     margin-top: 3rem;
     padding: 2.25rem 2rem;
     background: radial-gradient(ellipse at top, var(--halo-warm), transparent 70%);
-    border: 1px solid rgba(255, 107, 53, 0.18);
+    border: 1px solid rgba(99, 102, 241, 0.18);
     border-radius: 12px;
     text-align: center;
 }
@@ -676,7 +679,7 @@
 }
 
 .guide-section > summary:hover {
-    background: rgba(255, 107, 53, 0.05);
+    background: rgba(99, 102, 241, 0.05);
 }
 
 .guide-section > summary h2 {
@@ -722,7 +725,7 @@
 }
 
 .comparison-table th {
-    background: linear-gradient(180deg, rgba(255, 107, 53, 0.18), rgba(255, 107, 53, 0.06));
+    background: linear-gradient(180deg, rgba(99, 102, 241, 0.18), rgba(99, 102, 241, 0.06));
     color: var(--text-primary);
     font-weight: 700;
     text-transform: uppercase;
@@ -737,7 +740,7 @@
 
 /* Code-block captions — a bit stronger */
 .code-block .code-header {
-    background: rgba(255, 107, 53, 0.08);
+    background: rgba(99, 102, 241, 0.08);
 }
 
 .guide-section > summary::after {
@@ -755,7 +758,7 @@
 }
 
 .guide-section[open] {
-    border-color: rgba(255, 107, 53, 0.3);
+    border-color: rgba(99, 102, 241, 0.3);
 }
 
 .guide-section[open] > summary {
@@ -782,7 +785,7 @@
     border-radius: 6px;
     cursor: pointer;
     font-size: 0.8rem;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     transition: all 0.2s ease;
 }
 
