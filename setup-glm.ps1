@@ -18,21 +18,29 @@ function Write-JsonFile($path, $obj) {
   [System.IO.File]::WriteAllText($path, $json, (New-Object System.Text.UTF8Encoding($false)))
   Write-Host "  создан: $path" -ForegroundColor Green
 }
-function New-Settings($baseUrl, $token, $model) {
-  return [ordered]@{
-    permissions = [ordered]@{ allow = @(); deny = @(); ask = @() }
-    env = [ordered]@{
-      ANTHROPIC_BASE_URL             = $baseUrl
-      ANTHROPIC_AUTH_TOKEN           = $token
-      ANTHROPIC_API_KEY              = ""
-      API_TIMEOUT_MS                 = "3000000"
-      ANTHROPIC_DEFAULT_OPUS_MODEL   = $model
-      ANTHROPIC_DEFAULT_SONNET_MODEL = $model
-      ANTHROPIC_DEFAULT_HAIKU_MODEL  = $model
-      ANTHROPIC_SMALL_FAST_MODEL     = $model
-      CLAUDE_CODE_SUBAGENT_MODEL     = $model
-    }
+function Write-Text($path, $content) {
+  $dir = Split-Path -Parent $path
+  if (-not (Test-Path $dir)) { New-Item -ItemType Directory -Force -Path $dir | Out-Null }
+  [System.IO.File]::WriteAllText($path, $content, (New-Object System.Text.UTF8Encoding($false)))
+  Write-Host "  создан: $path" -ForegroundColor Green
+}
+function New-SettingsJson($baseUrl, $token, $model) {
+  return @"
+{
+  "permissions": { "allow": [], "deny": [], "ask": [] },
+  "env": {
+    "ANTHROPIC_BASE_URL": "$baseUrl",
+    "ANTHROPIC_AUTH_TOKEN": "$token",
+    "ANTHROPIC_API_KEY": "",
+    "API_TIMEOUT_MS": "3000000",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "$model",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "$model",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "$model",
+    "ANTHROPIC_SMALL_FAST_MODEL": "$model",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "$model"
   }
+}
+"@
 }
 
 Write-Host "GLM 5.2 -> Claude Code: установщик" -ForegroundColor Yellow
@@ -82,11 +90,11 @@ $settingsPath = Join-Path $glm ".claude\settings.local.json"
 if ($provider -eq "zai") {
   Write-Step "Ветка C — z.ai напрямую"
   $key = Read-Host "Вставь свой ключ z.ai (z.ai/manage-apikey)"
-  Write-JsonFile $settingsPath (New-Settings "https://api.z.ai/api/anthropic" $key "glm-5.2")
+  Write-Text $settingsPath (New-SettingsJson "https://api.z.ai/api/anthropic" $key "glm-5.2")
 } elseif ($plugin -eq "no") {
   Write-Step "Ветка A — OpenRouter (терминал)"
   $key = Read-Host "Вставь свой ключ OpenRouter (sk-or-..., openrouter.ai/keys)"
-  Write-JsonFile $settingsPath (New-Settings "https://openrouter.ai/api" $key "z-ai/glm-5.2")
+  Write-Text $settingsPath (New-SettingsJson "https://openrouter.ai/api" $key "z-ai/glm-5.2")
   Write-Host "  Примечание: эта ветка для ТЕРМИНАЛА; в плагине будет redacted_thinking." -ForegroundColor DarkYellow
 } else {
   Write-Step "Ветка B — OpenRouter + прокси (плагин)"
@@ -119,7 +127,7 @@ if ($provider -eq "zai") {
   Write-Host "  Запускаю прокси..."
   try { ccr restart | Out-Null } catch { Write-Host "  Не смог вызвать ccr — перезапусти терминал и сделай 'ccr start'." -ForegroundColor DarkYellow }
 
-  Write-JsonFile $settingsPath (New-Settings "http://127.0.0.1:3456" $routerPass "z-ai/glm-5.2")
+  Write-Text $settingsPath (New-SettingsJson "http://127.0.0.1:3456" $routerPass "z-ai/glm-5.2")
   Write-Host "  Прокси должен быть запущен при работе с плагином. После перезагрузки ПК: ccr start" -ForegroundColor DarkYellow
 }
 
