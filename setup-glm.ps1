@@ -73,16 +73,23 @@ Write-Step "Папка проекта"
 $rootName = Read-Host "Имя папки (Enter = GLM-Claude-Code)"
 if ([string]::IsNullOrWhiteSpace($rootName)) { $rootName = "GLM-Claude-Code" }
 $root = Join-Path (Get-Location) $rootName
-$glm  = Join-Path $root "glm"
-New-Item -ItemType Directory -Force -Path $glm | Out-Null
-Write-Host "  создана: $glm" -ForegroundColor Green
 $opus = $null
 if ($opusFolder) {
+  # Две модели рядом -> нужны подпапки, чтобы у каждой был свой .claude
+  $glm  = Join-Path $root "glm"
   $opus = Join-Path $root "opus"
+  New-Item -ItemType Directory -Force -Path $glm  | Out-Null
   New-Item -ItemType Directory -Force -Path $opus | Out-Null
+  Write-Host "  создана: $glm"  -ForegroundColor Green
   Write-Host "  создана: $opus (пустая — обычный Claude по подписке)" -ForegroundColor Green
+  Write-Host "  Модель привязана к папке: glm/ = GLM, opus/ = твой Claude (в КОРНЕ .claude нет)."
+} else {
+  # Только GLM -> конфиг прямо в корневую папку: открыл её и сразу GLM, без cd glm
+  $glm = $root
+  New-Item -ItemType Directory -Force -Path $root | Out-Null
+  Write-Host "  создана: $root" -ForegroundColor Green
+  Write-Host "  Конфиг GLM кладётся ПРЯМО в эту папку — открой её в VS Code и сразу работает GLM."
 }
-Write-Host "  ВАЖНО: в корне НЕТ .claude — модель привязана к папке (glm/ = GLM, opus/ = твой Claude)."
 
 # --- Конфиг по выбранной ветке ---
 $settingsPath = Join-Path $glm ".claude\settings.local.json"
