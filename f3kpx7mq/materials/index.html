@@ -23,8 +23,59 @@
         <div class="materials-header">
             <h1>Материалы</h1>
             <p>Файлы и скиллы, которые я использую сам. Сгруппированы по продукту.</p>
-            <p class="materials-total">6 файлов · ~115 KB · zip-комплект готовится</p>
+            <p class="materials-total">8 файлов · ~132 KB · zip-комплект готовится</p>
         </div>
+
+        <!-- Group: GLM 5.2 -->
+        <details class="materials-group" open>
+            <summary class="materials-group-summary">
+                <span class="group-icon" aria-hidden="true">◈</span>
+                <h2 class="group-title">GLM 5.2 в Claude Code</h2>
+                <span class="group-count">2 файла</span>
+                <span class="group-toggle" aria-hidden="true">+</span>
+            </summary>
+            <div class="materials-group-content">
+                <p class="group-intro">
+                    Подключить открытую GLM 5.2 в Claude Code вместо Opus — примерно в 5 раз дешевле,
+                    1M контекста. Два пути: вставить готовый код самому или отдать файл агенту.
+                </p>
+
+                <!-- Settings codes -->
+                <div class="material-card">
+                    <h3><span class="h-num">01</span> Два кода — <em>настрой сам</em></h3>
+                    <p>
+                        Готовые <code>settings.local.json</code> под двух провайдеров: <strong>OpenRouter</strong>
+                        (один ключ, по токенам) и <strong>z.ai</strong> (официальный, есть подписки-планы).
+                        Вставляешь в папку проекта, подставляешь свой ключ — Claude Code работает на GLM 5.2.
+                    </p>
+                    <div class="material-meta">
+                        <span class="material-tag">.md</span>
+                        <span class="material-tag">OpenRouter</span>
+                        <span class="material-tag">z.ai</span>
+                        <span class="material-tag">copy-paste</span>
+                        <span class="material-size">~5 KB</span>
+                        <a href="f3kpx7mq/glm/CONFIGS.md" class="download-btn" download>↓ Скачать</a>
+                    </div>
+                </div>
+
+                <!-- Agent installer -->
+                <div class="material-card">
+                    <h3><span class="h-num">02</span> Установщик — <em>отдай агенту</em></h3>
+                    <p>
+                        Не хочешь возиться вручную? Отдай этот файл своему агенту (Claude Code, Codex,
+                        Antigravity) и скажи «выполни по шагам». Агент задаст пару вопросов, сам создаст
+                        папки и пропишет нужный конфиг — объясняя каждый шаг.
+                    </p>
+                    <div class="material-meta">
+                        <span class="material-tag">.md</span>
+                        <span class="material-tag">для агента</span>
+                        <span class="material-tag">авто-настройка</span>
+                        <span class="material-size">~12 KB · 191 строка</span>
+                        <a href="f3kpx7mq/glm/SETUP-GLM.md" class="download-btn" download>↓ Скачать</a>
+                    </div>
+                </div>
+            </div>
+        </details>
 
         <!-- Group: OpenClaw -->
         <details class="materials-group">
