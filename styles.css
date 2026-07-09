@@ -1590,3 +1590,36 @@ summary:focus-visible {
     .code-block pre { padding: 1rem; font-size: 0.8rem; }
     .features { padding: 2rem 1.5rem; }
 }
+
+/* ============================================================
+   MOBILE ADAPTATION — touch targets · safe areas · viewport
+   Added 2026-07-09. The layout was already responsive; this
+   tunes the phone experience. Desktop is untouched — every rule
+   is gated by (pointer: coarse) or env()/safe-area (0 elsewhere).
+   ============================================================ */
+
+/* Fixed chrome clears the notch / home indicator (viewport-fit=cover). */
+.site-header { padding-top: env(safe-area-inset-top); }
+.site-footer { padding-bottom: max(2.5rem, env(safe-area-inset-bottom)); }
+
+/* Touch input: every primary action becomes a ≥44px tap target,
+   and stacked in-card link lists get real tap rows instead of
+   18px slivers. Pointer devices (mouse) keep the compact sizing. */
+@media (pointer: coarse) {
+    .nav-telegram,
+    .cta-primary,
+    .telegram-btn,
+    .materials-banner-cta,
+    .material-card .download-btn {
+        min-height: 44px;
+    }
+    .nav-telegram { padding: 0.7rem 1rem; }
+
+    /* Padding goes on the anchor (the tap target), not the <li>,
+       and the number marker is nudged down to stay aligned. */
+    .module-list { gap: 0.1rem 1rem; }
+    .module-list a { display: block; padding: 0.5rem 0; }
+    .module-list li::before { top: 0.6rem; }
+
+    .card-meta { gap: 1.25rem; }
+}

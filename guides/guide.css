@@ -875,3 +875,14 @@
     font-size: 0.85rem;
     line-height: 1.6;
 }
+
+/* === MOBILE ADAPTATION (touch) — added 2026-07-09 ===
+   Roomier tap rows in the collapsed TOC and breadcrumbs so
+   navigating a guide by thumb hits a target, not a hairline.
+   Pointer devices keep the tight editorial spacing. */
+@media (pointer: coarse) {
+    .toc-link { padding: 0.75rem 0; }
+    .toc-h3 .toc-link { padding: 0.65rem 0 0.65rem 1rem; }
+    .breadcrumbs { gap: 0.4rem 0.6rem; flex-wrap: wrap; }
+    .breadcrumbs a { padding: 0.35rem 0; }
+}
