@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <title>Anki Word Clipper — слова в Anki в один клик | guide.arturx.art</title>
+    <meta name="description" content="Бесплатное браузерное расширение: выделяешь слово на любом сайте — оно улетает в Anki с контекстом предложения, переводом от ИИ, формами глагола и озвучкой.">
+
+    <meta property="og:title" content="Anki Word Clipper — слова в Anki в один клик">
+    <meta property="og:description" content="Выделил слово → карточка в Anki: контекст, перевод от ИИ, формы глагола, озвучка. Бесплатно и open source.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://guide.arturx.art/guides/tools/anki-word-clipper.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../guide.css">
+</head>
+<body>
+    <div class="reading-progress" id="reading-progress"></div>
+    <div id="header-placeholder"></div>
+
+    <div class="guide-container">
+        <aside class="guide-sidebar" id="guide-sidebar">
+            <nav class="toc">
+                <h4>Содержание</h4>
+                <ul id="toc-list"></ul>
+            </nav>
+        </aside>
+
+        <main class="guide-content">
+            <nav class="breadcrumbs">
+                <a href="/f3kpx7mq/">Главная</a>
+                <span>/</span>
+                <a href="/f3kpx7mq/#tools">Инструменты</a>
+                <span>/</span>
+                <span>Anki Word Clipper</span>
+            </nav>
+
+            <header class="guide-header">
+                <div class="guide-meta">
+                    <span class="guide-category">Инструменты</span>
+                    <span class="guide-reading-time">~7 мин</span>
+                    <span class="guide-updated">Июль 2026</span>
+                </div>
+                <h1>Anki Word Clipper — слова в Anki в один клик</h1>
+                <p class="guide-description">Бесплатное расширение для Chrome: выделяешь слово на любом сайте — и оно улетает в Anki готовой карточкой. С предложением-контекстом, переводом от ИИ, формами глагола, примером и озвучкой. Написано полностью искусственным интеллектом — как именно, смотри в видео на канале.</p>
+            </header>
+
+            <article class="guide-body">
+
+                <section id="download">
+                    <h2>Скачать</h2>
+                    <p>Расширение бесплатное и open source — весь код открыт на GitHub.</p>
+                    <p>
+                        <a class="cta-button" href="https://github.com/ArtCog/anki-word-clipper/releases/latest/download/anki-word-clipper.zip">⬇ Скачать ZIP (последняя версия)</a>
+                    </p>
+                    <p><a href="https://github.com/ArtCog/anki-word-clipper" target="_blank" rel="noopener">Исходный код на GitHub →</a></p>
+                </section>
+
+                <section id="what">
+                    <h2>Что оно умеет</h2>
+                    <ul>
+                        <li><strong>Один клик</strong> — выделил слово → кнопка «+ Anki» → карточка в колоде. Не выходя со страницы.</li>
+                        <li><strong>Контекст</strong> — предложение, в котором встретилось слово, попадает на карточку автоматически (само слово подсвечено).</li>
+                        <li><strong>Перевод от ИИ по контексту</strong> — не «словарный» перевод, а значение именно в этом предложении. Плюс словарная форма: <em>Häusern → das Haus, die Häuser</em>.</li>
+                        <li><strong>Формы глагола</strong> — выделил <em>ging</em> → на карточке <em>gehen, ging, ist gegangen</em>.</li>
+                        <li><strong>Пример и синонимы</strong> — ИИ добавляет простое предложение-пример и 1–2 синонима попроще (опционально).</li>
+                        <li><strong>Типы карточек</strong> — обычная, двусторонняя (перевод → слово), cloze (пропуск слова в предложении).</li>
+                        <li><strong>Озвучка</strong> — карточка произносит слово голосом системы (Anki TTS), без внешних сервисов.</li>
+                        <li><strong>Приватность</strong> — всё работает локально; наружу уходит только слово на перевод (и это отключается).</li>
+                    </ul>
+                </section>
+
+                <section id="install">
+                    <h2>Установка за 5 минут</h2>
+
+                    <h3>Шаг 1. Anki + AnkiConnect</h3>
+                    <ol>
+                        <li>Установи <a href="https://apps.ankiweb.net/" target="_blank" rel="noopener">Anki Desktop</a> (бесплатно) и запусти его.</li>
+                        <li>В Anki: <strong>Tools → Add-ons → Get Add-ons…</strong> → вставь код <code>2055492159</code> → OK → перезапусти Anki.</li>
+                        <li>Anki должен быть запущен, когда пользуешься расширением.</li>
+                    </ol>
+
+                    <h3>Шаг 2. Расширение в Chrome</h3>
+                    <ol>
+                        <li>Скачай ZIP по кнопке выше и <strong>распакуй</strong> в постоянную папку (не удаляй её потом — Chrome загружает расширение прямо оттуда).</li>
+                        <li>Открой <code>chrome://extensions</code> → включи <strong>Режим разработчика</strong> (переключатель справа сверху).</li>
+                        <li>Нажми <strong>«Загрузить распакованное расширение»</strong> → выбери распакованную папку.</li>
+                        <li>Предупреждения про <code>background.scripts</code> — это нормально (ключи для Firefox), Chrome их игнорирует.</li>
+                    </ol>
+
+                    <h3>Шаг 3. Разреши доступ</h3>
+                    <ol>
+                        <li>Кликни иконку расширения (зелёная буква <strong>A</strong> на панели; если не видно — иконка-пазл → закрепить).</li>
+                        <li>Anki покажет окно «An application is attempting to access Anki» → жми <strong>Yes</strong>.</li>
+                        <li>В попапе появится «Anki подключён ✓». Готово — расширение само создаст нужные типы карточек.</li>
+                    </ol>
+                </section>
+
+                <section id="usage">
+                    <h2>Как пользоваться</h2>
+                    <ul>
+                        <li>Выдели слово или фразу → кнопка <strong>«+ Anki»</strong> → проверь перевод → <code>Enter</code>. Всё.</li>
+                        <li><strong>ПКМ по выделению</strong> → «Добавить в Anki…» — запасной путь, работает даже там, где кнопка не появляется.</li>
+                        <li>Хоткей <code>Alt+A</code> — открыть форму для текущего выделения.</li>
+                        <li><strong>Мгновенный режим</strong> (в попапе): клик добавляет карточку сразу, без формы. <code>Shift+клик</code> делает наоборот.</li>
+                        <li>Перевод можно оставить пустым — «захвати сейчас, переведи вечером» — это нормальный сценарий.</li>
+                        <li>Дубликаты расширение ловит само и предлагает «Добавить всё равно».</li>
+                    </ul>
+                </section>
+
+                <section id="ai">
+                    <h2>Включаем ИИ-перевод (бесплатно)</h2>
+                    <p>Из коробки переводит Google. Но вся магия — словарные формы, формы глаголов, перевод по контексту, примеры — включается с ИИ-движком. Ключ Gemini бесплатный:</p>
+                    <ol>
+                        <li>Зайди на <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> (вход обычным Google-аккаунтом) → <strong>Create API key</strong> → скопируй ключ. Карта не нужна.</li>
+                        <li>Попап расширения → секция <strong>«Перевод»</strong> → «Движок перевода» → <strong>ИИ</strong>.</li>
+                        <li>Провайдер: <strong>Google Gemini</strong> → вставь ключ → кнопка <strong>«Проверить ИИ»</strong> → должно показать зелёную галочку с примером.</li>
+                        <li>По желанию включи <strong>«Пример-предложение на карточку»</strong> и озвучку (секция «Карточки» → язык TTS).</li>
+                    </ol>
+                    <p>Также поддерживаются OpenRouter, OpenAI и локальная Ollama (совсем без ключа) — пресеты уже внутри. В поле «Свои инструкции для ИИ» можно по-русски дописать свои правила — например, «добавляй управление глагола с падежом».</p>
+                </section>
+
+                <section id="faq">
+                    <h2>Частые вопросы</h2>
+                    <h3>Кнопка не появляется</h3>
+                    <p>Проверь, что Anki запущен, и обнови страницу (F5) после установки расширения. На системных страницах Chrome, в Google Docs и во встроенном PDF-просмотрщике кнопка не работает — это ограничение браузера (в PDF выручает ПКМ → «Добавить мгновенно»).</p>
+                    <h3>Карточки не появляются на телефоне</h3>
+                    <p>Они появятся после синхронизации: Anki Desktop → Sync (нужен бесплатный аккаунт AnkiWeb) → синхронизация в AnkiDroid/AnkiMobile.</p>
+                    <h3>Это безопасно?</h3>
+                    <p>Код открыт: <a href="https://github.com/ArtCog/anki-word-clipper" target="_blank" rel="noopener">github.com/ArtCog/anki-word-clipper</a>. Расширение общается только с локальным Anki и с выбранным тобой переводчиком. Ни аналитики, ни аккаунтов, ни облака.</p>
+                    <h3>Firefox?</h3>
+                    <p>Поддерживается как временное расширение: <code>about:debugging</code> → Load Temporary Add-on → manifest.json. Подробности в README на GitHub.</p>
+                </section>
+
+            </article>
+        </main>
+    </div>
+
+    <script src="../../script.js"></script>
+    <script src="../guide.js"></script>
+</body>
+</html>
