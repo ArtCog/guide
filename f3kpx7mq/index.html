@@ -34,13 +34,27 @@
                 <span class="hl-accent">ИИмерсивного.</span>
             </h1>
 
-            <p class="hero-lead">Гайды, конфиги и скиллы для AI-агентов. Собрано из живой работы — не из туториалов.</p>
+            <!-- Waveform signal — brand motif -->
+            <svg class="hero-waveform" viewBox="0 0 900 40" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <line class="baseline" x1="0" y1="20" x2="900" y2="20"></line>
+                <path class="trace" d="M0 20 H210 l14 -15 l18 30 l16 -38 l18 46 l16 -23 H430 l12 -10 l14 20 l13 -30 l14 38 l12 -18 H900"></path>
+            </svg>
+
+            <p class="hero-lead">Гайды, конфиги и скиллы для AI-агентов. Собрано из живой работы — <strong>не из туториалов.</strong></p>
 
             <!-- Terminal — typing animation as the hero anchor -->
             <div class="hero-mini-terminal" aria-hidden="true">
                 <span class="prompt">$</span>
                 <span class="typing-text" id="typing"></span>
                 <span class="cursor">|</span>
+            </div>
+
+            <!-- Data strip — hard numbers as scope readouts -->
+            <div class="hero-data-strip">
+                <span class="data-chip"><b>14</b> моделей</span>
+                <span class="data-chip"><b>4</b> крона</span>
+                <span class="data-chip"><b>5</b> уровней защиты</span>
+                <span class="data-chip">запуск <b>10</b> мин</span>
             </div>
         </div>
     </header>
@@ -113,6 +127,9 @@
             </div>
         </section>
 
+        <!-- Compact pair: 02 Тюнинг + 03 Инфраструктура, side by side -->
+        <div class="category-row">
+
         <!-- Category: OpenClaw Tuning -->
         <section id="tuning" class="category category-compact">
             <div class="category-ruler">
@@ -173,6 +190,8 @@
             </div>
         </section>
 
+        </div><!-- /.category-row -->
+
         <!-- Category: Access to AI Services -->
         <section id="ai-access" class="category">
             <div class="category-ruler">
@@ -223,6 +242,5 @@
     <div id="footer-placeholder"></div>
 
     <script src="script.js"></script>
-    <script src="smoke.js" defer></script>
 </body>
 </html>

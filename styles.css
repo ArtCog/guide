@@ -21,6 +21,10 @@
     --bg-secondary:  #111614;       /* cards, panels (brand --surface) */
     --bg-terminal:   #070A09;       /* terminals, code blocks (--surface-2) */
     --bg-elev:       #19211E;       /* hover surfaces (derived) */
+    /* Alias: brand colors.md names the page background `--bg`. Without this,
+       `color: var(--bg)` on the green buttons silently inherits instead of
+       going dark. Keep both names — the brand doc and the code each use one. */
+    --bg:            #0B0F0E;
 
     /* ---------- Foregrounds ---------- */
     --ink:           #E8EDEB;       /* primary text */
@@ -71,20 +75,48 @@ body {
     text-rendering: optimizeLegibility;
 }
 
-/* Background layer 2 — scanline texture («Осциллограф»). Sits above
-   the --bg-primary fill but below all content via negative z-index,
-   so no markup changes are needed. Opacity 0.012 is the ceiling —
-   any higher and it reads as a visible "retro effect". */
+/* Background layer 2 — scope grid + scanline («Осциллограф» 2.0).
+   Sits above the --bg-primary fill but below all content via negative
+   z-index, so no markup changes are needed — every page gets it.
+   Layer order (first = topmost): scanline, fine 44px grid, coarse 220px grid.
+   Scanline opacity 0.012 is the ceiling — any higher and it reads as a
+   visible "retro effect". Grid alphas are calibrated against #0B0F0E:
+   .045 fine / .09 coarse. Raising them turns the backdrop into graph paper. */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: -1;
-    background: repeating-linear-gradient(
-        0deg,
-        transparent, transparent 3px,
-        rgba(255, 255, 255, 0.012) 3px, rgba(255, 255, 255, 0.012) 4px
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            transparent, transparent 3px,
+            rgba(255, 255, 255, 0.012) 3px, rgba(255, 255, 255, 0.012) 4px
+        ),
+        linear-gradient(rgba(60, 229, 176, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(60, 229, 176, 0.045) 1px, transparent 1px),
+        linear-gradient(rgba(60, 229, 176, 0.09) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(60, 229, 176, 0.09) 1px, transparent 1px);
+    background-size:
+        auto,
+        44px 44px, 44px 44px,
+        220px 220px, 220px 220px;
+}
+
+/* Background layer 3 — radial fade. Dims the grid toward the edges so
+   content never fights it. Renders above ::before (same z-index, later
+   in source order). Viewport-fixed, so long guide pages read identically. */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background: radial-gradient(
+        ellipse 90% 70% at 50% 22%,
+        transparent 0%, transparent 42%,
+        rgba(11, 15, 14, 0.72) 100%
     );
 }
 
@@ -510,7 +542,7 @@ a:hover { color: var(--accent-bright); }
 /* === CTA SECTION === */
 .cta-section {
     padding: 5rem 2rem;
-    background: var(--bg-primary);
+    background: transparent;   /* let the scope grid run through */
     border-top: 1px solid var(--border);
 }
 .cta-content {
@@ -567,7 +599,7 @@ footer a:hover { text-decoration: underline; }
     left: 0;
     right: 0;
     z-index: 1000;
-    background: rgba(10, 6, 8, 0.75);
+    background: rgba(11, 15, 14, 0.72);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
 }
@@ -583,6 +615,21 @@ footer a:hover { text-decoration: underline; }
 }
 
 .logo { text-decoration: none; display: flex; align-items: center; gap: 0.6rem; }
+
+/* Logo mark — the waveform glyph in a rounded box. */
+.logo-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    border: 1px solid rgba(60, 229, 176, 0.4);
+    border-radius: 6px;
+}
+.logo-mark svg { display: block; }
+.logo:hover .logo-mark { border-color: var(--accent); }
+
 .logo-text {
     font-family: var(--font-mono);
     font-size: 0.95rem;
@@ -609,7 +656,7 @@ footer a:hover { text-decoration: underline; }
     align-items: center;
     gap: 0.5rem;
     background: var(--accent);
-    color: var(--bg);
+    color: var(--bg-primary);
     padding: 0.55rem 1rem;
     border-radius: 999px;
     text-decoration: none;
@@ -682,7 +729,7 @@ footer a:hover { text-decoration: underline; }
 .site-footer {
     padding: 2.5rem 2rem;
     border-top: 1px solid var(--border);
-    background: var(--bg-primary);
+    background: transparent;   /* let the scope grid run through */
     margin-top: 6rem;
 }
 
@@ -723,6 +770,19 @@ footer a:hover { text-decoration: underline; }
 
 .category { margin-bottom: 4rem; }
 
+/* Two compact categories side by side (02 Тюнинг + 03 Инфраструктура).
+   Collapses to a single column below --bp-md. */
+.category-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.75rem;
+    margin-bottom: 4rem;
+}
+.category-row > .category-compact { margin-bottom: 0; }
+@media (max-width: 768px) {
+    .category-row { grid-template-columns: 1fr; gap: 2rem; }
+}
+
 .category-compact { margin-bottom: 2.5rem; }
 .category-compact .category-ruler { margin-bottom: 1rem; }
 .category-compact .ruler-h2 { font-size: 1.4rem; }
@@ -733,6 +793,17 @@ footer a:hover { text-decoration: underline; }
 .category-compact .guide-card { padding: 1rem 1.25rem; }
 .category-compact .guide-card h3 { font-size: 1rem; }
 .category-compact .guide-card > p { font-size: 0.84rem; line-height: 1.5; }
+/* Inside .category-row the ruler has ~half the width — the trailing
+   description wraps the heading onto two lines. Drop it there. */
+.category-row .ruler-desc { display: none; }
+
+/* Explicit catalog grids — only where there is room. Below 1024px the
+   .guides-grid auto-fill default keeps handling the layout. */
+@media (min-width: 1024px) {
+    #tools .guides-grid { grid-template-columns: 1.6fr 1fr 1fr; }
+    #ai-access .guides-grid { grid-template-columns: repeat(4, 1fr); }
+    .category-row .guides-grid { grid-template-columns: 1fr 1fr; }
+}
 
 /* === EDITORIAL CATEGORY RULER === */
 .category-ruler {
@@ -832,9 +903,9 @@ footer a:hover { text-decoration: underline; }
 }
 .card-badge.muted { background: var(--border-strong); color: var(--text-secondary); }
 .card-badge.scheduled {
-    background: rgba(255, 126, 138, 0.08);
+    background: transparent;
     color: var(--accent-rose);
-    border: 1px solid rgba(255, 126, 138, 0.40);
+    border: 1px solid rgba(229, 89, 74, 0.40);
     font-family: var(--font-mono);
     letter-spacing: 0.06em;
 }
@@ -984,38 +1055,9 @@ footer a:hover { text-decoration: underline; }
     justify-content: center;
     padding: 8rem 2rem 5rem;
     text-align: center;
-    background: var(--bg-primary);
-}
-
-/* Smoke canvas mounts here (smoke.js inserts <canvas data-smoke>) */
-.editorial-hero canvas[data-smoke] {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
-/* Vignette */
-.editorial-hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 2;
-    background: radial-gradient(ellipse 70% 80% at center, transparent 0%, transparent 38%, rgba(0,0,0,0.55) 100%);
-}
-
-/* Paper grain */
-.editorial-hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 3;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.6 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
-    opacity: 0.08;
-    mix-blend-mode: overlay;
+    /* transparent, not --bg-primary: an opaque fill here would paint over
+       the body::before scope grid. The grid IS the hero background now. */
+    background: transparent;
 }
 
 .hero-inner {
@@ -1036,15 +1078,15 @@ footer a:hover { text-decoration: underline; }
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--accent-bright);
+    color: var(--accent);
     background: var(--accent-tint);
-    border: 1px solid rgba(94, 107, 255, 0.40);
-    border-radius: 999px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-pill);
 }
 .hero-marker .dot {
     width: 7px; height: 7px; border-radius: 50%;
-    background: var(--accent-bright);
-    box-shadow: 0 0 14px var(--accent-bright);
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
     animation: marker-pulse 1.8s ease-in-out infinite;
 }
 .hero-marker .ruler { display: none; }
@@ -1070,12 +1112,36 @@ footer a:hover { text-decoration: underline; }
     font-weight: 700;
 }
 
+/* Waveform signal — the brand motif. Sits between headline and lead.
+   The dash animation makes the trace "run" left-to-right like a live scope. */
+.hero-waveform {
+    display: block;
+    width: 100%;
+    max-width: 760px;
+    height: 34px;
+    margin: 1.1rem auto 0;
+}
+.hero-waveform .baseline { stroke: rgba(60, 229, 176, 0.14); stroke-width: 1; }
+.hero-waveform .trace {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-dasharray: 10 8;
+    filter: drop-shadow(0 0 6px rgba(60, 229, 176, 0.5));
+    animation: scope-dash 22s linear infinite;
+}
+
+@keyframes scope-dash {
+    to { stroke-dashoffset: -1200; }
+}
+
 .hero-lead {
-    margin: 1.75rem auto 0;
+    margin: 1.25rem auto 0;
     max-width: 56ch;
-    color: rgba(255, 245, 220, 0.72);
+    color: var(--text-secondary);
     font-size: 0.95rem;
-    line-height: 1.7;
+    line-height: 1.75;
     font-family: var(--font-mono);
     letter-spacing: 0.01em;
 }
@@ -1091,11 +1157,11 @@ footer a:hover { text-decoration: underline; }
     display: inline-flex;
     align-items: center;
     gap: 0.7rem;
-    margin: 2.5rem auto 0;
+    margin: 2.1rem auto 0;
     padding: 1rem 1.4rem;
-    background: rgba(6, 3, 5, 0.55);
-    border: 1px solid rgba(94, 107, 255, 0.25);
-    border-radius: 10px;
+    background: rgba(7, 10, 9, 0.75);
+    border: 1px solid rgba(60, 229, 176, 0.25);
+    border-radius: 12px;
     font-family: var(--font-mono);
     font-size: 0.95rem;
     color: var(--ink);
@@ -1108,6 +1174,28 @@ footer a:hover { text-decoration: underline; }
 .hero-mini-terminal .typing-text { color: var(--ink); }
 .hero-mini-terminal .cursor {
     color: var(--accent);
+}
+
+/* Data strip — hard numbers as scope readouts, right under the terminal. */
+.hero-data-strip {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    margin-top: 1.6rem;
+}
+.data-chip {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.44rem 0.75rem;
+    white-space: nowrap;
+}
+.data-chip b {
+    color: var(--accent);
+    font-weight: 700;
 }
 
 .hero-status {
@@ -1199,7 +1287,7 @@ footer a:hover { text-decoration: underline; }
     max-width: 100%;
     box-shadow:
         0 30px 70px rgba(0, 0, 0, 0.55),
-        0 0 0 1px rgba(94, 107, 255, 0.08);
+        0 0 0 1px rgba(60, 229, 176, 0.08);
 }
 
 @media (max-width: 960px) {
@@ -1220,7 +1308,7 @@ footer a:hover { text-decoration: underline; }
     margin: 0 auto 2.5rem;
     padding: 1.15rem 1.5rem;
     background: linear-gradient(120deg, var(--accent-tint) 0%, var(--bg-secondary) 70%);
-    border: 1.5px solid rgba(94, 107, 255, 0.45);
+    border: 1.5px solid rgba(60, 229, 176, 0.40);
     border-radius: 12px;
     text-decoration: none;
     position: relative;
@@ -1423,7 +1511,7 @@ footer a:hover { text-decoration: underline; }
     font-size: 0.7rem;
     padding: 0.22rem 0.6rem;
     border-radius: 4px;
-    background: rgba(255, 245, 220, 0.03);
+    background: rgba(255, 255, 255, 0.03);
     color: var(--text-secondary);
     border: 1px solid var(--border);
     letter-spacing: 0.06em;
@@ -1473,7 +1561,7 @@ footer a:hover { text-decoration: underline; }
 }
 
 .materials-group[open] {
-    border-color: rgba(94, 107, 255, 0.40);
+    border-color: var(--border-strong);
 }
 
 .materials-group-summary {
