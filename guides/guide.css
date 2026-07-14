@@ -284,6 +284,13 @@
     color: var(--text-primary);
 }
 
+/* Inline <code> carries unbreakable tokens (paths, flags, long commands) —
+   let them break mid-token on narrow screens. No effect inside <pre>:
+   white-space:pre wins there and those blocks scroll instead. */
+.guide-body code {
+    overflow-wrap: anywhere;
+}
+
 /* Steps Component */
 .steps {
     display: flex;
@@ -398,35 +405,39 @@
 }
 
 /* Comparison Table */
-.comparison-table {
+.guide-body table {
     width: 100%;
     border-collapse: collapse;
     margin: 1.5rem 0;
     font-size: 0.9rem;
+    /* hidden lives HERE (before the ≤768 media query) so the mobile
+       overflow-x:auto can win the cascade — otherwise phone tables are
+       clipped and unscrollable. Desktop keeps it for radius clipping. */
+    overflow: hidden;
 }
 
-.comparison-table th,
-.comparison-table td {
+.guide-body table th,
+.guide-body table td {
     padding: 1rem;
     text-align: left;
     border: 1px solid var(--border);
 }
 
-.comparison-table th {
+.guide-body table th {
     background: var(--bg-secondary);
     color: var(--text-primary);
     font-weight: 600;
 }
 
-.comparison-table td {
+.guide-body table td {
     color: var(--text-secondary);
 }
 
-.comparison-table tbody tr:nth-child(even) td {
+.guide-body table tbody tr:nth-child(even) td {
     background: rgba(255, 255, 255, 0.02);
 }
 
-.comparison-table tr:hover td {
+.guide-body table tr:hover td {
     background: var(--bg-secondary);
 }
 
@@ -586,23 +597,49 @@
         padding-top: 5rem;
     }
 
-    /* Show TOC above content on mobile — collapsed but reachable */
+    /* TOC above content as a single collapsed tap-row; guide.js adds
+       .toc-collapsible here and toggles .open. Same +/× language as
+       the guide-section summaries. */
     .guide-sidebar {
         position: static;
-        max-height: 280px;
-        overflow-y: auto;
-        margin-bottom: 2rem;
+        max-height: none;
+        margin-bottom: 1.5rem;
         order: -1;
     }
 
     .guide-sidebar .toc {
         padding: 1rem 1.25rem;
     }
+
+    .toc-collapsible h4 {
+        margin-bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+    .toc-collapsible h4::after {
+        content: '+';
+        color: var(--accent);
+        font-size: 1.3rem;
+        font-weight: 300;
+        line-height: 1;
+        transition: transform 0.25s ease;
+    }
+    .toc-collapsible.open h4::after { transform: rotate(45deg); }
+    .toc-collapsible ul { display: none; }
+    .toc-collapsible.open ul {
+        display: block;
+        margin-top: 0.75rem;
+        max-height: 45vh;
+        overflow-y: auto;
+    }
 }
 
 @media (max-width: 768px) {
     .guide-container {
-        padding: 3.5rem 0.75rem 1rem;
+        /* header is ~52px tall + possible notch inset — keep breadcrumbs clear */
+        padding: calc(4.5rem + env(safe-area-inset-top)) 0.75rem 1rem;
     }
 
     .guide-header h1 {
@@ -637,14 +674,14 @@
         gap: 0.5rem;
     }
 
-    .comparison-table {
+    .guide-body table {
         font-size: 0.8rem;
         display: block;
         overflow-x: auto;
     }
 
-    .comparison-table th,
-    .comparison-table td {
+    .guide-body table th,
+    .guide-body table td {
         padding: 0.5rem;
         white-space: nowrap;
     }
@@ -719,12 +756,11 @@
 }
 
 /* Comparison table: stronger header, zebra with tint */
-.comparison-table {
+.guide-body table {
     border-radius: 8px;
-    overflow: hidden;
 }
 
-.comparison-table th {
+.guide-body table th {
     background: linear-gradient(180deg, rgba(60, 229, 176, 0.18), rgba(60, 229, 176, 0.06));
     color: var(--text-primary);
     font-weight: 700;
@@ -734,7 +770,7 @@
     padding: 0.85rem 1rem;
 }
 
-.comparison-table tbody tr:nth-child(even) td {
+.guide-body table tbody tr:nth-child(even) td {
     background: rgba(255, 255, 255, 0.025);
 }
 

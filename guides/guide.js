@@ -45,6 +45,29 @@ function generateTOC() {
     tocList.innerHTML = html;
 }
 
+// === COLLAPSIBLE TOC (phone/tablet ≤1024px) ===
+function initCollapsibleTOC() {
+    const toc = document.querySelector('.guide-sidebar .toc');
+    if (!toc) return;
+
+    const mq = window.matchMedia('(max-width: 1024px)');
+    const apply = () => toc.classList.toggle('toc-collapsible', mq.matches);
+    mq.addEventListener('change', apply);
+    apply();
+
+    const heading = toc.querySelector('h4');
+    if (heading) {
+        heading.addEventListener('click', () => {
+            if (mq.matches) toc.classList.toggle('open');
+        });
+    }
+
+    // Picking a section means you're navigating away — fold the TOC back
+    toc.addEventListener('click', (e) => {
+        if (e.target.classList.contains('toc-link')) toc.classList.remove('open');
+    });
+}
+
 // === READING PROGRESS BAR ===
 function updateReadingProgress() {
     const progressBar = document.getElementById('reading-progress');
@@ -237,6 +260,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Init TOC links
     initTOCLinks();
+
+    // Collapsible TOC on small screens
+    initCollapsibleTOC();
 
     // Init copy buttons
     initCopyButtons();
