@@ -1324,17 +1324,25 @@ footer a:hover { text-decoration: underline; }
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1.5rem;
     max-width: 1200px;
     margin: 0 auto 2.5rem;
-    padding: 1.15rem 1.5rem;
-    background: linear-gradient(120deg, var(--accent-tint) 0%, var(--bg-secondary) 70%);
-    border: 1.5px solid rgba(60, 229, 176, 0.40);
-    border-radius: 12px;
+    padding: 1.6rem 2rem;
+    background: linear-gradient(120deg, rgba(60, 229, 176, 0.14) 0%, var(--bg-secondary) 70%);
+    border: 1.5px solid rgba(60, 229, 176, 0.55);
+    border-radius: 14px;
     text-decoration: none;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 0 28px var(--accent-glow);
-    transition: border-color 0.24s ease, box-shadow 0.24s ease, transform 0.24s ease;
+    /* Slow glow pulse — the eye must land here first. Killed globally by
+       prefers-reduced-motion. */
+    animation: banner-glow 3.2s ease-in-out infinite;
+    transition: border-color 0.24s ease, transform 0.24s ease;
+}
+
+@keyframes banner-glow {
+    0%, 100% { box-shadow: 0 0 26px var(--accent-glow); }
+    50%      { box-shadow: 0 0 54px rgba(60, 229, 176, 0.30); }
 }
 
 .materials-banner::before {
@@ -1348,83 +1356,106 @@ footer a:hover { text-decoration: underline; }
 
 .materials-banner:hover {
     border-color: var(--accent-bright);
-    box-shadow: 0 0 40px var(--accent-glow);
     transform: translateY(-2px);
 }
 
 .materials-banner-left {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
+    gap: 1.1rem;
     margin-left: 0.6rem;
+    min-width: 0;
 }
 
 .materials-banner-icon {
-    font-size: 1.4rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    font-size: 1.6rem;
     color: var(--accent-bright);
+    border: 1px solid var(--border-strong);
+    border-radius: 12px;
+    background: rgba(60, 229, 176, 0.08);
+}
+
+.materials-banner-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-width: 0;
 }
 
 .materials-banner-title {
     font-family: var(--font-display);
     color: var(--text-primary);
     font-weight: 700;
-    font-size: 1rem;
-    letter-spacing: -0.01em;
+    font-size: 1.35rem;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
 }
 
 .materials-banner-sub {
     color: var(--text-secondary);
     font-family: var(--font-mono);
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.07em;
 }
 
 .materials-banner-dot {
-    width: 7px; height: 7px;
+    display: inline-block;
+    width: 8px; height: 8px;
     border-radius: 50%;
-    flex-shrink: 0;
+    vertical-align: 0.15em;
+    margin-left: 0.35rem;
     background: var(--accent-bright);
     box-shadow: 0 0 14px var(--accent-bright);
     animation: marker-pulse 1.8s ease-in-out infinite;
 }
 
 .materials-banner-cta {
+    flex-shrink: 0;
     color: var(--bg-primary);
-    background: var(--cream);
-    padding: 0.55rem 1.1rem;
+    background: var(--accent);
+    padding: 0.85rem 1.5rem;
     border-radius: 999px;
-    font-size: 0.76rem;
+    font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     white-space: nowrap;
+    box-shadow: 0 6px 22px var(--accent-glow);
     transition: all 0.2s ease;
 }
 .materials-banner:hover .materials-banner-cta {
-    background: var(--accent);
-    color: var(--cream);
+    background: var(--accent-bright);
+    transform: translateX(2px);
 }
 
-/* Phone: the one-row banner (icon·title·dot·sub ↔ CTA) doesn't fit — stack it. */
+/* Phone: stack panel vertically, CTA becomes a full-width button. */
 @media (max-width: 640px) {
     .materials-banner {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 0.9rem;
+        align-items: stretch;
+        gap: 1.1rem;
         margin-left: 1rem;
         margin-right: 1rem;
-        padding: 1.1rem 1.25rem;
+        padding: 1.35rem 1.25rem;
     }
     .materials-banner-left {
-        flex-wrap: wrap;
-        row-gap: 0.35rem;
         margin-left: 0.4rem;
     }
-    .materials-banner-sub {
-        flex-basis: 100%;   /* subtitle drops to its own line instead of squeezing */
+    .materials-banner-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 1.35rem;
     }
+    .materials-banner-title { font-size: 1.2rem; }
     .materials-banner-cta {
+        text-align: center;
         margin-left: 0.4rem;
     }
 }
