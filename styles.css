@@ -1218,28 +1218,6 @@ footer a:hover { text-decoration: underline; }
     }
 }
 
-/* Data strip — hard numbers as scope readouts, right under the terminal. */
-.hero-data-strip {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.625rem;
-    margin-top: 1.6rem;
-}
-.data-chip {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 0.44rem 0.75rem;
-    white-space: nowrap;
-}
-.data-chip b {
-    color: var(--accent);
-    font-weight: 700;
-}
-
 .hero-status {
     display: inline-flex;
     align-items: center;
@@ -1688,6 +1666,28 @@ footer a:hover { text-decoration: underline; }
     background: var(--bg-primary);
 }
 
+/* Link from a materials group back to its source video (loop: files ↔ video) */
+.group-video {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: -0.5rem 0 1.5rem;
+    padding: 0.55rem 1rem;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+.group-video:hover {
+    border-color: var(--accent);
+    background: var(--accent-tint);
+    color: var(--accent-bright);
+}
+
 .materials-group-content .group-intro {
     margin-bottom: 1.5rem;
     color: var(--text-secondary);
@@ -1764,6 +1764,7 @@ summary:focus-visible {
     .cta-primary,
     .telegram-btn,
     .materials-banner-cta,
+    .group-video,
     .material-card .download-btn,
     .copy-btn,
     .tab-btn,
