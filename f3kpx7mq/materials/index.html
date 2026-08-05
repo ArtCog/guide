@@ -31,7 +31,7 @@
             <summary class="materials-group-summary">
                 <span class="group-icon" aria-hidden="true">🔥</span>
                 <h2 class="group-title">Скиллы для ИИ-агентов</h2>
-                <span class="group-count">1 файл</span>
+                <span class="group-count">2 файла</span>
                 <span class="group-toggle" aria-hidden="true">+</span>
             </summary>
             <div class="materials-group-content">
@@ -131,6 +131,100 @@ macOS/Linux:  ~/.claude/skills/</code></pre>
                         Загрузчики чата принимают ровно один <code>SKILL.md</code> в архиве, поэтому здесь они
                         слиты в один файл — <strong>текст автора не изменён ни на слово</strong>.
                         <a href="https://github.com/mattpocock/skills" rel="noopener" target="_blank">Оригинал на GitHub</a>.
+                    </p>
+                </div>
+
+                <!-- video-montage -->
+                <div class="material-card">
+                    <h3><span class="h-num">02</span> video-montage — <em>мой боевой скилл монтажа</em></h3>
+                    <p>
+                        Тот самый скилл, которым смонтированы ролики на канале. Агент режет паузы
+                        <strong>по голосовой дорожке</strong>, а не по общему миксу — поэтому демка,
+                        где шумит игра или приложение, больше не мешает вырезать тишину. Дальше:
+                        склейка сцен, субтитры по единому стандарту, оверлеи, круглая вебка,
+                        цветокоррекция, финальный рендер под YouTube на NVENC.
+                    </p>
+                    <p>
+                        Пороги внутри не из документации, а выставлены на слух на реальных роликах
+                        и зафиксированы. <code>SKILL.md</code> держит решения, семь справочников рядом
+                        агент подтягивает только когда они нужны — пока скилл не сработал, он не
+                        занимает контекст.
+                    </p>
+
+                    <p><strong>Выбери, где ты работаешь:</strong></p>
+                    <div class="install-tabs">
+                        <button class="tab-btn active" data-tab="vm-cc">⌨ Claude Code</button>
+                        <button class="tab-btn" data-tab="vm-chat">💬 Чат Claude</button>
+                        <button class="tab-btn" data-tab="vm-codex">◈ Codex CLI</button>
+                        <button class="tab-btn" data-tab="vm-gpt">⬡ ChatGPT</button>
+                    </div>
+
+                    <div class="tab-content active" id="vm-cc">
+                        <p>Две строки — и скилл на месте. Скачивать ничего не надо.</p>
+                        <div class="code-block">
+<pre><code>/plugin marketplace add ArtCog/skills
+/plugin install video-montage@artcog</code></pre>
+                            <button class="copy-btn" data-copy="/plugin marketplace add ArtCog/skills">Копировать 1-ю</button>
+                            <button class="copy-btn" data-copy="/plugin install video-montage@artcog">Копировать 2-ю</button>
+                        </div>
+                        <p class="tip">
+                            Обновления прилетают сами: я правлю скилл у себя — он обновляется у тебя.
+                            Так умеет только этот способ, архив — нет.
+                        </p>
+                    </div>
+
+                    <div class="tab-content" id="vm-chat">
+                        <p>Сайт claude.ai и приложение Claude на компьютере.</p>
+                        <ol>
+                            <li>Скачай архив кнопкой внизу карточки, <strong>не распаковывая</strong>.</li>
+                            <li><strong>Настройки → Capabilities</strong> → включи «Code execution and file creation».</li>
+                            <li><strong>Настройки → Customize → Skills</strong> → «+» → «Create skill» → «Upload a skill».</li>
+                        </ol>
+                        <p>
+                            Учти: сам монтаж чат не сделает — там нет ffmpeg и нет твоих файлов.
+                            В чате скилл полезен как консультант: спросить, какой командой резать,
+                            почему поплыла синхронизация, каким должен быть финальный рендер.
+                            <strong>Резать по-настоящему — в Claude Code или Codex.</strong>
+                        </p>
+                    </div>
+
+                    <div class="tab-content" id="vm-codex">
+                        <p>Скачай архив и распакуй папку <code>video-montage</code> целиком (вместе с <code>references/</code>) в:</p>
+                        <div class="code-block">
+<pre><code>~/.codex/skills/        — для всех проектов
+.codex/skills/          — только для текущего проекта</code></pre>
+                            <button class="copy-btn" data-copy="~/.codex/skills/">Копировать путь</button>
+                        </div>
+                        <p>Нужны <code>ffmpeg</code> и <code>auto-editor</code> — агент подскажет, если чего-то не хватает.</p>
+                    </div>
+
+                    <div class="tab-content" id="vm-gpt">
+                        <ol>
+                            <li>Скачай архив, не распаковывая.</li>
+                            <li><strong>Plugins → Skills → Create → «Upload from your computer»</strong>.</li>
+                        </ol>
+                        <div class="warning-box">
+                            <h4>Нужен рабочий план</h4>
+                            <p>
+                                Загрузка своих скиллов в ChatGPT доступна только на планах <strong>Business,
+                                Enterprise и Edu</strong>. И, как в чате Claude, монтировать оттуда не выйдет —
+                                только советоваться.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="material-meta">
+                        <span class="material-tag">.zip → SKILL.md + 7 справочников</span>
+                        <span class="material-tag">ffmpeg</span>
+                        <span class="material-tag">auto-editor</span>
+                        <span class="material-tag">NVENC</span>
+                        <span class="material-tag">MIT</span>
+                        <span class="material-size">~34 KB</span>
+                        <a href="f3kpx7mq/skills/video-montage-v2.0.zip" class="download-btn" download>↓ Скачать</a>
+                    </div>
+                    <p>
+                        Мой авторский скилл, не переупаковка чужого. Исходники и история правок —
+                        <a href="https://github.com/ArtCog/skills" rel="noopener" target="_blank">github.com/ArtCog/skills</a>.
                     </p>
                 </div>
             </div>
@@ -427,36 +521,6 @@ macOS/Linux:  ~/.claude/skills/</code></pre>
             </div>
         </details>
 
-        <!-- Group: Universal skills -->
-        <details class="materials-group">
-            <summary class="materials-group-summary">
-                <span class="group-icon" aria-hidden="true">◆</span>
-                <h2 class="group-title">Универсальные скиллы</h2>
-                <span class="group-count">1 файл</span>
-                <span class="group-toggle" aria-hidden="true">+</span>
-            </summary>
-            <div class="materials-group-content">
-                <p class="group-intro">
-                    Подходят любому AI-агенту: Claude Code, OpenClaw, Codex. Загружаешь как Markdown — агент сам читает.
-                </p>
-
-                <!-- Skill: Video Montage -->
-                <div class="material-card">
-                    <h3><span class="h-num">01</span> Скилл <em>видеомонтажа</em></h3>
-                    <p>
-                        Профессиональный скилл для AI-агентов: удаление пауз, склейка, субтитры,
-                        оверлеи, финальный рендер для YouTube — всё через ffmpeg + NVENC.
-                    </p>
-                    <div class="material-meta">
-                        <span class="material-tag">.md (Markdown)</span>
-                        <span class="material-tag">ffmpeg</span>
-                        <span class="material-tag">NVENC</span>
-                        <span class="material-size">~55 KB</span>
-                        <a href="f3kpx7mq/skills/video-montage.md" class="download-btn" download>↓ Скачать</a>
-                    </div>
-                </div>
-            </div>
-        </details>
 
         <!-- Group: AI Video Studio -->
         <details class="materials-group">

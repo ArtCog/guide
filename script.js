@@ -131,20 +131,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // === TAB SWITCHING ===
-const tabButtons = document.querySelectorAll('.tab-btn');
-const tabContents = document.querySelectorAll('.tab-content');
-
-tabButtons.forEach(button => {
+// Scoped to the owning card: several cards on one page each carry their own tabs,
+// and a page-wide query would let one card's click blank out every other card.
+document.querySelectorAll('.tab-btn').forEach(button => {
     button.addEventListener('click', () => {
-        const tabId = button.dataset.tab;
+        const scope = button.closest('.material-card') || document;
 
-        // Remove active class from all buttons and contents
-        tabButtons.forEach(btn => btn.classList.remove('active'));
-        tabContents.forEach(content => content.classList.remove('active'));
+        scope.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        scope.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
 
-        // Add active class to clicked button and corresponding content
         button.classList.add('active');
-        document.getElementById(tabId).classList.add('active');
+        const panel = scope.querySelector('#' + CSS.escape(button.dataset.tab));
+        if (panel) panel.classList.add('active');
     });
 });
 
