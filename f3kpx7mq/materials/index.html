@@ -26,17 +26,19 @@
             <p class="materials-total">15 файлов · ~16 MB · zip-комплект готовится</p>
         </div>
 
-        <!-- Group: Claude Code skills -->
+        <!-- Group: AI agent skills -->
         <details class="materials-group">
             <summary class="materials-group-summary">
                 <span class="group-icon" aria-hidden="true">🔥</span>
-                <h2 class="group-title">Скиллы для Claude Code</h2>
+                <h2 class="group-title">Скиллы для ИИ-агентов</h2>
                 <span class="group-count">1 файл</span>
                 <span class="group-toggle" aria-hidden="true">+</span>
             </summary>
             <div class="materials-group-content">
                 <p class="group-intro">
                     Готовые скиллы, которые ставятся за минуту и меняют то, как агент с тобой работает.
+                    Один и тот же файл подходит чату Claude, Claude Code, Codex и ChatGPT — <strong>меняется
+                    только то, куда его положить</strong>.
                 </p>
 
                 <!-- grill-me RU -->
@@ -47,19 +49,89 @@
                         за раз и идёт по каждой ветке решений, пока не останется недоговорённостей.
                         К каждому вопросу прикладывает свой рекомендуемый ответ — соглашайся одним
                         словом или спорь. Работает не только про код: план ролика, структура бизнеса,
-                        выбор квартиры. Оригинальный скилл
+                        выбор квартиры. Скилл
                         <a href="https://github.com/mattpocock/skills" rel="noopener" target="_blank">Мэтта Покока</a> —
                         на английском, но пиши агенту по-русски, и допрос пойдёт по-русски.
-                        Распакуй две папки в <code>~/.claude/skills/</code> — и всё.
                     </p>
-                    <div class="material-meta">
-                        <span class="material-tag">.zip → 2 скилла</span>
-                        <span class="material-tag">Claude Code</span>
-                        <span class="material-tag">оригинал автора</span>
-                        <span class="material-tag">MIT</span>
-                        <span class="material-size">~3 KB</span>
-                        <a href="f3kpx7mq/claude-skills/grill-me-v1.0.zip" class="download-btn" download>↓ Скачать</a>
+
+                    <p><strong>Выбери, где ты работаешь:</strong></p>
+                    <div class="install-tabs">
+                        <button class="tab-btn active" data-tab="grill-chat">💬 Чат Claude</button>
+                        <button class="tab-btn" data-tab="grill-cc">⌨ Claude Code</button>
+                        <button class="tab-btn" data-tab="grill-codex">◈ Codex CLI</button>
+                        <button class="tab-btn" data-tab="grill-gpt">⬡ ChatGPT</button>
                     </div>
+
+                    <div class="tab-content active" id="grill-chat">
+                        <p>Сайт claude.ai и приложение Claude на компьютере — шаги одинаковые.</p>
+                        <ol>
+                            <li>Скачай архив кнопкой внизу карточки. <strong>Не распаковывай</strong> — грузить надо именно <code>.zip</code>.</li>
+                            <li><strong>Настройки → Capabilities</strong> → включи «Code execution and file creation». Без этого раздела «Skills» просто не будет.</li>
+                            <li><strong>Настройки → Customize → Skills</strong> → кнопка «+» → «Create skill» → «Upload a skill» → выбери архив.</li>
+                        </ol>
+                        <p>Готово. Слэш-команд в чате нет — просто напиши «поджарь меня» и свой план, скилл подхватится сам.</p>
+                    </div>
+
+                    <div class="tab-content" id="grill-cc">
+                        <p>Способ первый — скопируй строку и отдай своему Claude Code:</p>
+                        <div class="code-block">
+<pre><code>Скачай https://guide.arturx.art/f3kpx7mq/claude-skills/grill-me-v1.1.zip,
+распакуй папку grill-me в ~/.claude/skills/ и перезапустись</code></pre>
+                            <button class="copy-btn" data-copy="Скачай https://guide.arturx.art/f3kpx7mq/claude-skills/grill-me-v1.1.zip, распакуй папку grill-me в ~/.claude/skills/ и перезапустись">Копировать</button>
+                        </div>
+                        <p>Способ второй — руками. Скачай архив и распакуй папку <code>grill-me</code> в:</p>
+                        <div class="code-block">
+<pre><code>Windows:      %USERPROFILE%\.claude\skills\
+macOS/Linux:  ~/.claude/skills/</code></pre>
+                            <button class="copy-btn" data-copy="%USERPROFILE%\.claude\skills\">Копировать путь Windows</button>
+                        </div>
+                        <p>Перезапусти Claude Code → набери <code>/grill-me</code>. Или скажи словами: «поджарь меня».</p>
+                    </div>
+
+                    <div class="tab-content" id="grill-codex">
+                        <p>Файл тот же, папка другая. Скачай архив и распакуй папку <code>grill-me</code> в:</p>
+                        <div class="code-block">
+<pre><code>~/.codex/skills/        — для всех проектов
+.codex/skills/          — только для текущего проекта</code></pre>
+                            <button class="copy-btn" data-copy="~/.codex/skills/">Копировать путь</button>
+                        </div>
+                        <p>
+                            <code>SKILL.md</code> — общий стандарт для агентов, поэтому один и тот же файл
+                            работает и в Claude Code, и в Codex без единой правки.
+                        </p>
+                    </div>
+
+                    <div class="tab-content" id="grill-gpt">
+                        <p>В ChatGPT скиллы тоже есть, и формат тот же.</p>
+                        <ol>
+                            <li>Скачай архив кнопкой внизу карточки, не распаковывая.</li>
+                            <li><strong>Plugins → Skills → Create → «Upload from your computer»</strong> → выбери архив.</li>
+                        </ol>
+                        <div class="warning-box">
+                            <h4>Нужен рабочий план</h4>
+                            <p>
+                                Загрузка своих скиллов в ChatGPT доступна только на планах <strong>Business,
+                                Enterprise и Edu</strong>. На Free и Plus этой кнопки нет — тогда бери
+                                вкладку «Чат Claude» или «Codex CLI».
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="material-meta">
+                        <span class="material-tag">.zip → 1 скилл</span>
+                        <span class="material-tag">чат Claude</span>
+                        <span class="material-tag">Claude Code</span>
+                        <span class="material-tag">Codex</span>
+                        <span class="material-tag">MIT</span>
+                        <span class="material-size">608 байт</span>
+                        <a href="f3kpx7mq/claude-skills/grill-me-v1.1.zip" class="download-btn" download>↓ Скачать</a>
+                    </div>
+                    <p>
+                        У автора это два файла: <code>grill-me</code> (команда) и <code>grilling</code> (сам допрос).
+                        Загрузчики чата принимают ровно один <code>SKILL.md</code> в архиве, поэтому здесь они
+                        слиты в один файл — <strong>текст автора не изменён ни на слово</strong>.
+                        <a href="https://github.com/mattpocock/skills" rel="noopener" target="_blank">Оригинал на GitHub</a>.
+                    </p>
                 </div>
             </div>
         </details>

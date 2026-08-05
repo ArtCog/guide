@@ -1565,6 +1565,21 @@ footer a:hover { text-decoration: underline; }
     font-weight: 700;
 }
 
+/* Global reset zeroes list padding — install steps need it back */
+.material-card ol,
+.material-card ul {
+    padding-left: 1.4rem;
+    margin-bottom: 1.1rem;
+}
+.material-card li {
+    color: var(--text-secondary);
+    font-size: 0.96rem;
+    line-height: 1.65;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-display);
+}
+.material-card li strong { color: var(--ink); font-weight: 700; }
+
 .material-card code {
     background: var(--bg-terminal);
     color: var(--accent-bright);
