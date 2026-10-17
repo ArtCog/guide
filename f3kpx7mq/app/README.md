@@ -20,6 +20,11 @@ A static page that is both the Telegram Mini App of @imersivnybot and a normal w
 
 The post links to the material as `https://t.me/imersivnybot?startapp=<slug>`.
 
+**Material for a post that is not out yet** (Arthur, 2026-10-17: materials appear only when the post goes out):
+push it ahead with `publishAt` = the post's time, or `draft: true` while the time is unknown. A held material is in
+no list and not in «Новое», but its startapp link opens it, so Arthur can check it on his phone first and the post
+link works from its first second. When the post is out, add `post_url` and push again.
+
 ## meta.json
 
 | Field | Needed | Meaning |
@@ -28,9 +33,11 @@ The post links to the material as `https://t.me/imersivnybot?startapp=<slug>`.
 | `section` | yes | an id from `site.json` |
 | `type` | yes | гайд, скилл, статья, сайт, промпты, подборка, установщик |
 | `date` | yes | `YYYY-MM-DD`; newest first |
-| `new` | no | `true`/`false` forces the «Новое» carousel; otherwise new for `newDays` days after `date` |
+| `new` | no | `true`/`false` forces the «Новое» carousel; otherwise new for `newDays` days after it appeared (`publishAt`, else `date`) |
+| `publishAt` | no | moment the post goes out, Berlin time with offset (`2026-10-18T10:00+02:00`); until then the material is in no list, from then on it appears by itself, no new push |
+| `draft` | no | `true`: in no list until the field is removed and pushed (post time not known yet) |
 | `files[]` | no | `name`, `about`, optional `url` (relative to this folder's app root, for files kept elsewhere on the site); `.md`/`.txt` open in the reader and can be copied |
-| `agentFile` | no | one of `files`: the line «Прочитай <public url> и проведи меня по шагам» is offered for Claude Code |
+| `agentFile` | no | one of `files`: the line «Прочитай `public url` и проведи меня по шагам» is offered for Claude Code |
 | `agent` | no | own line for the agent instead (install commands) |
 | `url` | sites | `https://` address; `domain` is derived |
 | `clip` | no | `{src, poster, still}` video for the «Новое» card (made in `C:\Projects\Distribution\mini-app\motion`) |

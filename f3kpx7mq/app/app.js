@@ -20,13 +20,19 @@ const nb = (t) => esc(t).replace(/(^|[\s ])([А-Яа-яЁё]{1,2}) /g, '$1$2 '
 const ic = (name) => `<svg class="i" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">${window.ICONS[name] || ''}</svg>`;
 const plural = (n, one, few, many) => { const d = n % 10, h = n % 100; return `${n} ${d === 1 && h !== 11 ? one : d >= 2 && d <= 4 && (h < 12 || h > 14) ? few : many}`; };
 const fmtDate = (iso) => { const [y, m, d] = iso.split('-').map(Number); return `${d} ${MONTHS[m - 1]}${y !== new Date().getFullYear() ? ' ' + y : ''}`; };
-const daysSince = (iso) => (Date.now() - new Date(iso + 'T00:00:00').getTime()) / 864e5;
 
 const bySlug = (slug) => MATS.find((m) => m.slug === slug);
 const section = (id) => SITE.sections.find((s) => s.id === id) || { id, title: '', short: '' };
 const isSite = (m) => m.type === 'сайт';
-// «Новое»: a material is new for SITE.newDays days after its date, unless its meta says "new": true or false
-const isNew = (m) => (typeof m.new === 'boolean' ? m.new : daysSince(m.date) <= SITE.newDays);
+// A material waits for its post: "draft": true, or "publishAt" still ahead, keeps it out of every list.
+// Its startapp link opens it anyway, so the post works the moment it goes out (Arthur, 2026-10-17).
+// Preview for Arthur: t.me/imersivnybot?startapp=preview (or ?preview on the web) shows held materials too.
+const PREVIEW = new URLSearchParams(location.search).has('preview')
+  || Boolean(IN_TG && TG.initDataUnsafe && TG.initDataUnsafe.start_param === 'preview');
+const listed = (m) => PREVIEW || (!m.draft && !(m.publishAt && Date.parse(m.publishAt) > Date.now()));
+// «Новое»: new for SITE.newDays days after it appeared, unless its meta says "new": true or false
+const isNew = (m) => (typeof m.new === 'boolean' ? m.new
+  : (Date.now() - Date.parse(m.publishAt || m.date + 'T00:00:00')) / 864e5 <= SITE.newDays);
 const asset = (m, name) => `content/${m.slug}/${name}`;
 const fileHref = (m, f) => f.url || asset(m, f.name); // relative to the app folder
 const absolute = (path) => new URL(path, location.href).href;
@@ -153,15 +159,16 @@ function post(m) {
 }
 
 function home(filter = 'all') {
-  const heroes = MATS.filter(isNew).sort((a, b) => Boolean(b.clip) - Boolean(a.clip)); // a clip leads the carousel
-  const feed = MATS.filter((m) => (filter === 'all' ? !heroes.includes(m) : m.section === filter))
+  const shown = MATS.filter(listed);
+  const heroes = shown.filter(isNew).sort((a, b) => Boolean(b.clip) - Boolean(a.clip)); // a clip leads the carousel
+  const feed = shown.filter((m) => (filter === 'all' ? !heroes.includes(m) : m.section === filter))
     .sort((a, b) => isSite(a) - isSite(b)); // own materials first, inspiration links after them
-  const liveSections = SITE.sections.filter((s) => MATS.some((m) => m.section === s.id)); // empty sections stay hidden
+  const liveSections = SITE.sections.filter((s) => shown.some((m) => m.section === s.id)); // empty sections stay hidden
   const name = IN_TG && TG.initDataUnsafe && TG.initDataUnsafe.user && TG.initDataUnsafe.user.first_name;
   const tabs = `<button class="tab" data-go="#/" aria-pressed="${filter === 'all'}">Все</button>
     ${liveSections.map((s) => `<button class="tab" data-go="#/s/${s.id}" aria-pressed="${filter === s.id}">${esc(s.short)}</button>`).join('')}`;
   return `
-  <header class="hello"><div><p class="hi">${name ? `Привет, ${esc(name)} · база знаний` : 'База знаний канала'}</p><h1 class="title">ИИмерсивный</h1></div>
+  <header class="hello"><div><p class="hi">${PREVIEW ? 'Предпросмотр: видно и то, что ждёт поста' : name ? `Привет, ${esc(name)} · база знаний` : 'База знаний канала'}</p><h1 class="title">ИИмерсивный</h1></div>
     <span class="head-links">
       <a href="${esc(SITE.links.telegram)}" target="_blank" rel="noopener" data-tglink aria-label="Канал в Telegram">${ic('telegram-logo-fill')}</a>
       <a href="${esc(SITE.links.youtube)}" target="_blank" rel="noopener" data-ext aria-label="YouTube">${ic('youtube-logo-fill')}</a>

@@ -57,6 +57,15 @@ def load_material(folder: Path, sections: set[str], problems: list[str]) -> dict
         problems.append(f"{where}: date must be YYYY-MM-DD")
     if "new" in meta and not isinstance(meta["new"], bool):
         problems.append(f"{where}: «new» must be true or false")
+    # held back until the post goes out: not listed anywhere, but its startapp link already opens it
+    if "draft" in meta and not isinstance(meta["draft"], bool):
+        problems.append(f"{where}: «draft» must be true or false")
+    if meta.get("publishAt"):
+        try:
+            if datetime.fromisoformat(meta["publishAt"]).tzinfo is None:
+                raise ValueError
+        except ValueError:
+            problems.append(f"{where}: publishAt must be like 2026-10-18T10:00+02:00 (Berlin time with its offset)")
 
     for key in ("title", "summary", "agent"):
         check_text(f"{where} {key}", meta.get(key), problems)
@@ -123,7 +132,8 @@ def main() -> int:
     out.write_text(json.dumps(index, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n")
     print(f"content/index.json: {len(materials)} materials")
     for m in materials:
-        print(f"  {m['date']}  {m['section']:<12} {m['slug']}")
+        hold = " (draft, link only)" if m.get("draft") else f" (listed from {m['publishAt']})" if m.get("publishAt") else ""
+        print(f"  {m['date']}  {m['section']:<12} {m['slug']}{hold}")
     return 0
 
 
