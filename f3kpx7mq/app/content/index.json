@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-17T03:16:11+00:00",
+ "generated": "2026-10-17T16:26:42+00:00",
  "site": {
   "base": "https://guide.arturx.art/f3kpx7mq/app/",
   "bot": "imersivnybot",
@@ -107,6 +107,38 @@
    "domain": "remotion.dev",
    "cover": "cover.jpg",
    "slug": "remotion-showcase"
+  },
+  {
+   "title": "Вайбкодинг по науке: пайплайн скиллов Покока",
+   "section": "agents",
+   "type": "гайд",
+   "date": "2026-10-17",
+   "summary": "Отдаёшь START.md своему агенту, и он ставит скиллы Мэтта Покока и ведёт тебя по первой задаче через весь путь: допрос, ТЗ, тикеты, код через тесты и ревью.",
+   "agentFile": "START.md",
+   "files": [
+    {
+     "name": "START.md",
+     "about": "Установка скиллов агентом и первая задача через весь пайплайн",
+     "kind": "text"
+    },
+    {
+     "name": "PIPELINE.md",
+     "about": "Шпаргалка: какую команду когда звать и что можно пропустить",
+     "kind": "text"
+    },
+    {
+     "name": "PROMPTS.md",
+     "about": "Первые фразы для допроса, когда не знаешь, с чего начать",
+     "kind": "text"
+    }
+   ],
+   "tags": [
+    "claude code",
+    "скиллы",
+    "вайбкодинг",
+    "grill-me"
+   ],
+   "slug": "vibecoding-pipeline"
   },
   {
    "title": "Моушен-графика и монтаж с Клодом",
