@@ -45,6 +45,17 @@ link works from its first second. When the post is out, add `post_url` and push 
 | `tags[]` | no | kept for a later search |
 | `cover.jpg` | no | a file in the folder, picked up automatically (site screenshots, 1280x800) |
 
+## Subscribers only (2026-10-17)
+
+The app opens only for subscribers of the channel «ИИмерсивный» (id -1003695481859). `app.js` posts Telegram's
+signed `initData` to `https://n8n.arturx.art/kb/access` (Caddy → systemd `kb-access` on Hermes, source
+`Distribution/mini-app/server/`). The server checks the signature with @imersivnybot's token and asks Telegram
+`getChatMember`; @imersivnybot must be an administrator of the channel for that. Subscriber: a toast «Ты подписан на
+канал, всё открыто». Not subscribed: a screen with «Подписаться на канал» and «Я подписался». Outside Telegram: a
+screen with «Открыть в Telegram» (the same startapp link). If the check fails (server or Telegram down, bot not an
+admin) the base stays open. localhost always sees everything. The files themselves stay reachable by their URLs:
+this is a gate for the app, not protection of the files.
+
 ## Inside Telegram
 
 `ready()`, `expand()`, always white (header and background painted white, Arthur 2026-10-17), Telegram's Back

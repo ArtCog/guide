@@ -1,10 +1,15 @@
 {
- "generated": "2026-10-17T17:14:49+00:00",
+ "generated": "2026-10-17T17:35:18+00:00",
  "site": {
   "base": "https://guide.arturx.art/f3kpx7mq/app/",
   "bot": "imersivnybot",
   "newDays": 14,
   "sections": [
+   {
+    "id": "agents",
+    "title": "Агенты и Claude Code",
+    "short": "Агенты"
+   },
    {
     "id": "montage",
     "title": "Моушен и монтаж",
@@ -19,11 +24,6 @@
     "id": "inspiration",
     "title": "Вдохновение",
     "short": "Вдохновение"
-   },
-   {
-    "id": "agents",
-    "title": "Агенты и Claude Code",
-    "short": "Агенты"
    }
   ],
   "course": {

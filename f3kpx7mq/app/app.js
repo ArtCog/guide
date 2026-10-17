@@ -59,12 +59,42 @@ function openTelegram(url) {
   else window.open(url, '_blank', 'noopener');
 }
 
-function toast(text) {
+function toast(text, ms = 1800) {
   const t = document.getElementById('toast');
   t.innerHTML = ic('check') + esc(text);
   t.classList.add('on');
   clearTimeout(t._h);
-  t._h = setTimeout(() => t.classList.remove('on'), 1800);
+  t._h = setTimeout(() => t.classList.remove('on'), ms);
+}
+
+// ---------- access: channel subscribers only (Arthur, 2026-10-17) ----------
+// The server (Hermes, systemd kb-access) verifies Telegram's signed initData and asks Telegram whether the user is in
+// the channel. Outside Telegram nobody can be checked, so the web shows the way into the bot. If the check itself
+// fails (server or Telegram down), the base stays open: a subscriber must never be locked out by our outage.
+const ACCESS_URL = 'https://n8n.arturx.art/kb/access';
+const LOCAL = /^(localhost|127\.0\.0\.1)$/.test(location.hostname); // local review sees everything
+async function checkAccess() {
+  if (LOCAL) return 'open';
+  if (!IN_TG) return 'web';
+  try {
+    const res = await fetch(ACCESS_URL, { method: 'POST', body: TG.initData, cache: 'no-store' });
+    if (!res.ok) return 'open';
+    return (await res.json()).subscribed ? 'member' : 'locked';
+  } catch (e) {
+    return 'open';
+  }
+}
+function gate(state) {
+  const slug = (location.hash.match(/^#\/m\/([\w-]+)/) || [])[1];
+  const inBot = `https://t.me/${SITE.bot}${slug ? `?startapp=${slug}` : '?startapp'}`;
+  return `<div class="gate"><p class="hi">База знаний канала</p><h1 class="title">ИИмерсивный</h1>
+    <p class="gate-text">${state === 'web'
+      ? 'Материалы открыты подписчикам канала. Открой базу в Telegram, там она проверит подписку.'
+      : 'Материалы открыты подписчикам канала. Подпишись и нажми «Я подписался», всё бесплатно.'}</p>
+    ${state === 'web'
+      ? `<div class="gate-actions"><a class="gate-btn" href="${esc(inBot)}">Открыть в Telegram</a></div>`
+      : `<div class="gate-actions"><a class="gate-btn" href="${esc(SITE.links.telegram)}" data-tglink>Подписаться на канал</a>
+        <button class="gate-btn quiet" data-recheck>Я подписался</button></div>`}</div>`;
 }
 function copyText(text, msg) {
   const done = () => { toast(msg); haptic(); };
@@ -181,7 +211,6 @@ function home(filter = 'all') {
   <div class="feed-gap" id="feed"></div>
   ${feed.length ? feed.map(post).join('') : '<p class="empty">Здесь пока пусто. Материалы появятся вместе с постами.</p>'}
   <div class="course"><span class="tag">курс</span>${nb(SITE.course.title)}. ${esc(SITE.course.note)}.</div>
-  <p class="foot">Новое выходит вместе с постами в канале</p>
   <nav class="tabbar glass" aria-label="Разделы">${tabs}</nav>`;
 }
 
@@ -252,9 +281,15 @@ function parentOf(h) {
   return '#/';
 }
 let wasHome = false;
+let ACCESS = 'open';
 function render() {
   const h = location.hash;
   const app = document.getElementById('app');
+  if (ACCESS === 'locked' || ACCESS === 'web') {
+    app.innerHTML = gate(ACCESS);
+    if (IN_TG && TG.BackButton) TG.BackButton.hide();
+    return;
+  }
   const isHome = !/^#\/m\//.test(h);
   const feedMark = document.getElementById('feed');
   const keep = isHome && wasHome && feedMark && window.scrollY > feedMark.offsetTop; // switching sections keeps the reader's place
@@ -282,8 +317,18 @@ function startRoute() {
 
 // ---------- taps ----------
 document.addEventListener('click', (e) => {
-  const t = e.target.closest('[data-play],[data-dl],[data-agent],[data-copyfile],[data-copylink],[data-open],[data-share],[data-ext],[data-tglink],[data-retry],[data-go]');
+  const t = e.target.closest('[data-recheck],[data-play],[data-dl],[data-agent],[data-copyfile],[data-copylink],[data-open],[data-share],[data-ext],[data-tglink],[data-retry],[data-go]');
   if (!t) return;
+  if ('recheck' in t.dataset) {
+    t.disabled = true;
+    t.textContent = 'Проверяю…';
+    return checkAccess().then((state) => {
+      ACCESS = state;
+      if (state === 'locked') toast('Подписки пока не видно. Подпишись и попробуй ещё раз', 2600);
+      else toast('Ты подписан на канал, всё открыто', 2600);
+      render();
+    });
+  }
   if ('play' in t.dataset) {
     e.stopPropagation();
     const v = t.closest('.hero-media').querySelector('video.clip');
@@ -337,6 +382,7 @@ async function init() {
     TG.onEvent('themeChanged', paintTelegram);
     if (TG.BackButton) TG.BackButton.onClick(() => go(parentOf(location.hash)));
   }
+  const access = checkAccess(); // runs while the content loads
   try {
     const res = await fetch('content/index.json', { cache: 'no-cache' });
     if (!res.ok) throw new Error(res.status);
@@ -348,7 +394,9 @@ async function init() {
     return;
   }
   startRoute();
+  ACCESS = await access;
   render();
+  if (ACCESS === 'member') toast('Ты подписан на канал, всё открыто', 2600);
   window.addEventListener('hashchange', render);
 }
 init();
