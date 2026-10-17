@@ -37,14 +37,11 @@ const agentLine = (m) => m.agent || `Прочитай ${live(asset(m, m.agentFil
 const dot = (m) => `<span class="dot" style="background:var(--c-${esc(m.section)})"></span>`;
 const filesLabel = (m) => (m.files && m.files.length ? plural(m.files.length, 'файл', 'файла', 'файлов') : '');
 
-// ---------- Telegram and theme ----------
-function applyTheme() {
-  const dark = IN_TG ? TG.colorScheme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-  document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-  const page = getComputedStyle(document.documentElement).getPropertyValue('--page').trim();
-  document.querySelector('meta[name="theme-color"]').content = page;
-  if (tgAtLeast('6.9')) { TG.setHeaderColor(page); TG.setBackgroundColor(page); }
-  else if (tgAtLeast('6.1')) TG.setHeaderColor('bg_color');
+// ---------- Telegram ----------
+// Arthur 2026-10-17: the app is always white, also in a dark Telegram theme, so Telegram's header and
+// background are painted white to match (any colour is allowed from Bot API 6.9).
+function paintTelegram() {
+  if (tgAtLeast('6.9')) { TG.setHeaderColor('#ffffff'); TG.setBackgroundColor('#ffffff'); }
 }
 const haptic = () => { if (tgAtLeast('6.1')) TG.HapticFeedback.notificationOccurred('success'); };
 function openExternal(url) {
@@ -326,12 +323,10 @@ async function init() {
     document.documentElement.classList.add('tg');
     TG.ready();
     TG.expand();
-    TG.onEvent('themeChanged', applyTheme);
+    paintTelegram();
+    TG.onEvent('themeChanged', paintTelegram);
     if (TG.BackButton) TG.BackButton.onClick(() => go(parentOf(location.hash)));
-  } else {
-    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
   }
-  applyTheme();
   try {
     const res = await fetch('content/index.json', { cache: 'no-cache' });
     if (!res.ok) throw new Error(res.status);

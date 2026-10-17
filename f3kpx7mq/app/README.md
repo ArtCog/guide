@@ -40,7 +40,7 @@ The post links to the material as `https://t.me/imersivnybot?startapp=<slug>`.
 
 ## Inside Telegram
 
-`ready()`, `expand()`, theme from `colorScheme` (header and background colours follow the page), Telegram's Back
+`ready()`, `expand()`, always white (header and background painted white, Arthur 2026-10-17), Telegram's Back
 button instead of the in-page one, downloads through `downloadFile` (Bot API 8.0, otherwise `openLink`), sharing
 through `t.me/share/url`, `start_param` opens a material (routing only, nothing trusted). The Telegram script has no
 integrity hash on purpose: Telegram updates it in place.
