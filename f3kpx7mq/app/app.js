@@ -160,9 +160,12 @@ function post(m) {
 
 function home(filter = 'all') {
   const shown = MATS.filter(listed);
-  const heroes = shown.filter(isNew).sort((a, b) => Boolean(b.clip) - Boolean(a.clip)); // a clip leads the carousel
-  const feed = shown.filter((m) => (filter === 'all' ? !heroes.includes(m) : m.section === filter))
-    .sort((a, b) => isSite(a) - isSite(b)); // own materials first, inspiration links after them
+  // a clip leads the carousel, own materials before inspiration links
+  const heroes = shown.filter(isNew).sort((a, b) => Boolean(b.clip) - Boolean(a.clip) || isSite(a) - isSite(b));
+  // Arthur 2026-10-17: new materials stand first in the list too, not only in the carousel above it.
+  // Order: own materials before inspiration links, new before old, a clip first; otherwise newest first.
+  const feed = shown.filter((m) => filter === 'all' || m.section === filter)
+    .sort((a, b) => isSite(a) - isSite(b) || isNew(b) - isNew(a) || Boolean(b.clip) - Boolean(a.clip));
   const liveSections = SITE.sections.filter((s) => shown.some((m) => m.section === s.id)); // empty sections stay hidden
   const name = IN_TG && TG.initDataUnsafe && TG.initDataUnsafe.user && TG.initDataUnsafe.user.first_name;
   const tabs = `<button class="tab" data-go="#/" aria-pressed="${filter === 'all'}">Все</button>

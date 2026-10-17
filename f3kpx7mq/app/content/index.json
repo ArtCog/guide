@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-17T16:38:01+00:00",
+ "generated": "2026-10-17T16:47:51+00:00",
  "site": {
   "base": "https://guide.arturx.art/f3kpx7mq/app/",
   "bot": "imersivnybot",
@@ -113,7 +113,6 @@
    "section": "agents",
    "type": "гайд",
    "date": "2026-10-17",
-   "draft": true,
    "summary": "Отдаёшь START.md своему агенту, и он ставит скиллы Мэтта Покока и ведёт тебя по первой задаче через весь путь: допрос, ТЗ, тикеты, код через тесты и ревью.",
    "agentFile": "START.md",
    "files": [
