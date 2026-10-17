@@ -1,0 +1,20 @@
+{
+  "title": "Скилл видеомонтажа",
+  "section": "skills",
+  "type": "скилл",
+  "date": "2026-08-05",
+  "summary": "Монтаж говорящей головы: паузы, дубли, субтитры. Ставится из маркетплейса или архивом в чат.",
+  "agent": "Выполни в терминале: claude plugin marketplace add ArtCog/skills, затем claude plugin install video-montage@artcog. Проверь, что скилл виден, и коротко расскажи, как им пользоваться.",
+  "files": [
+    {
+      "name": "video-montage-v2.0.zip",
+      "about": "Скилл одним архивом",
+      "url": "../skills/video-montage-v2.0.zip"
+    }
+  ],
+  "tags": [
+    "скилл",
+    "монтаж",
+    "субтитры"
+  ]
+}

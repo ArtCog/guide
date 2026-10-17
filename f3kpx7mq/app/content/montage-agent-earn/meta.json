@@ -1,0 +1,33 @@
+{
+  "title": "Моушен-графика и монтаж с Клодом",
+  "section": "montage",
+  "type": "гайд",
+  "date": "2026-10-17",
+  "summary": "Отдаёшь START.md своему агенту, и он сам ставит Remotion, скиллы и монтаж, делает первый ролик в твоих цветах и даёт план на первую неделю.",
+  "agentFile": "START.md",
+  "clip": {
+    "src": "hero.mp4",
+    "poster": "hero-start.jpg",
+    "still": "hero-still.jpg"
+  },
+  "files": [
+    {
+      "name": "START.md",
+      "about": "Установка агентом и план на первую неделю"
+    },
+    {
+      "name": "PROMPTS.md",
+      "about": "Промпты для стиля, процесса и типовых заказов"
+    },
+    {
+      "name": "RESOURCES.md",
+      "about": "Библиотеки, стили, шрифты и музыка с лицензиями"
+    }
+  ],
+  "tags": [
+    "remotion",
+    "монтаж",
+    "моушен",
+    "claude code"
+  ]
+}

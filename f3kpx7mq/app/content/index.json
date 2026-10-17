@@ -1,0 +1,192 @@
+{
+ "generated": "2026-10-17T03:16:11+00:00",
+ "site": {
+  "base": "https://guide.arturx.art/f3kpx7mq/app/",
+  "bot": "imersivnybot",
+  "newDays": 14,
+  "sections": [
+   {
+    "id": "montage",
+    "title": "Моушен и монтаж",
+    "short": "Моушен"
+   },
+   {
+    "id": "skills",
+    "title": "Скиллы",
+    "short": "Скиллы"
+   },
+   {
+    "id": "inspiration",
+    "title": "Вдохновение",
+    "short": "Вдохновение"
+   },
+   {
+    "id": "agents",
+    "title": "Агенты и Claude Code",
+    "short": "Агенты"
+   }
+  ],
+  "course": {
+   "title": "Курс по монтажу и моушену с агентами",
+   "note": "Скоро"
+  },
+  "links": {
+   "telegram": "https://t.me/+afIVRcIuSeI2OTYy",
+   "youtube": "https://youtube.com/@art.immersive"
+  }
+ },
+ "materials": [
+  {
+   "title": "BUCK",
+   "section": "inspiration",
+   "type": "сайт",
+   "date": "2026-10-17",
+   "new": false,
+   "url": "https://buck.co/work",
+   "summary": "Портфолио одной из самых известных студий анимации и моушена. Так выглядит работа высшего уровня.",
+   "domain": "buck.co",
+   "cover": "cover.jpg",
+   "slug": "buck"
+  },
+  {
+   "title": "Godly",
+   "section": "inspiration",
+   "type": "сайт",
+   "date": "2026-10-17",
+   "new": false,
+   "url": "https://godly.website/",
+   "summary": "Подборка сайтов с сильным дизайном и анимацией. Идеи, как могут двигаться интерфейсы.",
+   "domain": "godly.website",
+   "cover": "cover.jpg",
+   "slug": "godly"
+  },
+  {
+   "title": "Motion Design Awards",
+   "section": "inspiration",
+   "type": "сайт",
+   "date": "2026-10-17",
+   "new": true,
+   "url": "https://www.motiondesignawards.com/",
+   "summary": "Ежедневная премия моушен-дизайна: каждый день лучшая работа дня от дизайнеров и студий.",
+   "domain": "motiondesignawards.com",
+   "cover": "cover.jpg",
+   "slug": "motion-design-awards"
+  },
+  {
+   "title": "Motionographer",
+   "section": "inspiration",
+   "type": "сайт",
+   "date": "2026-10-17",
+   "new": false,
+   "url": "https://motionographer.com/",
+   "summary": "Главное издание о моушен-дизайне: лучшие работы студий и авторов, разборы, новости индустрии.",
+   "domain": "motionographer.com",
+   "cover": "cover.jpg",
+   "slug": "motionographer"
+  },
+  {
+   "title": "Ordinary Folk",
+   "section": "inspiration",
+   "type": "сайт",
+   "date": "2026-10-17",
+   "new": false,
+   "url": "https://www.ordinaryfolk.co/",
+   "summary": "Студия моушен-дизайна и анимации из Ванкувера. Хороший пример чистой брендовой анимации.",
+   "domain": "ordinaryfolk.co",
+   "cover": "cover.jpg",
+   "slug": "ordinary-folk"
+  },
+  {
+   "title": "Remotion Showcase",
+   "section": "inspiration",
+   "type": "сайт",
+   "date": "2026-10-17",
+   "new": true,
+   "url": "https://www.remotion.dev/showcase",
+   "summary": "Ролики, сделанные кодом в Remotion, на том же движке, что в гайде про монтаж с Клодом. Видно, чего можно добиться.",
+   "domain": "remotion.dev",
+   "cover": "cover.jpg",
+   "slug": "remotion-showcase"
+  },
+  {
+   "title": "Моушен-графика и монтаж с Клодом",
+   "section": "montage",
+   "type": "гайд",
+   "date": "2026-10-17",
+   "summary": "Отдаёшь START.md своему агенту, и он сам ставит Remotion, скиллы и монтаж, делает первый ролик в твоих цветах и даёт план на первую неделю.",
+   "agentFile": "START.md",
+   "clip": {
+    "src": "hero.mp4",
+    "poster": "hero-start.jpg",
+    "still": "hero-still.jpg"
+   },
+   "files": [
+    {
+     "name": "START.md",
+     "about": "Установка агентом и план на первую неделю",
+     "kind": "text"
+    },
+    {
+     "name": "PROMPTS.md",
+     "about": "Промпты для стиля, процесса и типовых заказов",
+     "kind": "text"
+    },
+    {
+     "name": "RESOURCES.md",
+     "about": "Библиотеки, стили, шрифты и музыка с лицензиями",
+     "kind": "text"
+    }
+   ],
+   "tags": [
+    "remotion",
+    "монтаж",
+    "моушен",
+    "claude code"
+   ],
+   "slug": "montage-agent-earn"
+  },
+  {
+   "title": "Grill-me: агент допрашивает твой план",
+   "section": "skills",
+   "type": "скилл",
+   "date": "2026-08-05",
+   "summary": "Скилл Мэтта Покока: агент задаёт вопросы, пока не найдёт дыры в плане. С русским гайдом.",
+   "agent": "Скачай https://guide.arturx.art/f3kpx7mq/claude-skills/grill-me-v1.1.zip, распакуй в ~/.claude/skills/ и проверь, что скилл grill-me виден. Потом покажи, как его вызвать.",
+   "files": [
+    {
+     "name": "grill-me-v1.1.zip",
+     "about": "Скилл для чата и Claude Code",
+     "url": "../claude-skills/grill-me-v1.1.zip",
+     "kind": "zip"
+    }
+   ],
+   "tags": [
+    "скилл",
+    "планирование"
+   ],
+   "slug": "grill-me"
+  },
+  {
+   "title": "Скилл видеомонтажа",
+   "section": "skills",
+   "type": "скилл",
+   "date": "2026-08-05",
+   "summary": "Монтаж говорящей головы: паузы, дубли, субтитры. Ставится из маркетплейса или архивом в чат.",
+   "agent": "Выполни в терминале: claude plugin marketplace add ArtCog/skills, затем claude plugin install video-montage@artcog. Проверь, что скилл виден, и коротко расскажи, как им пользоваться.",
+   "files": [
+    {
+     "name": "video-montage-v2.0.zip",
+     "about": "Скилл одним архивом",
+     "url": "../skills/video-montage-v2.0.zip",
+     "kind": "zip"
+    }
+   ],
+   "tags": [
+    "скилл",
+    "монтаж",
+    "субтитры"
+   ],
+   "slug": "video-montage-skill"
+  }
+ ]
+}

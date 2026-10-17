@@ -1,0 +1,35 @@
+{
+  "base": "https://guide.arturx.art/f3kpx7mq/app/",
+  "bot": "imersivnybot",
+  "newDays": 14,
+  "sections": [
+    {
+      "id": "montage",
+      "title": "Моушен и монтаж",
+      "short": "Моушен"
+    },
+    {
+      "id": "skills",
+      "title": "Скиллы",
+      "short": "Скиллы"
+    },
+    {
+      "id": "inspiration",
+      "title": "Вдохновение",
+      "short": "Вдохновение"
+    },
+    {
+      "id": "agents",
+      "title": "Агенты и Claude Code",
+      "short": "Агенты"
+    }
+  ],
+  "course": {
+    "title": "Курс по монтажу и моушену с агентами",
+    "note": "Скоро"
+  },
+  "links": {
+    "telegram": "https://t.me/+afIVRcIuSeI2OTYy",
+    "youtube": "https://youtube.com/@art.immersive"
+  }
+}
