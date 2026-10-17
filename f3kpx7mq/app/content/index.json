@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-17T16:33:35+00:00",
+ "generated": "2026-10-17T16:38:01+00:00",
  "site": {
   "base": "https://guide.arturx.art/f3kpx7mq/app/",
   "bot": "imersivnybot",
@@ -167,6 +167,16 @@
     {
      "name": "RESOURCES.md",
      "about": "Библиотеки, стили, шрифты и музыка с лицензиями",
+     "kind": "text"
+    },
+    {
+     "name": "EARN.md",
+     "about": "Цены рынка, система для эксперта, сообщение первому клиенту",
+     "kind": "text"
+    },
+    {
+     "name": "SLOP.md",
+     "about": "Антислоп-список из 16 пунктов",
      "kind": "text"
     }
    ],
