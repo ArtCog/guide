@@ -22,3 +22,27 @@
 ## Звуки
 
 - **Pixabay**: бесплатные звуковые эффекты, если звуки от Claude звучат роботизированно. Скачай и отдай их Claude. https://pixabay.com/sound-effects/
+
+## Где брать идеи и готовые промпты
+
+Готовые ролики вместе с промптами, по которым их сделали:
+
+- **Remotion Prompt Showcase**: официальная галерея Remotion. Ролик, полный промпт и модель, на которой его делали. https://www.remotion.dev/prompts
+- **Prompt Motion**: больше 1 500 роликов на Claude с промптами, есть раздел объясняющих роликов. Качество разное, смотри глазами. https://promptmotion.org/prompts
+- **Claude Motion Graphics**: ролики на Claude, которые разошлись в X и YouTube, у части есть промпт. https://motion-graphics.org/
+- **Remotion Prompts**: небольшой сборник промптов для Remotion и Claude Code (новости, карты, демо продукта). https://github.com/manalkaff/remotion-prompts
+
+Как назвать движение, которое хочешь:
+
+- **Motion Prompt**: 192 приёма движения, камеры и интерфейса, у каждого живой пример и название, которое можно вставить в просьбу Claude. https://showheyohtaki.github.io/motion-prompt/
+
+Другие скиллы для видео:
+
+- **Официальные скиллы Remotion** для Claude Code. https://github.com/remotion-dev/skills
+- **Awesome Claude Video Skills**: большой список открытых скиллов для видео. https://github.com/zhuyansen/awesome-claude-video-skills
+- **Claude Animated Shorts**: скилл для мультяшных роликов, 2D-персонажи в 3D-мире на three.js и Remotion. https://github.com/mromidev/claude-animated-shorts
+
+Просто красивое движение, без промптов:
+
+- **60fps.design**: анимации интерфейсов из реальных приложений. https://60fps.design/
+- **Motion Folios**: портфолио моушн-дизайнеров и студий. https://motionfolios.com/
