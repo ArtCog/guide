@@ -41,6 +41,7 @@ const deepLink = (m) => `https://t.me/${SITE.bot}?startapp=${m.slug}`;
 const hasAgent = (m) => Boolean(m.agent || m.agentFile);
 const agentLine = (m) => m.agent || `Прочитай ${live(asset(m, m.agentFile))} и проведи меня по шагам. Где написано СПРОСИ, спроси меня.`;
 const dot = (m) => `<span class="dot" style="background:var(--c-${esc(m.section)})"></span>`;
+const appeared = (m) => Date.parse(m.publishAt || m.date); // newest first wherever materials are listed
 const pdfIndex = (m) => (m.files || []).findIndex((f) => f.kind === 'pdf'); // a guide's main file
 const fileIcon = (f) => (f.kind === 'text' ? 'file-text' : f.kind === 'pdf' ? 'file-pdf' : 'file-zip');
 const filesLabel = (m) => (m.files && m.files.length ? plural(m.files.length, 'файл', 'файла', 'файлов') : '');
@@ -189,7 +190,7 @@ function setupHeroes() {
 function post(m) {
   let extra = '';
   if (isSite(m) && m.cover) extra = `<span class="pcover"><img src="${esc(asset(m, m.cover))}" alt="" loading="lazy"><span class="pill glass quiet">${esc(m.domain)}</span></span>`;
-  else if (pdfIndex(m) >= 0) extra = `<div class="chips"><span class="chip">${ic('file-pdf')}Гайд в PDF</span>${m.github ? `<span class="chip">${ic('github-logo')}GitHub</span>` : ''}</div>`;
+  else if (pdfIndex(m) >= 0) extra = `<div class="chips"><span class="chip pdf">${ic('file-pdf')}Гайд в PDF</span>${m.github ? `<span class="chip">${ic('github-logo')}GitHub</span>` : ''}</div>`;
   else if (hasAgent(m)) extra = `<div class="chips"><button class="chip" data-agent="${m.slug}">${ic('terminal-window')}Отдать агенту</button></div>`;
   return `<div class="post" data-go="#/m/${m.slug}" role="button" tabindex="0">
     <p class="kicker">${dot(m)}${LABEL[m.type]} · ${fmtDate(m.date)}</p>
@@ -203,7 +204,7 @@ function home(filter = 'all') {
   // Arthur 2026-10-17: new materials stand first in the list too, not only in the carousel above it.
   // Order: own materials before inspiration links, new before old, a clip first; otherwise newest first.
   const feed = shown.filter((m) => filter === 'all' || m.section === filter)
-    .sort((a, b) => isSite(a) - isSite(b) || isNew(b) - isNew(a) || Boolean(b.clip) - Boolean(a.clip));
+    .sort((a, b) => isSite(a) - isSite(b) || isNew(b) - isNew(a) || Boolean(b.clip) - Boolean(a.clip) || appeared(b) - appeared(a));
   const liveSections = SITE.sections.filter((s) => shown.some((m) => m.section === s.id)); // empty sections stay hidden
   const name = IN_TG && TG.initDataUnsafe && TG.initDataUnsafe.user && TG.initDataUnsafe.user.first_name;
   const tabs = `<button class="tab" data-go="#/" aria-pressed="${filter === 'all'}">Все</button>
@@ -241,14 +242,14 @@ function material(slug) {
   <div class="list">${m.files.map((f, i) => {
     const text = f.kind === 'text';
     return `<div class="row" ${text ? `data-go="#/m/${m.slug}/${i}" role="button" tabindex="0"` : ''}>
-      <span class="fi">${ic(fileIcon(f))}</span>
+      <span class="fi ${esc(f.kind)}">${ic(fileIcon(f))}</span>
       <span class="body"><span class="t">${esc(f.name)}</span><span class="s">${esc(f.about || '')}</span></span>
       ${text ? `<button class="icon-btn" data-copyfile="${m.slug}/${i}" aria-label="Скопировать">${ic('copy')}</button>` : ''}
       <a class="icon-btn" href="${esc(fileHref(m, f))}" download="${esc(f.name)}" data-dl="${m.slug}/${i}" aria-label="Скачать">${ic('download-simple')}</a></div>`;
   }).join('')}</div>` : ''}
   ${site ? '' : moreGuides(m)}
   ${site ? `<div class="main"><button class="glass" data-open="${esc(m.url)}">Открыть сайт ${ic('arrow-up-right')}</button></div>`
-    : pdfIndex(m) >= 0 ? `<div class="main"><a class="glass" href="${esc(fileHref(m, m.files[pdfIndex(m)]))}" download="${esc(m.files[pdfIndex(m)].name)}" data-dl="${m.slug}/${pdfIndex(m)}">${ic('file-pdf')}Скачать гайд PDF</a></div>`
+    : pdfIndex(m) >= 0 ? `<div class="main"><a class="glass pdf-main" href="${esc(fileHref(m, m.files[pdfIndex(m)]))}" download="${esc(m.files[pdfIndex(m)].name)}" data-dl="${m.slug}/${pdfIndex(m)}">${ic('file-pdf')}Скачать гайд PDF</a></div>`
     : hasAgent(m) ? `<div class="main"><button class="glass" data-agent="${m.slug}">${ic('terminal-window')}Скопировать для агента</button></div>` : ''}`;
 }
 
@@ -256,11 +257,11 @@ function material(slug) {
 // by its cover and title (Arthur, 2026-11-02).
 function moreGuides(m) {
   const others = MATS.filter((x) => listed(x) && !isSite(x) && x.slug !== m.slug)
-    .sort((a, b) => Date.parse(b.publishAt || b.date) - Date.parse(a.publishAt || a.date)).slice(0, 6);
+    .sort((a, b) => appeared(b) - appeared(a)).slice(0, 6);
   if (!others.length) return '';
   return `<div class="sec"><span>Другие гайды</span><button data-go="#/">Все</button></div>
   <div class="list">${others.map((x) => `<div class="row" data-go="#/m/${x.slug}" role="button" tabindex="0">
-    ${x.cover ? `<span class="thumb"><img src="${esc(asset(x, x.cover))}" alt="" loading="lazy"></span>` : `<span class="fi">${ic(pdfIndex(x) >= 0 ? 'file-pdf' : 'file-text')}</span>`}
+    ${x.cover ? `<span class="thumb"><img src="${esc(asset(x, x.cover))}" alt="" loading="lazy"></span>` : `<span class="fi ${pdfIndex(x) >= 0 ? 'pdf' : 'text'}">${ic(pdfIndex(x) >= 0 ? 'file-pdf' : 'file-text')}</span>`}
     <span class="body"><span class="tt">${nb(x.title)}</span><span class="s">${LABEL[x.type]} · ${fmtDate(x.date)}</span></span>${ic('caret-right')}</div>`).join('')}</div>`;
 }
 
@@ -270,8 +271,8 @@ function about(m) {
   if (!m.github && !m.quick) return m.note ? `<p class="note">${nb(m.note)}</p>` : '';
   const repo = m.github ? m.github.replace(/^https:\/\/github\.com\//, '') : '';
   return `<div class="about">
-    ${m.github ? `<a class="arow" href="${esc(m.github)}" target="_blank" rel="noopener" data-ext><span class="ai">${ic('github-logo')}</span><span class="body"><b>GitHub</b><span>${esc(repo)}</span></span>${ic('arrow-up-right')}</a>` : ''}
-    ${m.quick ? `<div class="arow"><span class="ai">${ic('lightning')}</span><span class="body"><b>Быстрая установка</b><span>${nb(m.quick)}</span></span></div>` : ''}
+    ${m.github ? `<a class="arow" href="${esc(m.github)}" target="_blank" rel="noopener" data-ext><span class="ai gh">${ic('github-logo')}</span><span class="body"><b>GitHub</b><span>${esc(repo)}</span></span>${ic('arrow-up-right')}</a>` : ''}
+    ${m.quick ? `<div class="arow"><span class="ai bolt">${ic('lightning')}</span><span class="body"><b>Быстрая установка</b><span>${nb(m.quick)}</span></span></div>` : ''}
   </div>${m.note ? `<p class="note">${nb(m.note)}</p>` : ''}`;
 }
 

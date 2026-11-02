@@ -182,3 +182,16 @@ svg.i { width: 1em; height: 1em; flex: none; }
 .row .tt { font-size: 15px; line-height: 1.3; display: block; color: var(--text); }
 .row > svg { font-size: 16px; color: var(--hint); flex: none; }
 .list:has(+ .main), .list:last-child { margin-bottom: 104px; }
+
+/* less white, clearer headings (Arthur 2026-11-02) */
+.sec { font-size: 18px; font-weight: 600; letter-spacing: -.01em; color: var(--text); padding: 32px 20px 12px; align-items: center; }
+.sec > span:last-child:not(:first-child) { font-size: 14px; font-weight: 500; color: var(--hint); background: var(--surface); border-radius: 10px; padding: 2px 9px; }
+.sec button { font-size: 15px; font-weight: 500; }
+.fi.pdf, .chip.pdf svg { color: #E5372B; }
+.fi.pdf { background: #FDE9E7; }
+.fi.text { color: #2F6FEB; background: #E8F0FE; }
+.fi.zip { color: #B7791F; background: #FBF1DC; }
+.arow .ai.gh { background: #111113; color: #fff; }
+.arow .ai.bolt { background: #FFF4D6; color: #D99A00; }
+.main a.pdf-main svg { color: #E5372B; font-size: 20px; }
+.main a.pdf-main { font-weight: 600; }
