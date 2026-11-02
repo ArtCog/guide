@@ -39,6 +39,9 @@ link works from its first second. When the post is out, add `post_url` and push 
 | `files[]` | no | `name`, `about`, optional `url` (relative to this folder's app root, for files kept elsewhere on the site); `.md`/`.txt` open in the reader and can be copied |
 | `agentFile` | no | one of `files`: the line «Прочитай `public url` и проведи меня по шагам» is offered for Claude Code |
 | `agent` | no | own line for the agent instead (install commands) |
+| `github` | no | `https://github.com/...` of the original; a «GitHub» row on the material page and a chip on its card |
+| `quick` | no | «Быстрая установка» row: the quickest way in one or two sentences (Russian, no long dashes) |
+| `note` | no | fine print under the rows, e.g. «Материал образовательный…» for money topics |
 | `url` | sites | `https://` address; `domain` is derived |
 | `clip` | no | `{src, poster, still}` video for the «Новое» card (made in `C:\Projects\Distribution\mini-app\motion`) |
 | `post_url` | no | link to the Telegram post |
