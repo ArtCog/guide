@@ -27,6 +27,7 @@
 
 Готовые ролики вместе с промптами, по которым их сделали:
 
+- **Oneshotted**: больше 9 000 роликов, сделанных ИИ (Remotion, GSAP, Three.js), у каждого промпт, по которому его собрали. https://oneshotted.io/
 - **Remotion Prompt Showcase**: официальная галерея Remotion. Ролик, полный промпт и модель, на которой его делали. https://www.remotion.dev/prompts
 - **Prompt Motion**: больше 1 500 роликов на Claude с промптами, есть раздел объясняющих роликов. Качество разное, смотри глазами. https://promptmotion.org/prompts
 - **Claude Motion Graphics**: ролики на Claude, которые разошлись в X и YouTube, у части есть промпт. https://motion-graphics.org/
@@ -35,6 +36,10 @@
 Как назвать движение, которое хочешь:
 
 - **Motion Prompt**: 192 приёма движения, камеры и интерфейса, у каждого живой пример и название, которое можно вставить в просьбу Claude. https://showheyohtaki.github.io/motion-prompt/
+
+Готовые шаблоны как референс:
+
+- **Motion Array**: тысячи шаблонов от моушн-дизайнеров. Сами шаблоны по подписке, превью смотреть бесплатно: покажи превью Claude и попроси повторить кодом. https://motionarray.com/motion-graphics-templates/
 
 Другие скиллы для видео:
 
