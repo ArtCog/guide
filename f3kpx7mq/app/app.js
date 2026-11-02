@@ -89,10 +89,15 @@ async function checkAccess() {
 function gate(state) {
   const slug = (location.hash.match(/^#\/m\/([\w-]+)/) || [])[1];
   const inBot = `https://t.me/${SITE.bot}${slug ? `?startapp=${slug}` : '?startapp'}`;
-  return `<div class="gate"><p class="hi">База знаний канала</p><h1 class="title">ИИмерсивный</h1>
+  const m = slug && bySlug(slug);
+  const head = m
+    ? `${m.cover ? `<div class="gate-cover"><img src="${esc(asset(m, m.cover))}" alt=""></div>` : ''}<p class="hi">Гайд готов</p><h1 class="title">${nb(m.title)}</h1>`
+    : '<p class="hi">База знаний канала</p><h1 class="title">ИИмерсивный</h1>';
+  return `<div class="gate">${head}
     <p class="gate-text">${state === 'web'
       ? 'Материалы открыты подписчикам канала. Открой базу в Telegram, там она проверит подписку.'
-      : 'Материалы открыты подписчикам канала. Подпишись и нажми «Я подписался», всё бесплатно.'}</p>
+      : m ? 'Гайд бесплатный для подписчиков канала «ИИмерсивный». Подпишись и вернись сюда: гайд откроется сам.'
+        : 'Всё бесплатно для подписчиков канала «ИИмерсивный». Подпишись и вернись сюда: база откроется сама.'}</p>
     ${state === 'web'
       ? `<div class="gate-actions"><a class="gate-btn" href="${esc(inBot)}">Открыть в Telegram</a></div>`
       : `<div class="gate-actions"><a class="gate-btn" href="${esc(SITE.links.telegram)}" data-tglink>Подписаться на канал</a>
@@ -241,9 +246,22 @@ function material(slug) {
       ${text ? `<button class="icon-btn" data-copyfile="${m.slug}/${i}" aria-label="Скопировать">${ic('copy')}</button>` : ''}
       <a class="icon-btn" href="${esc(fileHref(m, f))}" download="${esc(f.name)}" data-dl="${m.slug}/${i}" aria-label="Скачать">${ic('download-simple')}</a></div>`;
   }).join('')}</div>` : ''}
+  ${site ? '' : moreGuides(m)}
   ${site ? `<div class="main"><button class="glass" data-open="${esc(m.url)}">Открыть сайт ${ic('arrow-up-right')}</button></div>`
     : pdfIndex(m) >= 0 ? `<div class="main"><a class="glass" href="${esc(fileHref(m, m.files[pdfIndex(m)]))}" download="${esc(m.files[pdfIndex(m)].name)}" data-dl="${m.slug}/${pdfIndex(m)}">${ic('file-pdf')}Скачать гайд PDF</a></div>`
     : hasAgent(m) ? `<div class="main"><button class="glass" data-agent="${m.slug}">${ic('terminal-window')}Скопировать для агента</button></div>` : ''}`;
+}
+
+// The bio link is one for every Reel and opens the newest guide; a viewer of an older Reel finds theirs here,
+// by its cover and title (Arthur, 2026-11-02).
+function moreGuides(m) {
+  const others = MATS.filter((x) => listed(x) && !isSite(x) && x.slug !== m.slug)
+    .sort((a, b) => Date.parse(b.publishAt || b.date) - Date.parse(a.publishAt || a.date)).slice(0, 6);
+  if (!others.length) return '';
+  return `<div class="sec"><span>Другие гайды</span><button data-go="#/">Все</button></div>
+  <div class="list">${others.map((x) => `<div class="row" data-go="#/m/${x.slug}" role="button" tabindex="0">
+    ${x.cover ? `<span class="thumb"><img src="${esc(asset(x, x.cover))}" alt="" loading="lazy"></span>` : `<span class="fi">${ic(pdfIndex(x) >= 0 ? 'file-pdf' : 'file-text')}</span>`}
+    <span class="body"><span class="tt">${nb(x.title)}</span><span class="s">${LABEL[x.type]} · ${fmtDate(x.date)}</span></span>${ic('caret-right')}</div>`).join('')}</div>`;
 }
 
 // Arthur 2026-11-02: a material reads like a guide's card in a bot: what is inside (summary), the original on GitHub,
@@ -325,10 +343,17 @@ function render() {
 const go = (hash) => { location.hash = hash; };
 
 // A link like t.me/imersivnybot?startapp=<slug> opens that material (start_param is used for routing only).
+const newest = () => {
+  const own = MATS.filter((m) => listed(m) && !isSite(m));
+  own.sort((a, b) => Date.parse(b.publishAt || b.date) - Date.parse(a.publishAt || a.date));
+  return own.length ? own[0].slug : '';
+};
 function startRoute() {
   const q = new URLSearchParams(location.search);
   const p = (IN_TG && TG.initDataUnsafe && TG.initDataUnsafe.start_param) || q.get('tgWebAppStartParam');
-  if (p && /^[a-z0-9-]{1,64}$/.test(p) && bySlug(p)) history.replaceState(null, '', `${location.pathname}${location.search}#/m/${p}`);
+  // Arthur 2026-11-02: the Instagram bio links t.me/<bot>?startapp=new, which opens the newest guide
+  const slug = p === 'new' ? newest() : p;
+  if (slug && /^[a-z0-9-]{1,64}$/.test(slug) && bySlug(slug)) history.replaceState(null, '', `${location.pathname}${location.search}#/m/${slug}`);
 }
 
 // ---------- taps ----------
@@ -338,12 +363,7 @@ document.addEventListener('click', (e) => {
   if ('recheck' in t.dataset) {
     t.disabled = true;
     t.textContent = 'Проверяю…';
-    return checkAccess().then((state) => {
-      ACCESS = state;
-      if (state === 'locked') toast('Подписки пока не видно. Подпишись и попробуй ещё раз', 2600);
-      else toast('Ты подписан на канал, всё открыто', 2600);
-      render();
-    });
+    return recheck(false);
   }
   if ('play' in t.dataset) {
     e.stopPropagation();
@@ -389,6 +409,22 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ---------- start ----------
+// The viewer subscribes in the channel and comes back: check again by itself, no button needed (Arthur 2026-11-02).
+let rechecking = false;
+async function recheck(loud) {
+  if (rechecking || ACCESS !== 'locked') return;
+  rechecking = true;
+  const state = await checkAccess();
+  rechecking = false;
+  if (state === 'locked') {
+    if (loud) { toast('Подписки пока не видно. Подпишись и попробуй ещё раз', 2600); render(); }
+    return;
+  }
+  ACCESS = state;
+  toast(/^#\/m\//.test(location.hash) ? 'Подписка есть, гайд открыт' : 'Подписка есть, всё открыто', 2600);
+  render();
+}
+
 async function init() {
   if (IN_TG) {
     document.documentElement.classList.add('tg');
@@ -414,5 +450,8 @@ async function init() {
   render();
   if (ACCESS === 'member') toast('Ты подписан на канал, всё открыто', 2600);
   window.addEventListener('hashchange', render);
+  if (IN_TG) TG.onEvent('activated', () => recheck(false));
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) recheck(false); });
+  window.addEventListener('focus', () => recheck(false));
 }
 init();
