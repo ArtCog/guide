@@ -10,7 +10,7 @@
 
 ## Картинки
 
-- **LLM Router**: один ключ к GPT Image 2.5, Nano Banana, GPT, Gemini и DeepSeek. Платишь только за то, что сгенерировал. https://llm-router.org
+- **LLM Router**: один ключ к GPT Image 2.5, Nano Banana, GPT, Gemini и DeepSeek. Платишь только за то, что сгенерировал. https://llm-router.org?ref=slsdgpk3
   Промокод **MOTION**: бонус к первому пополнению.
 - **Свой ключ OpenAI** вместо LLM Router: https://platform.openai.com/api-keys
 - **Другие сервисы картинок**, которые скилл тоже умеет подключить: https://fal.ai и https://kie.ai
