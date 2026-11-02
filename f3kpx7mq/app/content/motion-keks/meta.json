@@ -1,0 +1,21 @@
+{
+  "title": "Motion-keks: моушн-графика с ИИ-картинками в Claude Code",
+  "section": "skills",
+  "type": "скилл",
+  "date": "2026-11-02",
+  "summary": "Скилл из ролика: объясняющие ролики и рекламу на Remotion, ИИ-картинки без фона, озвучка и звук. Ставится в Claude Code.",
+  "agent": "Скачай https://guide.arturx.art/f3kpx7mq/skills/motion-keks-v1.0.zip, распакуй в ~/.claude/skills/ и проверь, что скилл motion-keks виден. Потом проведи меня по первому запуску: ключи в файл .env, не в чат.",
+  "files": [
+    {
+      "name": "motion-keks-v1.0.zip",
+      "about": "Скилл одним архивом",
+      "url": "../skills/motion-keks-v1.0.zip"
+    }
+  ],
+  "tags": [
+    "скилл",
+    "моушн",
+    "remotion",
+    "claude code"
+  ]
+}
