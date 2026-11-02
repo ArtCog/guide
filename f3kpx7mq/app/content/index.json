@@ -1,10 +1,15 @@
 {
- "generated": "2026-10-17T17:35:18+00:00",
+ "generated": "2026-11-02T14:18:02+00:00",
  "site": {
   "base": "https://guide.arturx.art/f3kpx7mq/app/",
   "bot": "imersivnybot",
   "newDays": 14,
   "sections": [
+   {
+    "id": "skills",
+    "title": "Скиллы",
+    "short": "Скиллы"
+   },
    {
     "id": "agents",
     "title": "Агенты и Claude Code",
@@ -14,11 +19,6 @@
     "id": "montage",
     "title": "Моушен и монтаж",
     "short": "Моушен"
-   },
-   {
-    "id": "skills",
-    "title": "Скиллы",
-    "short": "Скиллы"
    },
    {
     "id": "inspiration",
@@ -36,6 +36,31 @@
   }
  },
  "materials": [
+  {
+   "title": "Day Trader Skill: полная инструкция",
+   "section": "skills",
+   "type": "гайд",
+   "date": "2026-11-02",
+   "summary": "Что делает каждый из 11 скиллов для дейтрейдинга, как поставить их за 10 минут и пройти первую сделку на демо-счёте, без настоящих денег. Простыми словами и с готовыми промптами.",
+   "github": "https://github.com/Jakeschincariol/day-trader-skill",
+   "quick": "Открой Claude Code, скинь ему ссылку на репозиторий и попроси установить скилл. Или скопируй строку для агента ниже. Подробности в PDF.",
+   "note": "Материал образовательный и не является инвестиционной рекомендацией. На торговле можно потерять деньги.",
+   "agent": "Установи Day Trader Skill из официального репозитория https://github.com/Jakeschincariol/day-trader-skill: claude plugin marketplace add Jakeschincariol/day-trader-skill, затем claude plugin install day-trader-skill@day-trader-skill. Демо-счёт по умолчанию, ни одного ордера без моего «да». Потом покажи, как запустить сканер и Машину времени на TSLA. Отвечай по-русски.",
+   "files": [
+    {
+     "name": "Day-Trader-Skill-guide.pdf",
+     "about": "Гайд на 9 страниц: 11 скиллов, установка, первая сделка, Машина времени, лимиты",
+     "kind": "pdf"
+    }
+   ],
+   "tags": [
+    "скиллы",
+    "трейдинг",
+    "claude code"
+   ],
+   "cover": "cover.jpg",
+   "slug": "day-trader-skill"
+  },
   {
    "title": "BUCK",
    "section": "inspiration",

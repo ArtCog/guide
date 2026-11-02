@@ -24,7 +24,7 @@ DASHES = ("\u2014", "\u2013")  # viewer texts never use long dashes
 
 def kind_of(name: str) -> str:
     ext = Path(name).suffix.lower()
-    return "text" if ext in TEXT_EXT else "zip" if ext == ".zip" else "file"
+    return "text" if ext in TEXT_EXT else "zip" if ext == ".zip" else "pdf" if ext == ".pdf" else "file"
 
 
 def check_text(where: str, value: object, problems: list[str]) -> None:
@@ -67,8 +67,10 @@ def load_material(folder: Path, sections: set[str], problems: list[str]) -> dict
         except ValueError:
             problems.append(f"{where}: publishAt must be like 2026-10-18T10:00+02:00 (Berlin time with its offset)")
 
-    for key in ("title", "summary", "agent"):
+    for key in ("title", "summary", "agent", "quick", "note"):
         check_text(f"{where} {key}", meta.get(key), problems)
+    if meta.get("github") and not meta["github"].startswith("https://github.com/"):
+        problems.append(f"{where}: «github» must be a https://github.com/ link")
 
     if meta.get("type") == "сайт":
         url = urlparse(meta.get("url", ""))

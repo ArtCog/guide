@@ -4,6 +4,11 @@
   "newDays": 14,
   "sections": [
     {
+      "id": "skills",
+      "title": "Скиллы",
+      "short": "Скиллы"
+    },
+    {
       "id": "agents",
       "title": "Агенты и Claude Code",
       "short": "Агенты"
@@ -12,11 +17,6 @@
       "id": "montage",
       "title": "Моушен и монтаж",
       "short": "Моушен"
-    },
-    {
-      "id": "skills",
-      "title": "Скиллы",
-      "short": "Скиллы"
     },
     {
       "id": "inspiration",

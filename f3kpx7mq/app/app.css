@@ -163,3 +163,15 @@ svg.i { width: 1em; height: 1em; flex: none; }
 .gate-btn { display: flex; align-items: center; justify-content: center; height: 52px; border-radius: 18px; background: var(--text); color: #fff; font-size: 16.5px; font-weight: 500; text-decoration: none; }
 .gate-btn.quiet { background: var(--surface); color: var(--text); }
 .gate-btn:disabled { opacity: .6; }
+
+/* a guide's card (Arthur 2026-11-02): GitHub, quickest install, fine print */
+.about { margin: 18px 20px 0; border-radius: 18px; background: var(--surface); overflow: hidden; }
+.arow { display: flex; align-items: flex-start; gap: 12px; padding: 13px 14px; position: relative; color: var(--text); }
+.arow + .arow::before { content: ""; position: absolute; top: 0; left: 56px; right: 0; height: 1px; background: var(--line); }
+.arow .ai { width: 30px; height: 30px; border-radius: 8px; background: var(--chip); display: grid; place-items: center; font-size: 17px; flex: none; }
+.arow .body { flex: 1; min-width: 0; }
+.arow b { display: block; font-size: 15px; font-weight: 600; }
+.arow .body > span { display: block; font-size: 14px; line-height: 1.45; color: var(--soft-text); margin-top: 2px; overflow-wrap: anywhere; }
+.arow > svg { font-size: 17px; color: var(--hint); align-self: center; }
+.note { margin: 12px 20px 0; font-size: 13px; line-height: 1.45; color: var(--hint); }
+.main a { display: flex; width: 100%; height: 52px; border-radius: 18px; justify-content: center; align-items: center; gap: 8px; font-size: 16.5px; font-weight: 500; color: var(--text); }

@@ -1,0 +1,22 @@
+{
+  "title": "Day Trader Skill: полная инструкция",
+  "section": "skills",
+  "type": "гайд",
+  "date": "2026-11-02",
+  "summary": "Что делает каждый из 11 скиллов для дейтрейдинга, как поставить их за 10 минут и пройти первую сделку на демо-счёте, без настоящих денег. Простыми словами и с готовыми промптами.",
+  "github": "https://github.com/Jakeschincariol/day-trader-skill",
+  "quick": "Открой Claude Code, скинь ему ссылку на репозиторий и попроси установить скилл. Или скопируй строку для агента ниже. Подробности в PDF.",
+  "note": "Материал образовательный и не является инвестиционной рекомендацией. На торговле можно потерять деньги.",
+  "agent": "Установи Day Trader Skill из официального репозитория https://github.com/Jakeschincariol/day-trader-skill: claude plugin marketplace add Jakeschincariol/day-trader-skill, затем claude plugin install day-trader-skill@day-trader-skill. Демо-счёт по умолчанию, ни одного ордера без моего «да». Потом покажи, как запустить сканер и Машину времени на TSLA. Отвечай по-русски.",
+  "files": [
+    {
+      "name": "Day-Trader-Skill-guide.pdf",
+      "about": "Гайд на 9 страниц: 11 скиллов, установка, первая сделка, Машина времени, лимиты"
+    }
+  ],
+  "tags": [
+    "скиллы",
+    "трейдинг",
+    "claude code"
+  ]
+}

@@ -41,6 +41,8 @@ const deepLink = (m) => `https://t.me/${SITE.bot}?startapp=${m.slug}`;
 const hasAgent = (m) => Boolean(m.agent || m.agentFile);
 const agentLine = (m) => m.agent || `Прочитай ${live(asset(m, m.agentFile))} и проведи меня по шагам. Где написано СПРОСИ, спроси меня.`;
 const dot = (m) => `<span class="dot" style="background:var(--c-${esc(m.section)})"></span>`;
+const pdfIndex = (m) => (m.files || []).findIndex((f) => f.kind === 'pdf'); // a guide's main file
+const fileIcon = (f) => (f.kind === 'text' ? 'file-text' : f.kind === 'pdf' ? 'file-pdf' : 'file-zip');
 const filesLabel = (m) => (m.files && m.files.length ? plural(m.files.length, 'файл', 'файла', 'файлов') : '');
 
 // ---------- Telegram ----------
@@ -182,6 +184,7 @@ function setupHeroes() {
 function post(m) {
   let extra = '';
   if (isSite(m) && m.cover) extra = `<span class="pcover"><img src="${esc(asset(m, m.cover))}" alt="" loading="lazy"><span class="pill glass quiet">${esc(m.domain)}</span></span>`;
+  else if (pdfIndex(m) >= 0) extra = `<div class="chips"><span class="chip">${ic('file-pdf')}Гайд в PDF</span>${m.github ? `<span class="chip">${ic('github-logo')}GitHub</span>` : ''}</div>`;
   else if (hasAgent(m)) extra = `<div class="chips"><button class="chip" data-agent="${m.slug}">${ic('terminal-window')}Отдать агенту</button></div>`;
   return `<div class="post" data-go="#/m/${m.slug}" role="button" tabindex="0">
     <p class="kicker">${dot(m)}${LABEL[m.type]} · ${fmtDate(m.date)}</p>
@@ -222,23 +225,36 @@ function material(slug) {
   return `
   <div class="nav"><button class="back" data-go="#/s/${m.section}">${ic('caret-left')}${esc(section(m.section).short)}</button>
     <div class="tools">${site ? `<button class="icon-btn" data-copylink="${esc(m.url)}" aria-label="Скопировать ссылку">${ic('copy')}</button>` : ''}<button class="icon-btn" data-share="${m.slug}" aria-label="Поделиться">${ic('share-network')}</button></div></div>
-  ${site && m.cover ? `<div class="mmedia"><div class="hero-media"><img src="${esc(asset(m, m.cover))}" alt=""></div></div>` : ''}
+  ${m.cover ? `<div class="mmedia"><div class="hero-media"><img src="${esc(asset(m, m.cover))}" alt=""></div></div>` : ''}
   <div class="mhead"><p class="kicker">${dot(m)}${esc(section(m.section).short)} · ${site ? esc(m.domain) : LABEL[m.type]} · ${fmtDate(m.date)}</p>
     <h1 class="title">${nb(m.title)}</h1><p class="lead">${nb(m.summary)}</p>
     ${m.post_url ? `<a class="post-link" href="${esc(m.post_url)}" target="_blank" rel="noopener" data-tglink>Пост в канале ${ic('arrow-up-right')}</a>` : ''}</div>
+  ${about(m)}
   ${hasAgent(m) ? `<div class="sec"><span>Для агента</span><button data-agent="${m.slug}">Копировать</button></div>
   <div class="agent"><span class="cue">›</span> ${esc(agentLine(m))}</div>` : ''}
   ${m.files && m.files.length ? `<div class="sec"><span>Файлы</span><span>${m.files.length}</span></div>
   <div class="list">${m.files.map((f, i) => {
     const text = f.kind === 'text';
     return `<div class="row" ${text ? `data-go="#/m/${m.slug}/${i}" role="button" tabindex="0"` : ''}>
-      <span class="fi">${ic(text ? 'file-text' : 'file-zip')}</span>
+      <span class="fi">${ic(fileIcon(f))}</span>
       <span class="body"><span class="t">${esc(f.name)}</span><span class="s">${esc(f.about || '')}</span></span>
       ${text ? `<button class="icon-btn" data-copyfile="${m.slug}/${i}" aria-label="Скопировать">${ic('copy')}</button>` : ''}
       <a class="icon-btn" href="${esc(fileHref(m, f))}" download="${esc(f.name)}" data-dl="${m.slug}/${i}" aria-label="Скачать">${ic('download-simple')}</a></div>`;
   }).join('')}</div>` : ''}
   ${site ? `<div class="main"><button class="glass" data-open="${esc(m.url)}">Открыть сайт ${ic('arrow-up-right')}</button></div>`
+    : pdfIndex(m) >= 0 ? `<div class="main"><a class="glass" href="${esc(fileHref(m, m.files[pdfIndex(m)]))}" download="${esc(m.files[pdfIndex(m)].name)}" data-dl="${m.slug}/${pdfIndex(m)}">${ic('file-pdf')}Скачать гайд PDF</a></div>`
     : hasAgent(m) ? `<div class="main"><button class="glass" data-agent="${m.slug}">${ic('terminal-window')}Скопировать для агента</button></div>` : ''}`;
+}
+
+// Arthur 2026-11-02: a material reads like a guide's card in a bot: what is inside (summary), the original on GitHub,
+// the quickest install and the fine print. All three are optional meta fields.
+function about(m) {
+  if (!m.github && !m.quick) return m.note ? `<p class="note">${nb(m.note)}</p>` : '';
+  const repo = m.github ? m.github.replace(/^https:\/\/github\.com\//, '') : '';
+  return `<div class="about">
+    ${m.github ? `<a class="arow" href="${esc(m.github)}" target="_blank" rel="noopener" data-ext><span class="ai">${ic('github-logo')}</span><span class="body"><b>GitHub</b><span>${esc(repo)}</span></span>${ic('arrow-up-right')}</a>` : ''}
+    ${m.quick ? `<div class="arow"><span class="ai">${ic('lightning')}</span><span class="body"><b>Быстрая установка</b><span>${nb(m.quick)}</span></span></div>` : ''}
+  </div>${m.note ? `<p class="note">${nb(m.note)}</p>` : ''}`;
 }
 
 function reader(slug, index) {
