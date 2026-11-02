@@ -268,12 +268,12 @@ function moreGuides(m) {
 // Arthur 2026-11-02: a material reads like a guide's card in a bot: what is inside (summary), the original on GitHub,
 // the quickest install and the fine print. All three are optional meta fields.
 function about(m) {
-  if (!m.github && !m.quick) return m.note ? `<p class="note">${nb(m.note)}</p>` : '';
+  if (!m.github && !m.quick) return m.note ? `<p class="note"><span class="warn" aria-hidden="true">⚠️</span><span>${nb(m.note)}</span></p>` : '';
   const repo = m.github ? m.github.replace(/^https:\/\/github\.com\//, '') : '';
   return `<div class="about">
     ${m.github ? `<a class="arow" href="${esc(m.github)}" target="_blank" rel="noopener" data-ext><span class="ai gh">${ic('github-logo')}</span><span class="body"><b>GitHub</b><span>${esc(repo)}</span></span>${ic('arrow-up-right')}</a>` : ''}
     ${m.quick ? `<div class="arow"><span class="ai bolt">${ic('lightning')}</span><span class="body"><b>Быстрая установка</b><span>${nb(m.quick)}</span></span></div>` : ''}
-  </div>${m.note ? `<p class="note">${nb(m.note)}</p>` : ''}`;
+  </div>${m.note ? `<p class="note"><span class="warn" aria-hidden="true">⚠️</span><span>${nb(m.note)}</span></p>` : ''}`;
 }
 
 function reader(slug, index) {

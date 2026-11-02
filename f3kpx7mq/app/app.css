@@ -195,3 +195,6 @@ svg.i { width: 1em; height: 1em; flex: none; }
 .arow .ai.bolt { background: #FFF4D6; color: #D99A00; }
 .main a.pdf-main svg { color: #E5372B; font-size: 20px; }
 .main a.pdf-main { font-weight: 600; }
+/* fine print that must be seen (Arthur 2026-11-02): a warning card, not grey small text */
+.note { display: flex; gap: 10px; align-items: flex-start; margin: 14px 20px 0; padding: 12px 14px; border-radius: 16px; background: #FFF4E0; border: 1px solid #F6D9A6; font-size: 14.5px; line-height: 1.45; color: #6B4A10; font-weight: 500; }
+.note .warn { font-size: 18px; line-height: 1.2; flex: none; }
