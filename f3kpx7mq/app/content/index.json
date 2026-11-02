@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-02T16:43:49+00:00",
+ "generated": "2026-11-02T17:12:15+00:00",
  "site": {
   "base": "https://guide.arturx.art/f3kpx7mq/app/",
   "bot": "imersivnybot",
@@ -66,12 +66,12 @@
    "section": "skills",
    "type": "скилл",
    "date": "2026-11-02",
-   "summary": "Скилл из ролика: объясняющие ролики и рекламу на Remotion, ИИ-картинки без фона, озвучка и звук. Ставится в Claude Code.",
+   "summary": "Скилл из ролика, оба пути внутри: раскадровка по словам и ИИ-картинки без фона. Плюс озвучка, звук и сборка в Remotion.",
    "agent": "Скачай https://guide.arturx.art/f3kpx7mq/skills/motion-keks-v1.0.zip, распакуй в ~/.claude/skills/ и проверь, что скилл motion-keks виден. Потом проведи меня по первому запуску: ключи в файл .env, не в чат.",
    "files": [
     {
      "name": "motion-keks-v1.0.zip",
-     "about": "Скилл одним архивом",
+     "about": "Скилл одним архивом: раскадровка, картинки, голос, сборка",
      "url": "../skills/motion-keks-v1.0.zip",
      "kind": "zip"
     },
