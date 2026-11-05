@@ -51,7 +51,7 @@ link works from its first second. When the post is out, add `post_url` and push 
 ## Subscribers only (2026-10-17)
 
 The app opens only for subscribers of the channel «ИИмерсивный» (id -1003695481859). `app.js` posts Telegram's
-signed `initData` to `ACCESS_URL` in `app.js` (empty since 2026-11-06: the old address n8n.arturx.art expired, the check is off until a new one is chosen; was Caddy → systemd `kb-access` on Hermes, source
+signed `initData` to `https://hermes-srv.tail7ba1c3.ts.net:8443/kb/access` (`ACCESS_URL` in `app.js`; Tailscale Funnel since 2026-11-06, before that Caddy → systemd `kb-access` on Hermes, source
 `Distribution/mini-app/server/`). The server checks the signature with @imersivnybot's token and asks Telegram
 `getChatMember`; @imersivnybot must be an administrator of the channel for that. Subscriber: a toast «Ты подписан на
 канал, всё открыто». Not subscribed: a screen with «Подписаться на канал» and «Я подписался». Outside Telegram: a

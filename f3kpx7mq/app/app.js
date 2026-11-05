@@ -74,7 +74,7 @@ function toast(text, ms = 1800) {
 // The server (Hermes, systemd kb-access) verifies Telegram's signed initData and asks Telegram whether the user is in
 // the channel. Outside Telegram nobody can be checked, so the web shows the way into the bot. If the check itself
 // fails (server or Telegram down), the base stays open: a subscriber must never be locked out by our outage.
-const ACCESS_URL = ''; // empty = check switched off, the base is open (arturx.art expired, 2026-11-06; new address pending Arthur's choice)
+const ACCESS_URL = 'https://hermes-srv.tail7ba1c3.ts.net:8443/kb/access'; // Tailscale Funnel on Hermes (arturx.art expired, moved 2026-11-06); empty = check off, base open
 const LOCAL = /^(localhost|127\.0\.0\.1)$/.test(location.hostname); // local review sees everything
 async function checkAccess() {
   if (LOCAL || !ACCESS_URL) return 'open';
