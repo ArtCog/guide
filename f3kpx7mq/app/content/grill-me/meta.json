@@ -4,7 +4,7 @@
   "type": "скилл",
   "date": "2026-08-05",
   "summary": "Скилл Мэтта Покока: агент задаёт вопросы, пока не найдёт дыры в плане. С русским гайдом.",
-  "agent": "Скачай https://guide.arturx.art/f3kpx7mq/claude-skills/grill-me-v1.1.zip, распакуй в ~/.claude/skills/ и проверь, что скилл grill-me виден. Потом покажи, как его вызвать.",
+  "agent": "Скачай https://artcog.github.io/guide/f3kpx7mq/claude-skills/grill-me-v1.1.zip, распакуй в ~/.claude/skills/ и проверь, что скилл grill-me виден. Потом покажи, как его вызвать.",
   "files": [
     {
       "name": "grill-me-v1.1.zip",

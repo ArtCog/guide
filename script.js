@@ -1,5 +1,5 @@
 // === ACCESS GATE ===
-const SECRET_PATH = '/f3kpx7mq/';
+const SECRET_PATH = '/guide/f3kpx7mq/';
 
 // If user is on the secret path — remember access
 if (window.location.pathname.startsWith(SECRET_PATH)) {

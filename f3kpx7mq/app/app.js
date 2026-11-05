@@ -74,10 +74,10 @@ function toast(text, ms = 1800) {
 // The server (Hermes, systemd kb-access) verifies Telegram's signed initData and asks Telegram whether the user is in
 // the channel. Outside Telegram nobody can be checked, so the web shows the way into the bot. If the check itself
 // fails (server or Telegram down), the base stays open: a subscriber must never be locked out by our outage.
-const ACCESS_URL = 'https://n8n.arturx.art/kb/access';
+const ACCESS_URL = ''; // empty = check switched off, the base is open (arturx.art expired, 2026-11-06; new address pending Arthur's choice)
 const LOCAL = /^(localhost|127\.0\.0\.1)$/.test(location.hostname); // local review sees everything
 async function checkAccess() {
-  if (LOCAL) return 'open';
+  if (LOCAL || !ACCESS_URL) return 'open';
   if (!IN_TG) return 'web';
   try {
     const res = await fetch(ACCESS_URL, { method: 'POST', body: TG.initData, cache: 'no-store' });

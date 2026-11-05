@@ -1,7 +1,7 @@
 {
- "generated": "2026-11-05T02:33:12+00:00",
+ "generated": "2026-11-05T23:03:18+00:00",
  "site": {
-  "base": "https://guide.arturx.art/f3kpx7mq/app/",
+  "base": "https://artcog.github.io/guide/f3kpx7mq/app/",
   "bot": "imersivnybot",
   "newDays": 14,
   "bioPin": "",
@@ -92,7 +92,7 @@
    "type": "скилл",
    "date": "2026-11-02",
    "summary": "Скилл из ролика, оба пути внутри: раскадровка по словам и ИИ-картинки без фона. Плюс озвучка, звук и сборка в Remotion.",
-   "agent": "Скачай https://guide.arturx.art/f3kpx7mq/skills/motion-keks-v1.0.zip, распакуй в ~/.claude/skills/ и проверь, что скилл motion-keks виден. Потом проведи меня по первому запуску: ключи в файл .env, не в чат.",
+   "agent": "Скачай https://artcog.github.io/guide/f3kpx7mq/skills/motion-keks-v1.0.zip, распакуй в ~/.claude/skills/ и проверь, что скилл motion-keks виден. Потом проведи меня по первому запуску: ключи в файл .env, не в чат.",
    "files": [
     {
      "name": "motion-keks-v1.0.zip",
@@ -272,7 +272,7 @@
    "type": "скилл",
    "date": "2026-08-05",
    "summary": "Скилл Мэтта Покока: агент задаёт вопросы, пока не найдёт дыры в плане. С русским гайдом.",
-   "agent": "Скачай https://guide.arturx.art/f3kpx7mq/claude-skills/grill-me-v1.1.zip, распакуй в ~/.claude/skills/ и проверь, что скилл grill-me виден. Потом покажи, как его вызвать.",
+   "agent": "Скачай https://artcog.github.io/guide/f3kpx7mq/claude-skills/grill-me-v1.1.zip, распакуй в ~/.claude/skills/ и проверь, что скилл grill-me виден. Потом покажи, как его вызвать.",
    "files": [
     {
      "name": "grill-me-v1.1.zip",
