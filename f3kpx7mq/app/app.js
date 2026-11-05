@@ -344,7 +344,10 @@ function render() {
 const go = (hash) => { location.hash = hash; };
 
 // A link like t.me/imersivnybot?startapp=<slug> opens that material (start_param is used for routing only).
+// site.json «bioPin»: the slug the bio link (startapp=new) opens instead of the newest guide, so the Instagram bio never
+// changes when an older Reel takes off (Arthur, 2026-11-05); empty or missing: the newest.
 const newest = () => {
+  if (SITE.bioPin && bySlug(SITE.bioPin)) return SITE.bioPin;
   const own = MATS.filter((m) => listed(m) && !isSite(m));
   own.sort((a, b) => Date.parse(b.publishAt || b.date) - Date.parse(a.publishAt || a.date));
   return own.length ? own[0].slug : '';

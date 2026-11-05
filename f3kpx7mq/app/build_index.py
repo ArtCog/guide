@@ -121,6 +121,10 @@ def main() -> int:
         if meta:
             materials.append(meta)
 
+    pin = site.get("bioPin") or ""
+    if pin and pin not in {m["slug"] for m in materials}:
+        problems.append(f"content/site.json: bioPin «{pin}» is no material's slug")
+
     if problems:
         print("index.json NOT written:", file=sys.stderr)
         for p in problems:
