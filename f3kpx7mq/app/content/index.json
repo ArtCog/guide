@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-02T20:43:27+00:00",
+ "generated": "2026-11-05T02:26:15+00:00",
  "site": {
   "base": "https://guide.arturx.art/f3kpx7mq/app/",
   "bot": "imersivnybot",
@@ -36,6 +36,30 @@
   }
  },
  "materials": [
+  {
+   "title": "5 программ с GitHub: полная инструкция",
+   "section": "agents",
+   "type": "гайд",
+   "date": "2026-11-05",
+   "summary": "Как с нуля поставить на Windows Upscayl, Open WebUI, n8n, Agency Agents и OpenClaw и получить первый результат от каждой: картинка в 4 раза, свой чат с DeepSeek, отчёт в Telegram, ИИ-сотрудники и личный агент. Простыми словами, с готовыми командами и честно о том, где рилс упростил.",
+   "quick": "Начни с самой простой: скачай Upscayl с GitHub, выбери картинку и нажми кнопку. Остальные четыре по шагам в PDF. Или скопируй строку для агента ниже.",
+   "agent": "Помоги мне поставить на этот компьютер из официальных источников, по одной программе: Upscayl (github.com/upscayl/upscayl), Ollama с моделью deepseek-r1:1.5b и Open WebUI Desktop (github.com/open-webui/desktop), n8n через Docker (github.com/n8n-io/n8n), приложение Agency Agents (github.com/msitarzewski/agency-agents-app) и OpenClaw (github.com/openclaw/openclaw). Сначала проверь систему, видеокарту, память и место на диске и скажи, что подойдёт. Перед каждой командой объясняй, что она делает, и жди моего да. Ключи и пароли в чате не спрашивай. OpenClaw оставь в режиме подтверждения команд (tools.exec.mode ask) и запусти openclaw security audit. В конце покажи, как проверить каждую программу. Отвечай по-русски.",
+   "files": [
+    {
+     "name": "GitHub-5-programs-guide.pdf",
+     "about": "Гайд на 10 страниц: Upscayl, Open WebUI с DeepSeek, n8n и первый отчёт в Telegram, Agency Agents, OpenClaw и его безопасность, Рилс и реальность, чек-лист",
+     "kind": "pdf"
+    }
+   ],
+   "tags": [
+    "github",
+    "бесплатные программы",
+    "n8n",
+    "ии-агенты"
+   ],
+   "cover": "cover.jpg",
+   "slug": "github-5"
+  },
   {
    "title": "Day Trader Skill: полная инструкция",
    "section": "skills",
