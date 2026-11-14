@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-13T02:05:57+00:00",
+ "generated": "2026-11-14T23:10:37+00:00",
  "site": {
   "base": "https://artcog.github.io/guide/f3kpx7mq/app/",
   "bot": "imersivnybot",
@@ -37,6 +37,31 @@
   }
  },
  "materials": [
+  {
+   "title": "Awesome AI Motion: полная инструкция",
+   "section": "montage",
+   "type": "гайд",
+   "date": "2026-11-13",
+   "summary": "Справочник из 637 приёмов движения для видео. Что внутри, как подключить его к Claude Code и собрать первый ролик с infinite zoom из рилса. Простыми словами и с готовыми промптами.",
+   "github": "https://github.com/gongnyang/awesome-ai-motion",
+   "quick": "Открой Claude Code, скинь ему ссылку на репозиторий и попроси установить скилл. Или скопируй строку для агента ниже. Подробности в PDF.",
+   "agent": "Установи скилл Awesome AI Motion из официального репозитория https://github.com/gongnyang/awesome-ai-motion. Склонируй его в ~/.claude/skills/awesome-ai-motion (на Windows $HOME\\.claude\\skills\\awesome-ai-motion), если такой папки ещё нет. Для рендера проверь Node.js 20 или новее и ffmpeg, потом в папке скилла выполни npm install и npx playwright install chromium. Чего не хватает, скажи мне, сам не ставь. Потом покажи, как сделать ролик с приёмом infinite-zoom. Отвечай по-русски.",
+   "files": [
+    {
+     "name": "Awesome-AI-Motion-guide.pdf",
+     "about": "Гайд на 10 страниц. Что внутри справочника, словарь из 12 приёмов, установка, первый ролик, рецепты и где можно споткнуться",
+     "kind": "pdf"
+    }
+   ],
+   "tags": [
+    "моушен",
+    "скиллы",
+    "claude code"
+   ],
+   "draft": true,
+   "cover": "cover.jpg",
+   "slug": "motion-library"
+  },
   {
    "title": "Какую модель Claude выбрать: выжимка гайда Anthropic",
    "section": "agents",
