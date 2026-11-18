@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-14T23:10:37+00:00",
+ "generated": "2026-11-18T17:43:17+00:00",
  "site": {
   "base": "https://artcog.github.io/guide/f3kpx7mq/app/",
   "bot": "imersivnybot",
@@ -37,6 +37,31 @@
   }
  },
  "materials": [
+  {
+   "title": "Graphify: полная инструкция",
+   "section": "agents",
+   "type": "гайд",
+   "date": "2026-11-18",
+   "summary": "Как поставить Graphify для Claude Code за 3 команды, построить карту своего проекта и сделать так, чтобы Claude смотрел в неё в каждой новой сессии. Простыми словами, с проверкой на настоящем проекте и честно о том, где рилс упрощает.",
+   "github": "https://github.com/Graphify-Labs/graphify",
+   "quick": "Открой Claude Code, скинь ему ссылку на репозиторий и попроси установить Graphify. Или скопируй строку для агента ниже. Подробности в PDF.",
+   "agent": "Установи мне Graphify из официального репозитория https://github.com/Graphify-Labs/graphify, сверяясь с его README. Пакет ставь командой uv tool install graphifyy (две y, другие пакеты graphify чужие); если uv нет, скажи, какую команду из README мне выполнить, сам не ставь. Потом выполни graphify install (на Windows, если ассистент не определился, graphify install --platform windows). Мне нужна бесплатная локальная версия: Graphify Cloud не подключай, аккаунтов не создавай, ключи не спрашивай. В конце скажи перезапустить Claude Code, набрать /graphify . в папке проекта и потом выполнить там graphify claude install. Отвечай по-русски.",
+   "files": [
+    {
+     "name": "Graphify-guide.pdf",
+     "about": "Гайд на 6 страниц: что это и что даёт, установка в 3 команды, карта и режим «всегда», Рилс и реальность, проверка и что дальше",
+     "kind": "pdf"
+    }
+   ],
+   "tags": [
+    "claude code",
+    "github",
+    "токены"
+   ],
+   "draft": true,
+   "cover": "cover.jpg",
+   "slug": "graphify"
+  },
   {
    "title": "Awesome AI Motion: полная инструкция",
    "section": "montage",
