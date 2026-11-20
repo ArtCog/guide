@@ -1,0 +1,23 @@
+{
+  "title": "Claude Code бесплатно через FreeLLM API: полная инструкция",
+  "section": "agents",
+  "type": "гайд",
+  "date": "2026-11-20",
+  "summary": "Как поставить FreeLLM API на Windows, Mac или Linux, добавить бесплатные ключи провайдеров и запускать Claude Code на бесплатных моделях, когда кончился лимит. Простыми словами, с готовым промптом и честно о том, что думает там не Claude.",
+  "github": "https://github.com/tashfeenahmed/freellmapi",
+  "quick": "Открой Claude Code, скинь ему ссылку на репозиторий и попроси подключить FreeLLM API. Или скопируй строку для агента ниже. Подробности в PDF.",
+  "agent": "Подключи мне FreeLLM API к Claude Code из официального репозитория https://github.com/tashfeenahmed/freellmapi, сверяясь с README и docs/en/clients/01-agent-clients.md. Проверь Claude Code и Node.js 20.18 или новее. Ключи в чат не проси, я ввожу их сам. На Windows скажи мне поставить приложение FreeLLMAPI из Microsoft Store, на macOS и Linux покажи скрипт https://freellmapi.co/install.sh и запусти его только после моего «да». Попроси меня добавить ключи провайдеров на странице Keys и проверить ответ в Playground. Настройки Claude Code насовсем не меняй, дай мне команду npx freellmapi launch --url <адрес панели>. Отвечай по-русски.",
+  "files": [
+    {
+      "name": "FreeLLM-API-Claude-Code-guide.pdf",
+      "about": "Гайд на 5 страниц: как это устроено, Рилс и реальность, роутер и ключи, подключение Claude Code, цепочка моделей и заметка, чек-лист"
+    }
+  ],
+  "tags": [
+    "claude code",
+    "github",
+    "бесплатно"
+  ],
+  "note": "Запросы и код уходят бесплатным провайдерам моделей. Пароли, ключи и чужой код под NDA туда не отправляй.",
+  "draft": true
+}
