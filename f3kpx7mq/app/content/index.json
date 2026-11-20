@@ -1,8 +1,9 @@
 {
- "generated": "2026-11-20T13:10:30+00:00",
+ "generated": "2026-11-20T16:23:55+00:00",
  "site": {
   "base": "https://artcog.github.io/guide/f3kpx7mq/app/",
   "bot": "imersivnybot",
+  "newDays": 14,
   "bioPin": "",
   "sections": [
    {
@@ -31,7 +32,7 @@
    "note": "Скоро"
   },
   "links": {
-   "telegram": "https://t.me/ai_immersive",
+   "telegram": "https://t.me/iimersive",
    "youtube": "https://youtube.com/@art.immersive"
   }
  },
@@ -59,6 +60,7 @@
     "бесплатно"
    ],
    "note": "Запросы и код уходят бесплатным провайдерам моделей. Пароли, ключи и чужой код под NDA туда не отправляй.",
+   "pinTitle": "Claude Code бесплатно через FreeLLM API",
    "cover": "cover.jpg",
    "slug": "freellmapi-claude-code"
   },
@@ -84,6 +86,7 @@
     "github",
     "токены"
    ],
+   "pinTitle": "Graphify, карта проекта для Claude Code",
    "cover": "cover.jpg",
    "slug": "graphify"
   },
@@ -109,6 +112,7 @@
     "скиллы",
     "claude code"
    ],
+   "pinTitle": "Awesome AI Motion, 637 приёмов движения",
    "cover": "cover.jpg",
    "slug": "motion-library"
   },
@@ -154,6 +158,7 @@
     "claude code",
     "гайд"
    ],
+   "pinTitle": "Все новые функции Claude 2.0",
    "cover": "cover.jpg",
    "slug": "claude-2-0"
   },
@@ -179,6 +184,7 @@
     "n8n",
     "ии-агенты"
    ],
+   "pinTitle": "5 программ с GitHub",
    "cover": "cover.jpg",
    "slug": "github-5"
   },
@@ -205,6 +211,7 @@
     "трейдинг",
     "claude code"
    ],
+   "pinTitle": "Day Trader Skill для дейтрейдинга",
    "cover": "cover.jpg",
    "slug": "day-trader-skill"
   },
@@ -236,6 +243,7 @@
     "claude code"
    ],
    "quick": "Скачай архив, распакуй в ~/.claude/skills/ и напиши Claude: сделай объясняющий ролик. Ключи вставляешь в файл .env, не в чат.",
+   "pinTitle": "Motion-keks, моушн-графика в Claude Code",
    "slug": "motion-keks"
   },
   {
