@@ -1,6 +1,7 @@
 {
   "base": "https://artcog.github.io/guide/f3kpx7mq/app/",
   "bot": "imersivnybot",
+  "newDays": 14,
   "bioPin": "",
   "sections": [
     {
