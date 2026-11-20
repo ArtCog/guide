@@ -3,6 +3,7 @@
   "section": "skills",
   "type": "скилл",
   "date": "2026-11-02",
+  "fromVideo": true,
   "summary": "Скилл из ролика, оба пути внутри: раскадровка по словам и ИИ-картинки без фона. Плюс озвучка, звук и сборка в Remotion.",
   "agent": "Скачай https://artcog.github.io/guide/f3kpx7mq/skills/motion-keks-v1.0.zip, распакуй в ~/.claude/skills/ и проверь, что скилл motion-keks виден. Потом проведи меня по первому запуску: ключи в файл .env, не в чат.",
   "files": [

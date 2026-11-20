@@ -1,9 +1,8 @@
 {
- "generated": "2026-11-20T12:56:12+00:00",
+ "generated": "2026-11-20T13:10:30+00:00",
  "site": {
   "base": "https://artcog.github.io/guide/f3kpx7mq/app/",
   "bot": "imersivnybot",
-  "newDays": 14,
   "bioPin": "",
   "sections": [
    {
@@ -32,7 +31,7 @@
    "note": "Скоро"
   },
   "links": {
-   "telegram": "https://t.me/+afIVRcIuSeI2OTYy",
+   "telegram": "https://t.me/ai_immersive",
    "youtube": "https://youtube.com/@art.immersive"
   }
  },
@@ -42,6 +41,7 @@
    "section": "agents",
    "type": "гайд",
    "date": "2026-11-20",
+   "fromVideo": true,
    "summary": "Как поставить FreeLLM API на Windows, Mac или Linux, добавить бесплатные ключи провайдеров и запускать Claude Code на бесплатных моделях, когда кончился лимит. Простыми словами, с готовым промптом и честно о том, что думает там не Claude.",
    "github": "https://github.com/tashfeenahmed/freellmapi",
    "quick": "Открой Claude Code, скинь ему ссылку на репозиторий и попроси подключить FreeLLM API. Или скопируй строку для агента ниже. Подробности в PDF.",
@@ -59,7 +59,6 @@
     "бесплатно"
    ],
    "note": "Запросы и код уходят бесплатным провайдерам моделей. Пароли, ключи и чужой код под NDA туда не отправляй.",
-   "draft": true,
    "cover": "cover.jpg",
    "slug": "freellmapi-claude-code"
   },
@@ -68,6 +67,7 @@
    "section": "agents",
    "type": "гайд",
    "date": "2026-11-18",
+   "fromVideo": true,
    "summary": "Как поставить Graphify для Claude Code за 3 команды, построить карту своего проекта и сделать так, чтобы Claude смотрел в неё в каждой новой сессии. Простыми словами, с проверкой на настоящем проекте и честно о том, где рилс упрощает.",
    "github": "https://github.com/Graphify-Labs/graphify",
    "quick": "Открой Claude Code, скинь ему ссылку на репозиторий и попроси установить Graphify. Или скопируй строку для агента ниже. Подробности в PDF.",
@@ -84,7 +84,6 @@
     "github",
     "токены"
    ],
-   "draft": true,
    "cover": "cover.jpg",
    "slug": "graphify"
   },
@@ -93,6 +92,7 @@
    "section": "montage",
    "type": "гайд",
    "date": "2026-11-13",
+   "fromVideo": true,
    "summary": "Справочник из 637 приёмов движения для видео. Что внутри, как подключить его к Claude Code и собрать первый ролик с infinite zoom из рилса. Простыми словами и с готовыми промптами.",
    "github": "https://github.com/gongnyang/awesome-ai-motion",
    "quick": "Открой Claude Code, скинь ему ссылку на репозиторий и попроси установить скилл. Или скопируй строку для агента ниже. Подробности в PDF.",
@@ -109,7 +109,6 @@
     "скиллы",
     "claude code"
    ],
-   "draft": true,
    "cover": "cover.jpg",
    "slug": "motion-library"
   },
@@ -140,6 +139,7 @@
    "section": "agents",
    "type": "гайд",
    "date": "2026-11-06",
+   "fromVideo": true,
    "summary": "Все новые функции Claude Desktop и Claude Code по шагам, в порядке видео. Где что лежит, 7 команд и 29 горячих клавиш для Windows и Mac, плюс готовые связки функций.",
    "quick": "Открой гайд и начни со страницы «С чего начать за 5 минут». Там пять функций, которые окупаются сразу. Подробности в PDF.",
    "files": [
@@ -162,6 +162,7 @@
    "section": "agents",
    "type": "гайд",
    "date": "2026-11-05",
+   "fromVideo": true,
    "summary": "Как с нуля поставить на Windows Upscayl, Open WebUI, n8n, Agency Agents и OpenClaw и получить первый результат от каждой: картинка в 4 раза, свой чат с DeepSeek, отчёт в Telegram, ИИ-сотрудники и личный агент. Простыми словами, с готовыми командами и честно о том, где рилс упростил.",
    "quick": "Начни с самой простой: скачай Upscayl с GitHub, выбери картинку и нажми кнопку. Остальные четыре по шагам в PDF. Или скопируй строку для агента ниже.",
    "agent": "Помоги мне поставить на этот компьютер из официальных источников, по одной программе: Upscayl (github.com/upscayl/upscayl), Ollama с моделью deepseek-r1:1.5b и Open WebUI Desktop (github.com/open-webui/desktop), n8n через Docker (github.com/n8n-io/n8n), приложение Agency Agents (github.com/msitarzewski/agency-agents-app) и OpenClaw (github.com/openclaw/openclaw). Сначала проверь систему, видеокарту, память и место на диске и скажи, что подойдёт. Перед каждой командой объясняй, что она делает, и жди моего да. Ключи и пароли в чате не спрашивай. OpenClaw оставь в режиме подтверждения команд (tools.exec.mode ask) и запусти openclaw security audit. В конце покажи, как проверить каждую программу. Отвечай по-русски.",
@@ -186,6 +187,7 @@
    "section": "skills",
    "type": "гайд",
    "date": "2026-11-02",
+   "fromVideo": true,
    "summary": "Что делает каждый из 11 скиллов для дейтрейдинга, как поставить их за 10 минут и пройти первую сделку на демо-счёте, без настоящих денег. Простыми словами и с готовыми промптами.",
    "github": "https://github.com/Jakeschincariol/day-trader-skill",
    "quick": "Открой Claude Code, скинь ему ссылку на репозиторий и попроси установить скилл. Или скопируй строку для агента ниже. Подробности в PDF.",
@@ -211,6 +213,7 @@
    "section": "skills",
    "type": "скилл",
    "date": "2026-11-02",
+   "fromVideo": true,
    "summary": "Скилл из ролика, оба пути внутри: раскадровка по словам и ИИ-картинки без фона. Плюс озвучка, звук и сборка в Remotion.",
    "agent": "Скачай https://artcog.github.io/guide/f3kpx7mq/skills/motion-keks-v1.0.zip, распакуй в ~/.claude/skills/ и проверь, что скилл motion-keks виден. Потом проведи меня по первому запуску: ключи в файл .env, не в чат.",
    "files": [

@@ -1,7 +1,6 @@
 {
   "base": "https://artcog.github.io/guide/f3kpx7mq/app/",
   "bot": "imersivnybot",
-  "newDays": 14,
   "bioPin": "",
   "sections": [
     {
@@ -30,7 +29,7 @@
     "note": "Скоро"
   },
   "links": {
-    "telegram": "https://t.me/+afIVRcIuSeI2OTYy",
+    "telegram": "https://t.me/ai_immersive",
     "youtube": "https://youtube.com/@art.immersive"
   }
 }
