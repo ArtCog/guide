@@ -2,6 +2,7 @@
   "title": "Какую модель Claude выбрать: выжимка гайда Anthropic",
   "section": "agents",
   "type": "гайд",
+  "kind": "guides",
   "date": "2026-11-13",
   "summary": "Официальный гайд Anthropic о выборе между Haiku, Sonnet, Opus и Fable на пяти страницах по-русски. Какую модель брать под задачу, когда поднимать усилие, команды Claude Code и что даёт твоя подписка.",
   "quick": "Открой выжимку и начни с таблицы «Модель под задачу». Не знаешь, что брать, ставь Opus 5.5 и крути усилие, а не модель. Оригинал на английском https://claude.dev/blog/which-claude-model-should-you-build-with/",

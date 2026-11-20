@@ -2,6 +2,7 @@
   "title": "Motion-keks: моушн-графика с ИИ-картинками в Claude Code",
   "section": "skills",
   "type": "скилл",
+  "kind": "skills",
   "date": "2026-11-02",
   "fromVideo": true,
   "summary": "Скилл из ролика, оба пути внутри: раскадровка по словам и ИИ-картинки без фона. Плюс озвучка, звук и сборка в Remotion.",
@@ -23,5 +24,6 @@
     "remotion",
     "claude code"
   ],
-  "quick": "Скачай архив, распакуй в ~/.claude/skills/ и напиши Claude: сделай объясняющий ролик. Ключи вставляешь в файл .env, не в чат."
+  "quick": "Скачай архив, распакуй в ~/.claude/skills/ и напиши Claude: сделай объясняющий ролик. Ключи вставляешь в файл .env, не в чат.",
+  "pinTitle": "Motion-keks, моушн-графика в Claude Code"
 }

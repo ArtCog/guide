@@ -1,7 +1,6 @@
-/* Knowledge base «ИИмерсивный». Design A8 «Спокойный» (Arthur, 2026-10-17): white page, light grey cards with no
-   border or blur, Source Serif 4 titles, Golos Text interface. Glass only on things floating over content:
-   the bottom section bar, the main button, pills on pictures, the toast.
-   Always white, also in a dark Telegram or system theme (Arthur, 2026-10-17). */
+/* Knowledge base «ИИмерсивный». Base rules from design A8 «Спокойный» (Arthur, 2026-10-17), then look F «тёплая
+   бумага» (Arthur, 2026-11-20) at the end of the file overrides the colours and fonts. Glass only on things floating
+   over content: the tab bar, the main button and the toast. One light page, also in a dark Telegram or system theme. */
 
 :root {
   --page: #ffffff; --surface: #f5f5f7; --surface-2: #ececef; --chip: #ffffff;
@@ -13,7 +12,7 @@
   --ui: "Golos Text", -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", sans-serif;
   --display: "Source Serif 4", Georgia, serif;
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  --c-montage: #ff9500; --c-inspiration: #ff2d55; --c-agents: #5856d6; --c-course: #34c759; --c-skills: #af52de;
+  --c-course: #34c759;
   --safe-bottom: max(env(safe-area-inset-bottom), var(--tg-safe-area-inset-bottom, 0px));
   color-scheme: light; scrollbar-width: thin; scrollbar-color: rgba(0, 0, 0, .14) transparent;
 }
@@ -29,7 +28,7 @@ svg.i { width: 1em; height: 1em; flex: none; }
 .wrap { max-width: 560px; margin: 0 auto; }
 .title { font-family: var(--display); font-weight: 400; letter-spacing: -.01em; }
 .glass { background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); border: 1px solid var(--glass-line); box-shadow: var(--glass-shadow); }
-:is(.post, .hero-media, .tab, .chip, .icon-btn, .row, .head-links a):active { opacity: .6; }
+:is(.vg, .hero-media, .chip, .icon-btn, .row, .head-links a):active { opacity: .6; }
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-thumb { background: rgba(127, 127, 127, .25); border-radius: 3px; }
 
@@ -44,44 +43,9 @@ svg.i { width: 1em; height: 1em; flex: none; }
 .head-links { display: flex; gap: 8px; padding-bottom: 2px; }
 .head-links a { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font-size: 18px; color: var(--soft-text); background: var(--surface); }
 
-/* «Новое» carousel */
-.heroes { display: flex; gap: 12px; overflow-x: auto; padding: 22px 20px 4px; scroll-snap-type: x mandatory; scroll-padding: 0 20px; scrollbar-width: none; }
-.heroes::-webkit-scrollbar { display: none; }
-.hero { flex: none; width: calc(100% - 28px); max-width: 480px; scroll-snap-align: start; }
-.heroes > .hero:only-child { width: 100%; }
 .kicker { font-size: 12.5px; letter-spacing: .02em; color: var(--hint); }
-.dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin: 0 6px 1px 0; vertical-align: middle; }
-.hero h2 { font-size: 22px; line-height: 1.22; margin-top: 4px; }
 .hero-media { position: relative; display: block; width: 100%; aspect-ratio: 1 / 1; border-radius: 26px; overflow: hidden; margin-top: 12px; background: var(--surface); }
 .hero-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
-.hero-media img.drift { object-position: 0% 0%; animation: drift 18s ease-in-out infinite alternate; }
-@keyframes drift { to { object-position: 100% 0%; } }
-.clip-card { background: #f5f5f7; }
-.clip-card video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-.media-bar { position: absolute; left: 14px; right: 14px; bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
-.pill { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 14px; border-radius: 17px; font-size: 14px; color: var(--text); }
-.pill.quiet { color: var(--soft-text); }
-.pill svg { font-size: 17px; }
-.hero-dots { display: flex; gap: 6px; justify-content: center; margin-top: 12px; }
-.hero-dots i { width: 6px; height: 6px; border-radius: 3px; background: var(--line); background: rgba(127, 127, 127, .3); transition: width .35s, background .35s; }
-.hero-dots i.on { width: 18px; background: rgba(127, 127, 127, .75); }
-/* a guide with no clip and no cover: its files as fanned paper sheets */
-.sheets { position: absolute; inset: 0; }
-.sheet { position: absolute; width: 44%; aspect-ratio: 3 / 4; background: #fff; border-radius: 12px; padding: 12px; font: 400 11px/1 var(--mono); color: #946229; box-shadow: 0 8px 24px rgba(0, 0, 0, .08); }
-.sheet i { display: block; height: 5px; border-radius: 3px; background: #f1ebe3; margin-top: 8px; }
-.sheet:nth-child(1) { left: 6%; top: 12%; transform: rotate(-9deg); }
-.sheet:nth-child(2) { left: 28%; top: 7%; transform: rotate(1deg); }
-.sheet:nth-child(3) { left: 50%; top: 13%; transform: rotate(9deg); }
-
-/* feed */
-.feed-gap { height: 14px; }
-.post { display: block; margin: 0 14px 10px; width: calc(100% - 28px); padding: 16px; border-radius: 26px; background: var(--surface); }
-.post h3 { font-size: 17px; line-height: 1.3; margin-top: 4px; }
-.post p.sum { font-size: 15px; line-height: 1.45; margin-top: 4px; color: var(--sum); }
-.pcover { position: relative; display: block; width: 100%; aspect-ratio: 16 / 10; border-radius: 18px; overflow: hidden; margin-top: 12px; background: var(--surface-2); }
-.pcover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
-.pcover .pill { position: absolute; left: 12px; bottom: 12px; height: 30px; font-size: 13px; }
-.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
 .chip { display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px; border-radius: 15px; background: var(--chip); font-size: 13.5px; color: var(--soft-text); }
 .chip svg { font-size: 15px; color: var(--hint); }
 .course { margin: 26px 20px 0; padding: 13px 16px; border-radius: 16px; background: var(--surface); display: flex; gap: 10px; align-items: center; font-size: 14.5px; color: var(--soft-text); }
@@ -89,11 +53,6 @@ svg.i { width: 1em; height: 1em; flex: none; }
 .foot { text-align: center; color: var(--hint); font-size: 13px; padding: 26px 32px 0; }
 .empty { color: var(--hint); text-align: center; padding: 48px 32px; }
 
-/* bottom section bar */
-.tabbar { position: fixed; left: 12px; right: 12px; bottom: calc(14px + var(--safe-bottom)); z-index: 8; max-width: 536px; margin: 0 auto; display: flex; gap: 2px; padding: 5px; border-radius: 26px; overflow-x: auto; scrollbar-width: none; }
-.tabbar::-webkit-scrollbar { display: none; }
-.tab { flex: none; height: 40px; padding: 0 14px; border-radius: 20px; font-size: 15px; color: var(--soft-text); display: inline-flex; align-items: center; transition: background .15s, color .15s; }
-.tab[aria-pressed="true"] { background: var(--surface); color: var(--text); }
 
 /* inner pages */
 .nav { position: sticky; top: 0; z-index: 5; display: flex; justify-content: space-between; align-items: center; min-height: 52px; padding: 8px 12px; background: var(--page); }
@@ -104,7 +63,7 @@ svg.i { width: 1em; height: 1em; flex: none; }
 .nav .tools { display: flex; gap: 8px; }
 .mhead { padding: 10px 20px 0; }
 .mhead h1 { font-size: 28px; line-height: 1.15; margin-top: 8px; }
-.mhead .lead { font-size: 16.5px; line-height: 1.55; color: var(--soft-text); margin-top: 12px; }
+.mhead .msum { font-size: 16.5px; line-height: 1.55; color: var(--soft-text); margin-top: 12px; }
 .mmedia { margin: 6px 20px 0; }
 .mmedia .hero-media { margin: 0; aspect-ratio: 16 / 10; }
 .sec { font-size: 13px; letter-spacing: .02em; color: var(--hint); padding: 30px 20px 10px; display: flex; justify-content: space-between; align-items: baseline; }
@@ -149,11 +108,6 @@ svg.i { width: 1em; height: 1em; flex: none; }
 .toast.on { opacity: 1; transform: translate(-50%, 0); }
 .toast svg { color: var(--c-course); }
 
-@media (min-width: 720px) {
-  .hero { width: 420px; }
-  .heroes > .hero:only-child { width: 100%; }
-}
-
 /* access gate: channel subscribers only (2026-10-17) */
 .gate { padding: 28px 24px 32px; max-width: 480px; margin: 0 auto; }
 .gate .hi { font-size: 14px; color: var(--hint); }
@@ -177,8 +131,6 @@ svg.i { width: 1em; height: 1em; flex: none; }
 .main a { display: flex; width: 100%; height: 52px; border-radius: 18px; justify-content: center; align-items: center; gap: 8px; font-size: 16.5px; font-weight: 500; color: var(--text); }
 .gate-cover { aspect-ratio: 16 / 10; border-radius: 22px; overflow: hidden; background: var(--surface); margin-bottom: 22px; }
 .gate-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.row .thumb { width: 56px; height: 35px; border-radius: 8px; overflow: hidden; background: var(--chip); flex: none; }
-.row .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .row .tt { font-size: 15px; line-height: 1.3; display: block; color: var(--text); }
 .row > svg { font-size: 16px; color: var(--hint); flex: none; }
 .list:has(+ .main), .list:last-child { margin-bottom: 104px; }
@@ -198,3 +150,107 @@ svg.i { width: 1em; height: 1em; flex: none; }
 /* fine print that must be seen (Arthur 2026-11-02): a warning card, not grey small text */
 .note { display: flex; gap: 10px; align-items: flex-start; margin: 14px 20px 0; padding: 12px 14px; border-radius: 16px; background: #FFF4E0; border: 1px solid #F6D9A6; font-size: 14.5px; line-height: 1.45; color: #6B4A10; font-weight: 500; }
 .note .warn { font-size: 18px; line-height: 1.2; flex: none; }
+
+
+/* ===== 2026-11-20: four tabs, the glass bar, covers 16:10 ===== */
+.dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin: 0 6px 1px 0; vertical-align: middle; background: var(--c-course); }
+.tabbody { padding-top: 14px; }
+.tabs { display: flex; }
+.tabs .tab { display: flex; align-items: center; justify-content: center; }
+.more { display: block; width: calc(100% - 28px); margin: 12px 14px 0; height: 46px; border-radius: 16px; background: var(--surface); text-align: center; font-size: 15.5px; font-weight: 500; color: var(--link); }
+:is(.tab, .lead, .card, .line, .more, .prod, .all, .row):active { opacity: .6; }
+.tabh { display: flex; justify-content: space-between; align-items: baseline; padding: 0 20px 12px; }
+.tabh h2 { font-size: 24px; line-height: 1.15; }
+.tabh > span { font-size: 14px; color: var(--hint); }
+.empty { padding: 40px 32px; }
+
+/* cover.jpg is 16:10 (a guide's PDF spread, a site's screenshot), the frame too: shown whole, not zoomed (Arthur, 2026-11-20) */
+.pic { position: relative; display: block; flex: none; aspect-ratio: 16 / 10; overflow: hidden; background: var(--surface); }
+.pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.pic.none { display: grid; place-content: center; justify-items: center; gap: 4px; color: var(--hint); font-size: 24px; }
+.pic.none b { font-size: 11.5px; font-weight: 600; }
+.row .pic { width: 64px; border-radius: 9px; }
+.row .pic.none { font-size: 18px; }
+.row .pic.none b { display: none; }
+
+/* the course: name and «скоро», room for the real product card later */
+.prod { display: flex; align-items: center; gap: 12px; }
+.prod-i { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; font-size: 20px; flex: none; }
+.prod-t { flex: 1; min-width: 0; font-size: 17px; line-height: 1.2; }
+.prod-soon { flex: none; font-size: 12px; font-weight: 500; border-radius: 9px; padding: 4px 9px; }
+
+.shelf-h { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.shelf-h .all, .all { color: var(--link); font-weight: 500; }
+.shelf { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.shelf::-webkit-scrollbar { display: none; }
+.shelf .card { flex: none; scroll-snap-align: start; }
+.card { display: block; min-width: 0; cursor: pointer; }
+.card .pic { width: 100%; }
+.ct { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; color: var(--text); }
+.card .s, .line .s { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--hint); }
+.grid { display: grid; grid-template-columns: 1fr 1fr; }
+.line { display: flex; align-items: center; cursor: pointer; position: relative; }
+.line .body { flex: 1; min-width: 0; }
+.line > svg { flex: none; color: var(--hint); font-size: 16px; }
+.lead { display: flex; cursor: pointer; }
+.lead .body { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.lt { display: block; color: var(--text); }
+.lead .open { display: inline-flex; align-items: center; gap: 4px; align-self: flex-start; }
+
+/* ===== Look F «тёплая бумага» (Arthur picked it on 2026-11-20): cream page, Lora titles, Manrope interface, a glass bar
+   with four icons at the bottom. Home: the newest guide big, the course as an ink card, the next four as a 2×2 grid.
+   Tabs: one column of cards with the cover, the title and two lines of summary. ===== */
+:root { --page: #f4efe7; --surface: #ebe4d8; --surface-2: #e3dacb; --chip: #fbf8f2; --text: #1f2420; --soft-text: #4a4d47;
+  --sum: #6c6a62; --hint: #8c877c; --line: rgba(31, 36, 32, .1); --link: #b0542b; --c-course: #6f9a62;
+  --glass: rgba(251, 248, 242, .9); --glass-line: rgba(31, 36, 32, .08);
+  --ui: "Manrope", -apple-system, Roboto, "Segoe UI", sans-serif; --display: "Lora", Georgia, serif; }
+.title { font-weight: 500; letter-spacing: -.01em; }
+
+.hello { padding: 22px 18px 0; align-items: center; }
+.hello .hi { font-size: 13px; }
+.hello h1 { font-size: 31px; }
+.head-links a { background: var(--chip); }
+
+.tabs { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(12px + var(--safe-bottom)); z-index: 8; gap: 2px; padding: 5px; border-radius: 24px;
+  background: var(--glass); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur); border: 1px solid var(--glass-line); box-shadow: var(--glass-shadow); }
+.tabs .tab { flex-direction: column; gap: 2px; width: 84px; padding: 6px 0 5px; border-radius: 19px; font-size: 11.5px; font-weight: 600; color: var(--hint); text-align: center; }
+.tabs .tab svg { font-size: 21px; }
+.tabs .tab[aria-pressed="true"] { background: var(--text); color: var(--page); }
+.tabbody { padding-top: 16px; }
+
+.lead { flex-direction: column; margin: 0 14px; border-radius: 26px; overflow: hidden; background: var(--chip); }
+.lead .pic { width: 100%; }
+.lead .body { padding: 13px 18px 17px; }
+.lead .kicker { font-size: 12.5px; color: var(--hint); }
+.lt { font-size: 24px; line-height: 1.15; margin-top: 4px; }
+
+.prod { margin: 12px 14px 0; padding: 14px 16px; border-radius: 22px; background: var(--text); color: var(--page); }
+.prod-i { background: rgba(244, 239, 231, .1); color: #f0cba9; }
+.prod-t { font-size: 17px; }
+.prod-soon { color: #f0cba9; box-shadow: inset 0 0 0 1px rgba(240, 203, 169, .45); }
+
+.shelf-h { padding: 26px 18px 12px; }
+.shelf-h .title { font-size: 22px; }
+.shelf-h .all { font-size: 14.5px; }
+.grid { gap: 16px 10px; padding: 0 14px; }
+.grid .pic { border-radius: 16px; }
+.card .ct { margin-top: 8px; font-size: 15px; line-height: 1.25; font-weight: 600; font-family: var(--ui); -webkit-line-clamp: 2; letter-spacing: -.005em; }
+.card .s { font-size: 12.5px; margin-top: 2px; }
+
+.tabh { padding: 0 18px 12px; }
+.tabh h2 { font-size: 26px; }
+.lines { padding: 0 14px; display: grid; gap: 8px; }
+.line { gap: 14px; padding: 10px; border-radius: 20px; background: var(--chip); align-items: flex-start; }
+.line .pic { width: 116px; border-radius: 12px; }
+.line .body { padding: 2px 4px 2px 0; }
+.line .ct { font-size: 18px; line-height: 1.2; -webkit-line-clamp: 2; }
+.line .s { font-size: 12.5px; margin-top: 3px; }
+.line .sum { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: 5px; font-size: 13.5px; line-height: 1.4; color: var(--sum); }
+.line > svg { display: none; }
+.more { background: var(--chip); }
+.list, .about, .agent { background: var(--chip); }
+
+/* Arthur 2026-11-20: card edges more visible on the cream page. */
+:root { --card-edge: rgba(31, 36, 32, .16); --card-shadow: 0 1px 2px rgba(31, 36, 32, .06), 0 6px 18px rgba(31, 36, 32, .07); }
+.lead, .line, .grid .pic, .list, .about, .more { border: 1px solid var(--card-edge); box-shadow: var(--card-shadow); }
+.hero-media { border: 1px solid var(--card-edge); }

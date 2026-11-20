@@ -17,6 +17,9 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parent
 CONTENT = ROOT / "content"
 TYPES = {"гайд", "скилл", "статья", "сайт", "промпты", "подборка", "установщик"}
+# the app's tab (Arthur, 2026-11-20): «Гайды» step-by-step guides, «Скиллы и плагины» what is installed as a skill or
+# plugin, «Вдохновение» sites. Missing «kind» is taken from «type»: сайт -> inspo, скилл -> skills, anything else -> guides.
+KINDS = {"guides", "skills", "inspo"}
 TEXT_EXT = {".md", ".txt", ".json", ".csv"}
 SLUG = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 DASHES = ("\u2014", "\u2013")  # viewer texts never use long dashes
@@ -55,8 +58,17 @@ def load_material(folder: Path, sections: set[str], problems: list[str]) -> dict
         date.fromisoformat(meta.get("date", ""))
     except ValueError:
         problems.append(f"{where}: date must be YYYY-MM-DD")
+    if meta.get("type") in TYPES:
+        meta.setdefault("kind", "inspo" if meta["type"] == "сайт" else "skills" if meta["type"] == "скилл" else "guides")
+    if meta.get("kind") not in KINDS:
+        problems.append(f"{where}: «kind» must be one of {', '.join(sorted(KINDS))}")
+    elif (meta["kind"] == "inspo") != (meta.get("type") == "сайт"):
+        problems.append(f"{where}: «kind» inspo is for sites only, and a site goes to inspo")
     if "new" in meta and not isinstance(meta["new"], bool):
         problems.append(f"{where}: «new» must be true or false")
+    # a guide to a Reel or YouTube video: in the pinned post (pin_post.py) and the bio link startapp=new
+    if "fromVideo" in meta and not isinstance(meta["fromVideo"], bool):
+        problems.append(f"{where}: «fromVideo» must be true or false")
     # held back until the post goes out: not listed anywhere, but its startapp link already opens it
     if "draft" in meta and not isinstance(meta["draft"], bool):
         problems.append(f"{where}: «draft» must be true or false")
@@ -138,8 +150,9 @@ def main() -> int:
     out.write_text(json.dumps(index, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n")
     print(f"content/index.json: {len(materials)} materials")
     for m in materials:
-        hold = " (draft, link only)" if m.get("draft") else f" (listed from {m['publishAt']})" if m.get("publishAt") else ""
-        print(f"  {m['date']}  {m['section']:<12} {m['slug']}{hold}")
+        hold = " [video]" if m.get("fromVideo") else ""
+        hold += " (draft, link only)" if m.get("draft") else f" (listed from {m['publishAt']})" if m.get("publishAt") else ""
+        print(f"  {m['date']}  {m['kind']:<7} {m['slug']}{hold}")
     return 0
 
 

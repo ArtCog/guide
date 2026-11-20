@@ -1,13 +1,13 @@
 // Knowledge base «ИИмерсивный»: one static page that works as a Telegram Mini App (bot @imersivnybot) and as a site.
 // Content comes from content/index.json, built by build_index.py from content/<slug>/meta.json.
-// Routes: #/ home, #/s/<section> home filtered, #/m/<slug> material, #/m/<slug>/<file index> reader.
+// Routes: #/ home, #/t/<guides|skills|inspo> tabs (old #/s/<section> lands on home, #/t/more on «Гайды»),
+// #/m/<slug> material, #/m/<slug>/<file index> reader.
 'use strict';
 
 const TG = window.Telegram && window.Telegram.WebApp;
 const IN_TG = Boolean(TG && TG.initData);
 const tgAtLeast = (v) => IN_TG && typeof TG.isVersionAtLeast === 'function' && TG.isVersionAtLeast(v);
 
-const LABEL = { 'гайд': 'Гайд', 'скилл': 'Скилл', 'статья': 'Статья', 'сайт': 'Сайт', 'промпты': 'Промпты', 'подборка': 'Подборка', 'установщик': 'Установщик' };
 const MONTHS = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
 let SITE = null;
 let MATS = [];
@@ -18,11 +18,9 @@ const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '
 // one- and two-letter words (и, с, в, на…) stay with the next word, so a line never ends on them
 const nb = (t) => esc(t).replace(/(^|[\s ])([А-Яа-яЁё]{1,2}) /g, '$1$2 ');
 const ic = (name) => `<svg class="i" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">${window.ICONS[name] || ''}</svg>`;
-const plural = (n, one, few, many) => { const d = n % 10, h = n % 100; return `${n} ${d === 1 && h !== 11 ? one : d >= 2 && d <= 4 && (h < 12 || h > 14) ? few : many}`; };
 const fmtDate = (iso) => { const [y, m, d] = iso.split('-').map(Number); return `${d} ${MONTHS[m - 1]}${y !== new Date().getFullYear() ? ' ' + y : ''}`; };
 
 const bySlug = (slug) => MATS.find((m) => m.slug === slug);
-const section = (id) => SITE.sections.find((s) => s.id === id) || { id, title: '', short: '' };
 const isSite = (m) => m.type === 'сайт';
 // A material waits for its post: "draft": true, or "publishAt" still ahead, keeps it out of every list.
 // Its startapp link opens it anyway, so the post works the moment it goes out (Arthur, 2026-10-17).
@@ -30,9 +28,6 @@ const isSite = (m) => m.type === 'сайт';
 const PREVIEW = new URLSearchParams(location.search).has('preview')
   || Boolean(IN_TG && TG.initDataUnsafe && TG.initDataUnsafe.start_param === 'preview');
 const listed = (m) => PREVIEW || (!m.draft && !(m.publishAt && Date.parse(m.publishAt) > Date.now()));
-// «Новое»: new for SITE.newDays days after it appeared, unless its meta says "new": true or false
-const isNew = (m) => (typeof m.new === 'boolean' ? m.new
-  : (Date.now() - Date.parse(m.publishAt || m.date + 'T00:00:00')) / 864e5 <= SITE.newDays);
 const asset = (m, name) => `content/${m.slug}/${name}`;
 const fileHref = (m, f) => f.url || asset(m, f.name); // relative to the app folder
 const absolute = (path) => new URL(path, location.href).href;
@@ -40,17 +35,18 @@ const live = (path) => new URL(path, SITE.base).href; // the public address, als
 const deepLink = (m) => `https://t.me/${SITE.bot}?startapp=${m.slug}`;
 const hasAgent = (m) => Boolean(m.agent || m.agentFile);
 const agentLine = (m) => m.agent || `Прочитай ${live(asset(m, m.agentFile))} и проведи меня по шагам. Где написано СПРОСИ, спроси меня.`;
-const dot = (m) => `<span class="dot" style="background:var(--c-${esc(m.section)})"></span>`;
 const appeared = (m) => Date.parse(m.publishAt || m.date); // newest first wherever materials are listed
 const pdfIndex = (m) => (m.files || []).findIndex((f) => f.kind === 'pdf'); // a guide's main file
 const fileIcon = (f) => (f.kind === 'text' ? 'file-text' : f.kind === 'pdf' ? 'file-pdf' : 'file-zip');
-const filesLabel = (m) => (m.files && m.files.length ? plural(m.files.length, 'файл', 'файла', 'файлов') : '');
+// «Graphify: полная инструкция» → name «Graphify» (as said in the Reel)
+const nameOf = (m) => m.pinTitle || m.title.split(':')[0].trim(); // pinTitle: the name the video used, same line as in the pinned post
 
 // ---------- Telegram ----------
-// Arthur 2026-10-17: the app is always white, also in a dark Telegram theme, so Telegram's header and
-// background are painted white to match (any colour is allowed from Bot API 6.9).
+// Arthur 2026-10-17: the app keeps its own light page, also in a dark Telegram theme, so Telegram's header and
+// background are painted in the page colour (--page, warm paper since 2026-11-20; any colour is allowed from Bot API 6.9).
 function paintTelegram() {
-  if (tgAtLeast('6.9')) { TG.setHeaderColor('#ffffff'); TG.setBackgroundColor('#ffffff'); }
+  const page = getComputedStyle(document.documentElement).getPropertyValue('--page').trim() || '#ffffff';
+  if (tgAtLeast('6.9')) { TG.setHeaderColor(page); TG.setBackgroundColor(page); }
 }
 const haptic = () => { if (tgAtLeast('6.1')) TG.HapticFeedback.notificationOccurred('success'); };
 function openExternal(url) {
@@ -96,7 +92,7 @@ function gate(state) {
     : '<p class="hi">База знаний канала</p><h1 class="title">ИИмерсивный</h1>';
   return `<div class="gate">${head}
     <p class="gate-text">${state === 'web'
-      ? 'Материалы открыты подписчикам канала. Открой базу в Telegram, там она проверит подписку.'
+      ? 'Гайды открыты подписчикам канала. Открой базу в Telegram, там она проверит подписку.'
       : m ? 'Гайд бесплатный для подписчиков канала «ИИмерсивный». Подпишись и вернись сюда: гайд откроется сам.'
         : 'Всё бесплатно для подписчиков канала «ИИмерсивный». Подпишись и вернись сюда: база откроется сама.'}</p>
     ${state === 'web'
@@ -131,96 +127,86 @@ function share(m) {
   copyText(link, 'Ссылка скопирована');
 }
 
-// ---------- «Новое» carousel ----------
-function heroCard(m) {
-  const left = isSite(m) ? `<span class="pill glass quiet">${esc(m.domain)}</span>`
-    : filesLabel(m) ? `<span class="pill glass quiet">${filesLabel(m)}</span>` : '<span></span>';
-  const bar = `<div class="media-bar">${left}<span class="pill glass">Открыть</span></div>`;
-  let media = '';
-  if (m.clip) {
-    media = `<video class="clip" src="${esc(asset(m, m.clip.src))}" poster="${esc(asset(m, m.clip.poster))}" data-still="${esc(asset(m, m.clip.still))}"
-      muted loop playsinline preload="auto" aria-hidden="true"></video>`;
-  } else if (m.cover) {
-    media = `<img class="drift" src="${esc(asset(m, m.cover))}" alt="">`;
-  } else if (m.files) {
-    media = `<div class="sheets">${m.files.slice(0, 3).map((f) => `<span class="sheet">${esc(f.name)}<i></i><i></i><i style="width:70%"></i><i></i><i style="width:55%"></i></span>`).join('')}</div>`;
-  }
-  return `<div class="hero"><p class="kicker">${dot(m)}Новое · ${LABEL[m.type]}</p><h2 class="title">${nb(m.title)}</h2>
-    <button class="hero-media${m.clip ? ' clip-card' : ''}" data-go="#/m/${m.slug}">${media}${bar}</button></div>`;
-}
-
-// Autoplay refused (some phones in power saving): show the finished title and turn «N файлов» into «Смотреть».
-function offerPlay(v) {
-  v.poster = v.dataset.still;
-  const pill = v.parentElement.querySelector('.media-bar .pill');
-  if (!pill || 'play' in pill.dataset) return;
-  pill.dataset.play = pill.textContent;
-  pill.className = 'pill glass';
-  pill.innerHTML = ic('play-circle-fill') + 'Смотреть';
-}
-
-let heroTimer = 0;
-let clipWatch = null;
-function setupHeroes() {
-  clearInterval(heroTimer);
-  if (clipWatch) clipWatch.disconnect();
-  const rail = document.querySelector('.heroes');
-  if (!rail) return;
-  const cards = [...rail.children];
-  const dots = [...document.querySelectorAll('.hero-dots i')];
-  const current = () => Math.round(rail.scrollLeft / (cards[0].offsetWidth + 12));
-  let touched = false;
-  rail.addEventListener('pointerdown', () => { touched = true; }, { once: true });
-  rail.addEventListener('scroll', () => dots.forEach((d, k) => d.classList.toggle('on', k === current())), { passive: true });
-  // Arthur 2026-10-17: «Новое» plays by itself for everyone; a clip plays only while it is on screen
-  clipWatch = new IntersectionObserver((entries) => entries.forEach((e) => {
-    if (e.isIntersecting) e.target.play().catch(() => offerPlay(e.target));
-    else e.target.pause();
-  }), { threshold: 0.6 });
-  rail.querySelectorAll('video.clip').forEach((v) => clipWatch.observe(v));
-  if (cards.length < 2) return;
-  heroTimer = setInterval(() => {
-    if (touched || !rail.isConnected) return clearInterval(heroTimer);
-    const next = cards[(current() + 1) % cards.length];
-    rail.scrollTo({ left: next.offsetLeft - 20, behavior: 'smooth' });
-  }, 11000);
-}
-
 // ---------- screens ----------
-function post(m) {
-  let extra = '';
-  if (isSite(m) && m.cover) extra = `<span class="pcover"><img src="${esc(asset(m, m.cover))}" alt="" loading="lazy"><span class="pill glass quiet">${esc(m.domain)}</span></span>`;
-  else if (pdfIndex(m) >= 0) extra = `<div class="chips"><span class="chip pdf">${ic('file-pdf')}Гайд в PDF</span>${m.github ? `<span class="chip">${ic('github-logo')}GitHub</span>` : ''}</div>`;
-  else if (hasAgent(m)) extra = `<div class="chips"><button class="chip" data-agent="${m.slug}">${ic('terminal-window')}Отдать агенту</button></div>`;
-  return `<div class="post" data-go="#/m/${m.slug}" role="button" tabindex="0">
-    <p class="kicker">${dot(m)}${LABEL[m.type]} · ${fmtDate(m.date)}</p>
-    <h3 class="title">${nb(m.title)}</h3><p class="sum">${nb(m.summary)}</p>${extra}</div>`;
+// Arthur 2026-11-20, look F («тёплая бумага»): four tabs in a glass bar at the bottom. «Главная»: the newest guide big,
+// the course card (now «скоро»), «Недавние» as a 2×2 grid, a way to all guides; a viewer from a Reel sees the fresh guide
+// at once. «Гайды»: step-by-step guides (PDF, files for the agent). «Скиллы и плагины»: what is downloaded and installed
+// as a skill or plugin. «Вдохновение»: sites. The tab is meta «kind» (build_index.py fills it from «type» when missing).
+// «Главная» takes guides and skills together, so a fresh skill from a Reel shows there too.
+// Covers: the guide's own cover.jpg (a PDF spread, 16:10) whole, not zoomed (Arthur: the zoomed spread was a mess).
+const TABS = [
+  { id: 'home', hash: '#/', title: 'Главная', icon: 'star-fill' },
+  { id: 'guides', hash: '#/t/guides', title: 'Гайды', icon: 'book-open-text-fill' },
+  { id: 'skills', hash: '#/t/skills', title: 'Скиллы', full: 'Скиллы и плагины', icon: 'puzzle-piece-fill' },
+  { id: 'inspo', hash: '#/t/inspo', title: 'Вдохновение', icon: 'sparkle-fill' },
+];
+const FIRST = 10; // a tab shows 10, the rest behind «Показать ещё»; search when there are about 30
+const LATEST = 4; // «Главная»: the newest big plus this many
+let showAll = false;
+let lastTab = ''; // the tab a guide was opened from, so «назад» returns there; opened by a link: its own tab
+const tabOf = (m) => TABS.find((x) => x.id === m.kind) || TABS[1];
+const backOf = (m) => TABS.find((x) => x.hash === lastTab) || tabOf(m);
+const when = (m) => fmtDate((m.publishAt || m.date).slice(0, 10));
+const byNew = (a, b) => appeared(b) - appeared(a);
+const inTab = (t) => MATS.filter((m) => listed(m) && tabOf(m) === t).sort(byNew);
+const fresh = () => MATS.filter((m) => listed(m) && !isSite(m)).sort(byNew); // guides and skills together
+const kindOf = (m) => (tabOf(m) === TABS[2] ? (m.type === 'скилл' ? 'Скилл' : 'Плагин') : pdfIndex(m) >= 0 ? 'Гайд · PDF' : 'Гайд для агента');
+const newLabel = (m) => (tabOf(m) === TABS[2] ? 'Новый скилл' : 'Новый гайд');
+const label = (m) => (isSite(m) ? m.title : nameOf(m));
+const go1 = (m) => `data-go="#/m/${m.slug}" role="button" tabindex="0"`;
+// cover.jpg is 16:10 (a guide's PDF spread, a site's screenshot) and the frame is 16:10, so nothing is cut;
+// without a cover (skills, guides for the agent) the same frame holds the file icon and the kind
+const cover = (m) => (m.cover
+  ? `<span class="pic"><img src="${esc(asset(m, m.cover))}" alt="" loading="lazy"></span>`
+  : `<span class="pic none">${ic(pdfIndex(m) >= 0 ? 'file-pdf' : tabOf(m) === TABS[2] ? 'puzzle-piece-fill' : 'file-text')}<b>${isSite(m) ? esc(m.domain) : kindOf(m)}</b></span>`);
+
+// one line of a calm list (a guide's «Другие гайды»)
+function row(x, small) {
+  return `<div class="row" data-go="#/m/${x.slug}" role="button" tabindex="0">${cover(x)}
+    <span class="body"><span class="tt">${nb(label(x))}</span><span class="s">${esc(small)}</span></span>${ic('caret-right')}</div>`;
 }
 
-function home(filter = 'all') {
-  const shown = MATS.filter(listed);
-  // a clip leads the carousel, own materials before inspiration links
-  const heroes = shown.filter(isNew).sort((a, b) => Boolean(b.clip) - Boolean(a.clip) || isSite(a) - isSite(b));
-  // Arthur 2026-10-17: new materials stand first in the list too, not only in the carousel above it.
-  // Order: own materials before inspiration links, new before old, a clip first; otherwise newest first.
-  const feed = shown.filter((m) => filter === 'all' || m.section === filter)
-    .sort((a, b) => isSite(a) - isSite(b) || isNew(b) - isNew(a) || Boolean(b.clip) - Boolean(a.clip) || appeared(b) - appeared(a));
-  const liveSections = SITE.sections.filter((s) => shown.some((m) => m.section === s.id)); // empty sections stay hidden
-  const name = IN_TG && TG.initDataUnsafe && TG.initDataUnsafe.user && TG.initDataUnsafe.user.first_name;
-  const tabs = `<button class="tab" data-go="#/" aria-pressed="${filter === 'all'}">Все</button>
-    ${liveSections.map((s) => `<button class="tab" data-go="#/s/${s.id}" aria-pressed="${filter === s.id}">${esc(s.short)}</button>`).join('')}`;
+const course = () => `<div class="prod"><span class="prod-i">${ic('graduation-cap-fill')}</span>
+  <span class="prod-t title">${nb(SITE.course.title)}</span><span class="prod-soon">${esc(SITE.course.note)}</span></div>`;
+const card = (m) => `<div class="card" ${go1(m)}>${cover(m)}<span class="ct title">${nb(label(m))}</span>
+  <span class="s">${isSite(m) ? esc(m.domain) : when(m)}</span></div>`;
+const line = (m) => `<div class="line" ${go1(m)}>${cover(m)}
+  <span class="body"><span class="ct title">${nb(label(m))}</span><span class="s">${isSite(m) ? esc(m.domain) : `${kindOf(m)} · ${when(m)}`}</span>
+  <span class="sum">${nb(m.summary)}</span></span></div>`;
+const allLink = () => `<button class="all" data-go="#/t/guides">Все гайды · ${inTab(TABS[1]).length}</button>`;
+
+function homeTab() {
+  const all = fresh();
+  const top = all[0];
+  if (!top) return course() + '<p class="empty">Гайды появятся вместе с роликами.</p>';
+  return `<div class="lead" ${go1(top)}>${cover(top)}<span class="body">
+    <span class="kicker"><span class="dot"></span>${newLabel(top)} · ${when(top)}</span><span class="lt title">${nb(nameOf(top))}</span></span></div>
+  ${course()}
+  <div class="shelf-h"><span class="title">Недавние</span>${allLink()}</div>
+  <div class="grid">${all.slice(1, 1 + LATEST).map(card).join('')}</div>`;
+}
+
+function home(hash) {
+  const tab = TABS.find((x) => x.hash === hash) || (hash === '#/t/more' ? TABS[1] : TABS[0]);
+  lastTab = tab.hash;
+  const user = IN_TG && TG.initDataUnsafe && TG.initDataUnsafe.user && TG.initDataUnsafe.user.first_name;
+  let body;
+  if (tab === TABS[0]) body = homeTab();
+  else {
+    const items = inTab(tab);
+    const cut = showAll ? items : items.slice(0, FIRST);
+    body = `<div class="tabh"><h2 class="title">${tab.full || tab.title}</h2><span>${items.length}</span></div>
+    ${items.length ? `<div class="lines">${cut.map(line).join('')}</div>` : '<p class="empty">Здесь пока пусто.</p>'}
+    ${items.length > cut.length ? `<button class="more" data-more>Показать ещё (${items.length - cut.length})</button>` : ''}`;
+  }
   return `
-  <header class="hello"><div><p class="hi">${PREVIEW ? 'Предпросмотр: видно и то, что ждёт поста' : name ? `Привет, ${esc(name)} · база знаний` : 'База знаний канала'}</p><h1 class="title">ИИмерсивный</h1></div>
+  <header class="hello"><div><p class="hi">${PREVIEW ? 'Предпросмотр: видно и то, что ждёт поста' : user ? `Привет, ${esc(user)} · база знаний` : 'База знаний канала'}</p><h1 class="title">ИИмерсивный</h1></div>
     <span class="head-links">
       <a href="${esc(SITE.links.telegram)}" target="_blank" rel="noopener" data-tglink aria-label="Канал в Telegram">${ic('telegram-logo-fill')}</a>
       <a href="${esc(SITE.links.youtube)}" target="_blank" rel="noopener" data-ext aria-label="YouTube">${ic('youtube-logo-fill')}</a>
     </span></header>
-  ${filter === 'all' && heroes.length ? `<div class="heroes">${heroes.map(heroCard).join('')}</div>
-  ${heroes.length > 1 ? `<div class="hero-dots">${heroes.map((_, i) => `<i class="${i ? '' : 'on'}"></i>`).join('')}</div>` : ''}` : ''}
-  <div class="feed-gap" id="feed"></div>
-  ${feed.length ? feed.map(post).join('') : '<p class="empty">Здесь пока пусто. Материалы появятся вместе с постами.</p>'}
-  <div class="course"><span class="tag">курс</span>${nb(SITE.course.title)}. ${esc(SITE.course.note)}.</div>
-  <nav class="tabbar glass" aria-label="Разделы">${tabs}</nav>`;
+  <nav class="tabs" aria-label="Разделы">${TABS.map((x) => `<button class="tab" data-go="${x.hash}" aria-pressed="${x === tab}">${ic(x.icon)}<span>${x.title}</span></button>`).join('')}</nav>
+  <div class="tabbody">${body}</div>`;
 }
 
 function material(slug) {
@@ -229,11 +215,11 @@ function material(slug) {
   const site = isSite(m);
   prefetchTexts(m);
   return `
-  <div class="nav"><button class="back" data-go="#/s/${m.section}">${ic('caret-left')}${esc(section(m.section).short)}</button>
+  <div class="nav"><button class="back" data-go="${backOf(m).hash}">${ic('caret-left')}${backOf(m).title}</button>
     <div class="tools">${site ? `<button class="icon-btn" data-copylink="${esc(m.url)}" aria-label="Скопировать ссылку">${ic('copy')}</button>` : ''}<button class="icon-btn" data-share="${m.slug}" aria-label="Поделиться">${ic('share-network')}</button></div></div>
   ${m.cover ? `<div class="mmedia"><div class="hero-media"><img src="${esc(asset(m, m.cover))}" alt=""></div></div>` : ''}
-  <div class="mhead"><p class="kicker">${dot(m)}${esc(section(m.section).short)} · ${site ? esc(m.domain) : LABEL[m.type]} · ${fmtDate(m.date)}</p>
-    <h1 class="title">${nb(m.title)}</h1><p class="lead">${nb(m.summary)}</p>
+  <div class="mhead"><p class="kicker">${site ? esc(m.domain) : kindOf(m)} · ${fmtDate(m.date)}</p>
+    <h1 class="title">${nb(m.title)}</h1><p class="msum">${nb(m.summary)}</p>
     ${m.post_url ? `<a class="post-link" href="${esc(m.post_url)}" target="_blank" rel="noopener" data-tglink>Пост в канале ${ic('arrow-up-right')}</a>` : ''}</div>
   ${about(m)}
   ${hasAgent(m) ? `<div class="sec"><span>Для агента</span><button data-agent="${m.slug}">Копировать</button></div>
@@ -257,12 +243,10 @@ function material(slug) {
 // by its cover and title (Arthur, 2026-11-02).
 function moreGuides(m) {
   const others = MATS.filter((x) => listed(x) && !isSite(x) && x.slug !== m.slug)
-    .sort((a, b) => appeared(b) - appeared(a)).slice(0, 6);
+    .sort((a, b) => Boolean(b.fromVideo) - Boolean(a.fromVideo) || appeared(b) - appeared(a)).slice(0, 6);
   if (!others.length) return '';
-  return `<div class="sec"><span>Другие гайды</span><button data-go="#/">Все</button></div>
-  <div class="list">${others.map((x) => `<div class="row" data-go="#/m/${x.slug}" role="button" tabindex="0">
-    ${x.cover ? `<span class="thumb"><img src="${esc(asset(x, x.cover))}" alt="" loading="lazy"></span>` : `<span class="fi ${pdfIndex(x) >= 0 ? 'pdf' : 'text'}">${ic(pdfIndex(x) >= 0 ? 'file-pdf' : 'file-text')}</span>`}
-    <span class="body"><span class="tt">${nb(x.title)}</span><span class="s">${LABEL[x.type]} · ${fmtDate(x.date)}</span></span>${ic('caret-right')}</div>`).join('')}</div>`;
+  return `<div class="sec"><span>Другие гайды</span><button data-go="#/t/guides">Все гайды</button></div>
+  <div class="list">${others.map((x) => row(x, `${kindOf(x)} · ${fmtDate(x.date)}`)).join('')}</div>`;
 }
 
 // Arthur 2026-11-02: a material reads like a guide's card in a bot: what is inside (summary), the original on GitHub,
@@ -304,18 +288,18 @@ function reader(slug, index) {
 }
 
 function notFound() {
-  return `<div class="nav"><button class="back" data-go="#/">${ic('caret-left')}Материалы</button></div>
-  <p class="empty">Такого материала нет. Может, ссылка устарела.<br><br><button class="chip" data-go="#/">Все материалы</button></p>`;
+  return `<div class="nav"><button class="back" data-go="#/">${ic('caret-left')}Все гайды</button></div>
+  <p class="empty">Такого гайда нет. Может, ссылка устарела.<br><br><button class="chip" data-go="#/">Все гайды</button></p>`;
 }
 
 // ---------- routing ----------
 function parentOf(h) {
   let m;
   if ((m = h.match(/^#\/m\/([\w-]+)\/\d+$/))) return `#/m/${m[1]}`;
-  if ((m = h.match(/^#\/m\/([\w-]+)$/))) { const mm = bySlug(m[1]); return mm ? `#/s/${mm.section}` : '#/'; }
-  return '#/';
+  const mm = (m = h.match(/^#\/m\/([\w-]+)$/)) && bySlug(m[1]);
+  return mm ? backOf(mm).hash : '#/'; // back to the tab the guide was opened from
 }
-let wasHome = false;
+let lastHash = null;
 let ACCESS = 'open';
 function render() {
   const h = location.hash;
@@ -326,20 +310,13 @@ function render() {
     return;
   }
   const isHome = !/^#\/m\//.test(h);
-  const feedMark = document.getElementById('feed');
-  const keep = isHome && wasHome && feedMark && window.scrollY > feedMark.offsetTop; // switching sections keeps the reader's place
   let m;
   if ((m = h.match(/^#\/m\/([\w-]+)\/(\d+)$/))) app.innerHTML = reader(m[1], +m[2]);
   else if ((m = h.match(/^#\/m\/([\w-]+)$/))) app.innerHTML = material(m[1]);
-  else if ((m = h.match(/^#\/s\/([\w-]+)$/))) app.innerHTML = home(m[1]);
-  else app.innerHTML = home();
-  if (keep) window.scrollTo(0, document.getElementById('feed').offsetTop);
-  else if (!(isHome && wasHome)) window.scrollTo(0, 0);
-  const active = document.querySelector('.tab[aria-pressed="true"]');
-  if (active) active.scrollIntoView({ inline: 'nearest', block: 'nearest' });
-  wasHome = isHome;
-  if (isHome) setupHeroes(); else { clearInterval(heroTimer); if (clipWatch) clipWatch.disconnect(); }
-  if (IN_TG && TG.BackButton) (/^#\/(m|s)\//.test(h) ? TG.BackButton.show() : TG.BackButton.hide());
+  else app.innerHTML = home(h || '#/'); // #/, #/t/<tab>; old #/s/<section> links land on «Главная»
+  if (h !== lastHash) window.scrollTo(0, 0); // «Показать ещё» re-renders in place
+  lastHash = h;
+  if (IN_TG && TG.BackButton) (isHome ? TG.BackButton.hide() : TG.BackButton.show());
 }
 const go = (hash) => { location.hash = hash; };
 
@@ -348,33 +325,30 @@ const go = (hash) => { location.hash = hash; };
 // changes when an older Reel takes off (Arthur, 2026-11-05); empty or missing: the newest.
 const newest = () => {
   if (SITE.bioPin && bySlug(SITE.bioPin)) return SITE.bioPin;
-  const own = MATS.filter((m) => listed(m) && !isSite(m));
+  const own = MATS.filter((m) => listed(m) && m.fromVideo); // the bio link belongs to the Reels
   own.sort((a, b) => Date.parse(b.publishAt || b.date) - Date.parse(a.publishAt || a.date));
   return own.length ? own[0].slug : '';
 };
 function startRoute() {
   const q = new URLSearchParams(location.search);
   const p = (IN_TG && TG.initDataUnsafe && TG.initDataUnsafe.start_param) || q.get('tgWebAppStartParam');
-  // Arthur 2026-11-02: the Instagram bio links t.me/<bot>?startapp=new, which opens the newest guide
+  // Arthur 2026-11-02: the Instagram bio links t.me/<bot>?startapp=new, which opens the newest guide.
+  // No start_param (t.me/<bot>?startapp, the pinned post) or «preview»: the home page with the catalog on top.
+  const tab = TABS.find((x) => x.id === p && x !== TABS[0]); // startapp=guides | skills | inspo opens that tab
+  if (tab) return history.replaceState(null, '', `${location.pathname}${location.search}${tab.hash}`);
   const slug = p === 'new' ? newest() : p;
   if (slug && /^[a-z0-9-]{1,64}$/.test(slug) && bySlug(slug)) history.replaceState(null, '', `${location.pathname}${location.search}#/m/${slug}`);
 }
 
 // ---------- taps ----------
 document.addEventListener('click', (e) => {
-  const t = e.target.closest('[data-recheck],[data-play],[data-dl],[data-agent],[data-copyfile],[data-copylink],[data-open],[data-share],[data-ext],[data-tglink],[data-retry],[data-go]');
+  const t = e.target.closest('[data-more],[data-recheck],[data-dl],[data-agent],[data-copyfile],[data-copylink],[data-open],[data-share],[data-ext],[data-tglink],[data-retry],[data-go]');
   if (!t) return;
+  if ('more' in t.dataset) { showAll = true; return render(); }
   if ('recheck' in t.dataset) {
     t.disabled = true;
     t.textContent = 'Проверяю…';
     return recheck(false);
-  }
-  if ('play' in t.dataset) {
-    e.stopPropagation();
-    const v = t.closest('.hero-media').querySelector('video.clip');
-    v.play().catch(() => {});
-    t.className = 'pill glass quiet'; t.textContent = t.dataset.play; delete t.dataset.play; // back to «N файлов»
-    return;
   }
   if (t.dataset.dl) {
     e.stopPropagation();
@@ -446,7 +420,7 @@ async function init() {
     SITE = data.site;
     MATS = data.materials;
   } catch (e) {
-    document.getElementById('app').innerHTML = '<p class="state">Материалы не загрузились. Проверь интернет и попробуй ещё раз.<br><button data-retry>Обновить</button></p>';
+    document.getElementById('app').innerHTML = '<p class="state">Гайды не загрузились. Проверь интернет и попробуй ещё раз.<br><button data-retry>Обновить</button></p>';
     return;
   }
   startRoute();

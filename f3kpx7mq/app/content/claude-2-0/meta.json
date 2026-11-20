@@ -2,6 +2,7 @@
   "title": "Гайд по всем новым функциям Claude 2.0",
   "section": "agents",
   "type": "гайд",
+  "kind": "guides",
   "date": "2026-11-06",
   "fromVideo": true,
   "summary": "Все новые функции Claude Desktop и Claude Code по шагам, в порядке видео. Где что лежит, 7 команд и 29 горячих клавиш для Windows и Mac, плюс готовые связки функций.",
@@ -16,5 +17,6 @@
     "claude",
     "claude code",
     "гайд"
-  ]
+  ],
+  "pinTitle": "Все новые функции Claude 2.0"
 }

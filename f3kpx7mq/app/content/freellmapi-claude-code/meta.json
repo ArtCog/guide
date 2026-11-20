@@ -2,6 +2,7 @@
   "title": "Claude Code бесплатно через FreeLLM API: полная инструкция",
   "section": "agents",
   "type": "гайд",
+  "kind": "guides",
   "date": "2026-11-20",
   "fromVideo": true,
   "summary": "Как поставить FreeLLM API на Windows, Mac или Linux, добавить бесплатные ключи провайдеров и запускать Claude Code на бесплатных моделях, когда кончился лимит. Простыми словами, с готовым промптом и честно о том, что думает там не Claude.",
