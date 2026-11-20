@@ -1,0 +1,25 @@
+{
+  "title": "Водяной знак Claude: полная инструкция",
+  "section": "skills",
+  "type": "гайд",
+  "kind": "guides",
+  "date": "2026-11-20",
+  "fromVideo": true,
+  "summary": "Как устроена невидимая метка Claude в выборе слов, что из рилса правда, как поставить watermarks-remover в Claude Code и настроить переписчика текста. Простыми словами, с готовыми промптами и честно о том, чего не обещает ни один инструмент.",
+  "github": "https://github.com/guillaumemeyer/watermarks-remover",
+  "quick": "Открой Claude Code, скинь ему ссылку на репозиторий и попроси установить watermarks-remover. Или скопируй строку для агента ниже. Подробности в PDF.",
+  "agent": "Установи мне watermarks-remover из официального репозитория https://github.com/guillaumemeyer/watermarks-remover, сверяясь с его README. Проверь git, Python 3.10 или новее и Node.js, сам ничего не ставь. Подключи плагин: claude plugin marketplace add guillaumemeyer/watermarks-remover, затем claude plugin install watermarks-remover@watermarks-remover. Склонируй репозиторий в мою домашнюю папку, запусти сервис на 127.0.0.1:8765 и проверь /health. Хук оставь в режиме check, ключи API в чате не спрашивай. Для переписывания текста предложи Ollama на моём компьютере, переписчик не должен быть Claude. Отвечай по-русски.",
+  "note": "Инструмент для текстов и файлов, которые принадлежат тебе. Не для учёбы и работы, где нужно раскрывать помощь ИИ. Снятая метка не значит, что ИИ не участвовал.",
+  "files": [
+    {
+      "name": "Claude-Watermark-guide.pdf",
+      "about": "Гайд на 10 страниц: как устроена метка, рилс и реальность, что умеет инструмент, установка за три шага, переписчик, первый результат, безопасность, чек-лист"
+    }
+  ],
+  "tags": [
+    "claude code",
+    "github",
+    "скиллы"
+  ],
+  "pinTitle": "Watermarks Remover, снять водяной знак Claude"
+}
